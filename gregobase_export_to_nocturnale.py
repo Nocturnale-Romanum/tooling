@@ -18,8 +18,17 @@ for [gid, hcode] in l:
     mode = ""
   if var == "NULL":
     var = ""
-  out.write("mode:{}{}\n".format(mode, var))
+  verses = c.gabc_verses
+  if verses in ["NULL", None]:
+    verses = ""
+  out.write("mode:{}{};\n".format(mode, var))
   out.write("%%\n")
-  out.write(c.gabc+"\n")
-  out.close()
+  try:
+    out.write(eval(c.gabc)+verses+"\n")
+  except:
+    log=open("export.log", "wa")
+    log.write(gid+"\n")
+    log.close()
+  finally:
+    out.close()
 
