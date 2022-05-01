@@ -5,11 +5,11 @@
 
 from import_grego_db import *
 flush_and_import()
-l = open("hcode_to_gid.tsv").readlines()
+l = open("gid2hcode.tsv").readlines()
 del l[0]
-l = [x.strip().split("\t") for x in l]
-l = [x for x in l if len(x) == 2] # eliminate hcodes with no associated gid
-for [gid, hcode] in l:
+l = [[x.strip() for x in y.split("\t")] for y in l]
+l = [x for x in l if x[0]] # eliminate hcodes with no associated gid
+for [gid, hcode, s, p] in l:
   c = Chant.objects.get(id=int(gid))
   out = open("export/"+hcode+".gabc", "w")
   mode = c.mode
@@ -31,4 +31,25 @@ for [gid, hcode] in l:
     log.close()
   finally:
     out.close()
+
+#### to be executed in a django shell of an instance of Nocturnale
+export_dir = "from_gregobase"
+from home.models import *
+import os
+import time
+files = os.listdir(export_dir)
+u = User.objects.get(username="sandhofe")
+for file_name in files:
+  code = file_name.split(".gabc")[0]
+  try:
+    proposal = Proposal.objects.get(submitter=u, chant__code = code)
+  except:
+    log=open("new_files.log", "a")
+    log.write(code+"\n")
+    log.close()
+    continue
+  os.system("\\cp {}/{}.gabc nocturnale/static/gabc/{}_sandhofe.gabc".format(export_dir, code, code))
+  proposal.makepng()
+  time.sleep(40)
+
 
