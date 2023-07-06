@@ -30,8 +30,9 @@ def _check(filename, verbose):
 
     try:
         chant = converter.parse(filename)
-    except (arpeggio.NoMatch, AlterationWarning):
-        raise Skip('chant21 cannot parse')
+    except (arpeggio.NoMatch, AlterationWarning) as e:
+        print('ERROR {}: chant21 cannot parse ({})'.format(filename, e))
+        return
 
     metadata = chant.editorial.metadata
     office_part = metadata.get('office-part')
