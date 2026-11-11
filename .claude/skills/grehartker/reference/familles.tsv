@@ -1,0 +1,415 @@
+famille	glyphe	base	variante_de	ligature_avec	usages_NR	base_h_pct	base_w_pct
+vi	vi	vi			14394		
+vi	viN	viN	vi		1918		
+vi	viB	viB	vi		1580		
+vi	viNB	viNB	vi		13		
+vi	viNsut2	viN			313	94	104
+vi	viNpp2	viN			133	108	97
+vi	viNsu1sut2	viN			126	85	107
+vi	viNsuu1su2	viN			123	105	97
+vi	viNsut1su2	viN			100	149	132
+vi	viNsuu2	viN			68	112	100
+vi	viNsut3	viN			53	87	111
+vi	viNsu1sut1	viN			52	117	116
+vi	visu1suu1	vi			30	120	97
+vi	visut1su2	vi			26	125	134
+vi	visu1sut2	vi			25	152	137
+vi	visut3	vi			23	122	135
+vi	viNsuu3	viN			20	116	115
+vi	viNsu1suu2	viN			19	114	106
+vi	viNsu1suu1	viN			15	136	168
+vi	viNsu3	viN			12	104	105
+vi	viNsuu1sut1su2	viN			10	109	117
+vi	vilsc3	vi			10	70	81
+vi	vippt1su2	vi			10	131	107
+vi	viNsut4	viN			8	123	109
+vi	viBppt2	viB			7	80	98
+vi	vippu1su2	vi			6	161	137
+vi	visuu1su2	vi			6	169	156
+vi	viNsu2sut1	viN			4	117	102
+vi	viNEviNEvi	viN		vi vi	4		
+vi	visut1sux1	vi			3	135	117
+vi	vippu1su2lsc3	vi			3	127	134
+vi	viNsu4	viN			3	130	142
+vi	viNsuu2su2	viN			3	109	96
+vi	vippt1su1sut1	vi			3	142	124
+vi	viNppt3	viN			2	110	110
+vi	viNsu1sux1	viN			1	112	117
+vi	vippt1su2lsc3	vi			1	171	117
+vi	visu1suu1su2	vi			1	109	119
+vi	visuu3	vi			1	83	127
+vi	viNsu1suu1su2	viN			1	137	151
+vi	viNpp4	viN			1	110	119
+vi	visu2sux1	vi			1	147	138
+vi	viNlst3	viN			1	111	106
+ta	ta	ta			14708		
+ta	taB	taB	ta		1087		
+ta	taN	taN	ta		679		
+ta	talsc3	ta			27	366	113
+ta	talst2	ta			1	237	301
+cl	clN	clN	cl		7283		
+cl	cl	cl			3458		
+cl	clS	clS			259		
+cl	clB	clB	cl		118		
+cl	clNB	clNB	cl		68		
+cl	clM	clM			64		
+cl	clSN	clSN	clS		52		
+cl	clMN	clMN	clM		34		
+cl	clS1	clS1			7		
+cl	clSN1	clSN1	clS		4		
+cl	clNB1	clNB1	cl		3		
+cl	clSN2	clSN2	clS		2		
+cl	cllsc3	cl			2068	118	92
+cl	clEpi	cl		pi	334		
+cl	clEpilsc2	cl		pi	90		
+cl	clEpo	cl		po	24		
+cl	cllst2	cl			8	60	216
+cl	clEpoN1	cl		po	5		
+cl	clEpisu1	cl		pi	4		
+cl	clSNsu2	clSN			4	111	113
+cl	clBppt2	clB			3	107	91
+cl	clEclS	cl		cl	3		
+cl	clNlst2	clN			3	88	86
+cl	clSsut2	clS			3	109	187
+cl	clEpilsc1lst3	cl		pi	3		
+cl	clEpr	cl		pr	1		
+cl	clN1su2	clN1			1		
+cl	clSsuu1su2	clS			1	110	160
+pe	pe	pe			6207		
+pe	peS	peS			1815		
+pe	peN	peN	pe		357		
+pe	peB	peB	pe		281		
+pe	peB1	peB1	pe		267		
+pe	peN1	peN1	pe		152		
+pe	peB2	peB2	pe		11		
+pe	peG	peG			2		
+pe	peNB	peNB	pe		2		
+pe	peN1su2	peN1			542	109	108
+pe	peNsu2	peN			242	93	79
+pe	pesu2	pe			152	121	114
+pe	peN1sut2	peN1			96	80	91
+pe	peSsu2	peS			39	114	91
+pe	peN1sut3	peN1			37	71	82
+pe	peSsut2	peS			23	116	98
+pe	pesu3	pe			22	137	110
+pe	peN1su1sut1	peN1			22	87	86
+pe	pesu1sut1	pe			16	140	119
+pe	peNsu1sut1	peN			16	107	103
+pe	peSsut3	peS			10	106	98
+pe	peN1su1sut2	peN1			8	75	78
+pe	pesu1suu1	pe			8	145	108
+pe	peN1su1suu1	peN1			6	104	101
+pe	pesut2	pe			6	104	84
+pe	pesu2sut1	pe			3	132	100
+pe	peN1sut1sux1	peN1			3	76	86
+pe	peN1suu1su2	peN1			3	81	92
+pe	peSppt2	peS			3	117	111
+pe	peN1su1suw1	peN1			3	92	91
+pe	pesu1suw1	pe			2	125	85
+pe	peN1sut1suw1	peN1			1	77	86
+pe	pesu1sut3	pe			1	140	119
+pe	pesu1sux1	pe			1	146	102
+pe	peNsu3sut1	peN			1	111	101
+to	to	to			3649		
+to	toS2	toS2			465		
+to	toS	toS			445		
+to	toN1	toN1	to		133		
+to	toM1	toM1			96		
+to	toB	toB	to		85		
+to	toN	toN	to		49		
+to	toS3	toS3			35		
+to	toB2	toB2	to		10		
+to	toM3	toM3			8		
+to	toG	toG			5		
+to	toS1	toS1			3		
+to	toNB	toNB	to		1		
+to	toS2sut1	toS2			185	112	85
+to	toS2su2	toS2			150	88	61
+to	toSsu2	toS			121	90	73
+to	toN1su2	toN1			76	82	93
+to	tolsc3	to			31	108	101
+to	toEcl	to		cl	25		
+to	toN1suu1	toN1			23	95	97
+to	toS2sut2	toS2			13	185	133
+to	toEpi	to		pi	9		
+to	tolst2	to			8	129	121
+to	toS3lst2	toS3			6	98	128
+to	toSEcl	toS		cl	5		
+to	toEclN	to		cl	4		
+to	toppu1	to			4	147	120
+to	toEpisu1	to		pi	3		
+to	toBpp2	toB			1	118	134
+to	toSEclNlsi8	toS		cl	1		
+to	toEclB	to		cl	1		
+to	toSEclN	toS		cl	1		
+to	toS2sux1	toS2			1	112	88
+to	tolsc4lst3	to			1	120	121
+ql	ql	ql			756		
+ql	qlN	qlN	ql		278		
+ql	qlB	qlB	ql		25		
+ql	qlEclppt1	ql		cl	824		
+ql	qlEclNppt1	ql		cl	595		
+ql	qlEpo	ql		po	434		
+ql	qlppt1	ql			355	151	110
+ql	qlNsu2	qlN			333	87	93
+ql	qlNppt1su2	qlN			301	87	93
+ql	qlEpoppt1	ql		po	252		
+ql	qlEcl	ql		cl	197		
+ql	qlNppt1	qlN			189	93	90
+ql	qlNsut2	qlN			155	82	92
+ql	qlEclN	ql		cl	139		
+ql	qlEvssu2	ql		vs	126		
+ql	qlEvsppt1su2	ql		vs	89		
+ql	qlNppt1su1sut2	qlN			89	83	91
+ql	qlEvsppt1sut2	ql		vs	82		
+ql	qlEpoB	ql		po	65		
+ql	qlNsu1sux1	qlN			50	96	84
+ql	qlEpoN1ppt1	ql		po	36		
+ql	qlEpoN1	ql		po	28		
+ql	qlNsu1sut1	qlN			27	89	80
+ql	qlNppt1su3	qlN			27	86	78
+ql	qlBppt1	qlB			25	93	110
+ql	qlsut2	ql			23	87	92
+ql	qlNppt1su1sux1	qlN			21	96	84
+ql	qlEvssut2	ql		vs	13		
+ql	qlsu2	ql			9	128	99
+ql	qlppt1sut3	ql			8	93	89
+ql	qlsut3	ql			8	93	89
+ql	qlNsuu2	qlN			7	89	91
+ql	qlppt1su2	ql			7	128	99
+ql	qlEclB	ql		cl	7		
+ql	qlNsu3	qlN			6	86	78
+ql	qlEpoT	ql		po	4		
+ql	qlEclEclBppt1	ql		cl cl	4		
+ql	qlNppt1su1suu1	qlN			3	82	79
+ql	qlEclS1	ql		cl	3		
+ql	qlEvs	ql		vs	2		
+ql	qlNsu1suu2	qlN			2	142	130
+ql	qlNsu1sut2	qlN			2	83	91
+ql	qlNppt2su1suv1su2	qlN			2	92	89
+ql	qlEclBppt1	ql		cl	2		
+ql	qlEclB1	ql		cl	1		
+ql	qlEclEpippt1	ql		cl pi	1		
+ql	qlEclM	ql		cl	1		
+ql	qlEclEpi	ql		cl pi	1		
+ql	qlEclNB	ql		cl	1		
+ql	qlEpoTppt1	ql		po	1		
+ql	qlEclEclB	ql		cl cl	1		
+ql	qlEclNBppt1	ql		cl	1		
+ql	qlNsut1sux1	qlN			1	89	88
+ql	qlNsu1suu1	qlN			1	82	79
+ls	lsc	lsc			1129		
+ls	lse	lse			987		
+ls	lsi	lsi			757		
+ls	lss	lss			659		
+ls	lsl	lsl			631		
+ls	lsal	lsal			315		
+ls	lst	lst			127		
+ls	lsm	lsm			78		
+ls	lsco	lsco			66		
+ls	lsew	lsew			49		
+ls	lsx	lsx			42		
+ls	lssc	lssc			28		
+ls	lslc	lslc			24		
+ls	lsim	lsim			23		
+ls	lslm	lslm			17		
+ls	lsp	lsp			13		
+ls	lscm	lscm			12		
+ls	lssta	lssta			9		
+ls	lssm	lssm			8		
+ls	lslp	lslp			7		
+ls	lstm	lstm			4		
+ls	lstw	lstw			3		
+ls	lscw	lscw			3		
+ls	lsb	lsb			2		
+ls	lsst	lsst			2		
+ls	lsam	lsam			2		
+ci	ciN	ciN	ci		1735		
+ci	ci	ci			219		
+ci	ciG	ciG			113		
+ci	ciS	ciS			67		
+ci	ci1	ci1			63		
+ci	ciS1	ciS1			60		
+ci	ciB	ciB	ci		10		
+ci	ciMN	ciMN	ciM		5		
+ci	ciG1	ciG1			4		
+ci	ciM	ciM			2		
+ci	ciNpp2	ciN			779	87	73
+ci	cilsc3	ci			57	102	91
+pp-su	ppt2	ppt2			903		
+pp-su	pp2	pp2			415		
+pp-su	ppt1	ppt1			288		
+pp-su	su2	su2			53		
+pp-su	sut2	sut2			36		
+pp-su	ppu2	ppu2			17		
+pp-su	su1sut1	su1sut1			16		
+pp-su	sut3	sut3			14		
+pp-su	ppt3	ppt3			14		
+pp-su	su3	su3			13		
+pp-su	sut1sux1	sut1sux1			12		
+pp-su	su1	su1			12		
+pp-su	pp1	pp1			11		
+pp-su	su1suu1	su1suu1			8		
+pp-su	suu2	suu2			8		
+pp-su	su1suu2	su1suu2			6		
+pp-su	sut1suw1	sut1suw1			5		
+pp-su	su2sut1	su2sut1			4		
+pp-su	su1sux1	su1sux1			4		
+pp-su	suu3	suu3			4		
+pp-su	suu1su2	suu1su2			3		
+pp-su	sut1	sut1			3		
+pp-su	ppt4	ppt4			3		
+pp-su	pp3	pp3			2		
+pp-su	suu2su2	suu2su2			2		
+pp-su	su1sut3	su1sut3			2		
+pp-su	ppt5	ppt5			2		
+pp-su	sut1suu1	sut1suu1			1		
+pp-su	ppu3	ppu3			1		
+pp-su	su1sut2	su1sut2			1		
+pp-su	sut4	sut4			1		
+pp-su	su2suy1	su2suy1			1		
+pp-su	su4	su4			1		
+ob-cb-ni	ob	ob			859		
+ob-cb-ni	cb	cb			847		
+ob-cb-ni	ni	ni			3		
+pr	pr	pr			1452		
+pr	prN	prN	pr		191		
+pr	prM	prM			16		
+pr	prB	prB	pr		6		
+pr	prlst2	pr			7	132	95
+pr	prlsc2	pr			4	119	80
+qi	qi	qi			68		
+qi	qiN	qiN	qi		53		
+qi	qiB	qiB	qi		7		
+qi	qiNsu2	qiN			287	90	106
+qi	qiEpo	qi		po	277		
+qi	qiEclN	qi		cl	77		
+qi	qiEcl	qi		cl	57		
+qi	qiNsu1sux1	qiN			51	105	105
+qi	qiEvssu2	qi		vs	37		
+qi	qippt1	qi			37	103	121
+qi	qiEclppt1	qi		cl	36		
+qi	qiNsut2	qiN			16	90	108
+qi	qiEvs	qi		vs	11		
+qi	qiBppt1	qiB			10	103	110
+qi	qiNsut3	qiN			10	99	103
+qi	qiEvsppt1su2	qi		vs	8		
+qi	qiEpoB	qi		po	7		
+qi	qiEvsppt1	qi		vs	5		
+qi	qisu2	qi			2	161	141
+qi	qippt2sut2	qi			1	115	105
+qi	qiNppt1su1sut2	qiN			1	77	99
+qi	qiEvsppt1su1sut2	qi		vs	1		
+qi	qiNppt1suu1su1sut2	qiN			1	145	133
+qi	qiEclB	qi		cl	1		
+qi	qisut1sux1	qi			1	117	125
+qi	qiNsu1sut2	qiN			1	77	99
+qi	qisut2	qi			1	115	105
+po	po	po			693		
+po	poN1	poN1	po		102		
+po	poB	poB	po		95		
+po	poT	poT	po		6		
+po	poGN	poGN	poG		1		
+po	posu2	po			20	90	94
+po	polsc2	po			11	117	93
+po	poN1su2	poN1			6	77	82
+po	posu1sut1	po			4	110	108
+sa	sa	sa			680		
+sa	saB	saB	sa		50		
+sa	sa1	sa1			29		
+sa	saN	saN	sa		28		
+sa	saM	saM			18		
+sa	saB2	saB2	sa		7		
+sa	saN1	saN1	sa		5		
+sa	saM4	saM4			5		
+sa	saM2	saM2			4		
+sa	saM1	saM1			4		
+sa	saG	saG			3		
+sa	saNB1	saNB1	sa		3		
+sa	saMN1	saMN1	saM		3		
+sa	saM6	saM6			2		
+sa	sapp1	sa			12	64	112
+sa	saEclN	sa		cl	7		
+sa	saEcl	sa		cl	4		
+sa	saNsu1sut1	saN			1	97	94
+sa	sa1EclNB	sa1		cl	1		
+sa	saM5ppt1	saM5			1		
+sa	saEclS1	sa		cl	1		
+st	st	st			639		
+st	stB	stB	st		8		
+st	stN	stN	st		6		
+vs	vs	vs			353		
+vs	vsB	vsB	vs		93		
+vs	vsN	vsN	vs		13		
+vs	vslsc3	vs			96	90	95
+vs	vslst2	vs			1	68	73
+or	or	or			412		
+or	orB	orB	or		38		
+tr	tr	tr			134		
+tr	trN3	trN3	tr		98		
+tr	trNT1	trNT1	tr		13		
+tr	trSN	trSN	trS		11		
+tr	trN1	trN1	tr		10		
+tr	trB	trB	tr		9		
+tr	trM	trM			8		
+tr	trT	trT	tr		3		
+tr	trS	trS			2		
+tr	trG	trG			1		
+tr	trN1su2	trN1			120	90	60
+tr	trSsut2	trS			13	66	88
+pf	pf	pf			101		
+pf	pfS	pfS			37		
+pf	pfN	pfN	pf		27		
+pf	pfB	pfB	pf		2		
+pf	pflsc2	pf			140	72	52
+pf	pf1lsc2	pf1			64		
+pf	pflst2	pf			27	76	56
+pf	pfEpi	pf		pi	2		
+pq	pq	pq			250		
+pq	pqN	pqN	pq		56		
+pq	pqB	pqB	pq		37		
+pq	pqS	pqS			8		
+pq	pqSN	pqSN	pqS		1		
+pq	pqEclN	pq		cl	4		
+pi	pi	pi			248		
+pi	piB	piB	pi		17		
+pi	pilst2	pi			45	85	129
+pi	pisu1	pi			23	167	115
+pi	pilsc2	pi			10	149	99
+pi	piM1sut1	piM1			1		
+pi	pisux1	pi			1	159	74
+bv	bvN	bvN	bv		244		
+bv	bv	bv			10		
+bv	bvNsut2	bvN			10	93	103
+sc	scM1	scM1			121		
+sc	sc	sc			41		
+sc	scG	scG			25		
+sc	scGN1	scGN1	scG		23		
+sc	scS	scS			23		
+sc	scN	scN	sc		15		
+sc	scM2	scM2			5		
+sc	scB	scB	sc		2		
+sc	scG1	scG1			2		
+ds	dsN	dsN	ds		156		
+ds	ds	ds			53		
+ds	dsB	dsB	ds		1		
+sf	sf	sf			93		
+sf	sfN	sfN	sf		83		
+sf	sfS	sfS			15		
+sf	sflsc3	sf			6	106	76
+ts	ts	ts			67		
+ts	tsM	tsM			37		
+ts	tsB	tsB	ts		36		
+ts	tsMN	tsMN	tsM		10		
+ts	tsN	tsN	ts		4		
+ts	tsMB	tsMB	tsM		2		
+gr	gr	gr			139		
+gr	grN	grN	gr		2		
+tg	tg	tg			30		
+tg	tgS	tgS			13		
+tg	tgSN	tgSN	tgS		7		
+tg	tgS3	tgS3			1		
+tg	tgSsuu1	tgS			5	188	129
+pt	pt	pt			10		
+pu	pu	pu			9		
+tv	tvN	tvN	tv		2		

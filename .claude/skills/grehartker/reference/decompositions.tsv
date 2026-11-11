@@ -1,0 +1,415 @@
+lot	famille	glyphe	decomposition	statut	usages_NR
+virga	vi	vi	vi	base	14394
+virga	vi	viN	viN	base	1918
+virga	vi	viB	viB	base	1580
+virga	vi	viNB	viNB	base	13
+virga	ci	ciN	viN + pu + pu	régulier	1735
+virga	ci	ciNpp2	pu + pu + viN + pu + pu	régulier	779
+virga	vi	viNsut2	viN + ta + ta	régulier	313
+virga	bv	bvN	viN + viN	régulier	244
+virga	ci	ci	vi + pu + pu	régulier	219
+virga	vi	viNpp2	pu + pu + viN	régulier	133
+virga	vi	viNsu1sut2	viN + pu + ta + ta	régulier	126
+virga	vi	viNsuu1su2	viN + taN + pu + pu	régulier	123
+virga	vi	viNsut1su2	viN + ta + pu + pu	régulier	100
+virga	vi	viNsuu2	viN + taN + taN	régulier	68
+virga	ci	cilsc3	vi + pu + pu + lsc@3	régulier	57
+virga	vi	viNsut3	viN + ta + ta + ta	régulier	53
+virga	vi	viNsu1sut1	viN + pu + ta	régulier	52
+virga	sc	sc	pu + pu + vi	régulier	41
+virga	vi	visu1suu1	vi + pu + taN	régulier	30
+virga	vi	visut1su2	vi + ta + pu + pu	régulier	26
+virga	vi	visu1sut2	vi + pu + ta + ta	régulier	25
+virga	vi	visut3	vi + ta + ta + ta	régulier	23
+virga	vi	viNsuu3	viN + taN + taN + taN	régulier	20
+virga	vi	viNsu1suu2	viN + pu + taN + taN	régulier	19
+virga	vi	viNsu1suu1	viN + pu + taN	régulier	15
+virga	vi	viNsu3	viN + pu + pu + pu	régulier	12
+virga	vi	viNsuu1sut1su2	viN + taN + ta + pu + pu	régulier	10
+virga	vi	vilsc3	vi + lsc@3	régulier	10
+virga	vi	vippt1su2	ta + vi + pu + pu	régulier	10
+virga	bv	bv	vi + vi	régulier	10
+virga	bv	bvNsut2	viN + viN + ta + ta	régulier	10
+virga	vi	viNsut4	viN + ta + ta + ta + ta	régulier	8
+virga	vi	viBppt2	ta + ta + viB	régulier	7
+virga	vi	vippu1su2	taN + vi + pu + pu	régulier	6
+virga	vi	visuu1su2	vi + taN + pu + pu	régulier	6
+virga	vi	viNsu2sut1	viN + pu + pu + ta	régulier	4
+virga	vi	visut1sux1	vi + ta + stB	régulier	3
+virga	vi	vippu1su2lsc3	taN + vi + pu + pu + lsc@3	régulier	3
+virga	vi	viNsu4	viN + pu + pu + pu + pu	régulier	3
+virga	vi	viNsuu2su2	viN + taN + taN + pu + pu	régulier	3
+virga	vi	vippt1su1sut1	ta + vi + pu + ta	régulier	3
+virga	vi	viNppt3	ta + ta + ta + viN	régulier	2
+virga	tv	tvN	viN + viN + viN	régulier	2
+virga	vi	viNsu1sux1	viN + pu + stB	régulier	1
+virga	vi	vippt1su2lsc3	ta + vi + pu + pu + lsc@3	régulier	1
+virga	vi	visu1suu1su2	vi + pu + taN + pu + pu	régulier	1
+virga	vi	visuu3	vi + taN + taN + taN	régulier	1
+virga	vi	viNsu1suu1su2	viN + pu + taN + pu + pu	régulier	1
+virga	vi	viNpp4	pu + pu + pu + pu + viN	régulier	1
+virga	vi	visu2sux1	vi + pu + pu + stB	régulier	1
+virga	vi	viNlst3	viN + lst@3	régulier	1
+virga	ci	ciS	vi + pu + ta	d'après gregall	67
+virga	ci	ci1	vi + pu + pu + pu	d'après gregall	63
+virga	ci	ciS1	vi + ta + ta	d'après gregall	60
+virga	sc	scS	ta + ta + vi	d'après gregall	23
+virga	sc	scN	ta + ta + viN	d'après gregall	15
+virga	ci	ciB	vi + pu + stB	d'après gregall	10
+virga	ci	ciMN	viN + pu + gr	d'après gregall	5
+virga	ci	ciM	vi + pu + gr	d'après gregall	2
+virga	sc	scB	pu + pu + viB	d'après gregall	2
+pes	pe	pe	pe	base	6207
+pes	pe	peS	peS	base	1815
+pes	pe	peN	peN	base	357
+pes	pe	peB	peB	base	281
+pes	pe	peB1	peB1	base	267
+pes	pe	peN1	peN1	base	152
+pes	pe	peNB	peNB	base	2
+pes	pe	peN1su2	peN1 + pu + pu	régulier	542
+pes	pe	peNsu2	peN + pu + pu	régulier	242
+pes	pe	pesu2	pe + pu + pu	régulier	152
+pes	pe	peN1sut2	peN1 + ta + ta	régulier	96
+pes	pe	peSsu2	peS + pu + pu	régulier	39
+pes	pe	peN1sut3	peN1 + ta + ta + ta	régulier	37
+pes	pe	peSsut2	peS + ta + ta	régulier	23
+pes	pe	pesu3	pe + pu + pu + pu	régulier	22
+pes	pe	peN1su1sut1	peN1 + pu + ta	régulier	22
+pes	pe	pesu1sut1	pe + pu + ta	régulier	16
+pes	pe	peNsu1sut1	peN + pu + ta	régulier	16
+pes	pe	peSsut3	peS + ta + ta + ta	régulier	10
+pes	pe	peN1su1sut2	peN1 + pu + ta + ta	régulier	8
+pes	pe	pesu1suu1	pe + pu + taN	régulier	8
+pes	pe	peN1su1suu1	peN1 + pu + taN	régulier	6
+pes	pe	pesut2	pe + ta + ta	régulier	6
+pes	pe	pesu2sut1	pe + pu + pu + ta	régulier	3
+pes	pe	peN1sut1sux1	peN1 + ta + stB	régulier	3
+pes	pe	peN1suu1su2	peN1 + taN + pu + pu	régulier	3
+pes	pe	peSppt2	ta + ta + peS	régulier	3
+pes	pe	peN1su1suw1	peN1 + pu + gr	régulier	3
+pes	pe	pesu1suw1	pe + pu + gr	régulier	2
+pes	pe	peN1sut1suw1	peN1 + ta + gr	régulier	1
+pes	pe	pesu1sut3	pe + pu + ta + ta + ta	régulier	1
+pes	pe	pesu1sux1	pe + pu + stB	régulier	1
+pes	pe	peNsu3sut1	peN + pu + pu + pu + ta	régulier	1
+pes	sc	scM1	viN + pe	d'après gregall	121
+pes	sc	scG	ta + pe	d'après gregall	25
+pes	sc	scGN1	peN + vi	d'après gregall	23
+pes	pe	peB2	ta + taB	d'après gregall	11
+pes	sc	scM2	vi + pe	d'après gregall	5
+pes	pe	peG	vi + vi	d'après gregall	2
+pes	sc	scG1	pe + vi	d'après gregall	2
+clivis	cl	clN	clN	base	7283
+clivis	cl	cl	cl	base	3458
+clivis	cl	clS	clS	base	259
+clivis	cl	clB	clB	base	118
+clivis	cl	clNB	clNB	base	68
+clivis	cl	clM	clM	base	64
+clivis	cl	clSN	clSN	base	52
+clivis	cl	clMN	clMN	base	34
+clivis	cl	clS1	clS1	base	7
+clivis	cl	clSN1	clSN1	base	4
+clivis	cl	clNB1	clNB1	base	3
+clivis	cl	clSN2	clSN2	base	2
+clivis	cl	cllsc3	cl + lsc@3	régulier	2068
+clivis	cl	cllst2	cl + lst@2	régulier	8
+clivis	cl	clSNsu2	clSN + pu + pu	régulier	4
+clivis	cl	clBppt2	ta + ta + clB	régulier	3
+clivis	cl	clNlst2	clN + lst@2	régulier	3
+clivis	cl	clSsut2	clS + ta + ta	régulier	3
+clivis	cl	clN1su2	clN1 + pu + pu	régulier	1
+clivis	cl	clSsuu1su2	clS + taN + pu + pu	régulier	1
+clivis	ci	ciG	clS + ta	d'après gregall	113
+clivis	ci	ciG1	clS + pu + pu	d'après gregall	4
+clivis	cl	clEpi	cl!or_pi + pu	ligature	334
+clivis	cl	clEpilsc2	cl!or_pi + pu + lsc@2	ligature	90
+clivis	cl	clEpo	cl!po	ligature	24
+clivis	cl	clEpoN1	cl!poN1	ligature	5
+clivis	cl	clEpisu1	cl!or_pi + pu + pu	ligature	4
+clivis	cl	clEclS	cl!clS	ligature	3
+clivis	cl	clEpilsc1lst3	cl!or_pi + pu + lsc@1 + lst@3	ligature	3
+clivis	cl	clEpr	cl!vs + pu	ligature	1
+ds	ds	dsN	st + stN	d'après gregall	156
+ds	ds	ds	st + st	d'après gregall	53
+ds	ds	dsB	st + stB	d'après gregall	1
+gr	gr	gr	gr	base	139
+gr	gr	grN	grN	base	2
+ls	ls	lsc	lsc	base	1129
+ls	ls	lse	lse	base	987
+ls	ls	lsi	lsi	base	757
+ls	ls	lss	lss	base	659
+ls	ls	lsl	lsl	base	631
+ls	ls	lsal	lsal	base	315
+ls	ls	lst	lst	base	127
+ls	ls	lsm	lsm	base	78
+ls	ls	lsco	lsco	base	66
+ls	ls	lsew	lsew	base	49
+ls	ls	lsx	lsx	base	42
+ls	ls	lssc	lssc	base	28
+ls	ls	lslc	lslc	base	24
+ls	ls	lsim	lsim	base	23
+ls	ls	lslm	lslm	base	17
+ls	ls	lsp	lsp	base	13
+ls	ls	lscm	lscm	base	12
+ls	ls	lssta	lssta	base	9
+ls	ls	lssm	lssm	base	8
+ls	ls	lslp	lslp	base	7
+ls	ls	lstm	lstm	base	4
+ls	ls	lstw	lstw	base	3
+ls	ls	lscw	lscw	base	3
+ls	ls	lsb	lsb	base	2
+ls	ls	lsst	lsst	base	2
+ls	ls	lsam	lsam	base	2
+ob-cb-ni	ob-cb-ni	ob	ob	base	859
+ob-cb-ni	ob-cb-ni	cb	cb	base	847
+ob-cb-ni	ob-cb-ni	ni	ni	base	3
+or	or	or	or	base	412
+or	or	orB	orB	base	38
+pf	pf	pf	pf	base	101
+pf	pf	pfS	pfS	base	37
+pf	pf	pfN	pfN	base	27
+pf	pf	pfB	pfB	base	2
+pf	pf	pflsc2	pf + lsc@2	régulier	140
+pf	pf	pf1lsc2	pf1 + lsc@2	régulier	64
+pf	pf	pflst2	pf + lst@2	régulier	27
+pf	pf	pfEpi	pf!or_pi + pu	ligature	2
+pi	pi	pi	or_pi + pu	d'après gregall	248
+pi	pi	pilst2	or_pi + pu + lst@2	d'après gregall	45
+pi	pi	pisu1	or_pi + pu + pu	d'après gregall	23
+pi	pi	piB	or_pi + stB	d'après gregall	17
+pi	pi	pilsc2	or_pi + pu + lsc@2	d'après gregall	10
+pi	pi	piM1sut1	or_pi + ta + ta	d'après gregall	1
+pi	pi	pisux1	or_pi + pu + stB	d'après gregall	1
+po	po	po	po	base	693
+po	po	poN1	poN1	base	102
+po	po	poB	poB	base	95
+po	po	poT	poT	base	6
+po	po	posu2	po + pu + pu	régulier	20
+po	po	polsc2	po + lsc@2	régulier	11
+po	po	poN1su2	poN1 + pu + pu	régulier	6
+po	po	posu1sut1	po + pu + ta	régulier	4
+po	po	poGN	clN + viN	d'après gregall	1
+pp-su	pp-su	ppt2	ta + ta	régulier	903
+pp-su	pp-su	pp2	pu + pu	régulier	415
+pp-su	pp-su	ppt1	ta	régulier	288
+pp-su	pp-su	su2	pu + pu	régulier	53
+pp-su	pp-su	sut2	ta + ta	régulier	36
+pp-su	pp-su	ppu2	taN + taN	régulier	17
+pp-su	pp-su	su1sut1	pu + ta	régulier	16
+pp-su	pp-su	sut3	ta + ta + ta	régulier	14
+pp-su	pp-su	ppt3	ta + ta + ta	régulier	14
+pp-su	pp-su	su3	pu + pu + pu	régulier	13
+pp-su	pp-su	sut1sux1	ta + stB	régulier	12
+pp-su	pp-su	su1	pu	régulier	12
+pp-su	pp-su	pp1	pu	régulier	11
+pp-su	pp-su	su1suu1	pu + taN	régulier	8
+pp-su	pp-su	suu2	taN + taN	régulier	8
+pp-su	pp-su	su1suu2	pu + taN + taN	régulier	6
+pp-su	pp-su	sut1suw1	ta + gr	régulier	5
+pp-su	pp-su	su2sut1	pu + pu + ta	régulier	4
+pp-su	pp-su	su1sux1	pu + stB	régulier	4
+pp-su	pp-su	suu3	taN + taN + taN	régulier	4
+pp-su	pp-su	suu1su2	taN + pu + pu	régulier	3
+pp-su	pp-su	sut1	ta	régulier	3
+pp-su	pp-su	ppt4	ta + ta + ta + ta	régulier	3
+pp-su	pp-su	pp3	pu + pu + pu	régulier	2
+pp-su	pp-su	suu2su2	taN + taN + pu + pu	régulier	2
+pp-su	pp-su	su1sut3	pu + ta + ta + ta	régulier	2
+pp-su	pp-su	ppt5	ta + ta + ta + ta + ta	régulier	2
+pp-su	pp-su	sut1suu1	ta + taN	régulier	1
+pp-su	pp-su	ppu3	taN + taN + taN	régulier	1
+pp-su	pp-su	su1sut2	pu + ta + ta	régulier	1
+pp-su	pp-su	sut4	ta + ta + ta + ta	régulier	1
+pp-su	pp-su	su2suy1	pu + pu + grN	régulier	1
+pp-su	pp-su	su4	pu + pu + pu + pu	régulier	1
+pq	pq	pq	pq	base	250
+pq	pq	pqN	pqN	base	56
+pq	pq	pqB	pqB	base	37
+pq	pq	pqS	pqS	base	8
+pq	pq	pqSN	pqSN	base	1
+pq	pq	pqEclN	pq!clN	ligature	4
+pr	pr	pr	vs + pu	d'après gregall	1452
+pr	pr	prN	vsN + pu	d'après gregall	191
+pr	pr	prM	vs + gr	d'après gregall	16
+pr	pr	prlst2	vs + pu + lst@2	d'après gregall	7
+pr	pr	prB	vs + stB	d'après gregall	6
+pr	pr	prlsc2	vs + pu + lsc@2	d'après gregall	4
+pt	pt	pt	pt	base	10
+pu	pu	pu	pu	base	9
+qi	qi	qi	qi	base	68
+qi	qi	qiN	qiN	base	53
+qi	qi	qiB	qiB	base	7
+qi	qi	qiNsu2	qiN + pu + pu	régulier	287
+qi	qi	qiNsu1sux1	qiN + pu + stB	régulier	51
+qi	qi	qippt1	ta + qi	régulier	37
+qi	qi	qiNsut2	qiN + ta + ta	régulier	16
+qi	qi	qiBppt1	ta + qiB	régulier	10
+qi	qi	qiNsut3	qiN + ta + ta + ta	régulier	10
+qi	qi	qisu2	qi + pu + pu	régulier	2
+qi	qi	qippt2sut2	ta + ta + qi + ta + ta	régulier	1
+qi	qi	qiNppt1su1sut2	ta + qiN + pu + ta + ta	régulier	1
+qi	qi	qiNppt1suu1su1sut2	ta + qiN + taN + pu + ta + ta	régulier	1
+qi	qi	qisut1sux1	qi + ta + stB	régulier	1
+qi	qi	qiNsu1sut2	qiN + pu + ta + ta	régulier	1
+qi	qi	qisut2	qi + ta + ta	régulier	1
+qi	qi	qiEpo	qi!po	ligature	277
+qi	qi	qiEclN	qi!clN	ligature	77
+qi	qi	qiEcl	qi!cl	ligature	57
+qi	qi	qiEvssu2	qi!vs + pu + pu	ligature	37
+qi	qi	qiEclppt1	ta + qi!cl	ligature	36
+qi	qi	qiEvs	qi!vs	ligature	11
+qi	qi	qiEvsppt1su2	ta + qi!vs + pu + pu	ligature	8
+qi	qi	qiEpoB	qi!poB	ligature	7
+qi	qi	qiEvsppt1	ta + qi!vs	ligature	5
+qi	qi	qiEvsppt1su1sut2	ta + qi!vs + pu + ta + ta	ligature	1
+qi	qi	qiEclB	qi!clB	ligature	1
+ql	ql	ql	ql	base	756
+ql	ql	qlN	qlN	base	278
+ql	ql	qlB	qlB	base	25
+ql	ql	qlppt1	ta + ql	régulier	355
+ql	ql	qlNsu2	qlN + pu + pu	régulier	333
+ql	ql	qlNppt1su2	ta + qlN + pu + pu	régulier	301
+ql	ql	qlNppt1	ta + qlN	régulier	189
+ql	ql	qlNsut2	qlN + ta + ta	régulier	155
+ql	ql	qlNppt1su1sut2	ta + qlN + pu + ta + ta	régulier	89
+ql	ql	qlNsu1sux1	qlN + pu + stB	régulier	50
+ql	ql	qlNsu1sut1	qlN + pu + ta	régulier	27
+ql	ql	qlNppt1su3	ta + qlN + pu + pu + pu	régulier	27
+ql	ql	qlBppt1	ta + qlB	régulier	25
+ql	ql	qlsut2	ql + ta + ta	régulier	23
+ql	ql	qlNppt1su1sux1	ta + qlN + pu + stB	régulier	21
+ql	ql	qlsu2	ql + pu + pu	régulier	9
+ql	ql	qlppt1sut3	ta + ql + ta + ta + ta	régulier	8
+ql	ql	qlsut3	ql + ta + ta + ta	régulier	8
+ql	ql	qlNsuu2	qlN + taN + taN	régulier	7
+ql	ql	qlppt1su2	ta + ql + pu + pu	régulier	7
+ql	ql	qlNsu3	qlN + pu + pu + pu	régulier	6
+ql	ql	qlNppt1su1suu1	ta + qlN + pu + taN	régulier	3
+ql	ql	qlNsu1suu2	qlN + pu + taN + taN	régulier	2
+ql	ql	qlNsu1sut2	qlN + pu + ta + ta	régulier	2
+ql	ql	qlNppt2su1suv1su2	ta + ta + qlN + pu + taNN? + pu + pu	régulier	2
+ql	ql	qlNsut1sux1	qlN + ta + stB	régulier	1
+ql	ql	qlNsu1suu1	qlN + pu + taN	régulier	1
+ql	ql	qlEclppt1	ta + ql!cl	ligature	824
+ql	ql	qlEclNppt1	ta + ql!clN	ligature	595
+ql	ql	qlEpo	ql!po	ligature	434
+ql	ql	qlEpoppt1	ta + ql!po	ligature	252
+ql	ql	qlEcl	ql!cl	ligature	197
+ql	ql	qlEclN	ql!clN	ligature	139
+ql	ql	qlEvssu2	ql!vs + pu + pu	ligature	126
+ql	ql	qlEvsppt1su2	ta + ql!vs + pu + pu	ligature	89
+ql	ql	qlEvsppt1sut2	ta + ql!vs + ta + ta	ligature	82
+ql	ql	qlEpoB	ql!poB	ligature	65
+ql	ql	qlEpoN1ppt1	ta + ql!poN1	ligature	36
+ql	ql	qlEpoN1	ql!poN1	ligature	28
+ql	ql	qlEvssut2	ql!vs + ta + ta	ligature	13
+ql	ql	qlEclB	ql!clB	ligature	7
+ql	ql	qlEpoT	ql!poT	ligature	4
+ql	ql	qlEclEclBppt1	ta + ql!cl!clB	ligature	4
+ql	ql	qlEclS1	ql!clS1	ligature	3
+ql	ql	qlEvs	ql!vs	ligature	2
+ql	ql	qlEclBppt1	ta + ql!clB	ligature	2
+ql	ql	qlEclB1	ql!clB1	ligature	1
+ql	ql	qlEclEpippt1	ta + ql!cl!or_pi + pu	ligature	1
+ql	ql	qlEclM	ql!clM	ligature	1
+ql	ql	qlEclEpi	ql!cl!or_pi + pu	ligature	1
+ql	ql	qlEclNB	ql!clNB	ligature	1
+ql	ql	qlEpoTppt1	ta + ql!poT	ligature	1
+ql	ql	qlEclEclB	ql!cl!clB	ligature	1
+ql	ql	qlEclNBppt1	ta + ql!clNB	ligature	1
+sa	sa	sa	pu + or_salicus + vi	d'après gregall	680
+sa	sa	saB	pu + or_salicus + viB	d'après gregall	50
+sa	sa	sa1	pu + or_couche + vi	d'après gregall	29
+sa	sa	saN	pu + or_salicus + viN	d'après gregall	28
+sa	sa	saM	vi + or_salicus + vi	d'après gregall	18
+sa	sa	sapp1	pu + pu + or_salicus + vi	d'après gregall	12
+sa	sa	saB2	ta + or_couche + viB	d'après gregall	7
+sa	sa	saEclN	pu + or_salicus + clN	d'après gregall	7
+sa	sa	saN1	pu + or_couche + viN	d'après gregall	5
+sa	sa	saM4	viN + or_couche + vi	d'après gregall	5
+sa	sa	saM2	vi + pq	d'après gregall	4
+sa	sa	saM1	vi + or_couche + vi	d'après gregall	4
+sa	sa	saEcl	pu + or_salicus + cl	d'après gregall	4
+sa	sa	saG	ta + pq	d'après gregall	3
+sa	sa	saNB1	viN + or_couche + viB	d'après gregall	3
+sa	sa	saMN1	vi + or_salicus + viN	d'après gregall	3
+sa	sa	saM6	viN + or_salicus + vi	d'après gregall	2
+sa	sa	saNsu1sut1	pu + or_salicus + viN + pu + ta	d'après gregall	1
+sa	sa	sa1EclNB	pu + or_couche + clNB	d'après gregall	1
+sa	sa	saM5ppt1	ta + pu + or_salicus + vi	d'après gregall	1
+sa	sa	saEclS1	pu + or_salicus + clS1	d'après gregall	1
+sf	sf	sf	pu + pu + cl	d'après gregall	93
+sf	sf	sfN	ta + ta + clN	d'après gregall	83
+sf	sf	sfS	ta + ta + cl	d'après gregall	15
+sf	sf	sflsc3	pu + pu + cl + lsc@3	d'après gregall	6
+st	st	st	st	base	639
+st	st	stB	stB	base	8
+st	st	stN	stN	base	6
+ta	ta	ta	ta	base	14708
+ta	ta	taB	taB	base	1087
+ta	ta	taN	taN	base	679
+ta	ta	talsc3	ta + lsc@3	régulier	27
+ta	ta	talst2	ta + lst@2	régulier	1
+tg	tg	tg	pu + pu + pu	d'après gregall	30
+tg	tg	tgS	pu + pu + ta	d'après gregall	13
+tg	tg	tgSN	pu + pu + taN	d'après gregall	7
+tg	tg	tgSsuu1	pu + pu + ta + taN	d'après gregall	5
+tg	tg	tgS3	pu + pu + ta + ta	d'après gregall	1
+to	to	to	to	base	3649
+to	to	toS2	toS2	base	465
+to	to	toS	toS	base	445
+to	to	toN1	toN1	base	133
+to	to	toM1	toM1	base	96
+to	to	toB	toB	base	85
+to	to	toN	toN	base	49
+to	to	toS3	toS3	base	35
+to	to	toB2	toB2	base	10
+to	to	toM3	toM3	base	8
+to	to	toS1	toS1	base	3
+to	to	toNB	toNB	base	1
+to	to	toS2sut1	toS2 + ta	régulier	185
+to	to	toS2su2	toS2 + pu + pu	régulier	150
+to	to	toSsu2	toS + pu + pu	régulier	121
+to	to	toN1su2	toN1 + pu + pu	régulier	76
+to	to	tolsc3	to + lsc@3	régulier	31
+to	to	toN1suu1	toN1 + taN	régulier	23
+to	to	toS2sut2	toS2 + ta + ta	régulier	13
+to	to	tolst2	to + lst@2	régulier	8
+to	to	toS3lst2	toS3 + lst@2	régulier	6
+to	to	toppu1	taN + to	régulier	4
+to	to	toBpp2	pu + pu + toB	régulier	1
+to	to	toS2sux1	toS2 + stB	régulier	1
+to	to	tolsc4lst3	to + lsc@4 + lst@3	régulier	1
+to	to	toG	ta + cl	d'après gregall	5
+to	to	toEcl	to!cl	ligature	25
+to	to	toEpi	to!or_pi + pu	ligature	9
+to	to	toSEcl	toS!cl	ligature	5
+to	to	toEclN	to!clN	ligature	4
+to	to	toEpisu1	to!or_pi + pu + pu	ligature	3
+to	to	toSEclNlsi8	toS!clN + lsi@8	ligature	1
+to	to	toEclB	to!clB	ligature	1
+to	to	toSEclN	toS!clN	ligature	1
+tr	tr	tr	tr	base	134
+tr	tr	trN3	trN3	base	98
+tr	tr	trNT1	trNT1	base	13
+tr	tr	trSN	trSN	base	11
+tr	tr	trN1	trN1	base	10
+tr	tr	trB	trB	base	9
+tr	tr	trT	trT	base	3
+tr	tr	trS	trS	base	2
+tr	tr	trN1su2	trN1 + pu + pu	régulier	120
+tr	tr	trSsut2	trS + ta + ta	régulier	13
+tr	tr	trM	viN + po	d'après gregall	8
+tr	tr	trG	ta + po	d'après gregall	1
+ts	ts	ts	st + st + st	d'après gregall	67
+ts	ts	tsM	st + st + st	d'après gregall	37
+ts	ts	tsB	st + st + stB	d'après gregall	36
+ts	ts	tsMN	st + st + stN	d'après gregall	10
+ts	ts	tsN	st + st + stN	d'après gregall	4
+ts	ts	tsMB	st + st + stB	d'après gregall	2
+vi	vi	viNEviNEvi	viN!viN!vi	ligature	4
+vs	vs	vs	vs	base	353
+vs	vs	vsB	vsB	base	93
+vs	vs	vsN	vsN	base	13
+vs	vs	vslsc3	vs + lsc@3	régulier	96
+vs	vs	vslst2	vs + lst@2	régulier	1

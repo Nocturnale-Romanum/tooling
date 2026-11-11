@@ -1,0 +1,33 @@
+element,manuscript,page,x,y,w,h,note,source
+dsB?,csg-0390,022,3052,709,28,45,strophae dont la dernière a une longue queue : ds> ou ts> à vérifier,"pages sources des pièces NR (st>, ds>, ts>)"
+dsB?,csg-0391,224,1998,3118,26,35,strophae dont la dernière a une longue queue : ds> ou ts> à vérifier,"pages sources des pièces NR (st>, ds>, ts>)"
+lsco,csg-0390,170,5199,6195,22,22,sommet du c d'un groupe co,identification visuelle
+lsi,csg-0390,031,4388,2866,21,32,lettre i,identification visuelle
+lsi,csg-0390,075,4147,5323,21,30,lettre i,identification visuelle
+lsi,csg-0390,080,2878,3228,28,29,lettre i,identification visuelle
+lsi,csg-0390,120,4586,3961,24,31,lettre i,identification visuelle
+lsi,csg-0390,140,5057,1197,22,27,lettre i,identification visuelle
+lsi,csg-0391,180,2523,3632,23,30,lettre i,identification visuelle
+st,csg-0390,032,3730,2173,23,34,"stropha isolée, queue courte (st simple ?)","pages sources des pièces NR (st>, ds>, ts>)"
+st,csg-0391,059,3314,902,23,31,"stropha isolée, queue courte (st simple ?)","pages sources des pièces NR (st>, ds>, ts>)"
+stB,csg-0390,160,3233,3153,35,42,"stropha liquescente isolée, longue queue","pages sources des pièces NR (st>, ds>, ts>)"
+stB,csg-0391,053,1033,2879,26,28,"stropha liquescente isolée, longue queue","pages sources des pièces NR (st>, ds>, ts>)"
+stB,csg-0391,057,1189,5275,24,26,"stropha liquescente isolée, longue queue","pages sources des pièces NR (st>, ds>, ts>)"
+su2,csg-0390,170,4176,5285,24,21,point d'un groupe su2,identification visuelle
+su2,csg-0391,157,2338,2195,24,23,point d'un groupe su2,identification visuelle
+sux,csg-0390,042,4256,4604,28,33,stropha liquescente en fin de subpunctis,identification visuelle
+sux,csg-0390,075,1399,1395,27,35,,identification visuelle
+sux,csg-0390,150,4844,1825,22,22,,identification visuelle
+sux,csg-0391,070,4381,6296,29,26,,identification visuelle
+sux,csg-0391,179,3033,5354,23,26,,identification visuelle
+sux,csg-0391,180,4119,3613,29,38,,identification visuelle
+tsB,csg-0390,021,1613,6371,26,35,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0390,075,2660,5242,26,38,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0390,075,3777,3848,29,36,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0390,111,2548,4579,33,36,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0390,121,2025,6307,28,35,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0391,053,1148,3210,33,36,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0391,053,3720,4275,33,38,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0391,053,4021,4279,36,36,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsB,csg-0391,069,933,3618,27,31,tristropha liquescente ; boîte = dernière stropha,"pages sources des pièces NR (st>, ds>, ts>)"
+tsM,csg-0391,160,2464,820,25,23,"1re stropha d'un tsM, plus basse que les deux suivantes",identification visuelle
