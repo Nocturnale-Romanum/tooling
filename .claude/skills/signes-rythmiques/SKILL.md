@@ -17,33 +17,35 @@ description: Ajouter des signes rythmiques GABC (points `.`, épisèmes `_`, `_0
 
 - **Python 3 :** bibliothèque standard seulement.
 - **Une copie de travail de `nocturnale-romanum` :** les scripts lisent `gabc/` dans le dossier passé en `--repo`, par défaut le dossier courant.
-- **Pour le rendu :** `lualatex` avec gregoriotex 6.1, la police NABC `gregall`, et `pdftoppm` (poppler).
+- **Pour le rendu, seulement si marteo le demande :** `lualatex` avec gregoriotex 6.1, la police NABC `gregall`, et `pdftoppm` (poppler).
 - **Notation :** pour les noms des neumes et la syntaxe, voir `GregorioRef.pdf` et `GregorioNabcRef.pdf` (section « Références Gregorio » du skill `fusion-repons` de NR).
 
 ## Travail un par un
 
 Ci-dessous, `S` désigne le dossier `scripts/` de ce skill. Lancer Python avec `-I` et `PYTHONIOENCODING=utf-8`.
 
-1. **Mettre NR à jour :** `git pull --ff-only`. marteo a pu commiter la pièce précédente entre-temps.
+1. **Mettre NR à jour :** `git pull --ff-only`. marteo a pu commiter la pièce précédente entre-temps. Si le pull bloque sur la pièce générée, restée non suivie, vérifier qu'elle est identique à la copie de `--samples` avant de la retirer : marteo commite sa propre version de ce fichier.
 2. **Apprendre de sa relecture :** si marteo a commité la pièce précédente, la comparer à la version générée.
    ```
    python -I S/compare_one.py <ID> --repo <NR> --samples <dossier>
    ```
-   Le script classe chaque syllabe qui diffère : signes, hauteurs NABC, notes ou neumes, texte. Rapporter brièvement ce qui a changé et en tirer les consignes nouvelles.
-3. **Générer la pièce suivante :**
+   Le script classe chaque syllabe qui diffère : signes, hauteurs NABC, notes ou neumes, texte. Si le `_dcrochu` a changé depuis la génération, régénérer d'abord la pièce en mémoire depuis la version actuelle, pour ne garder que les retouches de marteo. Rapporter brièvement ce qui a changé et en tirer les consignes nouvelles.
+3. **Générer la pièce suivante**, sans rendu :
    ```
-   python -I S/gen_one.py --next --repo <NR> --samples <dossier> --pdf
+   python -I S/gen_one.py --next --repo <NR> --samples <dossier>
    ```
    Le script :
    - écrit `gabc/<ID>_marteo.gabc` dans la copie de travail, **sans commit**, et refuse d'écraser un `_marteo` existant ;
-   - affiche les syllabes dont le NABC a été élevé et les fins d'incise avec les cas à revoir ;
-   - produit `<ID>.pdf` et `<ID>-1.png` dans `--samples`, à garder hors du dépôt.
+   - affiche les syllabes dont le NABC a été élevé, les notes non alignées et les fins d'incise avec les cas à revoir ;
+   - garde une copie du fichier dans `--samples`, hors du dépôt, pour `compare_one.py`.
 
    Les pièces viennent dans l'ordre alphabétique. On peut aussi donner un `<ID>` à la place de `--next`.
-4. **Regarder le rendu :** lire le PNG pour repérer les collisions entre épisèmes et NABC. Seule une vérification graphique permet de s'en assurer.
-5. **Présenter la pièce à marteo**, avec :
+
+   **Rendu :** marteo compile et regarde lui-même les pièces, donc ne pas compiler ni regarder le rendu. `--pdf` (lualatex puis `pdftoppm`, avec `gregall`) ne sert que s'il le demande. Les collisions entre épisèmes et NABC ne se vérifient que sur le rendu.
+4. **Présenter la pièce à marteo**, avec :
    - le lien de la pièce (`https://nocturnale.marteo.fr/chant/<ID>`) ;
-   - le chemin du fichier et du PDF ;
+   - un lien vers le fichier généré (`gabc/<ID>_marteo.gabc`) ;
+   - les notes non alignées, restées sans signe, avec leur neume : ce peut être une coquille du NABC ;
    - les contrôles : notes alignées, et seuls les signes et les hauteurs NABC diffèrent de dcrochu ;
    - les syllabes élevées, en signalant celles qui sont tassées ;
    - les fins d'incise à regarder en priorité : `,` après une virgule, `;` sans ponctuation, `;` après une pause longue, fin d'incipit, reprise.
@@ -116,7 +118,7 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 
 | Fichier | Rôle |
 |---|---|
-| `gen_one.py` | Génère une pièce dans la copie de travail, l'affiche avec les points à revoir, prépare le `.tex` et peut compiler le PDF |
+| `gen_one.py` | Génère une pièce dans la copie de travail et l'affiche avec les points à revoir ; prépare le `.tex` et compile le PDF avec `--pdf`, seulement si marteo le demande |
 | `compare_one.py` | Compare la version générée, copiée dans `--samples`, à celle que marteo a commitée |
 | `check_all.py` | Génère toutes les cibles en mémoire et vérifie les invariants : notes inchangées, plus aucun raccourci, élévation cohérente |
 | `train.py` | Réapprend la table sur le lot d'apprentissage et mesure le lot de vérification ; écrit `model.json` seulement avec `--write` |
@@ -169,8 +171,12 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 ## État au 11/11/2026
 
 - **[0202N1R1](https://nocturnale.marteo.fr/chant/0202N1R1) :** générée, retravaillée et commitée par marteo. Il n'a changé aucun signe, seulement 7 hauteurs NABC.
-- **[0202N1R2](https://nocturnale.marteo.fr/chant/0202N1R2) :** générée, dans la copie de travail de marteo, en attente de sa relecture.
-- **Répons restants :** 74 cibles après 0202N1R2. `check_all.py` donne 74 pièces, 16 095 notes, 159 non alignées et 486 syllabes élevées, dont 81 tassées, sans invariant violé.
+- **[0202N1R2](https://nocturnale.marteo.fr/chant/0202N1R2) :** générée, retravaillée et commitée par marteo. Ses retouches :
+  - point retiré devant un `;` sans ponctuation dont la suite est nécessaire au sens (*purgatiónis ejus ; secúndum legem Móysi*) ;
+  - reprise raccourcie à *Sicut.* ;
+  - séparateurs ajustés (`!` → `/`, `/` → `//`, `` ` `` dans le NABC).
+- **[0202N1R3](https://nocturnale.marteo.fr/chant/0202N1R3) :** générée, en attente de la relecture de marteo. `no(fe|pr)` (un `pr` sur 2 notes) n'a pas pu être aligné.
+- **Répons restants :** 73 après 0202N1R3. Au moment de l'export (74 cibles après 0202N1R2), `check_all.py` donnait 74 pièces, 16 095 notes, 159 non alignées et 486 syllabes élevées, dont 81 tassées, sans invariant violé.
 - **Corrections signalées dans le corpus**, à vérifier avant d'en reparler :
   - [0829N1R3](https://nocturnale.marteo.fr/chant/0829N1R3) : `tas,(gf..|cl-)` → `gf__` ;
   - [1226N2R1](https://nocturnale.marteo.fr/chant/1226N2R1) : `te,(fe..|cl-)` → `fe__` ;
