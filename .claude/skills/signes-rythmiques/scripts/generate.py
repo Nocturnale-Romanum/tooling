@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from nrparse import *
 from build import rows_for
 from rules import predict_piece, digits_piece
-from writer import rewrite, expand_shorthands, shorthands_left
+from writer import rewrite, expand_shorthands, fix_liquescent_strophae, shorthands_left
 from raise_nabc import raise_body
 from model import load_model
 
@@ -48,6 +48,7 @@ def generate(i):
     first = re.sub(r'^submitter:.*$', 'submitter:marteo;', first, flags=re.M)
     if 'nabc-lines' not in first:
         first += '\nnabc-lines:1;'
+    body = fix_liquescent_strophae(body)
     signed = body
     body, raised = raise_body(body)
     txt = first.replace('\r\n', '\n') + '\n%%' + body.replace('\r\n', '\n')
@@ -56,5 +57,5 @@ def generate(i):
     d0 = open(path, encoding='utf-8', errors='replace').read().rpartition('%%')[2].replace('\r\n', '\n')
     return dict(id=i, path=path, text=txt, first=first, rows=rows, P=P, Dg=Dg, stat=stat, raised=raised,
                 signed=signed, body=body,
-                same=strip_signs(expand_shorthands(d0)) == strip_signs(signed.replace('\r\n', '\n')),
+                same=strip_signs(fix_liquescent_strophae(expand_shorthands(d0))) == strip_signs(signed.replace('\r\n', '\n')),
                 left=shorthands_left(body))

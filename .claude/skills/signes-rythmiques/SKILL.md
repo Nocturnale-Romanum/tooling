@@ -52,6 +52,21 @@ Ci-dessous, `S` désigne le dossier `scripts/` de ce skill. Lancer Python avec `
 
    **Ne jamais commiter la pièce :** marteo la retravaille et la commite. Attendre qu'il demande la suivante.
 
+## Génération en lot (plan de marteo depuis le 11/11/2026)
+
+marteo peut demander de générer tous les répons restants d'un coup, sans commit, puis de faire le pull de temps en temps pour analyser ses corrections et ajuster le reste.
+
+- **Générer :** `python -I S/gen_all.py S <dossier>`, depuis la racine de NR. Le script :
+  - lance `gen_one.py` sur chaque cible ;
+  - garde les journaux dans `<dossier>/logs/` ;
+  - tient un manifeste `<dossier>/manifest.json`, avec le sha256 de chaque fichier écrit ;
+  - affiche une ligne de résumé par pièce.
+- **Résumer :** `python -I S/summarize.py <dossier> <revue.md>` écrit la liste à revoir, pièce par pièce. Donner à marteo les liens de chaque pièce et de chaque fichier.
+- **Avant chaque pull :** retirer seulement les fichiers générés que marteo a commités et dont la copie de travail correspond encore au manifeste.
+- **Après un changement de règle :** `python -I S/regen_intact.py S <dossier> [--dry]` régénère seulement les fichiers intacts, c'est-à-dire non suivis par git et conformes au manifeste. Il ne touche jamais un fichier commité ou retouché, puis met le manifeste à jour. Relancer ensuite `check_all.py` sur les pièces du manifeste.
+
+Le manifeste vit dans le dossier de travail de la session. S'il est perdu, comparer chaque fichier non suivi à une régénération en mémoire avant d'y toucher.
+
 **Corrections du corpus :** les écarts trouvés dans le corpus `_marteo`, comme une reprise qui diffère du corps ou un signe que marteo juge faux, sont à **signaler** et à tenir en liste. Ne jamais les corriger de soi-même : tout changement dans NR passe par une PR, ou par marteo. Le skill `fusion-repons` de NR décrit ce circuit.
 
 ## Consignes de marteo
@@ -95,6 +110,7 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 
 ### Écriture
 - **Raccourcis :** toujours développer les strophas et virgas multiples (`fss` → `fsfs`, `fsss` → `fsfsfs`, `fvv` → `fvfv`), dans la partie GABC seulement. `fss_` est ambigu : Gregorio 6.1 l'épisème comme `fs_fs`, alors que seul `fsfs_` est correct. Le NABC a ses propres `ss` (`lss2`), qu'il ne faut pas toucher.
+- **Inclinatum suivi d'une stropha liquescente :** quand dcrochu écrit deux notes losangées consécutives dont la deuxième est une stropha liquescente (`H!Gs<`, `H!Gs>`, `HGs<`, `HGs>`), supprimer la stropha et le `!`, et mettre une liquescence ordinaire : `HG>`. Le corpus `_marteo` écrit toujours ces paires sans `!`.
 - **En-tête :** premier bloc d'en-tête de dcrochu, avec `submitter:marteo;` et `nabc-lines:1;`. Les fins de ligne CRLF sont conservées.
 - **Échantillons :** les compiler avec la police NABC `gregall` (`\gresetnabcfont{gregall}{12}`), et non `gresgmodern`, même si `common_headers.tex` l'indique.
 - **Codes de pièce :** tout code cité (`P3F4R1`, `0202N1R2`) est un lien vers `https://nocturnale.marteo.fr/chant/<code>`.
@@ -118,6 +134,7 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 
 | Fichier | Rôle |
 |---|---|
+| `gen_all.py`, `summarize.py`, `regen_intact.py` | Génération en lot avec manifeste, liste à revoir, régénération des seuls fichiers intacts |
 | `gen_one.py` | Génère une pièce dans la copie de travail et l'affiche avec les points à revoir ; prépare le `.tex` et compile le PDF avec `--pdf`, seulement si marteo le demande |
 | `compare_one.py` | Compare la version générée, copiée dans `--samples`, à celle que marteo a commitée |
 | `check_all.py` | Génère toutes les cibles en mémoire et vérifie les invariants : notes inchangées, plus aucun raccourci, élévation cohérente |
@@ -176,7 +193,8 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
   - reprise raccourcie à *Sicut.* ;
   - séparateurs ajustés (`!` → `/`, `/` → `//`, `` ` `` dans le NABC).
 - **[0202N1R3](https://nocturnale.marteo.fr/chant/0202N1R3) :** générée, en attente de la relecture de marteo. `no(fe|pr)` (un `pr` sur 2 notes) n'a pas pu être aligné.
-- **Répons restants :** 73 après 0202N1R3. Au moment de l'export (74 cibles après 0202N1R2), `check_all.py` donnait 74 pièces, 16 095 notes, 159 non alignées et 486 syllabes élevées, dont 81 tassées, sans invariant violé.
+- **0202N1R3 :** commitée par marteo, sans aucun signe changé. Il a corrigé `no(fe|pr)` en `ffoe` et passé la clé en `f3`.
+- **Répons restants :** les 73 répons restants (de 0202N2R1 à Q5F6N3R2) sont tous générés, non commités, dans la copie de travail de marteo. Au moment de l'export (74 cibles après 0202N1R2), `check_all.py` donnait 74 pièces, 16 095 notes, 159 non alignées et 486 syllabes élevées, dont 81 tassées, sans invariant violé.
 - **Corrections signalées dans le corpus**, à vérifier avant d'en reparler :
   - [0829N1R3](https://nocturnale.marteo.fr/chant/0829N1R3) : `tas,(gf..|cl-)` → `gf__` ;
   - [1226N2R1](https://nocturnale.marteo.fr/chant/1226N2R1) : `te,(fe..|cl-)` → `fe__` ;

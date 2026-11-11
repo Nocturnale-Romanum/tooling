@@ -112,10 +112,21 @@ def expand_shorthands(body):
     return on_gabc(body, lambda x: RE_SH.sub(one, x))
 
 
+RE_INCL_STROPHA = re.compile(r'(\[[^\]]*\])|([A-NP](?:_+\d*|\.+\d*)?)!?([A-N])s[<>]')
+
+
+def fix_liquescent_strophae(body):
+    """Two consecutive inclinata, the second a liquescent stropha (H!Gs<, H!Gs>, HGs<, HGs>):
+    drop the stropha and write an ordinary liquescence, HG> (marteo, 11/11/2026)."""
+    def one(m):
+        return m.group(1) or m.group(2) + m.group(3) + '>'
+    return on_gabc(body, lambda x: RE_INCL_STROPHA.sub(one, x))
+
+
 def shorthands_left(body):
-    """Shorthands still present: fss, fvv, and fs_s or fs.s."""
+    """Writings to avoid still present: fss, fvv, fs_s or fs.s, and an inclinatum followed by a liquescent stropha."""
     left = []
-    pat = re.compile(r"[a-nA-N](?:s{2,}|v{2,})|[a-nA-N]([sv])[_.\d'<>~]+\1")
+    pat = re.compile(r"[a-nA-N](?:s{2,}|v{2,})|[a-nA-N]([sv])[_.\d'<>~]+\1|[A-NP](?:_+\d*|\.+\d*)?!?[A-N]s[<>]")
 
     def look(x):
         left.extend(m.group() for m in pat.finditer(re.sub(r'\[[^\]]*\]', '', x)))
