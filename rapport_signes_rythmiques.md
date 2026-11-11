@@ -239,11 +239,10 @@ La liste complète est dans `reprises_ecarts.tsv`.
 
 ## 8. Fichiers
 
-Seul ce rapport est versé ici. Les fichiers ci-dessous sont restés dans le dossier temporaire de la session d'analyse (08/11/2026) et ne sont pas conservés dans ce dépôt.
+Les scripts, le modèle et la marche à suivre sont dans le skill `.claude/skills/signes-rythmiques/` de ce dépôt (`SKILL.md`, `scripts/`, `data/`). Ce skill reprend aussi les consignes données depuis ce rapport : élévation du NABC sous les épisèmes et développement de `fss` en `fsfs`.
 
-- `nrparse.py`, `build.py` : lecture et alignement.
-- `rules.py` : les règles. `final2.py` : les évaluations. `gen2.py` : l'écriture des signes et la génération.
-- `split.json` : tirage. `model.pkl` : table et longueurs apprises.
-- `seg_labels.py`, `seg_cmp2.py` : mes lectures à l'aveugle du latin.
-- `ecarts.tsv` : notes en écart (2 366). `reprises_ecarts.tsv` : reprises en écart.
-- `generes/` : les 76 fichiers `<ID>_marteo.gabc` et `echantillon.pdf`.
+- `scripts/nrparse.py`, `scripts/build.py` : lecture et alignement.
+- `scripts/rules.py` : les règles. `scripts/train.py` : apprentissage et évaluation. `scripts/writer.py`, `scripts/generate.py`, `scripts/gen_one.py` : écriture des signes et génération.
+- `scripts/split.json` : tirage. `scripts/model.json` : table et longueurs apprises (ex-`model.pkl`).
+- `data/ecarts.tsv` : notes en écart (2 366). `data/reprises_ecarts.tsv` : reprises en écart.
+- Les lectures à l'aveugle du latin (`seg_labels.py`, `seg_cmp2.py`) et les 76 fichiers de `generes/` ne sont pas conservés : les pièces se génèrent une par une avec `gen_one.py`.
