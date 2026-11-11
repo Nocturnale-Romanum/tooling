@@ -40,7 +40,10 @@ def source_of(code):
     except Exception:
         return None
     m = re.search(r"e-codices\.unifr\.ch/[a-z]+/csg/(\d{4})/(\d+[a-z]?)", html)
-    return (m.group(1), m.group(2)) if m else None
+    if not m:
+        return None
+    page = m.group(2)
+    return (m.group(1), page.lstrip("0") or "0")
 
 
 def main():
