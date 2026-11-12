@@ -117,10 +117,10 @@ clivis	cl	clSNsu2	clSN + pu + pu	régulier	4
 clivis	cl	clBppt2	ta + ta + clB	régulier	3
 clivis	cl	clNlst2	clN + lst@2	régulier	3
 clivis	cl	clSsut2	clS + ta + ta	régulier	3
-clivis	cl	clN1su2	clN1 + pu + pu	régulier	1
 clivis	cl	clSsuu1su2	clS + taN + pu + pu	régulier	1
 clivis	ci	ciG	clS + ta	d'après gregall	113
 clivis	ci	ciG1	clS + pu + pu	d'après gregall	4
+clivis	cl	clN1su2	clSN + pu + pu	d'après gregall	1
 clivis	cl	clEpi	cl!or_pi + pu	ligature	334
 clivis	cl	clEpilsc2	cl!or_pi + pu + lsc@2	ligature	90
 clivis	cl	clEpo	cl!po	ligature	24
@@ -169,9 +169,9 @@ pf	pf	pf	pf	base	101
 pf	pf	pfS	pfS	base	37
 pf	pf	pfN	pfN	base	27
 pf	pf	pfB	pfB	base	2
-pf	pf	pflsc2	pf + lsc@2	régulier	140
-pf	pf	pf1lsc2	pf1 + lsc@2	régulier	64
 pf	pf	pflst2	pf + lst@2	régulier	27
+pf	pf	pflsc2	cl + cl + lsc_semi@2	d'après gregall	140
+pf	pf	pf1lsc2	pf + lsc@2	d'après gregall	64
 pf	pf	pfEpi	pf!or_pi + pu	ligature	2
 pi	pi	pi	or_pi + pu	d'après gregall	248
 pi	pi	pilst2	or_pi + pu + lst@2	d'après gregall	45

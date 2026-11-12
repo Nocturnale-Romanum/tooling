@@ -5,9 +5,9 @@ vi	neume	44	15919		choisi
 clN	neume	5	7377		choisi
 pe	neume	14	6571		choisi
 viN	neume	44	6211		choisi
-cl	neume	8	5657		choisi
-lsc	lettre	18	3751		
+cl	neume	10	5937		choisi
 to	neume	5	3693		choisi
+lsc	lettre	17	3611		
 vs	neume	8	1935		
 peS	neume	5	1890		choisi
 viB	neume	6	1649		choisi
@@ -40,15 +40,16 @@ lsal	lettre	1	315
 ql!vs	ligature	5	312		
 peB	neume	1	281		
 qi!po	ligature	1	277		
-pf	neume	3	268		
 peB1	neume	1	267		
 pq	neume	3	257		
 lst	lettre	13	238		
 toN1	neume	3	232		
 stB	modèle d'élément	21	231		choisi
 vsN	neume	2	204		
+pf	neume	3	192		
 stN	neume	4	176		
 gr	modèle d'élément	8	173		choisi
+lsc_semi	lettre	1	140		
 tr	neume	1	134		
 trN1	neume	2	130		
 clB	neume	2	121		
@@ -66,10 +67,9 @@ clNB	neume	2	69
 lsco	lettre	1	66		
 ql!poB	ligature	1	65		
 clM	neume	1	64		
-pf1	sans glyphe propre dans gregall	1	64		
 ql!poN1	ligature	2	64		
 qi!vs	ligature	5	62		
-clSN	neume	2	56		
+clSN	neume	3	57		
 pqN	neume	1	56		
 or_couche	sans glyphe propre dans gregall	7	54		
 qlB	neume	2	50		
@@ -137,7 +137,6 @@ taNN	modèle d'élément	1	2	oui
 ql!cl!or_pi	ligature	2	2		
 ql!clNB	ligature	2	2		
 toS!clN	ligature	2	2		
-clN1	sans glyphe propre dans gregall	1	1		
 cl!vs	ligature	1	1		
 pqSN	neume	1	1		
 qi!clB	ligature	1	1		

@@ -85,8 +85,8 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 **Choix des exemplaires**
 - Pour chaque forme : un choix et quatre variantes, **toutes de pages différentes**, présentés
   sur une planche avec gregall à la même échelle. marteo choisit, ou demande une variante.
-- Préférer des pages en module courant. Écarter les mains plus tardives (391 p. 110, 150, 240 ;
-  voir `sources/pages_examinees.csv`).
+- Préférer des pages en module courant. Écarter les mains plus tardives et les autres mises en
+  page (391 p. 110, 150, 240 ; 390 p. 192, litanies ; voir `sources/pages_examinees.csv`).
 - Pour un neume rare, passer par les pièces NR qui l'emploient (`S/sources_nr.py`) : le site
   NR donne la page de Hartker de chaque pièce.
 - Les identifications données en passant par marteo (lettres, éléments…) vont dans
@@ -115,7 +115,7 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
    ```
    Un neume avec points (placement d'un composé) :
    ```
-   python -I S/motifs.py <nom> --base vi viN --sous tt [--avant pp]
+   python -I S/motifs.py <nom> --base vi viN [--type vi] --motifs "|tt" "pp|" "||2" … [--pages 391:53 …]
    ```
    Un neume rare : `python -I S/sources_nr.py <neume> --nr <NR> --telecharger`, puis repérer la
    syllabe sur la page et relever la boîte, ou lancer `candidats.py` sur les pages téléchargées.
@@ -177,14 +177,19 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `viNsu1sut2`, `viNsut1su2`, `viNsuu1su2`, `viNsuu2`, `viNsut3`, `viNsu1sut1`, `viNpp2`.
 - **Choisis avant la règle de cohérence par lot, à revoir avec leur lot :** `cl`, `clN`, `pe`,
   `peS`, `to`.
-- **Décompositions :** les 414 glyphes utilisés dans NR, tous tranchés ; 146 formes de base
-  (71 neumes, 7 modèles d'éléments, 26 lettres, 34 ligatures, 3 crochets/vide, 5 sans glyphe
-  propre). Les formes déjà choisies couvrent 76 % des emplois.
-- **Pages examinées :** 74 (`sources/pages_examinees.csv`), dont 3 exclues.
+- **Décompositions :** les 414 glyphes utilisés dans NR, tous tranchés ; 145 formes de base
+  (71 neumes, 7 modèles d'éléments, 27 lettres dont le c mi-long `lsc_semi`, 34 ligatures,
+  3 crochets/vide, 3 sans glyphe propre : `or_salicus`, `or_pi`, `or_couche`).
+- **Lot virga (12 novembre 2026) :** exemplaires de placement proposés pour 30 glyphes de plus
+  (`ci`, `ciNpp2`, `sc`, `bvN`, `bv`, `ciS`, `ci1`, `ciS1`, `scS`, `scB`, `tvN`, `bvNsut2` et
+  18 `vi…su/pp`), en attente de la décision de marteo ; `viNB` pas encore trouvé avec certitude.
+  Sans exemplaire propre (placement à emprunter au glyphe le plus proche) : `ciB`, `ciM`,
+  `ciMN` (comme `ci`/`ciN`), `viNsut4`, `viBppt2`, `visuu1su2`, `viNsuu2su2`, `vippt1su1sut1`,
+  `viNppt3`, `visu1suu1su2`, `visuu3`, `viNpp4`, `visut1sux1`, `viNsu1sux1`, `visu2sux1`.
+- **Pages examinées :** 104 (`sources/pages_examinees.csv`), dont 4 exclues ; 100 en cache.
 
 **Prochaines étapes :**
-1. Lot virga : `viNB` (13 emplois ; pages sources téléchargées, céphalicus épisémé pas encore
-   repéré), et les exemplaires de placement des composés rares (`S/sources_nr.py`).
+1. Lot virga : décision de marteo sur les propositions, `viNB`, puis import.
 2. Outil de construction des composés par références (voir plus haut).
 3. Lots suivants, par usage : clivis, pes, torculus, quilisma…, avec revue des choix anciens.
 4. Exemplaires des formes sans glyphe propre : `or_salicus`, `or_pi` (sur les mêmes pages que

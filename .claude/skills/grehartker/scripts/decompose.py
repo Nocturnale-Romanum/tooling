@@ -10,7 +10,8 @@ w ; `grN` gravis épisémé : y ; `stB` stropha liquescente : x ; `suv`, tractul
 épisème, n'a pas encore de modèle : `taNN?`), soit une lettre significative (`lsc`, notée
 `lsc@3` avec sa position), soit une forme sans glyphe propre dans gregall (les deux oriscus du
 salicus, `or_salicus` en ∩ et `or_couche` en ~ ; l'oriscus du pressus minor, `or_pi`, pendant
-court de la virga strata `vs` du pressus maior ; `pf1`, `clN1`).
+court de la virga strata `vs` du pressus maior). Le c mi-long de `pflsc2` (`lsc_semi`, entre `lsc` et `lscw`) n'a pas non plus de
+glyphe propre.
 
 Les neumes de gregall en plusieurs morceaux (climacus, scandicus, pressus, salicus, strophae
 répétées, trigonus…) sont décomposés d'après le dessin de gregall, qui fait foi (11 novembre
@@ -80,6 +81,8 @@ D_APRES_GREGALL = {
     "sf": ["pu", "pu", "cl"], "sfN": ["ta", "ta", "clN"], "sfS": ["ta", "ta", "cl"],
     # divers
     "peB2": ["ta", "taB"], "toG": ["ta", "cl"],
+    # formes de gregall sans logique apparente, tranchées par marteo le 12 novembre 2026
+    "pf1": ["pf"], "clN1": ["clSN"],
     # tranchés le 11 novembre 2026
     "trM": ["viN", "po"], "trG": ["ta", "po"], "poGN": ["clN", "viN"], "saM2": ["vi", "pq"],
     "saM4": ["viN", "or_couche", "vi"], "peG": ["vi", "vi"],
@@ -116,7 +119,17 @@ def head_of(base):
     return [base], "base"
 
 
+# glyphes entiers dont le dessin gregall ne suit pas le nom (tranchés par marteo, 12 novembre 2026) :
+# pflsc2 est dessiné comme deux clivis suivies d'un c mi-long, entre `lsc` et `lscw`.
+GLYPHES = {
+    "pflsc2": (["cl", "cl", "lsc_semi@2"], "d'après gregall"),
+}
+
+
 def decompose(glyph):
+    if glyph in GLYPHES:
+        dec, statut = GLYPHES[glyph]
+        return " + ".join(dec), statut
     if glyph in ("ob", "cb", "ni") or glyph.startswith("ls"):
         return glyph, "base"
     if "E" in glyph[2:]:
@@ -171,7 +184,7 @@ def forme_type(f):
         return "lettre"
     if f in ("ob", "cb", "ni"):
         return "crochet, vide"
-    if f in SANS_GLYPHE or f in ("pf1", "clN1"):
+    if f in SANS_GLYPHE:
         return "sans glyphe propre dans gregall"
     if "!" in f:
         return "ligature"
