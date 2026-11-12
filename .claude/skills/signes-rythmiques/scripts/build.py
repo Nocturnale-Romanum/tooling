@@ -7,6 +7,29 @@ DEF = dict(vi=1, pu=1, ta=1, gr=1, un=1, cl=2, pe=2, po=3, to=3, ci=3, sc=3, pf=
 DEF['or'] = 1
 
 
+def liquescent(a, d):
+    """A NABC glyph with `>` (or>, vi>, pe>1...) stands either for its base notes, the last one with an
+    augmentative liquescence (GABC `>`), or for one more note, diminished (GABC `~`): allow both counts."""
+    b = DEF.get(a.name[:2], 1)
+    if '>' in a.name and b > 0:
+        for k in (b, b + 1):
+            d.setdefault(k, .02)
+    return d
+
+
+def two_up(ns, n):
+    """Note n of the syllable belongs to a GABC glyph of exactly two ascending notes (gh, g_h, gh_):
+    Gregorio places the episema itself (below the first note, above the second), so no digit."""
+    a = b = n
+    while a > 0 and not ns[a - 1].sep and not ns[a - 1].bar:
+        a -= 1
+    while b < len(ns) - 1 and not ns[b].sep and not ns[b].bar:
+        b += 1
+    run = ns[a:b + 1]
+    return (len(run) == 2 and run[1].pitch > run[0].pitch
+            and not any(r.cap or re.search(r'[vVsrR=q]', r.shape) for r in run))
+
+
 def lenprob(a, L):
     if a.role != 'base':
         return {1: 1.0}
@@ -14,9 +37,9 @@ def lenprob(a, L):
         # the quilisma glyph may cover only the wavy note when another neume carries the following note
         d = {int(k): v for k, v in L.get(a.name, {'2': 1.0}).items()}
         d.setdefault(1, .1)
-        return d
+        return liquescent(a, d)
     if a.name in L:
-        return {int(k): v for k, v in L[a.name].items()}
+        return liquescent(a, {int(k): v for k, v in L[a.name].items()})
     b = DEF.get(a.name[:2], 1)
     if re.search(r'[>~]', a.name):
         return {b: .5, b + 1: .3, b - 1: .2} if b > 0 else {0: 1.0}
@@ -241,6 +264,7 @@ def rows_for(pid, path, L, stat=None):
             next_pitch=nx[1].pitch if nx else '', next_cap=bool(nx and nx[1].cap), prev_ep=bool(pv and pv[1].ep),
             next_cx_same=bool(nx and nx[2] is not None and nx[2].cx == at.cx),
             first_syl=x is ns[0], raw_atom=at.raw, sig=q,
+            two_up=two_up(ns, next(n for n, y in enumerate(ns) if y is x)),
             wordend=last and G['wordend'], abar=abar, cue=G['cue'], gi=gi, ni=next(n for n, y in enumerate(ns) if y is x),
             punct=bool(re.search(r'[,;:.!?]\s*$', re.sub(r'\{|\}', '', G['txt']))),
             accent=G.get('accent', False), wlen=G.get('wlen', 0), wpos=G.get('wpos', 0),

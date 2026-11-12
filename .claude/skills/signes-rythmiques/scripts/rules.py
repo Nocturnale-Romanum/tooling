@@ -112,6 +112,10 @@ def digits_piece(rows, P):
             d = '1'
         if r['atom'] == 'tr-3' and r['pos'] == 'last' and r['next_atom'] == 'vi-' and nE:
             d = '2'
+        # position digits are meaningless where Gregorio has only one place for the episema:
+        # a virga (above), a glyph of exactly two ascending notes (below the first, above the second)
+        if d in ('0', '1') and (re.search(r'[vV]', r['shape']) or r.get('two_up')):
+            d = ''
         if d:
             out[k] = d
     return out

@@ -93,11 +93,15 @@ Une reprise (`+`, `‡`) recopie exactement le corps du répons. Tout écart dan
 - **`_0` :** sous la note, au début d'une montée ou sur une note très haute.
 - **`_1` :** au-dessus, rare, sur une note très basse, pour éviter le texte.
 - **`_2` :** détaché de l'épisème suivant.
+- **Pas de chiffre de position (`_0`, `_1`) là où Gregorio n'a qu'une place :**
+  - sur une **virga** (`gv_`), l'épisème ne peut aller qu'au-dessus ;
+  - dans un groupe de **deux notes ascendantes, et seulement deux** (`gh_`, `g_h`), il va toujours au-dessus de la deuxième note et en dessous de la première. `dh_0` est donc une faute.
 
 ### Lettres significatives et neumes
 - **`lst` :** se lit avec sa position (1 à gauche, 2 au milieu, 3 à droite) et allonge. `vilst` est à épisémer.
 - **`lsc` :** indique une note rapide.
 - **`pp` :** en NABC, il s'écrit après le glyphe de base, mais ses notes GABC viennent avant celles du glyphe.
+- **Liquescence NABC `>` (`or>`, `vi>`, `pe>1`…) :** elle correspond soit aux notes du glyphe de base dont la dernière porte une liquescence augmentative (GABC `>`), soit à une note de plus, diminuée (GABC `~`). Exemple : `cum(hggof~|cllsc3`or>)`, où `or>` couvre `go` et `f~`. L'alignement (`lenprob` dans `build.py`) admet toujours les deux nombres de notes.
 - **Ce qu'il faut regarder :** la barre suivante, la nature syllabique ou mélismatique de la note, et le neume suivant (pour le quilisma).
 
 ### Élévation du NABC sous les épisèmes
@@ -128,7 +132,7 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 - **Avant un quilisma :** jamais d'épisème. Cette règle l'emporte sur les autres.
 - **Point (`dot`) :** dernière note de syllabe devant `;`, `:` ou `::`, hors reprise. `cl`, `cl-`, `pe` et `sf-` y prennent `..`. Une syllabe accentuée à l'unisson avant une finale d'une seule note prend aussi un point.
 - **Reprise :** copie du corps, par `cue_src`.
-- **Chiffres (`digits_piece`) :** `_0` en début de montée suivie d'un séparateur, `_1` sur la première note de `pr-` à `f` ou plus bas, `_2` sur la dernière note de `tr-3` devant `vi-` épisémé.
+- **Chiffres (`digits_piece`) :** `_0` en début de montée suivie d'un séparateur, `_1` sur la première note de `pr-` à `f` ou plus bas, `_2` sur la dernière note de `tr-3` devant `vi-` épisémé. Jamais `_0` ni `_1` sur une virga ni dans un glyphe GABC de deux notes ascendantes (trait `two_up` de `build.py`).
 
 ## Scripts (`scripts/`)
 
@@ -172,11 +176,11 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 
 | Placement de l'épisème | Précision | Rappel |
 |---|---:|---:|
-| `_0` | 87 % | 78 % |
+| `_0` | 96 % | 78 % |
 | `_1` | 37 % | 30 % |
 | `_2` | 60 % | 19 % |
 
-**Placement exact :** 97,6 % des épisèmes justes, contre 94,1 % sans aucun chiffre.
+**Placement exact :** 98,0 % des épisèmes justes, contre 94,1 % sans aucun chiffre. Avant la règle sur la virga et le groupe de deux notes ascendantes (12/11/2026), `_0` était à 87 % de précision et le placement à 97,6 %.
 
 **Variabilité du corpus :** 1,3 % des contextes identiques y portent des signes différents. Le plafond vient donc en partie du corpus lui-même.
 
@@ -200,4 +204,15 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
   - [1226N2R1](https://nocturnale.marteo.fr/chant/1226N2R1) : `te,(fe..|cl-)` → `fe__` ;
   - [1224R2](https://nocturnale.marteo.fr/chant/1224R2) : `te:(ixhg/higgf__|////cltoS2cl-)` → `higgf..` ;
   - les deux `fss_` ou `fvv_` du corpus ([08H1N3R1](https://nocturnale.marteo.fr/chant/08H1N3R1), [N1F1N3R2](https://nocturnale.marteo.fr/chant/N1F1N3R2)) ont été corrigés par marteo.
+## État au 12/11/2026
+
+- **Lot du 11/11 :** il n'est plus dans la copie de travail de NR. Il reste 66 cibles, de 0319N1R1 à Q5F6N3R2, et le manifeste est perdu.
+- **Relectures de [Q5F6N1R2](https://nocturnale.marteo.fr/chant/Q5F6N1R2) et [Q5F6N1R3](https://nocturnale.marteo.fr/chant/Q5F6N1R3) :**
+  - point retiré trois fois devant un `;` sans ponctuation dont la suite est nécessaire au sens ;
+  - NABC `hm` de dcrochu baissé à `hl` une fois ;
+  - le reste suit l'alignement sur 1227N2R2.
+  Pas de décision de marteo sur les fins d'incise pour l'instant : ne pas changer la règle du point.
+- **Règles ajoutées :** liquescence NABC `>` (une ou deux notes) et pas de chiffre de position sur une virga ni sur un groupe de deux notes ascendantes. Sur les 66 cibles, les notes non alignées passent de 157 à 143, et aucun invariant n'est violé.
+- **[0319N1R1](https://nocturnale.marteo.fr/chant/0319N1R1) :** générée avec ces règles, sans note non alignée. En attente de la relecture de marteo.
+
 - **Questions ouvertes :** la liste des points devant `,` à arbitrer n'existe pas encore (voir la section 3 du rapport). Les autres questions sont à la section 6 du rapport.
