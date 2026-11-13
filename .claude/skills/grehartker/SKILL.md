@@ -249,6 +249,17 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   composés (`ciG`, `ciG1`, `clSsut2`, `clSNsu2`, `clSsuu1su2`, `clN1su2`, `clBppt2`, lettres).
   `reperes.csv` garde des `ciG?` (clS avec tractulus sous le pied) et des salicus.
 
+- **Décisions du 13 novembre 2026 (suite) :** `decision_virga_1..4` validés sauf : `scB` (les
+  propositions étaient des `sf` ; `scB` n'est employé que deux fois dans NR, dont *Libera me…
+  de morte*, 391 p. 198, *ter*, page trop pâle : toujours sans exemplaire) ; `bv` = 391 p. 68
+  (*Exaltare Domine*, *xal*, bivirga isolée, boîte relevée à la main), les `bvsut2` en
+  variantes ; `viNsu1suu1su2` = 391 p. 232 ; `viNsu2sut1` = nouvelles propositions (390 p. 148…),
+  l'ancien était un `viNsu2suu1` ; `vippt1su2` : aucune proposition n'en était (`viNppt2su2`,
+  `viNppt1su2`, `visu1sut1` + `ciN`, `clSsut1` + `ciN`, notés dans `reperes.csv`), toujours sans
+  exemplaire ; `cl`, `clN`, `clS` validés ; `clM` : les premiers étaient des `cl`, puis des
+  `toM1` (repères) ; nouvelles propositions à jambe droite profonde (`candidats.py --trait
+  patte`, pages NR de `clM`).
+
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
 2. Lot clivis : revue de `cl` et `clN`, puis variantes cohérentes avec `cl` (`--sur cl`),

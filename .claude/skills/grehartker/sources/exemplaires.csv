@@ -114,8 +114,9 @@ bvN,variante A,csg-0391,213,3287,5255,105,65,"3319,5258,73,62","? 09H3N1R1 Peto 
 bvN,variante B,csg-0390,110,4672,5591,94,74,"4700,5592,66,71",
 bvN,variante C,csg-0391,080,1942,4124,108,59,"1976,4135,74,48",0624N1R1 Fuit homo missus a Deo cui nomen (Fu)
 bvN,variante D,csg-0391,180,3278,4607,75,71,"3297,4607,56,71",
-bv,choisi,csg-0391,168,5247,2205,115,52,"5274,2217,88,40",APEXN3R1 Isti sunt qui viventes (ne)
-bv,variante A,csg-0391,173,3110,2501,84,53,"3134,2506,60,48",PMEXN1R2 Viri sancti gloriosum sanguinem (pro)
+bv,choisi,csg-0391,068,1490,6300,96,72,,"P5F5N1R3 Exaltare Domine (xal), bivirga isolée ; boîte relevée à la main"
+bv,variante A,csg-0391,173,3110,2501,84,53,"3134,2506,60,48",PMEXN1R2 Viri sancti gloriosum sanguinem (pro) ; choix temporaire : c'est une bvsut2 (virgas seules dans la boîte)
+bv,variante B,csg-0391,168,5247,2205,115,52,"5274,2217,88,40",APEXN3R1 Isti sunt qui viventes (ne) ; c'est une bvsut2 (virgas seules dans la boîte)
 ci1,choisi,csg-0391,067,1522,6237,93,87,"1522,6237,59,51",
 ciS,choisi,csg-0391,179,1902,5146,70,87,"1902,5146,61,69",
 ciS1,choisi,csg-0391,088,2814,2884,75,74,"2814,2884,75,55","? 0118N2R2 Ego pro te rogavi (ma, tres) | 0118N2R3 Petre amas me (tre,, Pa, Pa) | 0118N3R1 Quem dicunt homines (es, um) | 0629N3R2 Quem dicunt homines (es, um) | 0801N2R2 Surge Petre (té)"
@@ -127,9 +128,6 @@ visut1su2,variante A,csg-0391,157,4323,3529,94,102,"4323,3529,82,59",? 1122N1R3 
 visut1su2,variante B,csg-0390,070,4101,656,90,112,"4101,656,90,70",
 visu1sut2,choisi,csg-0391,180,1678,4504,76,118,"1678,4504,54,58",
 visu1sut2,variante A,csg-0391,205,3549,1502,145,111,"3549,1502,69,49",
-vippt1su2,choisi,csg-0391,162,3950,2129,128,91,"3992,2129,86,62",
-vippt1su2,variante A,csg-0390,088,3963,750,89,100,"3976,750,76,81",
-vippt1su2,variante B,csg-0390,123,978,4206,130,81,"1021,4206,73,68",
 vippu1su2,choisi,csg-0391,057,3586,4814,127,76,"3642,4814,61,63",
 vippu1su2,variante A,csg-0391,070,4638,3835,145,91,"4697,3835,81,64",P5F5N3R2 Ponit nubem (le)
 vippu1su2,variante B,csg-0391,184,5495,6218,105,82,"5542,6218,58,73",
@@ -140,8 +138,8 @@ viNsu1suu2,variante A,csg-0390,145,1865,5463,91,116,"1865,5463,73,75",? 1002N1R1
 viNsu1suu2,variante B,csg-0390,050,4538,2787,92,125,"4538,2787,92,81",
 viNsu1suu2,variante C,csg-0390,114,5254,1783,91,111,"5254,1783,79,70",
 viNsu1suu2,variante D,csg-0391,043,4151,3153,93,119,"4151,3153,80,81",P0F2R2 Surrexit pastor bonus (Chris)
-viNsu1suu1su2,choisi,csg-0391,194,3210,6152,86,147,"3210,6152,86,67",
-viNsu1suu1su2,variante A,csg-0391,232,4598,3137,131,186,"4598,3137,82,72",
+viNsu1suu1su2,choisi,csg-0391,232,4598,3137,131,186,"4598,3137,82,72",
+viNsu1suu1su2,variante A,csg-0391,194,3210,6152,86,147,"3210,6152,86,67",
 bvNsut2,choisi,csg-0390,087,2393,3488,97,88,"2415,3489,65,72",
 bvNsut2,variante A,csg-0390,136,1348,4972,103,95,"1373,4975,78,69",
 bvNsut2,variante B,csg-0390,104,4121,2421,103,82,"4140,2421,79,72",H1N3R1 Benedicamus Patrem et Filium (sǽ)
@@ -154,10 +152,6 @@ viNsu1suu1,choisi,csg-0391,102,3696,770,90,93,"3696,770,87,70",? 0815N1R1 Vidi s
 viNsu1suu1,variante A,csg-0391,100,1985,755,64,83,"1985,755,62,48","0810N2R3 Beatus Laurentius clamavit (co, o)"
 viNsu3,choisi,csg-0391,113,4552,4436,87,123,"4552,4436,87,72",? CBMVN3R1 Felix namque ou 0908N2R3 Nativitas tua (non transcrit viNsu3 dans NR) ; page de la source de gregall (H307F « natalem »)
 viNsu3,variante A,csg-0390,058,5045,6282,89,120,"5045,6282,73,77",
-viNsu2sut1,choisi,csg-0390,046,3766,1599,98,122,"3766,1599,69,62",
-scB,choisi,csg-0390,045,1558,3463,111,119,"1607,3463,62,62",
-scB,variante A,csg-0390,028,1615,3064,104,105,"1663,3064,56,63",
-scB,variante B,csg-0391,168,2918,1771,118,109,"2973,1771,63,58",
 viNsuu3,choisi,csg-0390,016,2933,2803,105,101,"2933,2803,75,83",A1N1R2 Aspiciebam in visu (re)
 viNsuu3,variante A,csg-0390,035,3010,6283,92,105,"3010,6283,81,79",A3F6R3 Germinaverunt campi eremi (ni)
 viNsuu3,variante B,csg-0390,045,1684,4554,91,73,"1684,4554,48,48",N1F1N3R2 O Regem caeli (mun)
@@ -171,14 +165,17 @@ clS,variante A,csg-0390,144,5394,3147,52,60,,"? Q1N1R1 Ecce nunc tempus (æ, æ.
 clS,variante B,csg-0390,157,2289,4507,58,64,,E1N2R2 Vulpes foveas (re)
 clS,variante C,csg-0391,189,3077,2473,52,60,,? MUVXN3R1 Haec est virgo sapiens (lán) | MUXMN1R1 Veni sponsa Christi (lis)
 clS,variante D,csg-0390,075,4292,2426,54,62,,"? 0106N1R1b Tria sunt munera (cam) | 0106N1R2 In columbae specie (tus, au) | 0106N2R1 Illuminare illuminare Jerusalem (rú) | 0806N1R2 In splendenti nube (tus, au)"
-clM,choisi,csg-0390,150,3660,6003,46,73,,Q2N1R3 Det tibi Deus (ræ)
-clM,variante A,csg-0391,106,1621,5084,49,77,,
-clM,variante B,csg-0390,180,1761,774,35,55,,? Q6F5N2R2 Judas mercator pessimus (De) | Q6F5N3R1 Eram quasi agnus innocens (um)
-clM,variante C,csg-0391,112,3893,2718,41,66,,0908N2R1 Nativitas gloriosae (ni)
-clM,variante D,csg-0390,178,1894,705,34,61,,
 clB,choisi,csg-0390,080,3390,4576,74,59,,
 clB,variante A,csg-0390,061,3458,2865,72,60,,"Valde honorandus (commendavit), désigné par marteo le 13 novembre 2026"
 clB,variante B,csg-0390,177,3837,1472,77,60,,
 clB,variante C,csg-0390,174,3805,5277,72,58,,
 clB,variante D,csg-0390,152,3442,1798,81,60,,
 viNB,choisi,csg-0390,080,2771,2788,63,74,,
+clM,choisi,csg-0391,112,3692,4429,56,81,,0908N2R1 Nativitas gloriosae (ni)
+clM,variante A,csg-0391,197,928,4953,46,49,,ODEFN2R3 Ne recorderis peccata (pec)
+clM,variante B,csg-0391,214,1568,3868,49,56,,09H3N2R1 Sufficiebat nobis (mi)
+clM,variante C,csg-0391,211,4290,1093,47,57,,09H1F2R1 Versa est in luctum (ce)
+viNsu2sut1,choisi,csg-0390,148,3340,1709,117,120,"3340,1709,86,80",
+viNsu2sut1,variante A,csg-0390,017,4677,670,97,116,"4677,670,59,68",
+viNsu2sut1,variante B,csg-0391,186,4233,3539,97,117,"4233,3539,59,75",
+viNsu2sut1,variante C,csg-0391,076,3102,641,55,107,"3102,641,55,46",

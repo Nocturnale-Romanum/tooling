@@ -19,7 +19,9 @@ exemple --glyphe cl clN comme graines) :
 - pied     : le pied de la dernière jambe part vers la droite (clS, ciG) ; v ≈ 0,85 ;
 - episeme  : encre en haut à droite (clN, viN…) ; v ≈ 0,4 ;
 - boucle   : boucle fermée (cl>, vi>…) ; v ≈ 0,05 ;
-- etroite  : forme haute et étroite (clM) ; v ≈ 0,3.
+- etroite  : forme haute et étroite ; v ≈ 0,3 ;
+- patte    : la jambe droite descend plus bas que la gauche, en fraction de la hauteur (clM) ;
+             v ≈ 0,25.
 
 Sortie dans cache/candidats/ : <nom>.png (planche, au plus --par-page candidats par page, triés
 par ressemblance) et <nom>.json (boîtes des candidats, dans l'ordre de la planche). On choisit
@@ -79,7 +81,14 @@ def traits(m):
     return dict(pied=(bx.max() + 1) / w if len(bx) else 0,
                 episeme=top[:, int(w * 0.6):].sum() / top.sum() if top.sum() else 0,
                 boucle=(ndi.binary_fill_holes(m) & ~m).sum() / max(1, m.sum()),
-                etroite=1 - w / h)
+                etroite=1 - w / h,
+                patte=patte(m))
+
+
+def patte(m):
+    h, w = m.shape
+    left, right = np.nonzero(m[:, :w // 2])[0], np.nonzero(m[:, w // 2:])[0]
+    return (right.max() - left.max()) / h if len(left) and len(right) else 0
 
 
 def main():
@@ -93,7 +102,7 @@ def main():
     ap.add_argument("--n", type=int, default=36)
     ap.add_argument("--par-page", type=int, default=2)
     ap.add_argument("--seuil", type=float, default=0.4)
-    ap.add_argument("--trait", choices=["pied", "episeme", "boucle", "etroite"])
+    ap.add_argument("--trait", choices=["pied", "episeme", "boucle", "etroite", "patte"])
     ap.add_argument("--seuil-trait", type=float, default=0.5)
     args = ap.parse_args()
     seg = H.load_seg()
