@@ -35,3 +35,26 @@ def nabc_snippets(text):
       if i % (n + 1):
         yield pos, snip
       pos += len(snip) + 1
+
+
+def header_field(header, name):
+  m = re.search(r'^' + name + r':\s*([^;]*);', header, re.M)
+  return m.group(1).strip() if m else None
+
+
+CLEF = re.compile(r'(?<![a-z])([cf])b?([1-4])(?![0-9])')
+
+
+def last_clef(body):
+  """(type, line) of the last clef in body, e.g. ('c', 4)."""
+  clef = None
+  for m in NOTE_GROUP.finditer(body):
+    for c in CLEF.finditer(m.group(1).split('|')[0]):
+      clef = c.group(1), int(c.group(2))
+  return clef
+
+
+def to_c4(notes, clef):
+  """Transpose GABC pitch letters written under clef to the same pitches under a c4 clef."""
+  shift = 2 * (4 - clef[1]) + (3 if clef[0] == 'f' else 0)
+  return ''.join(chr(ord(n) + shift) for n in notes.lower())
