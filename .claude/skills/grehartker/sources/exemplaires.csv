@@ -171,12 +171,18 @@ clB,variante B,csg-0390,177,3837,1472,77,60,,
 clB,variante C,csg-0390,174,3805,5277,72,58,,
 clB,variante D,csg-0390,152,3442,1798,81,60,,
 viNB,choisi,csg-0390,080,2771,2788,63,74,,
-clM,choisi,csg-0391,112,3692,4429,56,81,,0908N2R1 Nativitas gloriosae (ni)
-clM,variante A,csg-0391,197,928,4953,46,49,,ODEFN2R3 Ne recorderis peccata (pec)
-clM,variante B,csg-0391,214,1568,3868,49,56,,09H3N2R1 Sufficiebat nobis (mi)
-clM,variante C,csg-0391,211,4290,1093,47,57,,09H1F2R1 Versa est in luctum (ce)
+clM,choisi,csg-0391,088,3303,2922,53,81,,"0118N3R1 Quem dicunt homines (li de Filium, avec lsc), désigné par marteo le 13 novembre 2026"
+clM,variante A,csg-0390,029,4931,4226,54,81,,"A3N3R3 Docebit nos Dnus (a, a, a)"
+clM,variante B,csg-0391,086,3420,4525,52,85,,? 0118N1R1 Simon Petre antequam (et) | 0118N1R2 Si diligis me Simon (te) | 0118N1R3 Tu es Petrus (et)
+clM,variante C,csg-0390,173,4408,1162,53,82,,? Q6F3R1 Contumelias et terrores passus (Resp.) (de) | Q6N3R2 Dixerunt impii apud se (ret)
+clM,variante D,csg-0391,159,4343,6262,50,76,,
 viNsu2sut1,choisi,csg-0390,148,3340,1709,117,120,"3340,1709,86,80",
 viNsu2sut1,variante A,csg-0390,017,4677,670,97,116,"4677,670,59,68",
 viNsu2sut1,variante B,csg-0391,186,4233,3539,97,117,"4233,3539,59,75",
 viNsu2sut1,variante C,csg-0391,076,3102,641,55,107,"3102,641,55,46",
 scB,choisi,csg-0391,198,4565,4507,142,135,"4630,4507,75,72","ODEFN3R3b Libera me Domine de morte (ter), désigné par marteo le 13 novembre 2026"
+clMN,choisi,csg-0390,161,1124,3323,56,65,,"? Q4F2R1 Vos qui transituri estis (lo) | Q4N2R3 Moyses famulus Domini (le, le, le)"
+clMN,variante A,csg-0391,029,1261,5573,48,64,,Q6F7N2R3 Ecce quomodo moritur (a)
+clMN,variante B,csg-0391,024,3627,2430,47,64,,? Q6F6N1R3 Vinea mea (di) | Q6F6N2R2 Tenebrae factae sunt (sit)
+clMN,variante C,csg-0390,029,4391,3149,52,63,,
+clMN,variante D,csg-0390,180,2483,3574,53,55,,Q6F5N2R1 Amicus meus osculi me (e)

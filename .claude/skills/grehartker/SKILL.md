@@ -124,6 +124,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - Le « Ꝛ » à pied tourné à droite suivi d'un tractulus dessous, devant une virga épisémée à deux
   points, est `toS2sut1` (ou `clSsut1`) suivi d'un `ci-`, pas un `vippt1su2`.
 
+- `clM` : petite jambe gauche, longue jambe droite qui descend bien plus bas (forme de « 7 ») ;
+  ce n'est ni une clivis à jambes presque égales, ni un `toM1` (qui a la note initiale du
+  torculus). Référence : 391 p. 88, *Quem dicunt*, *Filium* (avec `lsc`). `clMN` : même forme
+  avec épisème.
+
 **Divers**
 - Couleurs de glyphes dans le `.sfd` : rouge à refaire, jaune en cours, vert refait.
 - Ne jamais relancer `S/init_grehartker.py` sur `F` : il écraserait le travail.
