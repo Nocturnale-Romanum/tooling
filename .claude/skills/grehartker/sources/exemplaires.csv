@@ -1,164 +1,179 @@
-glyph,role,manuscript,page,x,y,w,h,base
-ta,choisi,csg-0390,100,3962,3642,39,17,
-ta,variante A,csg-0390,120,4543,3208,39,17,
-ta,variante B,csg-0390,040,3651,1843,39,17,
-ta,variante C,csg-0391,120,3037,5515,35,15,
-ta,variante D,csg-0390,031,2697,1043,34,15,
-taN,choisi,csg-0390,160,2649,4913,44,23,
-taN,variante A,csg-0390,180,4486,5350,44,25,
-taN,variante B,csg-0390,130,2388,5966,47,24,
-taN,variante C,csg-0391,070,3471,801,47,25,
-taN,variante D,csg-0390,110,3139,5661,41,24,
-pu,choisi,csg-0391,180,4604,3181,19,17,
-pu,variante A,csg-0391,120,3382,1380,20,18,
-pu,variante B,csg-0390,140,3714,5659,16,16,
-pu,variante C,csg-0391,060,4193,1946,19,17,
-pu,variante D,csg-0390,090,3861,2835,15,19,
-vi,choisi,csg-0390,120,3271,3868,76,59,
-vi,variante A,csg-0390,040,3163,1798,69,50,
-vi,variante B,csg-0390,170,3823,1372,69,55,
-vi,variante C,csg-0390,080,2544,3526,60,52,
-vi,variante D,csg-0390,100,3813,1879,68,58,
-viN,choisi,csg-0391,070,1793,2796,73,67,
-viN,variante A,csg-0391,120,2981,5796,74,66,
-viN,variante B,csg-0391,160,3706,1482,73,66,
-viN,variante C,csg-0390,170,2586,3818,71,65,
-viN,variante D,csg-0391,130,4878,824,84,67,
-viB,choisi,csg-0391,180,2707,3550,68,82,
-viB,variante A,csg-0390,120,2526,3867,67,75,
-viB,variante B,csg-0391,080,2644,4821,67,73,
-viB,variante C,csg-0391,050,2021,1484,67,71,
-viB,variante D,csg-0391,120,1936,1351,64,75,
-viNsut2,choisi,csg-0390,120,2377,2453,88,85,"2377,2453,75,70"
-viNsut2,variante A,csg-0390,150,2525,3855,74,80,"2525,3855,67,65"
-viNsut2,variante B,csg-0391,180,3369,4546,65,91,"3369,4546,65,75"
-viNsut2,variante C,csg-0390,140,4722,2104,69,86,"4722,2104,69,61"
-viNsut2,variante D,csg-0390,130,3624,671,89,87,"3624,671,82,80"
-viNsu1sut2,choisi,csg-0391,060,4154,1903,78,102,"4154,1903,67,65"
-viNsu1sut2,variante A,csg-0390,150,3836,3546,77,102,"3836,3546,65,68"
-viNsu1sut2,variante B,csg-0390,160,3443,689,95,114,"3443,689,84,81"
-viNsu1sut2,variante C,csg-0391,120,3341,1329,87,112,"3341,1329,87,70"
-viNsu1sut2,variante D,csg-0390,090,3798,2783,95,124,"3798,2783,81,69"
-viNsut1su2,choisi,csg-0390,150,3534,2109,74,105,"3534,2109,68,64"
-viNsut1su2,variante A,csg-0391,080,3382,4783,80,103,"3382,4783,80,57"
-viNsut1su2,variante B,csg-0390,070,4101,656,90,112,"4101,656,90,70"
-viNsut1su2,variante C,csg-0390,160,3378,5898,86,111,"3378,5898,80,80"
-viNsut1su2,variante D,csg-0390,140,4242,2783,82,116,"4242,2783,82,80"
-viNsuu1su2,choisi,csg-0390,050,1783,2839,85,124,"1783,2839,73,79"
-viNsuu1su2,variante A,csg-0390,150,5106,3123,89,124,"5106,3123,89,72"
-viNsuu2,choisi,csg-0391,180,2620,2212,69,80,"2620,2212,69,80"
-viNsuu2,variante A,csg-0390,160,3677,4825,95,88,"3677,4825,70,67"
-viNsuu2,variante B,csg-0391,210,3206,4575,92,102,"3206,4575,62,46"
-viNsut3,choisi,csg-0390,150,4887,3153,86,108,"4887,3153,86,70"
-viNsut3,variante A,csg-0391,130,4200,4499,85,107,"4200,4499,85,66"
-viNsu1sut1,choisi,csg-0391,080,3366,5461,77,85,"3366,5461,77,64"
-viNpp2,choisi,csg-0390,150,3604,3160,118,106,"3660,3160,62,63"
-clN,choisi,csg-0390,120,3523,3156,78,65,
-clN,variante A,csg-0390,040,2520,1792,77,67,
-clN,variante B,csg-0390,080,2151,3148,72,67,
-clN,variante C,csg-0390,100,2228,4634,75,68,
-clN,variante D,csg-0391,180,4003,3229,77,76,
-pe,choisi,csg-0390,120,3858,4927,89,68,
-pe,variante A,csg-0390,040,3664,2138,88,68,
-pe,variante B,csg-0390,080,3034,1785,87,63,
-pe,variante C,csg-0390,150,5288,2805,88,61,
-pe,variante D,csg-0391,120,2939,5146,92,65,
-to,choisi,csg-0391,180,1749,2540,77,62,
-to,variante A,csg-0390,150,3869,1409,71,59,
-to,variante B,csg-0390,060,2022,3097,72,58,
-to,variante C,csg-0390,120,5016,5309,72,59,
-to,variante D,csg-0391,060,3495,5635,66,55,
-cl,choisi,csg-0390,040,4430,2506,52,60,
-cl,variante A,csg-0390,120,2864,5304,58,61,
-cl,variante B,csg-0390,060,1987,1768,56,60,
-cl,variante C,csg-0391,120,3329,4096,59,61,
-cl,variante D,csg-0391,180,3656,4883,53,59,
-peS,choisi,csg-0390,040,1780,2497,99,71,
-peS,variante A,csg-0390,170,3742,1013,99,69,
-peS,variante B,csg-0390,120,2156,2072,101,71,
-peS,variante C,csg-0391,060,3047,4270,95,64,
-peS,variante D,csg-0390,080,1979,1424,98,64,
-ciN,choisi,csg-0391,130,4878,824,84,82,"4878,824,84,67"
-ciN,variante A,csg-0391,080,4924,4730,87,91,"4924,4730,87,77"
-ciN,variante B,csg-0391,160,2114,1038,84,92,"2114,1038,84,68"
-ciN,variante C,csg-0391,120,2201,3751,87,87,"2201,3751,87,67"
-ciN,variante D,csg-0390,050,3658,4907,94,78,"3658,4907,69,78"
-stB,choisi,csg-0391,053,1003,2876,57,56,
-stB,variante A,csg-0390,160,3206,3153,64,62,
-stB,variante B,csg-0390,042,4240,4601,47,50,
-stB,variante C,csg-0390,075,1384,1392,45,60,
-stB,variante D,csg-0391,179,3019,5351,40,45,
-gr,choisi,csg-0391,208,1669,4227,30,30,
-gr,variante A,csg-0391,214,1316,3906,30,22,
-gr,variante B,csg-0391,082,1518,4507,32,29,
-gr,variante C,csg-0391,157,4459,1826,29,30,
-gr,variante D,csg-0391,170,2828,5970,30,30,
-grN,choisi,csg-0391,219,753,2557,40,37,
-grN,variante A,csg-0391,217,1740,4551,39,35,
-ci,choisi,csg-0390,140,2337,4517,78,86,"2337,4517,70,68"
-ci,variante A,csg-0390,075,4930,3158,74,87,"4930,3158,72,58"
-ci,variante B,csg-0391,180,2413,3148,79,87,"2413,3148,69,75"
-ci,variante C,csg-0390,022,2905,5669,85,65,"2905,5669,47,54"
-ci,variante D,csg-0390,042,1440,4514,76,88,"1440,4514,76,58"
-sc,choisi,csg-0390,140,3815,3557,116,74,"3867,3557,64,59"
-sc,variante A,csg-0390,150,2187,3152,107,58,"2235,3152,59,56"
-sc,variante B,csg-0390,032,4122,1785,107,59,"4171,1785,58,52"
-sc,variante C,csg-0391,167,2984,2126,128,74,"3046,2126,66,53"
-sc,variante D,csg-0391,130,4735,2138,128,69,"4801,2138,62,46"
-ciNpp2,choisi,csg-0391,130,5285,4505,144,113,"5340,4505,88,66"
-ciNpp2,variante A,csg-0391,205,2977,6250,139,110,"3032,6250,84,69"
-ciNpp2,variante B,csg-0390,150,4821,2115,131,113,"4882,2115,70,70"
-ciNpp2,variante C,csg-0391,053,2282,5887,140,109,"2336,5887,72,67"
-ciNpp2,variante D,csg-0390,022,3376,3572,139,108,"3433,3572,69,68"
-bvN,choisi,csg-0390,042,1569,4570,93,74,"1591,4573,71,71"
-bvN,variante A,csg-0391,213,3287,5255,105,65,"3319,5258,73,62"
-bvN,variante B,csg-0390,110,4672,5591,94,74,"4700,5592,66,71"
-bvN,variante C,csg-0391,080,1942,4124,108,59,"1976,4135,74,48"
-bvN,variante D,csg-0391,180,3278,4607,75,71,"3297,4607,56,71"
-bv,choisi,csg-0391,161,1915,3597,130,62,"1989,3618,56,41"
-bv,variante A,csg-0390,060,4959,5632,122,54,"5021,5634,60,48"
-ci1,choisi,csg-0391,067,1522,6237,93,87,"1522,6237,59,51"
-ciS,choisi,csg-0391,179,1902,5146,70,87,"1902,5146,61,69"
-ciS1,choisi,csg-0391,157,2488,5997,86,59,"2488,5997,79,49"
-ciS1,variante A,csg-0391,088,2814,2884,75,74,"2814,2884,75,55"
-ciS1,variante B,csg-0390,136,1348,4972,100,95,"1348,4972,74,71"
-ciS1,variante C,csg-0391,055,2732,2052,76,73,"2732,2052,68,64"
-visut1su2,choisi,csg-0391,080,3797,5800,85,101,"3797,5800,83,62"
-visut1su2,variante A,csg-0391,157,4323,3529,94,102,"4323,3529,82,59"
-visut1su2,variante B,csg-0390,070,4101,656,90,112,"4101,656,90,70"
-visu1sut2,choisi,csg-0391,180,1678,4504,76,118,"1678,4504,54,58"
-visu1sut2,variante A,csg-0391,205,3549,1502,145,111,"3549,1502,69,49"
-vippt1su2,choisi,csg-0391,057,3586,4814,127,76,"3642,4814,61,63"
-vippt1su2,variante A,csg-0391,029,2511,2145,137,111,"2593,2145,54,51"
-vippu1su2,choisi,csg-0391,130,3884,754,152,81,"3946,754,79,50"
-vippu1su2,variante A,csg-0391,070,4638,3835,145,91,"4697,3835,81,64"
-scS,choisi,csg-0390,140,2060,5567,130,66,"2130,5567,60,60"
-scS,variante A,csg-0390,121,2920,3140,199,71,"3050,3140,69,62"
-scS,variante B,csg-0390,130,2306,1455,150,66,"2395,1455,61,61"
-scS,variante C,csg-0391,180,3397,4560,108,77,"3446,4560,59,68"
-viNsu1suu2,choisi,csg-0390,100,5221,1893,127,138,"5221,1893,72,73"
-viNsu1suu1su2,choisi,csg-0391,157,2181,3849,86,153,"2181,3849,86,74"
-bvNsut2,choisi,csg-0391,053,2933,4858,113,84,"2958,4858,78,72"
-bvNsut2,variante A,csg-0390,180,2953,735,96,83,"2973,735,68,78"
-viNsu4,choisi,csg-0391,179,4345,1792,89,168,"4345,1792,78,90"
-viNsu4,variante A,csg-0391,069,3971,4934,63,139,"3971,4934,57,51"
-viNsu4,variante B,csg-0391,160,5051,1450,86,157,"5051,1450,72,63"
-viNsu1suu1,choisi,csg-0391,102,3696,770,90,93,"3696,770,87,70"
-viNsu1suu1,variante A,csg-0391,100,1985,755,64,83,"1985,755,62,48"
-viNsu3,choisi,csg-0391,205,3043,3893,114,142,"3043,3893,72,61"
-viNsu3,variante A,csg-0391,082,2694,5858,81,107,"2694,5858,81,53"
-viNsu2sut1,choisi,csg-0390,070,1938,1420,124,124,"1938,1420,72,83"
-viNsu2sut1,variante A,csg-0391,057,1676,4191,124,102,"1676,4191,60,60"
-scB,choisi,csg-0391,217,2299,6223,128,96,"2361,6223,66,85"
-scB,variante A,csg-0390,042,2049,3162,119,77,"2110,3162,58,77"
-scB,variante B,csg-0391,219,4755,2408,127,86,"4816,2408,66,84"
-scB,variante C,csg-0391,143,1829,5291,119,88,"1886,5291,62,74"
-scB,variante D,csg-0391,209,1555,4571,156,81,"1646,4571,65,80"
-viNsuu3,choisi,csg-0390,016,2933,2803,105,101,"2933,2803,75,83"
-viNsuu3,variante A,csg-0390,035,3010,6283,92,105,"3010,6283,81,79"
-viNsuu3,variante B,csg-0390,045,1684,4554,91,73,"1684,4554,48,48"
-visu1suu1,choisi,csg-0391,144,4277,1897,80,92,"4277,1897,80,59"
-visu1suu1,variante A,csg-0391,183,3014,4560,84,84,"3014,4560,58,75"
-visut3,choisi,csg-0391,081,3369,1029,84,102,"3369,1029,84,63"
-tvN,choisi,csg-0390,161,2309,3635,121,82,"2358,3641,72,76"
-viNsuu1sut1su2,choisi,csg-0390,102,4056,5970,85,152,"4056,5970,82,81"
+glyph,role,manuscript,page,x,y,w,h,base,piece
+ta,choisi,csg-0390,100,3962,3642,39,17,,"? EXF1N2A1 Bonorum meorum (Bo, me, non, …) | EXF1N3A1 Non sunt loquelae (Non, que, nes, …) | EXF7A2b Bonum est (est, fi, ri) | EXF7A3 Clamor meus (mor, ad, ni, …) | EXF7A4 Benedic anima mea (a,) | EXF7A5 Visita nos (ta, mi, in, …) | EXF7A6 Confitebor Domino (Con) | F2N1A3 Inclina Domine (rem, mi, hi,, …) | F2N2A3 Vivit Dominus (nus,, be, tus, …) | F2N3A1 Exaudiat te Dominus (di, bu, ó, …)"
+ta,variante A,csg-0390,120,4543,3208,39,17,,"? 0202N2R3 Cum inducerent... Simeon (pú, pa, jus, …) | 0815N2R3 Beata es Maria quae (Be, á, quæ, …) | CBMVN1R3 Beata es Maria (Be, á, quæ, …)"
+ta,variante B,csg-0390,040,3651,1843,39,17,,
+ta,variante C,csg-0391,120,3037,5515,35,15,,"? 0508N1A Concussum est mare... alleluia (Con, re,, it, …) | 0508N1R1 Factum est silentium in caelo (tum, est, si, …) | 0508N1R2 Stetit Angelus super aram (ta, ha, áu, …) | 0508N1R3 In conspectu Angelorum (In, con, tu, …) | 0508N2A Michael Archangele venit in adjutorium... alleluia (Mí, chán, le,, …) | 0508N3R1 In conspectu Gentium (um, tu, vos, …) | 0929N1A1 Concussum est mare (Con, re,, it, …) | 0929N2A1 Michael Archangele (Mí, chán, le,, …) | 1002N1R3 In conspectu Gentium (um, tu, vos, …)"
+ta,variante D,csg-0390,031,2697,1043,34,15,,"A4N1R1 Canite tuba (ni, ba, an, …)"
+taN,choisi,csg-0390,160,2649,4913,44,23,,"? Q4N2R1 In mari via tua (in) | Q4N2R2 Qui persequebantur (Dó) | Q4N2R3 Moyses famulus Domini (ta, mi) | Q4N3R1 Splendida facta est facies (est) | Q4N3R2 Ecce mitto Angelum meum (te)"
+taN,variante A,csg-0390,180,4486,5350,44,25,,"? Q6F5N2R3 Unus ex discipulis meis (il) | Q6F5N3R1 Eram quasi agnus innocens (no) | Q6F5N3R2 Una hora non potuistis (ho, dé, tí, …) | Q6F5N3R3 Seniores populi consilium (li)"
+taN,variante B,csg-0390,130,2388,5966,47,24,,
+taN,variante C,csg-0391,070,3471,801,47,25,,"? P5F5N2R1 Tempus est (le) | P5F5N2R2 Non conturbetur cor vestrum (ves, le, le) | P7F4R2 Ite in orbem universum (le, o,)"
+taN,variante D,csg-0390,110,3139,5661,41,24,,
+pu,choisi,csg-0391,180,4604,3181,19,17,,
+pu,variante A,csg-0391,120,3382,1380,20,18,,
+pu,variante B,csg-0390,140,3714,5659,16,16,,
+pu,variante C,csg-0391,060,4193,1946,19,17,,
+pu,variante D,csg-0390,090,3861,2835,15,19,,E1F7R1 Misericordiam et judicium (mi)
+vi,choisi,csg-0390,120,3271,3868,76,59,,"? 0202N2R3 Cum inducerent... Simeon (dú, rum, tes, …) | 0815N2R3 Beata es Maria quae (es,, Cre, sæ, …) | CBMVN1R3 Beata es Maria (es,, Cre, sæ, …)"
+vi,variante A,csg-0390,040,3163,1798,69,50,,
+vi,variante B,csg-0390,170,3823,1372,69,55,,"? H2F6N1R3 Cum essemus (es, pec, con, …) | Q6N1R1 In die qua invocavi te (cá, vi, mi, …) | Q6N1R2 Fratres mei elongaverunt a me (me, lon, runt, …) | Q6N1R3 Attende Domine ad me (At, vo, ad, …)"
+vi,variante C,csg-0390,080,2544,3526,60,52,,
+vi,variante D,csg-0390,100,3813,1879,68,58,,"? EXF1N2A1 Bonorum meorum (nó, rum, ín, …) | EXF1N3A1 Non sunt loquelae (sunt, lo, ser, …) | EXF7A2b Bonum est (Bo, con, té, …) | EXF7A3 Clamor meus (Cla, me, te, …) | EXF7A4 Benedic anima mea (dic,, ni, ma, …) | EXF7A5 Visita nos (Ví, si, nos,, …) | EXF7A6 Confitebor Domino (fti, té, bor, …) | F2N1A3 Inclina Domine (clí, na,, Dó, …) | F2N2A3 Vivit Dominus (Vi, vit, Dó, …) | F2N3A1 Exaudiat te Dominus (xáu, at, te, …)"
+viN,choisi,csg-0391,070,1793,2796,73,67,,"? P5F5N2R1 Tempus est (pus) | P5F5N2R2 Non conturbetur cor vestrum (Non, tá, trum,) | P5F5N3R2 Ponit nubem (nas, lú) | P7F4R2 Ite in orbem universum (I, ia, Pa)"
+viN,variante A,csg-0391,120,2981,5796,74,66,,"? 0508N1A Concussum est mare... alleluia (dé) | 0508N1R1 Factum est silentium in caelo (e) | 0508N1R2 Stetit Angelus super aram (An, ge, scén, …) | 0508N1R3 In conspectu Angelorum (spéc, nó, ni, …) | 0508N3R1 In conspectu Gentium (mi, su) | 0929N1A1 Concussum est mare (dé) | 1002N1R3 In conspectu Gentium (mi, su)"
+viN,variante B,csg-0391,160,3706,1482,73,66,,"1123N2R3 Dedisti Domine habitaculum (dís, mó, Pa)"
+viN,variante C,csg-0390,170,2586,3818,71,65,,"? H2F6N1R3 Cum essemus (nos) | Q6N1R1 In die qua invocavi te (cau) | Q6N1R2 Fratres mei elongaverunt a me (ga, et, Qua, …) | Q6N1R3 Attende Domine ad me (ri)"
+viN,variante D,csg-0391,130,4878,824,84,67,,
+viB,choisi,csg-0391,180,2707,3550,68,82,,"? 0701N1R3 Vos qui aliquando eratis (in) | CONPN1R2 Justus germinabit sicut lilium (in) | CONPN1R3 Iste cognovit justitiam (psit, et) | P2F4N1R1 Clamavit populus ad regem (ad) | UMEXN1R2 Justus germinabit sicut lilium (in) | UMEXN1R3 Iste cognovit justitiam (psit, et) | UMEXN2R2 Desiderium animae ejus (e, dul) | UMEXN2R3 Stola jucunditatis induit (per) | UMEXN3R1 Corona aurea super caput (si) | UMEXN3R2a Hic est vere Martyr (Mar, sán, tis, …)"
+viB,variante A,csg-0390,120,2526,3867,67,75,,0202N2R3 Cum inducerent... Simeon (in)
+viB,variante B,csg-0391,080,2644,4821,67,73,,"? 0624I Regem Praecursoris (Re) | 0624N1R1 Fuit homo missus a Deo cui nomen (ut, et) | 0624N1R2 Elizabeth Zachariae (rum, am, án, …)"
+viB,variante C,csg-0391,050,2021,1484,67,71,,
+viB,variante D,csg-0391,120,1936,1351,64,75,,"? 0508N1A Concussum est mare... alleluia (al) | 0508N1R1 Factum est silentium in caelo (om, et) | 0508N1R2 Stetit Angelus super aram (in, Al, rum, …) | 0508N1R3 In conspectu Angelorum (plum, Al) | 0508N3R1 In conspectu Gentium (con, in, et, …) | 1002N1R3 In conspectu Gentium (con, in, et, …)"
+viNsut2,choisi,csg-0390,120,2377,2453,88,85,"2377,2453,75,70",CBMVN1R3 Beata es Maria (le)
+viNsut2,variante A,csg-0390,150,2525,3855,74,80,"2525,3855,67,65","? Q2N1R2 Ecce odor (dí, li, li) | Q2N1R3 Det tibi Deus (li,, li,) | Q2N2R2 Si Dominus Deus (me, o)"
+viNsut2,variante B,csg-0391,180,3369,4546,65,91,"3369,4546,65,75","? 0701N1R3 Vos qui aliquando eratis (quæ, rí) | 0701N2R2 Empti estis pretio magno (re) | CONPN1R2 Justus germinabit sicut lilium (te, le) | CONPN1R3 Iste cognovit justitiam (lés, rí) | P2F4N1R1 Clamavit populus ad regem (te, le) | UMEXN1R2 Justus germinabit sicut lilium (te) | UMEXN1R3 Iste cognovit justitiam (lés, rí) | UMEXN3R1 Corona aurea super caput (de) | UMEXN3R2a Hic est vere Martyr (sí)"
+viNsut2,variante C,csg-0390,140,4722,2104,69,86,"4722,2104,69,61",? 5GN2R1 Angelus Domini vocavit Abraham (Dó) | 6GN1R3 Quadraginta dies et noctes (di) | 6GN2R1 Aedificavit Noe altare Domino (ne)
+viNsut2,variante D,csg-0390,130,3624,671,89,87,"3624,671,82,80",
+viNsu1sut2,choisi,csg-0391,060,4154,1903,78,102,"4154,1903,67,65",
+viNsu1sut2,variante A,csg-0390,150,3836,3546,77,102,"3836,3546,65,68","? Q2N2R1 Dum exiret (é) | Q2N2R2 Si Dominus Deus (di) | Q2N2R3 Erit mihi Dominus (me, Sanc)"
+viNsu1sut2,variante B,csg-0390,160,3443,689,95,114,"3443,689,84,81",Q4N2R1 In mari via tua (Aa)
+viNsu1sut2,variante C,csg-0391,120,3341,1329,87,112,"3341,1329,87,70","? 0508N1R1 Factum est silentium in caelo (e) | 0508N3R1 In conspectu Gentium (mul) | 1002N1R3 In conspectu Gentium (mul, Sanc)"
+viNsu1sut2,variante D,csg-0390,090,3798,2783,95,124,"3798,2783,81,69",E1F6R2 Misericordia tua Domine (ti)
+viNsut1su2,choisi,csg-0390,150,3534,2109,74,105,"3534,2109,68,64","? Q2N1R3 Det tibi Deus (bi, mi) | Q2N2R2 Si Dominus Deus (ta)"
+viNsut1su2,variante A,csg-0391,080,3382,4783,80,103,"3382,4783,80,57",
+viNsut1su2,variante B,csg-0390,070,4101,656,90,112,"4101,656,90,70",
+viNsut1su2,variante C,csg-0390,160,3378,5898,86,111,"3378,5898,80,80",? Q1I Non sit vobis vanum (mi) | Q4N1R3 Cantemus Domino (in)
+viNsut1su2,variante D,csg-0390,140,4242,2783,82,116,"4242,2783,82,80","? 5GN1R1 Locutus est Dominus ad Abraham (ro) | 6GN2R2 Ponam arcum meum in nubibus (i,)"
+viNsuu1su2,choisi,csg-0390,050,1783,2839,85,124,"1783,2839,73,79","0101N1R1 Ecce Agnus Dei (ec, am)"
+viNsuu1su2,variante A,csg-0390,150,5106,3123,89,124,"5106,3123,89,72","? Q2N1R1 Tolle arma tua (a,) | Q2N2R1 Dum exiret (cæ)"
+viNsuu2,choisi,csg-0391,180,2620,2212,69,80,"2620,2212,69,80",UMEXN3R2a Hic est vere Martyr (per)
+viNsuu2,variante A,csg-0390,160,3677,4825,95,88,"3677,4825,70,67",
+viNsuu2,variante B,csg-0391,210,3206,4575,92,102,"3206,4575,62,46",
+viNsut3,choisi,csg-0390,150,4887,3153,86,108,"4887,3153,86,70",Q2N2R1 Dum exiret (cæ)
+viNsut3,variante A,csg-0391,130,4200,4499,85,107,"4200,4499,85,66",
+viNsu1sut1,choisi,csg-0391,080,3366,5461,77,85,"3366,5461,77,64",0624N1R2 Elizabeth Zachariae (vi)
+viNpp2,choisi,csg-0390,150,3604,3160,118,106,"3660,3160,62,63","? Q2N2R1 Dum exiret (do) | Q2N2R2 Si Dominus Deus (me,, me)"
+clN,choisi,csg-0390,120,3523,3156,78,65,,"? 0202N2R3 Cum inducerent... Simeon (Je, sum, o,, …) | 0815N2R3 Beata es Maria quae (um, tó, rum:, …) | CBMVN1R3 Beata es Maria (um, tó, rum:, …)"
+clN,variante A,csg-0390,040,2520,1792,77,67,,
+clN,variante B,csg-0390,080,2151,3148,72,67,,
+clN,variante C,csg-0390,100,2228,4634,75,68,,"? EXF1N3A1 Non sunt loquelae (ne, mó) | EXF7A3 Clamor meus (us) | EXF7A5 Visita nos (tá) | F2N1A3 Inclina Domine (di, ba) | F2N2A3 Vivit Dominus (et, díc) | F2N3A1 Exaudiat te Dominus (la)"
+clN,variante D,csg-0391,180,4003,3229,77,76,,"? 0701N1R3 Vos qui aliquando eratis (lon, pe, ti:, …) | 0701N2R2 Empti estis pretio magno (es, tis, o, …) | CONPN1R2 Justus germinabit sicut lilium (ná, bit, lí, …) | CONPN1R3 Iste cognovit justitiam (vit, tí, gna,, …) | P2F4N1R1 Clamavit populus ad regem (re, gem,, tens;, …) | UMEXN1R2 Justus germinabit sicut lilium (ná, bit, lí, …) | UMEXN1R3 Iste cognovit justitiam (vit, tí, gna,, …) | UMEXN2R2 Desiderium animae ejus (i,, ti, um., …) | UMEXN2R3 Stola jucunditatis induit (la, e, nus:, …) | UMEXN3R1 Corona aurea super caput (áu, a, jus,, …) | UMEXN3R2a Hic est vere Martyr (dit:, tí, it,, …)"
+pe,choisi,csg-0390,120,3858,4927,89,68,,"? 0202N2R3 Cum inducerent... Simeon (ce, e, e, …) | 0815N2R3 Beata es Maria quae (ni, a, nu, …) | CBMVN1R3 Beata es Maria (ni, a, nu, …)"
+pe,variante A,csg-0390,040,3664,2138,88,68,,
+pe,variante B,csg-0390,080,3034,1785,87,63,,
+pe,variante C,csg-0390,150,5288,2805,88,61,,"? Q2N1R1 Tolle arma tua (ne, ná, quid, …) | Q2N1R2 Ecce odor (ce, a, re, …) | Q2N1R3 Det tibi Deus (de, vi, ma, …) | Q2N2R1 Dum exiret (e, rí, cus, …) | Q2N2R2 Si Dominus Deus (us, e, vi, …) | Q2N2R3 Erit mihi Dominus (mi, xi, tu, …)"
+pe,variante D,csg-0391,120,2939,5146,92,65,,"? 0508N1A Concussum est mare... alleluia (cús, le) | 0508N1R1 Factum est silentium in caelo (Fac, a, po, …) | 0508N1R2 Stetit Angelus super aram (jux, re, nu, …) | 0508N1R3 In conspectu Angelorum (spéc, ge, o, …) | 0508N2A Michael Archangele venit in adjutorium... alleluia (ge) | 0508N3R1 In conspectu Gentium (te, nim, rí, …) | 0929N1A1 Concussum est mare (cús) | 0929N2A1 Michael Archangele (ge) | 1002N1R3 In conspectu Gentium (te, nim, rí, …)"
+to,choisi,csg-0391,180,1749,2540,77,62,,"? 0701N1R3 Vos qui aliquando eratis (ge,, ne, Chris, …) | 0701N2R2 Empti estis pretio magno (hó) | CONPN1R2 Justus germinabit sicut lilium (i) | CONPN1R3 Iste cognovit justitiam (am, a, ma, …) | P2F4N1R1 Clamavit populus ad regem (mus) | UMEXN1R2 Justus germinabit sicut lilium (i) | UMEXN1R3 Iste cognovit justitiam (am, a, ma, …) | UMEXN2R2 Desiderium animae ejus (um, mi, e) | UMEXN2R3 Stola jucunditatis induit (a, vit, i) | UMEXN3R1 Corona aurea super caput (prés, sa, gló, …) | UMEXN3R2a Hic est vere Martyr (ve, mi, os, …)"
+to,variante A,csg-0390,150,3869,1409,71,59,,"? Q2N1R1 Tolle arma tua (mi, cóm) | Q2N1R2 Ecce odor (fí, ni, tí) | Q2N1R3 Det tibi Deus (ti, i) | Q2N2R1 Dum exiret (ci) | Q2N2R2 Si Dominus Deus (ves, per,) | Q2N2R3 Erit mihi Dominus (la, sis, tris, …)"
+to,variante B,csg-0390,060,2022,3097,72,58,,
+to,variante C,csg-0390,120,5016,5309,72,59,,"? 0202N2R3 Cum inducerent... Simeon (vit,, i) | 0815N2R3 Beata es Maria quae (ti, nus, ti., …) | CBMVN1R3 Beata es Maria (ti, nus, ti., …)"
+to,variante D,csg-0391,060,3495,5635,66,55,,"? APTPN2R1 Lux perpetua lucebit Sanctis tuis (le, lú, tí, …) | MRTPN2R2 In servis suis alleluia consolabitur (su, De, us,, …)"
+cl,choisi,csg-0390,040,4430,2506,52,60,,
+cl,variante A,csg-0390,120,2864,5304,58,61,,"? 0202N2R3 Cum inducerent... Simeon (Cum, rent, rent, …) | 0815N2R3 Beata es Maria quae (qui, num) | CBMVN1R3 Beata es Maria (qui, num, le)"
+cl,variante B,csg-0390,060,1987,1768,56,60,,
+cl,variante C,csg-0391,120,3329,4096,59,61,,"? 0508N1A Concussum est mare... alleluia (lus) | 0508N1R1 Factum est silentium in caelo (lo,, tus, le, …) | 0508N1R2 Stetit Angelus super aram (a, le) | 0508N1R3 In conspectu Angelorum (rum, rá, a) | 0508N2A Michael Archangele venit in adjutorium... alleluia (i,) | 0508N3R1 In conspectu Gentium (le) | 0929N1A1 Concussum est mare (lus) | 1002N1R3 In conspectu Gentium (a)"
+cl,variante D,csg-0391,180,3656,4883,53,59,,"? 0701N1R3 Vos qui aliquando eratis (do, tis) | 0701N2R2 Empti estis pretio magno (o, no) | CONPN1R2 Justus germinabit sicut lilium (le, tus, in, …) | CONPN1R3 Iste cognovit justitiam (ti, me, le, …) | P2F4N1R1 Clamavit populus ad regem (le, lus) | UMEXN1R2 Justus germinabit sicut lilium (tus, in, mus, …) | UMEXN1R3 Iste cognovit justitiam (ti, me, ti) | UMEXN2R2 Desiderium animae ejus (si, i,, ti, …) | UMEXN2R3 Stola jucunditatis induit (du, pó, tá) | UMEXN3R1 Corona aurea super caput (for, ni, po, …) | UMEXN3R2a Hic est vere Martyr (næ)"
+peS,choisi,csg-0390,040,1780,2497,99,71,,
+peS,variante A,csg-0390,170,3742,1013,99,69,,"? H2F6N1R3 Cum essemus (su, ret, a, …) | Q6N1R1 In die qua invocavi te (te,, Dó, me) | Q6N1R2 Fratres mei elongaverunt a me (Fra, tres, é, …) | Q6N1R3 Attende Domine ad me (et, fó, et)"
+peS,variante B,csg-0390,120,2156,2072,101,71,,"? 0202N2R3 Cum inducerent... Simeon (tem, plum,, fá) | 0815N2R3 Beata es Maria quae (Ma) | CBMVN1R3 Beata es Maria (Ma)"
+peS,variante C,csg-0391,060,3047,4270,95,64,,MRTPN2R2 In servis suis alleluia consolabitur (vis)
+peS,variante D,csg-0390,080,1979,1424,98,64,,
+ciN,choisi,csg-0391,130,4878,824,84,82,"4878,824,84,67",
+ciN,variante A,csg-0391,080,4924,4730,87,91,"4924,4730,87,77","? 0624N1R1 Fuit homo missus a Deo cui nomen (æ.) | 0624N1R2 Elizabeth Zachariae (mi, rá, rat.)"
+ciN,variante B,csg-0391,160,2114,1038,84,92,"2114,1038,84,68","? 1123N2R1 Orante sancto Clemente (A, ná, tá, …) | 1123N2R2 Omnes una voce dixerunt (is, fí) | 1123N2R3 Dedisti Domine habitaculum (pli, ti,, a)"
+ciN,variante C,csg-0391,120,2201,3751,87,87,"2201,3751,87,67","? 0508N1R1 Factum est silentium in caelo (lo,) | 0508N1R2 Stetit Angelus super aram (a, ma, spéc, …) | 0508N1R3 In conspectu Angelorum (tu, bor)"
+ciN,variante D,csg-0390,050,3658,4907,94,78,"3658,4907,69,78","? 0101N1R1 Ecce Agnus Dei (cá, ce, vo, …) | 0101N1R3 Benedictus qui venit (De) | 0101N2R2 Confirmatum est cor (na, ri, díc, …) | 0101N3R2 Nesciens mater (cé, um., rí, …) | H2F6N3R2 Simus ergo imitatores Dei (am)"
+stB,choisi,csg-0391,053,1003,2876,57,56,,
+stB,variante A,csg-0390,160,3206,3153,64,62,,"Q4N2R2 Qui persequebantur (tuum,)"
+stB,variante B,csg-0390,042,4240,4601,47,50,,
+stB,variante C,csg-0390,075,1384,1392,45,60,,
+stB,variante D,csg-0391,179,3019,5351,40,45,,
+gr,choisi,csg-0391,208,1669,4227,30,30,,? 09H1N1R1 Si bona suscepimus (Si) | 09H1N1R2 Antequam comedam suspiro (et)
+gr,variante A,csg-0391,214,1316,3906,30,22,,? 09H3N1R1 Peto Domine (vel) | 09H3N1R3 Memor esto fili (si) | 09H3N2R2 Benedicite Deum caeli (Be)
+gr,variante B,csg-0391,082,1518,4507,32,29,,"? 0624N2R1 Descendit Angelus Domini ad Zachariam (in) | 0624N2R2 Hic Praecursor dilectus (et) | 0624N2R3 Inuebant patri ejus (et) | 0624N3R1 Praecursor Domini venit (Præ) | 0624N3R2 Gabriel Angelus apparuit Zachariae (Ga, Za, no, …)"
+gr,variante C,csg-0391,157,4459,1826,29,30,,"? 1122N2R2 Caeciliam intra cubiculum (cu) | 1122N2R3 Domine Jesu Christe pastor (sé, qua) | 1122N3R1 Beata Caecilia dixit Tiburtio (De)"
+gr,variante D,csg-0391,170,2828,5970,30,30,,
+grN,choisi,csg-0391,219,753,2557,40,37,,10H1N2R3 Tua est potentia (Tu)
+grN,variante A,csg-0391,217,1740,4551,39,35,,09H5N1R1 Domine Rex omnipotens (Dó)
+ci,choisi,csg-0390,140,2337,4517,78,86,"2337,4517,70,68",
+ci,variante A,csg-0390,075,4930,3158,74,87,"4930,3158,72,58",0106N2R1 Illuminare illuminare Jerusalem (ve)
+ci,variante B,csg-0391,180,2413,3148,79,87,"2413,3148,69,75",? 0701N1R3 Vos qui aliquando eratis (pax) | CONPN1R3 Iste cognovit justitiam (tís) | UMEXN1R3 Iste cognovit justitiam (tís)
+ci,variante C,csg-0390,022,2905,5669,85,65,"2905,5669,47,54","? A2N1R1 Jerusalem cito (re) | A2N1R3 Civitas Jerusalem (lem,, nus) | A2N2R1 Ecce veniet Dominus (cá)"
+ci,variante D,csg-0390,042,1440,4514,76,88,"1440,4514,76,58",1224R3 Sanctificamini filii (scén)
+sc,choisi,csg-0391,107,2598,2691,115,96,"2646,2691,67,52",0829N1R2 Joannes Baptista arguebat (u)
+sc,variante A,csg-0390,164,4115,5959,98,88,"4171,5959,42,43","Q5F2R2 Qui custodiebant (am,)"
+sc,variante B,csg-0391,112,4008,1689,109,99,"4056,1689,61,53","? 0908N1R1 Hodie nata est beata (Ma, ap, dit) | 0908N2R1 Nativitas gloriosae (ec)"
+sc,variante C,csg-0390,086,2903,2841,129,125,"2956,2841,76,72",
+ciNpp2,choisi,csg-0390,022,3376,3572,139,108,"3433,3572,69,68","? A2N1R2 Ecce Dominus veniet (e, ma, gen) | A2N2R1 Ecce veniet Dominus (su) | A2N2R2 Sicut mater (mi, ves)"
+ciNpp2,variante A,csg-0391,205,2977,6250,139,110,"3032,6250,84,69","? 08H1N1R2 Gyrum caeli (nu, cá) | 08H1N1R3 Emitte Domine sapientiam (tu) | 08H1N2R1 Da mihi Domine sedium (tu, tu) | 08H1N2R2 Initium sapientiae (mi, cu) | 08H1N3R1 Domine pater et Deus (quas, líg, mi)"
+ciNpp2,variante B,csg-0390,150,4821,2115,131,113,"4882,2115,70,70","? Q2N1R1 Tolle arma tua (ar, e, me) | Q2N1R2 Ecce odor (mi, ci, De, …) | Q2N1R3 Det tibi Deus (ti, pu, ó) | Q2N2R2 Si Dominus Deus (bu) | Q2N2R3 Erit mihi Dominus (De, ti)"
+ciNpp2,variante C,csg-0391,053,2282,5887,140,109,"2336,5887,72,67","? P3N1R1 Dignus es Domine (e, tu) | P3N1R3 Audivi vocem in caelo tamquam (cæ, lú) | P3N2R1 Locutus est ad me unus (di, A, lú)"
+ciNpp2,variante D,csg-0391,130,5285,4505,144,113,"5340,4505,88,66",
+bvN,choisi,csg-0390,042,1569,4570,93,74,"1591,4573,71,71","1224R3 Sanctificamini filii (di, det)"
+bvN,variante A,csg-0391,213,3287,5255,105,65,"3319,5258,73,62","? 09H3N1R1 Peto Domine (te,) | 09H3N1R2 Omni tempore (li)"
+bvN,variante B,csg-0390,110,4672,5591,94,74,"4700,5592,66,71",
+bvN,variante C,csg-0391,080,1942,4124,108,59,"1976,4135,74,48",0624N1R1 Fuit homo missus a Deo cui nomen (Fu)
+bvN,variante D,csg-0391,180,3278,4607,75,71,"3297,4607,56,71",
+bv,choisi,csg-0391,168,5247,2205,115,52,"5274,2217,88,40",APEXN3R1 Isti sunt qui viventes (ne)
+bv,variante A,csg-0391,173,3110,2501,84,53,"3134,2506,60,48",PMEXN1R2 Viri sancti gloriosum sanguinem (pro)
+ci1,choisi,csg-0391,067,1522,6237,93,87,"1522,6237,59,51",
+ciS,choisi,csg-0391,179,1902,5146,70,87,"1902,5146,61,69",
+ciS1,choisi,csg-0391,088,2814,2884,75,74,"2814,2884,75,55","? 0118N2R2 Ego pro te rogavi (ma, tres) | 0118N2R3 Petre amas me (tre,, Pa, Pa) | 0118N3R1 Quem dicunt homines (es, um) | 0629N3R2 Quem dicunt homines (es, um) | 0801N2R2 Surge Petre (té)"
+ciS1,variante A,csg-0391,157,2488,5997,86,59,"2488,5997,79,49",1122N2R3 Domine Jesu Christe pastor (pe)
+ciS1,variante B,csg-0390,136,1348,4972,100,95,"1348,4972,74,71",
+ciS1,variante C,csg-0391,055,2732,2052,76,73,"2732,2052,68,64",? P3F2R1 Vidi portam civitatis (le) | P3N2R2 Audivi vocem in caelo Angelorum (le)
+visut1su2,choisi,csg-0391,080,3797,5800,85,101,"3797,5800,83,62","? 0624N1R1 Fuit homo missus a Deo cui nomen (mi) | 0624N1R2 Elizabeth Zachariae (tam,, mi)"
+visut1su2,variante A,csg-0391,157,4323,3529,94,102,"4323,3529,82,59",? 1122N1R3 Virgo gloriosa semper Evangelium (bus) | 1122N3R1 Beata Caecilia dixit Tiburtio (co)
+visut1su2,variante B,csg-0390,070,4101,656,90,112,"4101,656,90,70",
+visu1sut2,choisi,csg-0391,180,1678,4504,76,118,"1678,4504,54,58",
+visu1sut2,variante A,csg-0391,205,3549,1502,145,111,"3549,1502,69,49",
+vippt1su2,choisi,csg-0391,162,3950,2129,128,91,"3992,2129,86,62",
+vippt1su2,variante A,csg-0390,088,3963,750,89,100,"3976,750,76,81",
+vippt1su2,variante B,csg-0390,123,978,4206,130,81,"1021,4206,73,68",
+vippt1su2,variante C,csg-0390,047,4343,3883,132,84,"4397,3883,68,74",? 0325N2R3 Sancta et immaculata... alleluia (le) | CBMVN1R1 Sancta et immaculata... alleluia (le)
+vippu1su2,choisi,csg-0391,057,3586,4814,127,76,"3642,4814,61,63",
+vippu1su2,variante A,csg-0391,070,4638,3835,145,91,"4697,3835,81,64",P5F5N3R2 Ponit nubem (le)
+vippu1su2,variante B,csg-0391,184,5495,6218,105,82,"5542,6218,58,73",
+scS,choisi,csg-0390,102,5000,4976,121,116,"5058,4976,63,66","H1N1R2 Benedictus Dominus Deus Israel (so, fi)"
+scS,variante A,csg-0390,184,4674,3501,118,113,"4733,3501,59,65",
+viNsu1suu2,choisi,csg-0390,088,4489,3203,103,111,"4489,3203,89,82",E1F5R2 Repleatur os meum laude (re)
+viNsu1suu2,variante A,csg-0390,145,1865,5463,91,116,"1865,5463,73,75",? 1002N1R1 Angelis suis mandavit de te (e) | Q1N3R3 Angelis suis mandavit (có)
+viNsu1suu2,variante B,csg-0390,050,4538,2787,92,125,"4538,2787,92,81",
+viNsu1suu2,variante C,csg-0390,114,5254,1783,91,111,"5254,1783,79,70",
+viNsu1suu2,variante D,csg-0391,043,4151,3153,93,119,"4151,3153,80,81",P0F2R2 Surrexit pastor bonus (Chris)
+viNsu1suu1su2,choisi,csg-0391,194,3210,6152,86,147,"3210,6152,86,67",
+viNsu1suu1su2,variante A,csg-0391,232,4598,3137,131,186,"4598,3137,82,72",
+bvNsut2,choisi,csg-0390,087,2393,3488,97,88,"2415,3489,65,72",
+bvNsut2,variante A,csg-0390,136,1348,4972,103,95,"1373,4975,78,69",
+bvNsut2,variante B,csg-0390,104,4121,2421,103,82,"4140,2421,79,72",H1N3R1 Benedicamus Patrem et Filium (sǽ)
+bvNsut2,variante C,csg-0391,053,2933,4858,113,84,"2958,4858,78,72",P3N1R3 Audivi vocem in caelo tamquam (le)
+bvNsut2,variante D,csg-0390,180,2953,735,96,83,"2973,735,68,78",Q6F5N2R3 Unus ex discipulis meis (fu)
+viNsu4,choisi,csg-0391,179,4345,1792,89,168,"4345,1792,78,90",
+viNsu4,variante A,csg-0391,069,3971,4934,63,139,"3971,4934,57,51",
+viNsu4,variante B,csg-0391,160,5051,1450,86,157,"5051,1450,72,63",
+viNsu1suu1,choisi,csg-0391,102,3696,770,90,93,"3696,770,87,70",? 0815N1R1 Vidi speciosam sicut (thu) | 1007N1R2 Vidi speciosam sicut (tá) | CBMVN2R1 Sicut cedrus exaltata (ma)
+viNsu1suu1,variante A,csg-0391,100,1985,755,64,83,"1985,755,62,48","0810N2R3 Beatus Laurentius clamavit (co, o)"
+viNsu3,choisi,csg-0391,113,4552,4436,87,123,"4552,4436,87,72",? CBMVN3R1 Felix namque ou 0908N2R3 Nativitas tua (non transcrit viNsu3 dans NR) ; page de la source de gregall (H307F « natalem »)
+viNsu3,variante A,csg-0390,058,5045,6282,89,120,"5045,6282,73,77",
+viNsu2sut1,choisi,csg-0390,046,3766,1599,98,122,"3766,1599,69,62",
+scB,choisi,csg-0390,045,1558,3463,111,119,"1607,3463,62,62",
+scB,variante A,csg-0390,028,1615,3064,104,105,"1663,3064,56,63",
+scB,variante B,csg-0391,168,2918,1771,118,109,"2973,1771,63,58",
+viNsuu3,choisi,csg-0390,016,2933,2803,105,101,"2933,2803,75,83",A1N1R2 Aspiciebam in visu (re)
+viNsuu3,variante A,csg-0390,035,3010,6283,92,105,"3010,6283,81,79",A3F6R3 Germinaverunt campi eremi (ni)
+viNsuu3,variante B,csg-0390,045,1684,4554,91,73,"1684,4554,48,48",N1F1N3R2 O Regem caeli (mun)
+visu1suu1,choisi,csg-0391,144,4277,1897,80,92,"4277,1897,80,59","1111N3R2 Martinus Abrahae sinu (ex, no)"
+visu1suu1,variante A,csg-0391,183,3014,4560,84,84,"3014,4560,58,75",COPON1R3 Juravit Dominus (dech.)
+visut3,choisi,csg-0391,081,3369,1029,84,102,"3369,1029,84,63",? 0624N1R3 Priusquam te formarem (de) | 0624N2R1 Descendit Angelus Domini ad Zachariam (Bap)
+tvN,choisi,csg-0390,161,2309,3635,121,82,"2358,3641,72,76",Q4F2R1 Vos qui transituri estis (De)
+viNsuu1sut1su2,choisi,csg-0391,134,5043,1093,85,147,"5043,1093,85,78","CDEDN1R2 Fundata est domus (ti de tibi, transcrit vi-suu2su2 dans NR) ; source de gregall (H328F)"
+clS,choisi,csg-0390,032,2155,4953,60,60,,"? A4N1R3 Me oportet minui (nit,) | A4N2R1 Nascetur nobis parvulus (su)"
+clS,variante A,csg-0390,144,5394,3147,52,60,,"? Q1N1R1 Ecce nunc tempus (æ, æ.) | Q1N1R2 In omnibus exhibeamus (mi, én) | Q1N2R1 Emendemus in melius (pec, non, mus)"
+clS,variante B,csg-0390,157,2289,4507,58,64,,E1N2R2 Vulpes foveas (re)
+clS,variante C,csg-0391,189,3077,2473,52,60,,? MUVXN3R1 Haec est virgo sapiens (lán) | MUXMN1R1 Veni sponsa Christi (lis)
+clS,variante D,csg-0390,075,4292,2426,54,62,,"? 0106N1R1b Tria sunt munera (cam) | 0106N1R2 In columbae specie (tus, au) | 0106N2R1 Illuminare illuminare Jerusalem (rú) | 0806N1R2 In splendenti nube (tus, au)"
+clM,choisi,csg-0390,150,3660,6003,46,73,,Q2N1R3 Det tibi Deus (ræ)
+clM,variante A,csg-0391,106,1621,5084,49,77,,
+clM,variante B,csg-0390,180,1761,774,35,55,,? Q6F5N2R2 Judas mercator pessimus (De) | Q6F5N3R1 Eram quasi agnus innocens (um)
+clM,variante C,csg-0391,112,3893,2718,41,66,,0908N2R1 Nativitas gloriosae (ni)
+clM,variante D,csg-0390,178,1894,705,34,61,,

@@ -50,7 +50,37 @@ def parse_motif(m):
     return avant, sous, k
 
 
-def analyse(seg, TG, seuil):
+def tight_pre(comps, first):
+    """Prepunctis d'un scandicus : diagonale montante et serrée jusqu'au pied du premier neume de
+    base. On part du pied et on remonte vers la gauche, chaque point un peu plus bas que le suivant."""
+    chain = []
+    cur_x, cur_y = first["x"] + 0.2 * first["w"], first["y"] + 0.75 * first["h"]
+    pool = [c for c in comps if small(c) and c["x"] + c["w"] <= first["x"] + 0.45 * first["w"]]
+    while True:
+        nxt = [c for c in pool if all(c is not k for k in chain)
+               and -12 <= cur_x - (c["x"] + c["w"]) <= 26 and -12 <= (c["y"] + c["h"] / 2) - cur_y <= 38]
+        if not nxt:
+            return chain[::-1]
+        c = min(nxt, key=lambda c: cur_x - (c["x"] + c["w"]))
+        chain.append(c)
+        cur_x, cur_y = c["x"], c["y"] + c["h"] / 2
+
+
+def tight_sub(chain):
+    """Subpunctis d'un climacus : chaque élément plus bas que le précédent, sans grand saut ni
+    écart horizontal ; la chaîne est coupée au premier élément qui rompt la descente."""
+    out = chain[:1]
+    for c in chain[1:]:
+        p = out[-1]
+        dy = (c["y"] + c["h"] / 2) - (p["y"] + p["h"] / 2)
+        dx = (c["x"] + c["w"] / 2) - (p["x"] + p["w"] / 2)
+        if not (8 <= dy <= 34 and -8 <= dx <= 30):
+            break
+        out.append(c)
+    return out
+
+
+def analyse(seg, TG, seuil, serre=False):
     """Pour chaque neume de base reconnu : voisins de base à gauche, prepunctis, subpunctis, et
     le glyphe de base dont les gabarits ressemblent le plus (`type`)."""
     T = [t for ts in TG.values() for t in ts]
@@ -61,7 +91,7 @@ def analyse(seg, TG, seuil):
             # neumes de base côte à côte à gauche (bivirga, trivirga), pied à la même hauteur
             row, cur = [v], v
             while True:
-                left = [b for b in bases if b is not cur and 0 < cur["x"] - b["x"] <= 75
+                left = [b for b in bases if b is not cur and 0 < cur["x"] - b["x"] <= (40 if serre else 75)
                         and abs((b["y"] + b["h"]) - (cur["y"] + cur["h"])) <= 22]
                 if not left:
                     break
@@ -80,6 +110,8 @@ def analyse(seg, TG, seuil):
                 last = c["y"] + c["h"]
             pre = sorted([c for c in comps if small(c) and first["x"] - 150 <= c["x"] and c["x"] + c["w"] <= first["x"] + 12
                           and first["y"] + 0.35 * first["h"] <= c["y"] <= first["y"] + first["h"] + 30], key=lambda c: c["x"])
+            if serre:
+                pre, chain = tight_pre(comps, first), tight_sub(chain)
             typ = max(TG, key=lambda g: H.score(v, TG[g]))
             out.append(dict(key=key, v=v, row=row, chain=chain, pre=pre, s=H.score(v, T), type=typ,
                             sous="".join(kind(c) for c in chain), avant="".join(kind(c) for c in pre)))
@@ -96,6 +128,10 @@ def main():
     ap.add_argument("--seuil", type=float, default=0.25)
     ap.add_argument("--pages", nargs="*", help="limiter la recherche à ces pages (volume:page), "
                     "par exemple les pages sources données par sources_nr.py")
+    ap.add_argument("--serre", action="store_true",
+                    help="géométrie stricte des vrais neumes : prepunctis en diagonale serrée jusqu'au pied "
+                    "(scandicus), neumes de base presque superposés (bivirga, trivirga), subpunctis en "
+                    "descente régulière (climacus) ; écarte les points des neumes voisins")
     ap.add_argument("--type", help="ne garder que les neumes de base les plus proches de ce glyphe "
                     "(ex. --base vi viN --type vi : virgas sans épisème) ; classement indicatif")
     args = ap.parse_args()
@@ -113,7 +149,8 @@ def main():
                 TG.setdefault(r["glyph"], []).append(H.template(c))
     if not TG:
         raise SystemExit("aucun gabarit de base dans les pages segmentées")
-    found = analyse({k: v for k, v in seg.items() if keep is None or k in keep} if keep else seg, TG, args.seuil)
+    found = analyse({k: v for k, v in seg.items() if keep is None or k in keep} if keep else seg, TG, args.seuil,
+                    args.serre)
     if args.type:
         found = [f for f in found if f["type"] == args.type]
     out = os.path.join(H.CACHE, "candidats")

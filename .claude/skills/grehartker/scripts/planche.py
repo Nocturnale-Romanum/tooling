@@ -7,9 +7,13 @@ Pour chaque glyphe, les lignes de sources/exemplaires.csv (choisi, variantes A�
 agrandies 4 fois, avec gregall rendu à la même échelle (10 unités par pixel de page) ; une
 ligne par glyphe, empilées dans cache/planches/<nom>.png.
 
---sur G : superpose en rouge l'exemplaire choisi de G (ex. `vi`), calé au pied du trait
-(point le plus bas à gauche). Sert à vérifier la cohérence d'une variante (viN, viB…) avec
-le glyphe de base retenu : même fût, même angle.
+--sur G : superpose en rouge l'exemplaire choisi de G (ex. `vi`), entier (toutes ses
+composantes : les deux virgas de `bvN`), calé au pied du trait de son neume de base (point le
+plus bas à gauche) sur celui du neume de base de chaque exemplaire (colonne `base`). Sert à
+vérifier la cohérence d'une variante (viN, viB…) ou d'un composé (bvNsut2 sur bvN) avec le
+glyphe retenu : même fût, même angle, même écart.
+
+Sous chaque exemplaire : sa page et sa pièce (colonne `piece`).
 """
 import argparse
 import csv
@@ -44,8 +48,7 @@ def main():
     seg = H.load_seg()
     ref = None
     if args.sur:
-        r = rows_of(args.sur)[0]
-        ref = H.comp_in(seg, r["manuscript"], r["page"], *(int(r[k]) for k in "xywh"))
+        ref = whole(seg, rows_of(args.sur)[0])
     sheets = []
     for g in args.glyphes:
         rows = rows_of(g)
@@ -58,7 +61,7 @@ def main():
             x, y, w, h = (int(r[k]) for k in "xywh")
             im = H.crop(r["manuscript"], r["page"], x, y, w, h, pad=pad, zoom=zoom)
             if ref is not None and (r["manuscript"], r["page"]) in seg:
-                c = H.comp_in(seg, r["manuscript"], r["page"], x, y, w, h)
+                c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
                 if c:
                     im = overlay_at(im, c, ref, x, y, pad, zoom)
             crops.append((r, im))
@@ -66,7 +69,7 @@ def main():
             gi = H.gregall_image(g)
         except KeyError:
             gi = Image.new("RGB", (200, 200), "white")
-        H_ = max([gi.height] + [im.height for _, im in crops]) + 120
+        H_ = max([gi.height] + [im.height for _, im in crops]) + 140
         W = gi.width + sum(im.width for _, im in crops) + 40 * (len(crops) + 2)
         sh = Image.new("RGB", (W, H_), "white")
         d = ImageDraw.Draw(sh)
@@ -80,6 +83,9 @@ def main():
                    font=H.font(26 if first else 20, first))
             d.text((x, 72), "Cod. Sang. %s, p. %s" % (r["manuscript"][-3:], r["page"].lstrip("0")), fill=(60, 60, 60), font=H.font(17))
             sh.paste(im, (x, 98))
+            if r.get("piece"):
+                piece = r["piece"] if len(r["piece"]) < 60 else r["piece"][:57] + "…"
+                d.text((x, 104 + im.height), piece, fill=(90, 90, 90), font=H.font(14))
             if first:
                 d.rectangle((x - 5, 93, x + im.width + 4, 98 + im.height + 4), outline=(0, 170, 0), width=6)
             x += im.width + 40
@@ -96,11 +102,32 @@ def main():
     print(path)
 
 
+def base_box(r):
+    return [int(v) for v in r["base"].split(",")] if r.get("base") else [int(r[k]) for k in "xywh"]
+
+
+def whole(seg, r):
+    """Exemplaire entier (composantes surtout dans sa boîte), avec le pied de son neume de base."""
+    x, y, w, h = (int(r[k]) for k in "xywh")
+    key = (r["manuscript"], r["page"])
+    comps = [c for c in seg[key] if max(0, min(x + w, c["x"] + c["w"]) - max(x, c["x"]))
+             * max(0, min(y + h, c["y"] + c["h"]) - max(y, c["y"])) >= 0.6 * c["w"] * c["h"]]
+    base = H.comp_in(seg, key[0], key[1], *base_box(r))
+    comps = comps or [base]
+    x0, y0 = min(c["x"] for c in comps), min(c["y"] for c in comps)
+    x1, y1 = max(c["x"] + c["w"] for c in comps), max(c["y"] + c["h"] for c in comps)
+    mask = np.zeros((y1 - y0, x1 - x0), bool)
+    for c in comps:
+        mask[c["y"] - y0:c["y"] - y0 + c["h"], c["x"] - x0:c["x"] - x0 + c["w"]] |= c["mask"]
+    fx, fy = foot(base["mask"])
+    return dict(mask=mask, foot=(fx + base["x"] - x0, fy + base["y"] - y0))
+
+
 def overlay_at(im, comp, ref, bx, by, pad, zoom):
     """Superposition dans une découpe dont le coin est (bx - pad, by - pad) en coordonnées de page."""
     fx, fy = foot(comp["mask"])
     fx, fy = fx + comp["x"] - bx, fy + comp["y"] - by
-    rx, ry = foot(ref["mask"])
+    rx, ry = ref["foot"]
     ys, xs = np.nonzero(ref["mask"])
     lay = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)

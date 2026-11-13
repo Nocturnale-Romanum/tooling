@@ -9,6 +9,11 @@ Usage (Python ordinaire) :
   Règle : choix et variantes viennent de pages toutes différentes (le script le vérifie).
 - --permuter : échange le choix et la variante indiquée (décision de marteo sur une planche).
 Les lignes précédentes du glyphe sont remplacées.
+
+Provenance : la colonne `piece` reçoit la pièce NR d'où vient l'exemplaire (code, incipit,
+syllabe), donnée par le candidat ou cherchée par hartker.provenance() parmi les pièces NR qui
+commencent sur la page ou la précédente et emploient le glyphe ; « ? a | b » si plusieurs sont
+possibles, vide si aucune (pièce hors NR) : compléter alors à la main.
 """
 import csv
 import json
@@ -19,7 +24,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # python -I n'aj
 import hartker as H  # noqa: E402
 
 CSV = os.path.join(H.SKILL, "sources", "exemplaires.csv")
-FIELDS = ["glyph", "role", "manuscript", "page", "x", "y", "w", "h", "base"]
+FIELDS = ["glyph", "role", "manuscript", "page", "x", "y", "w", "h", "base", "piece"]
 ROLES = ["choisi", "variante A", "variante B", "variante C", "variante D"]
 
 
@@ -30,7 +35,7 @@ def read():
 
 def write(rows):
     with open(CSV, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=FIELDS, lineterminator="\n")
+        w = csv.DictWriter(f, fieldnames=FIELDS, lineterminator="\n", restval="")
         w.writeheader()
         w.writerows(rows)
 
@@ -52,12 +57,13 @@ def main(argv):
         if len(set(pages)) != len(pages):
             raise SystemExit("choix et variantes doivent venir de pages différentes : %s" % pages)
         mine = [dict(glyph=glyph, role=ROLES[k], manuscript=c["manuscript"], page=c["page"], x=c["x"], y=c["y"],
-                     w=c["w"], h=c["h"], base=c.get("base", "")) for k, c in enumerate(picks)]
+                     w=c["w"], h=c["h"], base=c.get("base", ""),
+                     piece=c.get("piece") or H.provenance(glyph, c["manuscript"], c["page"])) for k, c in enumerate(picks)]
     pos = next((i for i, r in enumerate(rows) if r["glyph"] == glyph), len(rows))
     rest = [r for r in rows if r["glyph"] != glyph]
     write(rest[:pos] + mine + rest[pos:])
     for r in mine:
-        print(r["role"], r["manuscript"], r["page"], r["x"], r["y"], r["w"], r["h"], r.get("base", ""))
+        print(r["role"], r["manuscript"], r["page"], r["x"], r["y"], r["w"], r["h"], r.get("base", ""), r.get("piece", ""))
 
 
 if __name__ == "__main__":

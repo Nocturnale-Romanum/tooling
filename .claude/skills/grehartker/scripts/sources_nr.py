@@ -1,79 +1,70 @@
-"""Trouve, pour un neume rare, les pièces NR qui l'emploient et leur page source dans Hartker.
+"""Trouve, pour un glyphe, les pièces NR qui l'emploient et leur page source dans Hartker.
 
 Usage (Python ordinaire) :
-    python -I S/sources_nr.py <neume NABC ou nom de glyphe> [--nr <dossier NR>] [--telecharger]
+    python -I S/sources_nr.py <glyphe> [<glyphe> …] [--telecharger] [--suivantes]
 
-Exemples : `st>`, `ds>`, `gr-`, `vi->` ; un nom de glyphe gregall est converti (`viNB` -> `vi->`,
-B = `>`, N = `-`, E = `!`, T = `~`).
+Le glyphe est un nom gregall (`viNB`, `scB`, `qlEcl`…). Les emplois viennent du vrai parseur de
+gregoriotex-nabc.lua (cache/nabc_occurrences.tsv, alias compris : `vi>pp2` pose `scB`), les pages
+de sources/pieces_nr.tsv (export de la base du site, export_pieces_nr.py). La page est celle où
+commence la pièce : le neume peut être sur la suivante (--suivantes les ajoute).
 
-Le script cherche le neume dans les NABC des gabc/*_marteo.gabc (recherche de sous-chaîne,
-à vérifier sur le contexte affiché), puis lit pour chaque pièce le lien e-codices donné par
-https://nocturnale.marteo.fr/chant/<code> (pièces venant de Hartker seulement). Il affiche la
-syllabe et le neume pour retrouver l'endroit sur la page, puis les pages par nombre de pièces.
---telecharger : télécharge les bandes de ces pages (390 et 391 seulement) ; les segmenter
-ensuite avec pages.py segmenter.
+Affiche, par page : les pièces, la syllabe et le fragment NABC, pour retrouver l'endroit ; puis la
+source du glyphe dans gregall quand elle est dans Hartker (reference/gregall_sources.tsv), à
+proposer parmi les variantes, et la liste des pages pour motifs.py --pages.
+--telecharger : télécharge les bandes de ces pages ; les segmenter ensuite (pages.py segmenter).
 """
 import argparse
 import collections
-import glob
+import csv
 import os
 import sys
-import re
-import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # python -I n'ajoute pas le dossier du script
 import hartker as H  # noqa: E402
 
-SITE = "https://nocturnale.marteo.fr/chant/%s"
 
-
-def to_nabc(s):
-    if re.fullmatch(r"[a-z]{2}[A-Za-z0-9]*", s) and any(ch.isupper() for ch in s):
-        return s.replace("B", ">").replace("N", "-").replace("E", "!").replace("T", "~")
-    return s
-
-
-def source_of(code):
-    req = urllib.request.Request(SITE % code, headers={"User-Agent": H.UA})
-    try:
-        html = urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
-    except Exception:
-        return None
-    m = re.search(r"e-codices\.unifr\.ch/[a-z]+/csg/(\d{4})/(\d+[a-z]?)", html)
-    if not m:
-        return None
-    page = m.group(2)
-    return (m.group(1), page.lstrip("0") or "0")
+def gregall_source(glyph):
+    with open(os.path.join(H.SKILL, "reference", "gregall_sources.tsv"), encoding="utf-8") as f:
+        return next((r for r in csv.DictReader(f, delimiter="\t") if r["glyphe"] == glyph), None)
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("neume")
-    ap.add_argument("--nr", default=H.repo("NR_REPO", "nocturnale-romanum"))
+    ap.add_argument("glyphes", nargs="+")
     ap.add_argument("--telecharger", action="store_true")
+    ap.add_argument("--suivantes", action="store_true")
     args = ap.parse_args()
-    nabc = to_nabc(args.neume)
-    pat = re.compile(r"(?<!l)" + re.escape(nabc))
-    hits = collections.defaultdict(list)
-    for path in sorted(glob.glob(os.path.join(args.nr, "gabc", "*_marteo.gabc"))):
-        code = os.path.basename(path)[:-len("_marteo.gabc")]
-        with open(path, encoding="utf-8") as f:
-            text = f.read()
-        for m in re.finditer(r"([^\s()]*)\(([^)]*)\)", text):
-            parts = m.group(2).split("|")
-            if any(pat.search(p) for p in parts[1:]):
-                hits[code].append("%s(%s)" % (m.group(1), m.group(2)))
-    if not hits:
-        raise SystemExit("aucune pièce avec %s dans %s" % (nabc, args.nr))
-    pages = collections.Counter()
-    print("%d pièces avec %s" % (len(hits), nabc))
-    for code, ctx in sorted(hits.items()):
-        src = source_of(code)
-        where = "csg-%s p.%s" % src if src else "(pas de source Hartker)"
-        if src and src[0] in ("0390", "0391"):
-            pages[src] += 1
-        print("  %-12s %-22s %s" % (code, where, "  ".join(ctx[:3])))
-    print("pages :", ", ".join("%s:%s (%d)" % (ms[-3:], p, n) for (ms, p), n in pages.most_common()))
+    pn = H.pieces_nr()
+    if not pn:
+        raise SystemExit("sources/pieces_nr.tsv manque : lancer export_pieces_nr.py dans le shell du site")
+    allpages = set()
+    for glyph in args.glyphes:
+        occ = H.occurrences(glyph)
+        bypage = collections.defaultdict(lambda: collections.defaultdict(list))
+        other = set()
+        for code, syl, frag in occ:
+            p = pn.get(code)
+            if p:
+                bypage[(p["manuscript"], p["page"])][code].append("%s(%s)" % (syl, frag))
+            else:
+                other.add(code)
+        print("== %s : %d emplois, %d pièces d'après Hartker, %d d'autres sources"
+              % (glyph, len(occ), sum(len(v) for v in bypage.values()), len(other)))
+        for (ms, page), codes in sorted(bypage.items()):
+            for code, ctx in sorted(codes.items()):
+                print("  %s p.%-4s %-12s %-34s %s" % (ms[-3:], page.lstrip("0"), code,
+                                                      pn[code]["incipit"].split(" V")[0][:34], "  ".join(ctx[:4])))
+            allpages.add((ms, page))
+            if args.suivantes and page.isdigit():
+                allpages.add((ms, "%03d" % (int(page) + 1)))
+        g = gregall_source(glyph)
+        if g and g["manuscript"]:
+            print("  gregall : %s p.%s, %s (%s), mot « %s »%s" % (g["manuscript"][-3:], g["page"].lstrip("0"), g["piece"],
+                  g["ref"], g["mot"], (", image agrandie %s×" % g["echelle"]) if g["echelle"] else ""))
+        elif g:
+            print("  gregall : %s, mot « %s » (pas Hartker)" % (g["source"], g["mot"]))
+    pages = sorted(allpages)
+    print("pages :", " ".join("%s:%s" % (ms[-3:], p.lstrip("0")) for ms, p in pages))
     if args.telecharger:
         for ms, p in pages:
             print(H.download_band(ms, p), flush=True)

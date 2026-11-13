@@ -2,13 +2,24 @@
 
 Usage (Python ordinaire) :
     python -I S/candidats.py <nom> [--glyphe G …] [--repere E …] [--boite 391:53:x,y,w,h …]
-                             [--n 36] [--par-page 2] [--seuil 0.4]
+                             [--gregall G …] [--pages 391:53 …] [--n 36] [--par-page 2] [--seuil 0.4]
 
 Graines (au moins une) :
 - --glyphe G   : toutes les lignes de G dans sources/exemplaires.csv (choix et variantes) ;
 - --repere E   : toutes les lignes de E dans sources/reperes.csv ;
-- --boite      : une boîte de page donnée à la main (volume:page:x,y,w,h, pixels pleine page).
+- --boite      : une boîte de page donnée à la main (volume:page:x,y,w,h, pixels pleine page) ;
+- --gregall G  : le glyphe G de gregall, rendu à l'échelle de la page (10 unités par pixel), pour
+                 une forme qui n'a encore aucun exemplaire (gabarit grossier : trier à l'œil) ;
+                 seul son plus grand morceau sert (la ligature de clEpi, sans son punctum).
 Chaque graine est ramenée à sa composante d'encre dans la segmentation (pages.py segmenter).
+--pages : limiter la recherche à ces pages (volume:page), par exemple celles de sources_nr.py.
+--trait T [--seuil-trait v] : ne garder que les composantes qui portent un trait mesuré (valeur ≥ v),
+pour séparer les variantes d'une même famille que la ressemblance globale confond (avec par
+exemple --glyphe cl clN comme graines) :
+- pied     : le pied de la dernière jambe part vers la droite (clS, ciG) ; v ≈ 0,85 ;
+- episeme  : encre en haut à droite (clN, viN…) ; v ≈ 0,4 ;
+- boucle   : boucle fermée (cl>, vi>…) ; v ≈ 0,05 ;
+- etroite  : forme haute et étroite (clM) ; v ≈ 0,3.
 
 Sortie dans cache/candidats/ : <nom>.png (planche, au plus --par-page candidats par page, triés
 par ressemblance) et <nom>.json (boîtes des candidats, dans l'ordre de la planche). On choisit
@@ -20,6 +31,9 @@ import csv
 import json
 import os
 import sys
+
+import numpy as np
+from scipy import ndimage as ndi
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # python -I n'ajoute pas le dossier du script
 import hartker as H  # noqa: E402
@@ -39,6 +53,13 @@ def seeds_from(args, seg):
         ms, p = H.norm_page(vol, page)
         boxes.append((ms, p, *map(int, xywh.split(","))))
     comps = []
+    for g in args.gregall or []:
+        im = H.gregall_image(g, 100).convert("L")
+        lab, n = ndi.label(np.asarray(im) < 128)
+        m = lab == 1 + int(np.argmax(ndi.sum(lab > 0, lab, range(1, n + 1))))   # le morceau principal seul
+        ys, xs = np.nonzero(m)
+        m = m[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+        comps.append((("gregall", g), dict(x=-1, y=-1, w=m.shape[1], h=m.shape[0], mask=m)))
     for ms, p, x, y, w, h in boxes:
         if (ms, p) not in seg:
             print("page %s %s non segmentée : pages.py telecharger puis segmenter" % (ms, p))
@@ -49,18 +70,37 @@ def seeds_from(args, seg):
     return comps
 
 
+def traits(m):
+    """Traits de forme d'un masque (voir --trait)."""
+    h, w = m.shape
+    bot = m[int(h * 0.85):]
+    bx = np.nonzero(bot)[1]
+    top = m[:max(2, int(h * 0.2))]
+    return dict(pied=(bx.max() + 1) / w if len(bx) else 0,
+                episeme=top[:, int(w * 0.6):].sum() / top.sum() if top.sum() else 0,
+                boucle=(ndi.binary_fill_holes(m) & ~m).sum() / max(1, m.sum()),
+                etroite=1 - w / h)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("nom")
     ap.add_argument("--glyphe", nargs="*")
     ap.add_argument("--repere", nargs="*")
     ap.add_argument("--boite", nargs="*")
+    ap.add_argument("--gregall", nargs="*")
+    ap.add_argument("--pages", nargs="*")
     ap.add_argument("--n", type=int, default=36)
     ap.add_argument("--par-page", type=int, default=2)
     ap.add_argument("--seuil", type=float, default=0.4)
+    ap.add_argument("--trait", choices=["pied", "episeme", "boucle", "etroite"])
+    ap.add_argument("--seuil-trait", type=float, default=0.5)
     args = ap.parse_args()
     seg = H.load_seg()
     seeds = seeds_from(args, seg)
+    if args.pages:
+        keep = {H.norm_page(*p.split(":")) for p in args.pages}
+        seg = {k: v for k, v in seg.items() if k in keep}
     if not seeds:
         raise SystemExit("aucune graine trouvée")
     T = [H.template(c) for _, c in seeds]
@@ -73,6 +113,8 @@ def main():
             if not (0.6 * min(hs) <= c["h"] <= 1.6 * max(hs) and 0.6 * min(ws) <= c["w"] <= 1.6 * max(ws)):
                 continue
             if (key, c["x"], c["y"]) in known:
+                continue
+            if args.trait and traits(c["mask"])[args.trait] < args.seuil_trait:
                 continue
             s = H.score(c, T)
             if s >= args.seuil:

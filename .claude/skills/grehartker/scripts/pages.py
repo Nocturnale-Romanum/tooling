@@ -48,12 +48,17 @@ def telecharger(args):
 
 def segmenter():
     seg = H.load_seg()
+    new = 0
     for path in sorted(glob.glob(os.path.join(H.PAGES, "*_band.jpg"))):
         ms, p = os.path.basename(path).split("_")[:2]
         if (ms, p) in seg:
             continue
         seg[(ms, p)] = H.segment(path)
         print(ms, p, len(seg[(ms, p)]), "composantes", flush=True)
+        new += 1
+        if new % 10 == 0:           # seg.pkl pèse des centaines de Mo : ne pas le réécrire à chaque page
+            H.save_seg(seg)
+    if new:
         H.save_seg(seg)
     print(len(seg), "pages segmentées")
 

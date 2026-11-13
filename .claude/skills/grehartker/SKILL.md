@@ -31,12 +31,17 @@ Les scripts cherchent ces dépôts à côté de `tooling`, sinon dans les variab
 
 - **FontForge** avec son Python (`ffpython`, sous Windows
   `C:\Program Files\FontForgeBuilds\bin\ffpython.exe`), pour les scripts marqués *ffpython*.
-  Son Python n'a pas HTTPS sous Windows : les téléchargements passent par `curl`.
+  Son Python n'a pas HTTPS sous Windows : les téléchargements passent par `curl`. Sous Linux, le
+  module `fontforge` du système suffit : un environnement virtuel créé avec
+  `--system-site-packages` sert à la fois de `python` et de `ffpython`. Les scripts *ffpython*
+  se lancent **sans** `-I` (sinon `import commun` échoue).
 - **Python 3** avec `pip install -r scripts/requirements.txt` (Pillow, numpy, scipy), de
   préférence dans un environnement virtuel, pour les autres scripts. Lancer avec `python -I`
   et `PYTHONIOENCODING=utf-8`.
-- **Réseau :** e-codices (images IIIF) et `https://nocturnale.marteo.fr/chant/<code>` (source de
-  chaque pièce NR).
+- **Réseau :** e-codices (images IIIF).
+- **Pièces NR :** `sources/pieces_nr.tsv` (page de Hartker de chaque pièce NR) s'exporte de la
+  base du site par son shell Django, en lecture seule (`S/export_pieces_nr.py`, voir son en-tête) ;
+  `texlua` pour `S/nabc_occurrences.lua` (emplois des glyphes par pièce et syllabe).
 - Les images de Hartker (CC BY-NC) restent dans `cache/` (non versionné) ; seules les boîtes
   des découpes sont versionnées (`sources/`), et les extraits retenus vivent dans le `.sfd`.
 
@@ -87,10 +92,30 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   sur une planche avec gregall à la même échelle. marteo choisit, ou demande une variante.
 - Préférer des pages en module courant. Écarter les mains plus tardives et les autres mises en
   page (391 p. 110, 150, 240 ; 390 p. 192, litanies ; voir `sources/pages_examinees.csv`).
-- Pour un neume rare, passer par les pièces NR qui l'emploient (`S/sources_nr.py`) : le site
-  NR donne la page de Hartker de chaque pièce.
+- Pour un neume rare, ou dont la recherche automatique ne donne que de faux neumes, passer par
+  les pièces NR qui l'emploient (`S/sources_nr.py`) : il donne les pages de Hartker, les pièces
+  et les syllabes ; puis chercher sur ces pages (`motifs.py --pages … --serre`).
+- **Provenance toujours notée, le plus précisément possible :** page, boîte et pièce (code NR,
+  incipit, syllabe), colonne `piece` de `sources/exemplaires.csv`. `S/retenir.py` la remplit
+  d'après les pièces NR de la page qui emploient le glyphe (« ? a | b » si plusieurs sont
+  possibles) ; la compléter à la main quand on la connaît mieux.
+- **Glyphes de gregall venus de Hartker** (`reference/gregall_sources.tsv`, d'après
+  GregorioNabcRef : 131 glyphes, avec pièce et mot) : les proposer parmi les variantes, sans les
+  privilégier.
+- **Vrais neumes seulement :** un scandicus n'est pas une virga précédée des points du neume
+  voisin, une bivirga n'est pas deux virgas isolées, un climacus à quatre points n'est pas un
+  climacus à deux points suivi de deux points d'un autre neume. Les éléments d'un vrai neume se
+  suivent de près et régulièrement (`--serre`).
+- Un exemplaire de placement d'une forme voisine peut servir en dernier recours (ex. un
+  `viNsuu2su2` pour placer `viNsuu1sut1su2` en posant bien `taN ta pu pu`), mais on cherche
+  d'abord un vrai exemplaire. Les exemplaires reconnus en passant vont dans `sources/reperes.csv`.
+- Un composé d'une variante (`bvNsut2`) se choisit cohérent avec le choix de la variante (`bvN`) :
+  superposer (`planche.py … --sur bvN`).
 - Les identifications données en passant par marteo (lettres, éléments…) vont dans
   `sources/reperes.csv`.
+- **Rappel :** l'exemplaire d'un composé ne sert qu'à placer les éléments les uns par rapport aux
+  autres ; les éléments eux-mêmes (neume de base, `pu`, `ta`, `taN`…) sont réutilisés d'un composé
+  à l'autre. `S/restituer.py` pose les formes retenues sur l'exemplaire pour juger l'harmonie.
 
 **Divers**
 - Couleurs de glyphes dans le `.sfd` : rouge à refaire, jaune en cours, vert refait.
@@ -117,12 +142,14 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
    ```
    python -I S/motifs.py <nom> --base vi viN [--type vi] --motifs "|tt" "pp|" "||2" … [--pages 391:53 …]
    ```
-   Un neume rare : `python -I S/sources_nr.py <neume> --nr <NR> --telecharger`, puis repérer la
-   syllabe sur la page et relever la boîte, ou lancer `candidats.py` sur les pages téléchargées.
+   Un neume rare : `python -I S/sources_nr.py <glyphe> … --telecharger [--suivantes]`, puis
+   `pages.py segmenter` et `motifs.py … --pages <pages données> --serre`, ou repérer la syllabe
+   sur la page et relever la boîte.
 3. **Proposer.** Inscrire choix et variantes, puis faire la planche pour marteo :
    ```
    python -I S/retenir.py <glyphe> <nom> <i_choix> <i_A> <i_B> <i_C> <i_D>
    python -I S/planche.py <nom> <glyphe> … [--sur vi]
+   python -I S/restituer.py <nom> <glyphe> …        # formes de base retenues posées sur l'exemplaire
    ```
    Après la décision : `S/retenir.py <glyphe> --permuter "variante C"` si besoin.
 4. **Importer** (après accord de marteo seulement), puis vérifier et commiter `F` dans grehartker :
@@ -153,6 +180,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 | `ffpython S/familles.py GA K/reference/usage_nr.tsv K/reference/familles.tsv` | familles par code NABC, base, variante d'origine, écarts de taille dans gregall |
 | `python -I S/gregall_formes.py famille <fam>` / `glyphes …` / `morceaux …` | planches de gregall ; morceaux d'un glyphe comparés aux glyphes simples |
 | `texlua S/nabc_usage.lua <gregoriotex-nabc.lua> S/gregall_metrics.lua <sortie.tsv> gabc/*_marteo.gabc` | recompte l'usage des glyphes dans NR (depuis le dépôt NR) |
+| `python -I S/gregall_sources.py [GregorioNabcRef.tex]` | provenance des glyphes de gregall d'après la doc de Gregorio : `reference/gregall_sources.tsv` |
+| `SKILL=<skill> python manage.py shell < S/export_pieces_nr.py` | (dans le site NR, venv activé) page de Hartker de chaque pièce NR : `sources/pieces_nr.tsv` |
+| `texlua S/nabc_occurrences.lua <gregoriotex-nabc.lua> S/gregall_metrics.lua cache/nabc_occurrences.tsv gabc/*_marteo.gabc` | glyphes posés par pièce et syllabe (refait automatiquement s'il manque) |
 | `python -I S/calibrate.py` | recalcule l'échelle d'après `sources/calibration.csv` (fait : 10 u/px) |
 | `ffpython S/dump_metrics.py <police.sfd> <dossier>` | paramètres et métriques par glyphe |
 | `ffpython S/init_grehartker.py GA <nouveau.sfd>` | crée une police de travail depuis gregall (déjà fait) |
@@ -164,34 +194,61 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - Échelle et position des images d'arrière-plan ne sont pas exposées par l'API Python :
   `import_hartker.py` les écrit directement dans le `.sfd`.
 - Téléchargements e-codices : un à la fois, sinon le serveur tronque les images.
+- Ne pas lancer deux scripts quand `pages.py segmenter` tourne : il réécrit `cache/seg.pkl`
+  après chaque page. Une bande décodée pèse ~100 Mo : `hartker.crop` n'en garde que six.
+- Le parseur NABC applique des alias (`vipp2` → `sc`, `vi>pp2` → `scB`, `cippt1` → `vippt1su2`) :
+  chercher les emplois d'un glyphe par `hartker.occurrences()`, pas dans le texte des gabc.
 - La segmentation inclut le halo d'encre pâle : les boîtes sont un peu plus grandes que le trait.
 - La détection automatique se trompe : une « stropha » peut être une lettre `i`, le haut d'un
   `c` de `co`, un point de `su2`… Tout candidat se vérifie à l'œil, et marteo tranche.
 
-## État au 11 novembre 2026
+## État au 13 novembre 2026
 
 - **Dans la police (`F`), exemplaire importé en arrière-plan, rien de détouré :** `ta`, `taN`,
   `pu`, `stB`, `gr`, `grN`, `vi`, `viN`, `viB`, `ciN` (placement des points), `cl`, `clN`, `pe`,
   `peS`, `to`. `check_metrics` : 0 erreur.
 - **Choisis, pas encore importés :** les exemplaires de placement des composés `viNsut2`,
   `viNsu1sut2`, `viNsut1su2`, `viNsuu1su2`, `viNsuu2`, `viNsut3`, `viNsu1sut1`, `viNpp2`.
-- **Choisis avant la règle de cohérence par lot, à revoir avec leur lot :** `cl`, `clN`, `pe`,
-  `peS`, `to`.
+- **Lot virga, décisions de marteo (13 novembre 2026) :** acceptés `ci`, `ciN`, `bvN`, `ciS`,
+  `ci1`, `visu1suu1`, `visut1su2`, `visu1sut2`, `visut3`, `viNsuu3`, `viNsu1suu1`, `tvN` ;
+  `ciNpp2` = ancienne variante D (390 p. 22), `ciS1` = ancienne variante A (391 p. 88).
+  Rejetés comme faux neumes (points du neume voisin, virgas isolées…) et recherchés à nouveau
+  avec `motifs.py --serre` et les pages des pièces NR : `sc`, `scS`, `scB`, `bv`, `viNsu1suu2`
+  (c'était un `bvNsu1suu2`), `viNsu3` (style), `viNsuu1sut1su2` (c'était un `viNsuu2su2`),
+  `vippt1su2` (c'était un `vippu1su2`, repris pour `vippu1su2`), `vippu1su2` (c'était un
+  `viN` + `visu2`), `bvNsut2` (à rendre cohérent avec `bvN`), `viNsu2sut1`, `viNsu4`,
+  `viNsu1suu1su2` (c'était un `viNsu1suv1su2`, gardé dans `reperes.csv`).
+  Nouvelles propositions inscrites, en attente : `sc`, `scS`, `scB`, `bv` (vraies bivirgas
+  simples, suivies de deux tractulus : dans Hartker presque toutes les bivirgas sont
+  épisémées), `viNsu1suu2`, `viNsu3`, `viNsuu1sut1su2` (391 p. 134, Fundata est domus, source de
+  gregall ; NR y transcrit `vi-suu2su2`), `vippu1su2`, `bvNsut2` (classés par cohérence
+  mesurée avec `bvN`), `vippt1su2` (tractulus seul au pied de la virga ; la variante C, avec un
+  « Ꝛ + tractulus » devant, est sans doute un `ciG` + `ci`), `viNsu1suu1su2` (391 p. 194 et
+  232), `viNsu2sut1` (390 p. 46, dernier élément peut-être un uncinus). Toujours sans vrai
+  exemplaire dans les 411 pages : `viNsu4`.
+  `viNB` attend toujours le choix de marteo (n° 21 de `candidats.py viNB_c`).
+- **Restitution :** `restituer.py` sur tous les choix du lot virga (planches
+  `restitution_virga_1..3`).
 - **Décompositions :** les 414 glyphes utilisés dans NR, tous tranchés ; 145 formes de base
   (71 neumes, 7 modèles d'éléments, 27 lettres dont le c mi-long `lsc_semi`, 34 ligatures,
   3 crochets/vide, 3 sans glyphe propre : `or_salicus`, `or_pi`, `or_couche`).
-- **Lot virga (12 novembre 2026) :** exemplaires de placement proposés pour 30 glyphes de plus
-  (`ci`, `ciNpp2`, `sc`, `bvN`, `bv`, `ciS`, `ci1`, `ciS1`, `scS`, `scB`, `tvN`, `bvNsut2` et
-  18 `vi…su/pp`), en attente de la décision de marteo ; `viNB` pas encore trouvé avec certitude.
-  Sans exemplaire propre (placement à emprunter au glyphe le plus proche) : `ciB`, `ciM`,
-  `ciMN` (comme `ci`/`ciN`), `viNsut4`, `viBppt2`, `visuu1su2`, `viNsuu2su2`, `vippt1su1sut1`,
-  `viNppt3`, `visu1suu1su2`, `visuu3`, `viNpp4`, `visut1sux1`, `viNsu1sux1`, `visu2sux1`.
-- **Pages examinées :** 104 (`sources/pages_examinees.csv`), dont 4 exclues ; 100 en cache.
+- **Pages :** les bandes du corps principal des deux volumes (390 p. 16–191, 391 p. 3–239, hors
+  pages exclues) sont téléchargées et segmentées ; `sources/pages_examinees.csv` ne liste que
+  les pages vérifiées à l'œil.
+- **Lot clivis (commencé le 13 novembre 2026) :** `cl` et `clN` gardés, cohérents entre eux
+  (`planche.py clivis_1 cl clN clS clM --sur cl`). Proposés : `clS` (pied tourné vers la droite,
+  `candidats.py --trait pied`), `clM` (clivis étroite, à confirmer). `cl>` (`clB`) pas encore
+  reconnu : les recherches ne donnent que des céphalicus en P ; un exemple identifié par
+  marteo est nécessaire. Restent `clNB`, `clSN`, `clMN`, les formes rares (`clS1`, `clSN1`,
+  `clNB1`, `clSN2`), les ligatures (`cl!or_pi`, `cl!po`, `cl!poN1`, `cl!clS`, `cl!vs`) et les
+  composés (`ciG`, `ciG1`, `clSsut2`, `clSNsu2`, `clSsuu1su2`, `clN1su2`, `clBppt2`, lettres).
+  `reperes.csv` garde des `ciG?` (clS avec tractulus sous le pied) et des salicus.
 
 **Prochaines étapes :**
-1. Lot virga : décision de marteo sur les propositions, `viNB`, puis import.
-2. Outil de construction des composés par références (voir plus haut).
-3. Lots suivants, par usage : clivis, pes, torculus, quilisma…, avec revue des choix anciens.
-4. Exemplaires des formes sans glyphe propre : `or_salicus`, `or_pi` (sur les mêmes pages que
-   `vs`), `or_couche`.
+1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
+2. Lot clivis : revue de `cl` et `clN`, puis variantes cohérentes avec `cl` (`--sur cl`),
+   ligatures et composés.
+3. Outil de construction des composés par références (voir plus haut).
+4. Lots suivants : pes, torculus, quilisma… ; formes sans glyphe propre (`or_salicus` : de
+   nombreux salicus sont apparus dans les recherches de scandicus, `or_pi`, `or_couche`).
 5. Licence et demande à la Stiftsbibliothek (`docs/`), auteur à confirmer.

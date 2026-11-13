@@ -13,8 +13,10 @@ Emplacements des autres dépôts (variables d'environnement, sinon dossiers vois
 - GREHARTKER     : copie de github.com/Nocturnale-Romanum/grehartker (src/grehartker.sfd).
 """
 import csv
+import glob
 import os
 import pickle
+import re
 import subprocess
 import time
 import urllib.request
@@ -123,25 +125,36 @@ def segment(path):
 
 
 def load_seg():
-    if os.path.exists(SEG):
-        with open(SEG, "rb") as f:
-            return pickle.load(f)
-    return {}
+    """Composantes de chaque page segmentée ; les masques sont stockés en bits empaquetés."""
+    if not os.path.exists(SEG):
+        return {}
+    with open(SEG, "rb") as f:
+        seg = pickle.load(f)
+    for comps in seg.values():
+        for c in comps:
+            if "bits" in c:
+                c["mask"] = np.unpackbits(c.pop("bits"), count=c["h"] * c["w"]).reshape(c["h"], c["w"]).astype(bool)
+    return seg
 
 
 def save_seg(seg):
     os.makedirs(CACHE, exist_ok=True)
-    with open(SEG, "wb") as f:
-        pickle.dump(seg, f)
+    packed = {k: [dict({n: v for n, v in c.items() if n != "mask"}, bits=np.packbits(c["mask"].ravel()))
+                  for c in comps] for k, comps in seg.items()}
+    with open(SEG + ".part", "wb") as f:
+        pickle.dump(packed, f)
+    os.replace(SEG + ".part", SEG)
 
 
 def comp_in(seg, ms, page, x, y, w, h):
-    """Composante de plus grand recouvrement avec une boîte (coordonnées de page)."""
+    """Composante qui correspond le mieux à une boîte (coordonnées de page) : plus grand rapport
+    recouvrement / union, pour qu'un point ne soit pas pris pour la virga dont la boîte le couvre."""
     best = None
     for c in seg[(ms, page)]:
         ov = max(0, min(x + w, c["x"] + c["w"]) - max(x, c["x"])) * max(0, min(y + h, c["y"] + c["h"]) - max(y, c["y"]))
-        if ov and (best is None or ov > best[0]):
-            best = (ov, c)
+        iou = ov / (w * h + c["w"] * c["h"] - ov) if ov else 0
+        if iou and (best is None or iou > best[0]):
+            best = (iou, c)
     return best[1] if best else None
 
 
@@ -176,7 +189,12 @@ _imgs = {}
 def crop(ms, page, x, y, w, h, pad=25, zoom=4, box=False):
     """Découpe agrandie d'une zone de page, depuis la bande en cache (téléchargée au besoin)."""
     p = download_band(ms, page)
-    if p not in _imgs:
+    if p in _imgs:
+        _imgs[p] = _imgs.pop(p)
+    else:
+        # une bande décodée pèse ~100 Mo : n'en garder que quelques-unes (planches de 45 pages)
+        while len(_imgs) >= 6:
+            del _imgs[next(iter(_imgs))]
         _imgs[p] = Image.open(p).convert("RGB")
     X, Y = x - BAND[0], y - BAND[1]
     cr = _imgs[p].crop((X - pad, Y - pad, X + w + pad, Y + h + pad))
@@ -233,3 +251,55 @@ def grid(cells, cols, title=None, cell_w=None, label_h=26):
             sh.paste(im, (x, y + label_h))
         y += h
     return sh
+
+
+# ---------------------------------------------------------------- pièces NR (provenance)
+def pieces_nr():
+    """sources/pieces_nr.tsv (export_pieces_nr.py) : code -> pièce NR avec sa page de Hartker."""
+    path = os.path.join(SKILL, "sources", "pieces_nr.tsv")
+    if not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        return {r["code"]: r for r in csv.DictReader(f, delimiter="\t")}
+
+
+OCC = os.path.join(CACHE, "nabc_occurrences.tsv")
+_occ = {}
+
+
+def occurrences(glyph):
+    """Emplois d'un glyphe dans les gabc NR, d'après le vrai parseur de gregoriotex-nabc.lua
+    (nabc_occurrences.lua, alias compris : `vi>pp2` pose `scB`) : [(code, syllabe, fragment NABC)].
+    La table cache/nabc_occurrences.tsv est refaite si elle manque (texlua requis)."""
+    if not _occ:
+        if not os.path.exists(OCC):
+            nr = repo("NR_REPO", "nocturnale-romanum")
+            here = os.path.dirname(os.path.abspath(__file__))
+            os.makedirs(CACHE, exist_ok=True)
+            subprocess.run(["texlua", os.path.join(here, "nabc_occurrences.lua"),
+                            os.path.join(repo("GREGORIO_PATCH", "gregorio-patch"), "gregoriotex-nabc.lua"),
+                            os.path.join(here, "gregall_metrics.lua"), OCC]
+                           + sorted(glob.glob(os.path.join(nr, "gabc", "*_marteo.gabc"))), check=True)
+        with open(OCC, encoding="utf-8") as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                for g in set(r["glyphes"].split()):
+                    _occ.setdefault(g, []).append((r["code"], r["syllabe"], r["nabc"]))
+    return _occ.get(glyph, [])
+
+
+def provenance(glyph, ms, page):
+    """Pièces NR qui commencent sur cette page ou la précédente et emploient le glyphe :
+    'code incipit (syllabe)' ; plusieurs candidats séparés par ' | ', '?' si aucun n'est sûr."""
+    ms, page = norm_page(ms, page)
+    pn = pieces_nr()
+    pages = {page, "%03d" % (int(page) - 1)} if page.isdigit() else {page}
+    found = {}
+    for code, syl, _ in occurrences(glyph):
+        p = pn.get(code)
+        if p and p["manuscript"] == ms and p["page"] in pages:
+            found.setdefault(code, []).append(re.sub(r"<[^>]*>", "", syl))
+    items = ["%s %s (%s)" % (c, pn[c]["incipit"].split(" V")[0], ", ".join(s[:3]) + (", …" if len(s) > 3 else ""))
+             for c, s in sorted(found.items())]
+    if len(items) == 1:
+        return items[0]
+    return ("? " + " | ".join(items)) if items else ""
