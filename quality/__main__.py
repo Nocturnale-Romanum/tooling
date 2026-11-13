@@ -1,15 +1,22 @@
 """Run quality checks on Nocturnale Romanum GABC files.
 
-Usage: python3 -m quality [--check NAME ...] [FILE ...]
-Without FILE, checks <repo>/gabc/*_marteo.gabc, repo defaulting to ../liber-responsorialis/nocturnale-romanum.
+Usage: python3 -m quality [--check NAME ...] [--set SET] [FILE ...]
+Without FILE, checks the SET of files of <repo>/gabc (default: marteo, i.e. *_marteo.gabc;
+base: <ID>.gabc without _<submitter>; all: every .gabc), repo defaulting to ../liber-responsorialis/nocturnale-romanum.
 """
 import argparse
-import glob
 import os
+import re
 import sys
 
 from .checks import CHECKS
 from .gabc import line_col
+
+SETS = {
+  'marteo': lambda name: name.endswith('_marteo.gabc'),
+  'base': lambda name: re.fullmatch(r'[^_]+\.gabc', name),
+  'all': lambda name: name.endswith('.gabc'),
+}
 
 DEFAULT_REPO = os.path.join(os.path.dirname(__file__), '..', '..', 'liber-responsorialis', 'nocturnale-romanum')
 
@@ -18,6 +25,7 @@ def main():
   p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
   p.add_argument('files', nargs='*')
   p.add_argument('--repo', default=DEFAULT_REPO)
+  p.add_argument('--set', choices=SETS, default='marteo')
   p.add_argument('--check', action='append', choices=[c.NAME for c in CHECKS])
   p.add_argument('--list', action='store_true', help='list available checks')
   a = p.parse_args()
@@ -26,7 +34,8 @@ def main():
       print(f'{c.NAME}: {c.DESCRIPTION}')
     return 0
   checks = [c for c in CHECKS if not a.check or c.NAME in a.check]
-  files = a.files or sorted(glob.glob(os.path.join(a.repo, 'gabc', '*_marteo.gabc')))
+  gabc_dir = os.path.join(a.repo, 'gabc')
+  files = a.files or [os.path.join(gabc_dir, n) for n in sorted(os.listdir(gabc_dir)) if SETS[a.set](n)]
   count = 0
   for f in files:
     with open(f, encoding='utf-8') as fh:

@@ -1,6 +1,7 @@
 # Quality checks for Nocturnale Romanum
 
     cd tooling && python3 -m quality            # all checks on gabc/*_marteo.gabc
+    python3 -m quality --set base             # base pieces <ID>.gabc (also: marteo, all)
     python3 -m quality --list
     python3 -m quality --check ob-cb FILE...
 
