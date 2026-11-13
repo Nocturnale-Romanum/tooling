@@ -171,11 +171,11 @@ clB,variante B,csg-0390,177,3837,1472,77,60,,
 clB,variante C,csg-0390,174,3805,5277,72,58,,
 clB,variante D,csg-0390,152,3442,1798,81,60,,
 viNB,choisi,csg-0390,080,2771,2788,63,74,,
-clM,choisi,csg-0391,088,3303,2922,53,81,,"0118N3R1 Quem dicunt homines (li de Filium, avec lsc), désigné par marteo le 13 novembre 2026"
-clM,variante A,csg-0390,029,4931,4226,54,81,,"A3N3R3 Docebit nos Dnus (a, a, a)"
-clM,variante B,csg-0391,086,3420,4525,52,85,,? 0118N1R1 Simon Petre antequam (et) | 0118N1R2 Si diligis me Simon (te) | 0118N1R3 Tu es Petrus (et)
-clM,variante C,csg-0390,173,4408,1162,53,82,,? Q6F3R1 Contumelias et terrores passus (Resp.) (de) | Q6N3R2 Dixerunt impii apud se (ret)
-clM,variante D,csg-0391,159,4343,6262,50,76,,
+clM,choisi,csg-0390,179,2328,5663,40,81,,Q6F5N2R2 Judas mercator pessimus (De)
+clM,variante A,csg-0391,088,3303,2922,53,81,,"0118N3R1 Quem dicunt homines (li de Filium, avec lsc), désigné par marteo le 13 novembre 2026"
+clM,variante B,csg-0390,029,4931,4226,54,81,,"A3N3R3 Docebit nos Dnus (a, a, a)"
+clM,variante C,csg-0391,086,3420,4525,52,85,,? 0118N1R1 Simon Petre antequam (et) | 0118N1R2 Si diligis me Simon (te) | 0118N1R3 Tu es Petrus (et)
+clM,variante D,csg-0390,173,4408,1162,53,82,,? Q6F3R1 Contumelias et terrores passus (Resp.) (de) | Q6N3R2 Dixerunt impii apud se (ret)
 viNsu2sut1,choisi,csg-0390,148,3340,1709,117,120,"3340,1709,86,80",
 viNsu2sut1,variante A,csg-0390,017,4677,670,97,116,"4677,670,59,68",
 viNsu2sut1,variante B,csg-0391,186,4233,3539,97,117,"4233,3539,59,75",
