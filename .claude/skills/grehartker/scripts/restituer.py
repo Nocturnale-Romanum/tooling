@@ -6,7 +6,7 @@ Usage (Python ordinaire) :
 Pour chaque glyphe : l'exemplaire de placement (sources/exemplaires.csv, rôle choisi par défaut),
 sa décomposition (reference/decompositions.tsv) et les exemplaires choisis de ses formes de base.
 Chaque forme est posée à la place de l'élément correspondant de l'exemplaire :
-- neume de base (vi, viN, viB…) : bas et centre horizontal sur ceux du neume de base de
+- neume de base (toute forme de type « neume » de reference/formes_de_base.tsv) : bas et centre horizontal sur ceux du neume de base de
   l'exemplaire, comme import_hartker.py … base ;
 - modèles d'éléments (pu, ta, taN, stB, gr, grN) : centrés sur l'élément.
 Les éléments sont pris dans l'ordre de la décomposition : prepunctis de gauche à droite, neumes
@@ -27,7 +27,8 @@ from scipy import ndimage as ndi
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # python -I n'ajoute pas le dossier du script
 import hartker as H  # noqa: E402
 
-NEUMES = {"vi", "viN", "viB", "viNB"}
+with open(os.path.join(H.SKILL, "reference", "formes_de_base.tsv"), encoding="utf-8") as _f:
+    NEUMES = {r["forme"] for r in csv.DictReader(_f, delimiter="\t") if r["type"] == "neume"}
 PAD, ZOOM = 25, 3
 
 

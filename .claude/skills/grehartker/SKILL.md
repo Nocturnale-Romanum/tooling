@@ -88,6 +88,8 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - Oriscus sans glyphe propre dans gregall : `or_salicus` (∩, salicus), `or_couche` (~, certains
   salicus : `sa1`, `saN1`, `saB2`, `saM1`, `saNB1`, `saM4`), `or_pi` (pressus minor :
   `pi = or_pi + pu`, pendant court de la virga strata du pressus maior : `pr = vs + pu`).
+- **Ligatures traitées en dernier** (décision de marteo, 13 novembre 2026) : une fois choisis les
+  glyphes qui les composent, pour juger leur cohérence par superposition en transparence.
 - Ligatures (`!`) : seuls les morceaux qui se touchent sont liés (`clEpi = cl!or_pi + pu`) ; la
   virga d'un salicus lié à une clivis se fond dans la clivis (`saEcl = pu + or_salicus + cl`).
 
