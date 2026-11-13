@@ -200,8 +200,8 @@ clS1,choisi,csg-0391,218,4077,1540,72,50,,09H5N1R3 Spem in alium (num)
 clS1,variante A,csg-0391,224,3720,2106,60,60,,? 11H1F2R3 Misit Dominus (su) | 11H1F3R3 Genti peccatrici (ré)
 clS1,variante B,csg-0391,223,4650,2652,66,58,,11H1F2R3 Misit Dominus (su)
 clSN1,choisi,csg-0391,143,3299,6279,85,76,,1111N3R1 O beatum virum in cujus (tum)
-clSN1,variante A,csg-0391,234,3160,2772,92,81,,
+clSN1,variante A,csg-0391,234,3160,2772,92,81,,"source de gregall (H428A Ascendens Iesus, « navem »)"
 clSN1,variante B,csg-0391,167,3366,1824,94,77,,APEXN1R3 Dum steteritis ante reges (bis)
-clNB1,choisi,csg-0390,050,2362,4214,92,95,,
+clNB1,choisi,csg-0390,050,2362,4214,92,95,,"source de gregall (H50Q Quem vidistis pastores, « natum »)"
 clSN2,choisi,csg-0391,216,4400,5643,94,68,,09H4N2R3 Domine Deus qui conteris (ra)
-clSN2,variante A,csg-0391,140,3435,1439,94,68,,
+clSN2,variante A,csg-0391,140,3435,1439,94,68,,"source de gregall (H334I In civitate Domini, « suavissimus »)"
