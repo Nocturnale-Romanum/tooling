@@ -186,13 +186,22 @@ clMN,variante A,csg-0391,079,1707,6091,83,95,,0624I Regem Praecursoris (ris)
 clMN,variante B,csg-0391,088,4621,6229,83,97,,"0118N2R3 Petre amas me (Pa), désigné par marteo ; la boîte inclut la lsi en dessous"
 clMN,variante C,csg-0390,180,2483,3574,53,55,,Q6F5N2R1 Amicus meus osculi me (e)
 clMN,variante D,csg-0391,184,1700,2485,76,93,,COPON2R2 Posui adjutorium super potentem (e)
-clNB,choisi,csg-0390,032,4812,4224,104,84,"4812,4240,70,68","? A4N2R1 Nascetur nobis parvulus (For, per) | A4N2R2 Ecce jam veniet plenitudo (le) ; épisème détaché inclus dans la boîte"
+clNB,choisi,csg-0390,136,1992,4668,86,67,,"7GN1R3 Formavit igitur (em, e)"
 clNB,variante A,csg-0390,152,2498,4895,88,75,,
 clNB,variante B,csg-0390,068,3915,4985,80,75,,1228N2R3 Isti sunt sancti qui non (al)
 clNB,variante C,csg-0390,075,2667,4163,75,70,,0101N1R2 Dies sanctificatus (scén)
-clNB,variante D,csg-0390,136,1992,4668,86,67,,"7GN1R3 Formavit igitur (em, e)"
+clNB,variante D,csg-0390,032,4812,4224,104,84,"4812,4240,70,68","? A4N2R1 Nascetur nobis parvulus (For, per) | A4N2R2 Ecce jam veniet plenitudo (le) ; épisème détaché inclus dans la boîte"
 clSN,choisi,csg-0390,112,4307,5974,63,63,,0121N3R2 Omnipotens adorande (trans)
 clSN,variante A,csg-0390,032,3322,4570,57,61,,"A4N2R1 Nascetur nobis parvulus (bis, For, pa)"
 clSN,variante B,csg-0391,053,3903,6254,59,65,,"? P3N1R2 Ego sicut vitis (me,) | P3N1R3 Audivi vocem in caelo tamquam (tus,) | P3N2R1 Locutus est ad me unus (le)"
 clSN,variante C,csg-0391,075,3488,3898,61,61,,"? P7R1 Dum complerentur dies (lú, lú) | P7R2 Repleti sunt omnes (om)"
 clSN,variante D,csg-0390,022,1733,5690,51,66,,A2N1R2 Ecce Dominus veniet (num)
+clS1,choisi,csg-0391,218,4077,1540,72,50,,09H5N1R3 Spem in alium (num)
+clS1,variante A,csg-0391,224,3720,2106,60,60,,? 11H1F2R3 Misit Dominus (su) | 11H1F3R3 Genti peccatrici (ré)
+clS1,variante B,csg-0391,223,4650,2652,66,58,,11H1F2R3 Misit Dominus (su)
+clSN1,choisi,csg-0391,143,3299,6279,85,76,,1111N3R1 O beatum virum in cujus (tum)
+clSN1,variante A,csg-0391,234,3160,2772,92,81,,
+clSN1,variante B,csg-0391,167,3366,1824,94,77,,APEXN1R3 Dum steteritis ante reges (bis)
+clNB1,choisi,csg-0390,050,2362,4214,92,95,,
+clSN2,choisi,csg-0391,216,4400,5643,94,68,,09H4N2R3 Domine Deus qui conteris (ra)
+clSN2,variante A,csg-0391,140,3435,1439,94,68,,
