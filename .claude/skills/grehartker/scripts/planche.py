@@ -132,7 +132,7 @@ def overlay_at(im, comp, ref, bx, by, pad, zoom):
     lay = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
     for xx, yy in zip(xs - rx + fx + pad, ys - ry + fy + pad):
-        d.rectangle((xx * zoom, yy * zoom, xx * zoom + zoom - 1, yy * zoom + zoom - 1), fill=(220, 0, 0, 90))
+        d.rectangle((xx * zoom, yy * zoom, xx * zoom + zoom - 1, yy * zoom + zoom - 1), fill=(220, 0, 0, 45))
     return Image.alpha_composite(im.convert("RGBA"), lay).convert("RGB")
 
 

@@ -108,6 +108,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - **Glyphes de gregall venus de Hartker** (`reference/gregall_sources.tsv`, d'après
   GregorioNabcRef : 131 glyphes, avec pièce et mot) : les proposer parmi les variantes, sans les
   privilégier.
+- **En cas de doute, repartir des exemplaires identifiés dans NR** (`sources_nr.py` : pièce,
+  syllabe, page), et relever le neume sur la page, plutôt que de se fier à la recherche par
+  ressemblance (ex. `clBppt2` : la recherche donnait des `toppt2` et `toppt1`).
+- Contrôle d'échelle : superposer en rouge très transparent le glyphe de base associé
+  (`planche.py … --sur <base>`) ; les planches de restitution ne sont plus demandées.
 - **Vrais neumes seulement :** un scandicus n'est pas une virga précédée des points du neume
   voisin, une bivirga n'est pas deux virgas isolées, un climacus à quatre points n'est pas un
   climacus à deux points suivi de deux points d'un autre neume. Les éléments d'un vrai neume se
