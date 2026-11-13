@@ -39,8 +39,12 @@ Les scripts cherchent ces dépôts à côté de `tooling`, sinon dans les variab
   préférence dans un environnement virtuel, pour les autres scripts. Lancer avec `python -I`
   et `PYTHONIOENCODING=utf-8`.
 - **Réseau :** e-codices (images IIIF).
-- **Pièces NR :** `sources/pieces_nr.tsv` (page de Hartker de chaque pièce NR) s'exporte de la
-  base du site par son shell Django, en lecture seule (`S/export_pieces_nr.py`, voir son en-tête) ;
+- **Pièces NR :** `sources/pieces_nr.tsv` (page de Hartker de chaque pièce NR, **toutes
+  contributions** : marteo, dcrochu, sandhofe, mattiacus…) s'exporte de la base du site par son
+  shell Django, en lecture seule (`S/export_pieces_nr.py`, voir son en-tête) ; les emplois des
+  glyphes lisent les gabc de marteo (dépôt NR) et ceux des autres contributeurs (dossier gabc du
+  site). Ne pas se limiter aux transcriptions de marteo : on manquerait des pages (390 p. 72 pour
+  `clS1`, transcrite par dcrochu) ;
   `texlua` pour `S/nabc_occurrences.lua` (emplois des glyphes par pièce et syllabe).
 - Les images de Hartker (CC BY-NC) restent dans `cache/` (non versionné) ; seules les boîtes
   des découpes sont versionnées (`sources/`), et les extraits retenus vivent dans le `.sfd`.
@@ -250,7 +254,7 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - **Lot clivis (commencé le 13 novembre 2026) :** `cl` et `clN` gardés, cohérents entre eux
   (`planche.py clivis_1 cl clN clS clM --sur cl`). Proposés : `clS` (pied tourné vers la droite,
   `candidats.py --trait pied`), `clM` (clivis étroite, à confirmer). `clB` : choisi 390 p. 80 (céphalicus trouvé à partir de celui désigné par marteo). Restent `clNB`, `clSN`, `clMN`, les formes rares (`clS1`, `clSN1`,
-  `clNB1`, `clSN2`), les ligatures (`cl!or_pi`, `cl!po`, `cl!poN1`, `cl!clS`, `cl!vs`) et les
+  `clNB1`, `clSN2` : propositions faites, `clSN1`, `clSN2`, `clNB1` validés), les ligatures (`cl!or_pi`, `cl!po`, `cl!poN1`, `cl!clS`, `cl!vs`) et les
   composés (`ciG`, `ciG1`, `clSsut2`, `clSNsu2`, `clSsuu1su2`, `clN1su2`, `clBppt2`, lettres).
   `reperes.csv` garde des `ciG?` (clS avec tractulus sous le pied) et des salicus.
 

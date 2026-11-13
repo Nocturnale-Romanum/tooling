@@ -264,6 +264,20 @@ def pieces_nr():
 
 
 OCC = os.path.join(CACHE, "nabc_occurrences.tsv")
+
+
+def gabc_files(nr):
+    """gabc de marteo (dépôt NR), plus ceux des autres contributeurs (dcrochu, sandhofe…) pour les
+    pièces dont la source est Hartker, pris dans le dossier gabc du site (sources/pieces_nr.tsv)."""
+    files = set(glob.glob(os.path.join(nr, "gabc", "*_marteo.gabc")))
+    pn = pieces_nr()
+    dirs = {os.path.dirname(r["gabc"]) for r in pn.values() if r.get("gabc")}
+    for d in dirs:
+        for p in glob.glob(os.path.join(d, "*.gabc")):
+            parts = os.path.basename(p)[:-5].rsplit("_", 1)
+            if len(parts) == 2 and parts[1] != "marteo" and parts[0] in pn:
+                files.add(p)
+    return sorted(files)
 _occ = {}
 
 
@@ -279,7 +293,7 @@ def occurrences(glyph):
             subprocess.run(["texlua", os.path.join(here, "nabc_occurrences.lua"),
                             os.path.join(repo("GREGORIO_PATCH", "gregorio-patch"), "gregoriotex-nabc.lua"),
                             os.path.join(here, "gregall_metrics.lua"), OCC]
-                           + sorted(glob.glob(os.path.join(nr, "gabc", "*_marteo.gabc"))), check=True)
+                           + gabc_files(nr), check=True)
         with open(OCC, encoding="utf-8") as f:
             for r in csv.DictReader(f, delimiter="\t"):
                 for g in set(r["glyphes"].split()):

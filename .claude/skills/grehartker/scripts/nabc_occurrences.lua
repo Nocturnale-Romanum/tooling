@@ -1,4 +1,4 @@
--- Emplois de chaque glyphe dans les pièces NR, avec le vrai parseur de gregoriotex-nabc.lua.
+-- Emplois de chaque glyphe dans les pièces NR (<code>_<auteur>.gabc), avec le vrai parseur de gregoriotex-nabc.lua.
 -- usage : texlua nabc_occurrences.lua <gregoriotex-nabc.lua> <gregall_metrics.lua> <sortie.tsv> <gabc…>
 -- Sortie : code, syllabe, fragment NABC, glyphes posés (noms gregall, séparés par des espaces).
 -- Lu par hartker.occurrences() (sources_nr.py, retenir.py) ; à refaire quand les gabc changent.
@@ -20,7 +20,7 @@ o:write("code\tsyllabe\tnabc\tglyphes\n")
 local n = 0
 for i = 4, #arg do
   local fh = io.open(arg[i], "rb"); local s = fh:read("*a"); fh:close()
-  local code = arg[i]:match("([^/\\]+)_marteo%.gabc$") or arg[i]
+  local code = arg[i]:match("([^/\\]+)_[^_/\\]+%.gabc$") or arg[i]
   local body = s:match("\n%%%%\r?\n(.*)$") or ""
   if s:match("nabc%-lines:%s*1") then
     for syl, grp in body:gmatch("([^%s%(%)]*)%(([^%)]*)%)") do
