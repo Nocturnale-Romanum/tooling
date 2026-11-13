@@ -234,3 +234,17 @@ peNsu2,variante A,csg-0390,151,1333,2079,99,87,"1333,2079,91,80",
 peNsu2,variante B,csg-0390,034,4486,5297,96,79,"4486,5297,92,79","? A3F4R2 Orietur stella Jacob (sér, sér) | A4N3R1 Juravi dicit Dnus ut ultra (ut, ut) | A4N3R2 Non discedimus a te (lu, lu)"
 clBppt2,choisi,csg-0390,073,2086,1407,142,122,"2152,1407,76,62",0106N2R2 Omnes de Saba (án de annuntiantes) ; source de gregall (H73O)
 clBppt2,variante A,csg-0391,197,4838,3507,147,110,"4912,3507,69,59",ODEFN3R1 Peccantem me quotidie (túr de conturbat)
+peB,choisi,csg-0391,084,4299,4176,80,86,,"? 0626N2R1 Isti sunt duo viri (cén, cén) | PMEXN3R2b Haec est vera fraternitas (tem, tem, tem, …)"
+peB,variante A,csg-0391,097,3462,2747,75,85,,"? 0810N1R1 Levita Laurentius (gnum, gnum) | 0810N2A2 Dixit Romanus ad beatum Laurentium (tum) | 0810N2R2 Non me derelinque (Non, ma, et, …) | 0810N3A1 Strinxerunt corporis (Strin)"
+peB,variante B,csg-0391,182,1973,6301,67,90,,"COPON1A2 Beatus iste Sanctus qui confisus (in, in)"
+peB,variante C,csg-0391,167,2827,4570,70,88,,"? APEXN1R2 Tollite jugum meum super vos (Tól, Tól) | APEXN2R1 Vidi conjunctos viros (An, An)"
+peB1,choisi,csg-0390,069,3877,1012,96,97,,1228N3A2 Isti sunt qui venerunt (in)
+peB1,variante A,csg-0391,178,4577,4182,99,98,,UMEXN1A1 In lege Domini fuit voluntas (lún)
+peB1,variante B,csg-0390,121,4140,4182,96,91,,"0205N1R1 Dum torqueretur (rán, rán)"
+peB1,variante C,csg-0391,188,4663,4182,87,91,,"MUVXN3R1 Haec est virgo sapiens (lán, lán)"
+peB1,variante D,csg-0390,025,1884,3906,97,89,,"0815bN3A3 Cantate Domino canticum (cán, cán)"
+taB,choisi,csg-0390,016,3082,4568,42,44,,"Missus est (pud de apud, ta>lsl3)"
+taB,variante A,csg-0390,121,2656,1782,46,44,,"? 0205N1A3 Ancilla Christi sum (tén, tén) | 0205N1R1 Dum torqueretur (in, in, in, …) | 0205N2A3 Agathes laetissima (án, án)"
+taB,variante B,csg-0390,153,1231,1044,42,41,,"? Q3N1R1 Videntes Joseph (dén, sint, cunc, …) | Q3N1R2 Dixit Judas fratribus suis (num, sán, num, …)"
+taB,variante C,csg-0391,183,1389,2116,49,46,,"? COPON1R1 Euge serve bone (Eu, in, mul, …) | COPON1R2 Ecce sacerdos magnus (óm, gén, óm, …)"
+taB,variante D,csg-0390,152,2117,5940,45,42,,"? 0501N3R1 Jesus erat incipiens (al, au, spon, …) | Q2N3R1 Dixit Angelus ad Jacob (An, An)"
