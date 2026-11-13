@@ -117,6 +117,13 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   autres ; les éléments eux-mêmes (neume de base, `pu`, `ta`, `taN`…) sont réutilisés d'un composé
   à l'autre. `S/restituer.py` pose les formes retenues sur l'exemplaire pour juger l'harmonie.
 
+**Vocabulaire de marteo**
+- Le *céphalicus* est la forme en crosse qui s'enroule vers l'intérieur (`cl>`, `clB` : 390 p. 61,
+  Valde honorandus, *commendavit*). Le « P » (hampe et petite boucle fermée en haut) est `viB`,
+  pas un céphalicus.
+- Le « Ꝛ » à pied tourné à droite suivi d'un tractulus dessous, devant une virga épisémée à deux
+  points, est `toS2sut1` (ou `clSsut1`) suivi d'un `ci-`, pas un `vippt1su2`.
+
 **Divers**
 - Couleurs de glyphes dans le `.sfd` : rouge à refaire, jaune en cours, vert refait.
 - Ne jamais relancer `S/init_grehartker.py` sur `F` : il écraserait le travail.
@@ -226,7 +233,7 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   « Ꝛ + tractulus » devant, est sans doute un `ciG` + `ci`), `viNsu1suu1su2` (391 p. 194 et
   232), `viNsu2sut1` (390 p. 46, dernier élément peut-être un uncinus). Toujours sans vrai
   exemplaire dans les 411 pages : `viNsu4`.
-  `viNB` attend toujours le choix de marteo (n° 21 de `candidats.py viNB_c`).
+  `viNB` : choisi 390 p. 80 (n° 30 de `viNB_c`, la petite `lsi` à sa droite est hors boîte).
 - **Restitution :** `restituer.py` sur tous les choix du lot virga (planches
   `restitution_virga_1..3`).
 - **Décompositions :** les 414 glyphes utilisés dans NR, tous tranchés ; 145 formes de base
@@ -237,9 +244,7 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   les pages vérifiées à l'œil.
 - **Lot clivis (commencé le 13 novembre 2026) :** `cl` et `clN` gardés, cohérents entre eux
   (`planche.py clivis_1 cl clN clS clM --sur cl`). Proposés : `clS` (pied tourné vers la droite,
-  `candidats.py --trait pied`), `clM` (clivis étroite, à confirmer). `cl>` (`clB`) pas encore
-  reconnu : les recherches ne donnent que des céphalicus en P ; un exemple identifié par
-  marteo est nécessaire. Restent `clNB`, `clSN`, `clMN`, les formes rares (`clS1`, `clSN1`,
+  `candidats.py --trait pied`), `clM` (clivis étroite, à confirmer). `clB` : choisi 390 p. 80 (céphalicus trouvé à partir de celui désigné par marteo). Restent `clNB`, `clSN`, `clMN`, les formes rares (`clS1`, `clSN1`,
   `clNB1`, `clSN2`), les ligatures (`cl!or_pi`, `cl!po`, `cl!poN1`, `cl!clS`, `cl!vs`) et les
   composés (`ciG`, `ciG1`, `clSsut2`, `clSNsu2`, `clSsuu1su2`, `clN1su2`, `clBppt2`, lettres).
   `reperes.csv` garde des `ciG?` (clS avec tractulus sous le pied) et des salicus.
