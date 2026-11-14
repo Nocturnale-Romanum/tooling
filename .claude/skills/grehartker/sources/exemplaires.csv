@@ -248,9 +248,9 @@ taB,variante A,csg-0390,121,2656,1782,46,44,,"? 0205N1A3 Ancilla Christi sum (t�
 taB,variante B,csg-0390,153,1231,1044,42,41,,"? Q3N1R1 Videntes Joseph (dén, sint, cunc, …) | Q3N1R2 Dixit Judas fratribus suis (num, sán, num, …)"
 taB,variante C,csg-0391,183,1389,2116,49,46,,"? COPON1R1 Euge serve bone (Eu, in, mul, …) | COPON1R2 Ecce sacerdos magnus (óm, gén, óm, …)"
 taB,variante D,csg-0390,152,2117,5940,45,42,,"? 0501N3R1 Jesus erat incipiens (al, au, spon, …) | Q2N3R1 Dixit Angelus ad Jacob (An, An)"
-peNB,choisi,csg-0390,048,4659,1007,121,101,,"1225N3R1 Beata viscera Mariae (tum de Christum, pe->hh) ; seul emploi NR venant de Hartker"
-peB2,choisi,csg-0391,029,1337,5245,100,55,"1397,5248,39,32","Q6F7N2R3 Ecce quomodo moritur (in de Erit in pace, sc~)"
-peB2,variante A,csg-0391,223,1605,1088,105,60,,"11H1N2R1 Super muros tuos (lau de laudare, sc~) ; boîte relevée à la main"
+peB2,choisi,csg-0391,197,3442,3223,92,53,"3487,3223,47,43","ODEFN2R2 Heu mihi Domine (val, val)"
+peB2,variante A,csg-0391,219,4171,1111,159,45,"4280,1111,50,45","? 10H1N1R1 Adaperiat (le, le) | 10H1N3R1 Refulsit sol in clypeos (Et, Et, Et, …)"
+peB2,variante B,csg-0391,030,3382,2522,176,41,"3505,2522,53,41","Q6F7N2R3 Ecce quomodo moritur (in, in)"
 pesu2,choisi,csg-0391,213,1820,4182,87,83,"1820,4182,87,70","09H3N1R1 Peto Domine (Dó, Dó)"
 pesu2,variante A,csg-0391,041,2409,2412,92,81,"2409,2412,88,69","P0F6R2 Expurgate vetus fermentum (tum,, tum,)"
 pesu2,variante B,csg-0390,029,1800,1332,94,85,"1800,1332,84,76","? 0325N1R3 Suscipe verbum (lí, lí) | 0531N2R1 Suscipe verbum (lí) | A1F2R1 Suscipe verbum (lí, lí) | A3N2R3 Descendet Dnus (a, a) | OPBMR3 Suscipe verbum (lí, lí)"
@@ -261,8 +261,6 @@ peN1sut2,variante A,csg-0390,121,2858,3122,109,89,"2858,3122,109,80","? 0205N2A3
 peN1sut2,variante B,csg-0390,160,1584,2418,104,97,"1584,2418,104,87","? Q4N1R2 Stetit Moyses coram (ne, ne) | Q4N2R3 Moyses famulus Domini (ná, ná) | Q4N3R2 Ecce mitto Angelum meum (ël,, ël,)"
 peN1sut2,variante C,csg-0390,138,3299,1842,110,86,"3299,1842,110,80","7GN3R3 Ubi est Abel (e, mat, e, …)"
 peN1sut2,variante D,csg-0390,114,2855,1431,105,89,"2855,1431,105,75","0121N2R2 Mel et lac ex ejus (su, su)"
-peSsu2,choisi,csg-0391,197,2310,4917,107,91,"2310,4917,107,77","ODEFN2R3 Ne recorderis peccata (re, am., re, …)"
-peSsu2,variante A,csg-0391,061,4768,5332,90,75,"4768,5332,86,66",0503N3R1 Dulce lignum (le)
 peN1sut3,choisi,csg-0390,149,3055,6285,109,93,"3055,6285,105,77","Q2N1R2 Ecce odor (gri, gri)"
 peN1sut3,variante A,csg-0390,074,2208,5319,109,112,"2208,5319,107,86","0106N1R1b Tria sunt munera (myr, myr)"
 peN1sut3,variante B,csg-0391,205,803,3212,106,114,"803,3212,103,83","? 08H1N2R2 Initium sapientiae (mor, mor) | 08H1N3R1 Domine pater et Deus (ma, ma)"
@@ -284,6 +282,10 @@ peNsu1sut1,variante A,csg-0391,160,4535,767,93,89,"4535,767,90,69","1123N2R2 Omn
 peNsu1sut1,variante B,csg-0391,107,3811,2039,105,97,"3811,2039,100,88","0829N1R1 Misit Herodes rex (He, He, He)"
 peNsu1sut1,variante C,csg-0391,097,4001,2068,105,80,"4001,2068,79,71","0810N2R1 Quo progrederis sine filio (pen, pen)"
 pesu1sut1,choisi,csg-0391,157,3579,4582,87,73,"3579,4582,87,56","1122N3R2 Caecilia me misit ad vos (Ur, Ur)"
-pesu1suu1,choisi,csg-0390,049,3106,3831,108,82,"3106,3831,94,74","0101N1R1 Ecce Agnus Dei (cá, cá)"
 pesut2,choisi,csg-0390,068,2547,671,85,79,"2547,671,85,69",1228N1R1 Centum quadraginta (gín)
 peN1su1suu1,choisi,csg-0391,111,2206,3330,99,106,"2206,3330,99,76","0908N1R1 Hodie nata est beata (go, bus, go, …)"
+peSsu2,choisi,csg-0391,253,1525,5524,105,84,"1525,5524,105,79","? EXF4I In manu tua Domine (a,, mi) | F1Is Dominum qui fecit nos (cit, cit)"
+peSsu2,variante A,csg-0390,029,4566,3904,90,81,"4566,3904,90,74",0531N2R1 Suscipe verbum (le)
+pesu1suu1,choisi,csg-0390,022,4353,1796,91,81,"4353,1796,83,73","A2N1R3 Civitas Jerusalem (lem,, lem,)"
+pesu1suu1,variante A,csg-0391,058,4586,3855,100,78,"4586,3855,92,71","MRTPN2R3 Filiae Jerusalem venite (lem,, lem,)"
+pesu1suu1,variante B,csg-0390,178,3223,4566,85,79,"3223,4566,85,69","Q6F5N1R3 Ecce vidimus eum non habentem (e, e)"
