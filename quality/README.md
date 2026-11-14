@@ -12,3 +12,9 @@ with `NAME`, `DESCRIPTION` and `check(text)` yielding `(offset, message)`, and r
 |---|---|
 | `ob-cb` | every NABC `ob` is closed by a `cb` before the next `ob` or the end of the piece |
 | `euouae` | antiphons (`office-part:an`) have exactly one `<eu>…</eu>`, holding `E U O U A E.` or `Et sic finiátur.`, whose melody (transposed to c4) is the one of the differentia of the `mode:` header; the table is `DIFFERENTIAE` in `checks/euouae.py` |
+
+## Reports
+
+    python3 -m quality.versets -o versets-repons.html   # responsory verses: standard melodies by mode, deviations, proper verses
+
+`versets.py` is deterministic; the fixed text of the page is in `versets_template.html`.
