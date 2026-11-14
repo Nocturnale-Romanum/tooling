@@ -42,6 +42,8 @@ code{font-family:var(--mono);font-size:.85rem;word-break:break-all}
 .fam table{background:var(--panel);border:1px solid var(--line);border-radius:6px}
 .note{color:var(--amber);background:var(--amber-bg);padding:8px 12px;border-radius:6px}
 .pill{display:inline-block;font-size:.78rem;padding:1px 8px;border-radius:999px;font-weight:500}
+.seg{font-size:.8rem;color:var(--muted);display:inline-block;min-width:7.5em}
+.segs{display:flex;flex-direction:column;gap:2px}
 .pill.std{color:var(--ok);background:var(--ok-bg)} .pill.pr{color:var(--muted);background:var(--bg);outline:1px solid var(--line)} .pill.nr{color:var(--rubric);background:var(--rubric-bg)}
 .count{font-family:var(--body);font-size:.85rem;color:var(--muted);font-weight:400}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:12px 24px}
@@ -72,6 +74,18 @@ ul{margin:0;padding-left:20px;max-width:72ch}
 </section>
 
 <section>
+<h2>Exceptions acceptées <span class="count">@@NEXC@@</span></h2>
+<p>Écarts validés par marteo, avec la raison donnée. Ils sont listés dans <code>EXCEPTIONS</code> (<code>quality/versets.py</code>) et ne sont plus comptés comme écarts.</p>
+<div class="tw"><table>@@EXC@@</table></div>
+</section>
+
+<section>
+<h2>Mode à vérifier <span class="count">@@NSUSP@@</span></h2>
+<p>Versets dont aucune partie ne suit les formules de leur mode, mais dont certaines parties suivent exactement celles d'un autre mode.</p>
+<div class="tw"><table><thead><tr><th>Pièce</th><th>Verset</th><th>Mode indiqué</th><th>Formules du mode</th><th>Parties concordantes</th></tr></thead><tbody>@@SUSP@@</tbody></table></div>
+</section>
+
+<section>
 <h2>Mélodies standard</h2>
 <p>Chaque moitié de verset est réduite à son squelette : notes en c4, notes répétées fusionnées, motifs de récitation répétés (<code>hghg</code> → <code>hg</code>) fusionnés. Un squelette partagé par au moins 4 versets du même mode est une forme standard. Les variantes d'un même mode viennent surtout de l'intonation et de l'adaptation aux accents.</p>
 <div class="cols">@@FAMS@@</div>
@@ -79,14 +93,16 @@ ul{margin:0;padding-left:20px;max-width:72ch}
 
 <section>
 <h2>Versets propres et semi-propres</h2>
-<p><b>Semi-propre</b> : une moitié standard, l'autre propre. <b>Verset court</b> : une seule moitié, comparée aux deux moitiés standard. Les versets transposés dont la mélodie est standard comptent comme standard.</p>
+<p><b>Semi-propre</b> : une moitié standard, l'autre propre. <b>Verset court</b> : une seule moitié, comparée aux deux moitiés standard. <b>Verset long</b> : coupé en plus de deux incises par ses barres <code>;</code> et <code>:</code> ; les incises initiale et centrales peuvent finir sur une cadence provisoire, et les centrales commencer sans intonation (« standard, incise »). Une moitié bien plus courte que les moitiés standard peut omettre le début de la formule (« standard, début omis »). Tous les versets longs et toutes les moitiés à début omis sont listés ici. Les versets transposés dont la mélodie est standard comptent comme standard.</p>
 @@PROPER@@
 </section>
 
 <section>
 <h2>Méthode et limites</h2>
 <ul>
-<li>Le verset commence à <code>&lt;sp&gt;V/&lt;/sp&gt;</code> et finit à la barre <code>(::)</code>. Il est coupé en deux à la première barre <code>;</code>, ou à défaut <code>:</code>.</li>
+<li>Le verset commence à <code>&lt;sp&gt;V/&lt;/sp&gt;</code> et finit à la barre <code>(::)</code>. Il est coupé à ses barres <code>;</code> et <code>:</code> : deux moitiés, ou plus d'incises pour un verset long.</li>
+<li>Les écarts des incises centrales ne sont pas signalés : elles sont standard ou propres.</li>
+<li>Une moitié est « bien plus courte » quand elle a moins de syllabes que 90 % des moitiés standard de son mode.</li>
 <li>Seule la hauteur des notes compte ; rythme, épisèmes, formes de neumes et NABC sont ignorés.</li>
 <li>L'écart est une distance d'édition sur les squelettes (notes ajoutées, retirées ou changées). La syllabe surlignée vient d'un alignement avec le verset standard le plus proche et peut être décalée d'une syllabe.</li>
 <li>Un écart qui reproduit par hasard une autre forme standard n'est pas détecté.</li>

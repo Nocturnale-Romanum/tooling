@@ -3,11 +3,13 @@ deviations of 1 to 3 notes from it, proper and semi-proper verses.
 
 Usage: python3 -m quality.versets [--repo REPO] [--set marteo|base|all] [-o OUT.html]
 
-Each verse (from <sp>V/</sp> to the (::) bar) is split at its first ';' bar (else ':').
-Each half is reduced to a skeleton: pitches transposed to c4, repeated notes merged,
+Each verse (from <sp>V/</sp> to the (::) bar) is split at its ';' and ':' bars: two halves,
+or, for a long verse, a first incise, middle incises and a last one. Each part is reduced to a skeleton: pitches transposed to c4, repeated notes merged,
 repeated recitation motifs merged (hghg -> hg). A skeleton shared by at least MIN_FAMILY
 verses of the same mode is a standard form; a half at edit distance 1..MAX_NEAR from one
-(without transposition) is a deviation to check.
+(without transposition) is a deviation to check. Incises of long verses may end on a
+provisional cadence (and middle ones start without intonation); halves shorter than 90% of the
+standard ones may drop the beginning of the formula.
 """
 import argparse
 import collections
@@ -18,6 +20,11 @@ import re
 from .__main__ import SETS, DEFAULT_REPO
 
 MIN_FAMILY = 4
+# Deviations accepted by marteo: (piece, part) -> reason; part 1 first half, 2 last half, 0 short verse.
+# They apply to every verse of the piece (verse and Gloria Patri).
+EXCEPTIONS = {
+  ('0106N3R2', 2): 'la dernière syllabe du verset est propre à ce verset',
+}
 MAX_NEAR = 3
 CLEF = re.compile(r'(?<![a-z])([cf])(b?)([1-4])(?![0-9])')
 BAR = re.compile(r"[`,;:]+[0-9'_]*|::|;[0-9]*|:[0-9']*")
@@ -79,12 +86,15 @@ def verses(body):
   return out
 
 
-def halves(v):
-  for mark in (';', ':'):
-    i = next((j for j, k in enumerate(v) if k[0] == 'bar' and k[1].startswith(mark)), None)
-    if i is not None:
-      return v[:i], v[i + 1:]
-  return None
+def segments(v):
+  """Split a verse at its ';' and ':' bars: two halves, or more incises for a long verse."""
+  out = [[]]
+  for k in v:
+    if k[0] == 'bar' and k[1][0] in ';:':
+      out.append([])
+    else:
+      out[-1].append(k)
+  return [s for s in out if syls(s)]
 
 
 # ---- melodies
@@ -163,47 +173,89 @@ def align(a, b):
 # ---- analysis
 
 class Half:
-  def __init__(self, id, mode, verse, part, toks):
-    self.id, self.mode, self.verse, self.part, self.toks = id, mode, verse, part, toks
+  """A part of a verse: 0 whole short verse, 1 first half (or first incise), 2 last half, 3 middle incise."""
+  def __init__(self, id, mode, verse, part, toks, long):
+    self.id, self.mode, self.verse, self.part, self.toks, self.long = id, mode, verse, part, toks, long
     self.skel = skeleton(toks)
     s = syls(toks)
     self.gloria = bool(s) and s[0][1].startswith('Gl')
+    self.note = ''
+
+
+def free_dist(s, f, head_s=0, head_f=False, tail_s=0, tail_f=False):
+  """Edit distance between s and f, ignoring up to head_s/tail_s notes at the ends of s,
+  and, when head_f/tail_f, any number of notes at the ends of f."""
+  best = lev(s, f)
+  for h in range(head_s + 1):
+    for t in range(tail_s + 1):
+      ss = s[h:len(s) - t]
+      if not ss:
+        continue
+      for a in (range(len(f)) if head_f else (0,)):
+        for b in (range(a + 1, len(f) + 1) if tail_f else (len(f),)):
+          best = min(best, lev(ss, f[a:b]))
+  return best
 
 
 def analyse(repo, sel):
   H = []
   for id, mode, b in pieces(repo, sel):
     for vi, v in enumerate(verses(b)):
-      hs = halves(v)
-      if hs:
-        H += [Half(id, mode, vi, 1, hs[0]), Half(id, mode, vi, 2, hs[1])]
-      else:
-        H.append(Half(id, mode, vi, 0, v))
+      S = segments(v)
+      if len(S) == 1:
+        H.append(Half(id, mode, vi, 0, S[0], False))
+      elif S:
+        long = len(S) > 2
+        H += [Half(id, mode, vi, 1 if i == 0 else 2 if i == len(S) - 1 else 3, s, long) for i, s in enumerate(S)]
   fam = {}
   for m in sorted({h.mode for h in H}):
     for p in (1, 2):
-      c = collections.Counter(h.skel for h in H if h.mode == m and h.part == p)
+      c = collections.Counter(h.skel for h in H if h.mode == m and h.part == p and not h.long)
       fam[(m, p)] = [(s, n) for s, n in c.most_common() if n >= MIN_FAMILY]
+    # middle incises of long verses: a skeleton found in two of them is a formula
+    c = collections.Counter(h.skel for h in H if h.mode == m and h.part == 3)
+    fam[(m, 3)] = [(s, n) for s, n in c.most_common() if n >= 2]
+  forms = lambda m, p: [f for q in ((p,) if p in (1, 2) else (1, 2, 3)) for f, _ in fam.get((m, q), [])]
+  # a half shorter than 90% of the standard ones may drop the beginning of the formula
+  short = {}
+  for (m, p) in fam:
+    n = sorted(len(syls(h.toks)) for h in H if h.mode == m and h.part == p and not h.long and h.skel in dict(fam[(m, p)]))
+    short[(m, p)] = n[len(n) // 10] if n else 0
   for h in H:
     best = None
-    for p in ((h.part,) if h.part else (1, 2)):
-      for f, _ in fam.get((h.mode, p), []):
-        for k in range(-5, 6):
-          d = lev(transpose(h.skel, k), f)
-          if best is None or (d, abs(k)) < (best[0], abs(best[2])):
-            best = (d, f, k, p)
-    h.dist, h.family, h.shift, h.fpart = best or (99, None, 0, h.part or 1)
-    h.kind = ('std' if h.dist == 0 else 'near' if h.shift == 0 and h.dist <= MAX_NEAR else 'proper')
+    for f in forms(h.mode, h.part or 3):
+      for k in range(-5, 6):
+        d = lev(transpose(h.skel, k), f)
+        if best is None or (d, abs(k)) < (best[0], abs(best[1])):
+          best = (d, k)
+    h.dist, h.shift = best or (99, 0)
+    if h.dist and h.long and h.part in (1, 3):
+      # incise of a long verse: provisional cadence, and no intonation for a middle incise
+      d = min(free_dist(h.skel, f, tail_s=4, tail_f=True, head_f=h.part == 3) for f in forms(h.mode, h.part))
+      if d < h.dist or h.shift:
+        h.dist, h.shift = d, 0
+        if d == 0:
+          h.note = 'incise'
+    if h.dist and h.part in (1, 2) and not h.long and len(syls(h.toks)) < short[(h.mode, h.part)]:
+      d = min(free_dist(h.skel, f, head_s=3, head_f=True) for f in forms(h.mode, h.part))
+      if d < h.dist or h.shift:
+        h.dist, h.shift = d, 0
+        if d == 0:
+          h.note = 'début omis'
+    # middle incises are adapted too freely for their deviations to be meaningful
+    h.kind = 'std' if h.dist == 0 else 'near' if h.shift == 0 and h.dist <= MAX_NEAR and h.part != 3 else 'proper'
+    if h.kind == 'near' and (h.id, h.part) in EXCEPTIONS:
+      h.exception = EXCEPTIONS[(h.id, h.part)]
   std = collections.defaultdict(list)
   for h in H:
-    if h.kind == 'std' and h.shift == 0:
-      std[(h.mode, h.fpart)].append(h)
+    if h.kind == 'std' and h.shift == 0 and not h.note:
+      std[(h.mode, h.part if h.part in (1, 2) else 1)].append(h)
   for h in H:
     if h.kind != 'near':
       continue
     a, ia = collapsed_map(h.toks)
     best = None
-    for e in std[(h.mode, h.fpart)]:
+    for e in std[(h.mode, h.part if h.part in (1, 2) else 1)] + (std[(h.mode, 2)] if h.part in (0, 3) else []):
       b, ib = collapsed_map(e.toks)
       d = lev(a, b)
       if best is None or d < best[0]:
@@ -212,14 +264,30 @@ def analyse(repo, sel):
     ops = align(a, collapsed_map(h.example.toks)[0])
     h.marks = {ia[min(i, len(ia) - 1)] for i, j in ops}
     h.exmarks = {ib[min(j, len(ib) - 1)] for i, j in ops}
+  for h in H:
+    if getattr(h, 'exception', None):
+      h.kind, h.note = 'std', 'exception'
   # a deviation shared by several verses is more likely a variant
-  sig = lambda h: (h.mode, h.fpart, tuple(k[2] for i, k in enumerate(syls(h.toks)) if i in h.marks))
+  sig = lambda h: (h.mode, h.part, tuple(k[2] for i, k in enumerate(syls(h.toks)) if i in h.marks))
   near = [h for h in H if h.kind == 'near']
-  c1 = collections.Counter((h.mode, h.fpart, h.skel) for h in near)
+  c1 = collections.Counter((h.mode, h.part, h.skel) for h in near)
   c2 = collections.Counter(sig(h) for h in near)
   for h in near:
-    h.recurrent = max(c1[(h.mode, h.fpart, h.skel)], c2[sig(h)]) > 1
-  return H, fam
+    h.recurrent = max(c1[(h.mode, h.part, h.skel)], c2[sig(h)]) > 1
+  # verses with no standard part in their mode, but some in another mode
+  byv = collections.defaultdict(list)
+  for h in H:
+    byv[(h.id, h.verse)].append(h)
+  suspects = []
+  for hs in byv.values():
+    if any(h.kind == 'std' for h in hs):
+      continue
+    fits = {m: sum(any(lev(h.skel, f) == 0 for f in forms(m, h.part or 3)) for h in hs)
+            for m in sorted({m for m, _ in fam}) if m != hs[0].mode}
+    m = max(fits, key=fits.get)
+    if fits[m]:
+      suspects.append((hs, m, fits[m]))
+  return H, fam, suspects
 
 
 # ---- rendering
@@ -235,7 +303,9 @@ def vlabel(v, gloria):
   return 'Gloria Patri' if gloria else ('V/' if v == 0 else f'V/ {v + 1}')
 
 
-def half_label(p):
+def half_label(p, long=False):
+  if long:
+    return {1: 'incise initiale', 2: 'incise finale', 3: 'incise centrale'}[p]
   return {0: 'verset court', 1: '1<sup>re</sup> moitié', 2: '2<sup>de</sup> moitié'}[p]
 
 
@@ -245,7 +315,7 @@ def melody(h, marks=()):
     for i, k in enumerate(syls(h.toks))) + '</span>'
 
 
-def render(H, fam):
+def render(H, fam, suspects):
   modes = sorted(fam and {m for m, _ in fam})
   byv = collections.defaultdict(list)
   for h in H:
@@ -259,7 +329,7 @@ def render(H, fam):
     elif hs[0].part == 0:
       k = 'short' if kinds[0] == 'std' else 'proper'
     else:
-      k = {('std', 'std'): 'std', ('proper', 'proper'): 'proper'}.get(tuple(kinds), 'semi')
+      k = 'std' if set(kinds) == {'std'} else 'proper' if set(kinds) == {'proper'} else 'semi'
     status[key] = k
     summ[hs[0].mode][k] += 1
     summ[hs[0].mode]['tot'] += 1
@@ -274,7 +344,7 @@ def render(H, fam):
 
   def nearrow(h):
     e = h.example
-    return (f"<tr><td>{link(h.id)}<div class='sub'>mode {h.mode} · {vlabel(h.verse, h.gloria)} · {half_label(h.part)}</div></td>"
+    return (f"<tr><td>{link(h.id)}<div class='sub'>mode {h.mode} · {vlabel(h.verse, h.gloria)} · {half_label(h.part, h.long)}</div></td>"
             f"<td class='num'>{h.dist}</td><td>{melody(h, h.marks)}</td>"
             f"<td>{melody(e, h.exmarks)}<div class='sub'>{link(e.id)} {vlabel(e.verse, e.gloria)}</div></td></tr>")
   head = ("<thead><tr><th>Pièce</th><th>Écart</th><th>Verset (notes en c4, syllabes en écart surlignées)</th>"
@@ -282,6 +352,13 @@ def render(H, fam):
   near = [h for h in H if h.kind == 'near']
   iso = sorted((h for h in near if not h.recurrent), key=lambda h: (h.dist, h.mode, h.id))
   rec = sorted((h for h in near if h.recurrent), key=lambda h: (h.mode, h.part, h.skel, h.id))
+  exc = sorted((h for h in H if h.note == 'exception'), key=lambda h: (h.id, h.verse))
+  exc_rows = ''.join(nearrow(h).replace('</td><td class=\'num\'>', f"<div class='sub'>{E(h.exception)}</div></td><td class='num'>", 1)
+                     for h in exc)
+  susp = ''.join(
+    f"<tr><td>{link(hs[0].id)}</td><td>{vlabel(hs[0].verse, hs[0].gloria)}</td><td class='num'>{hs[0].mode}</td>"
+    f"<td class='num'>{m}</td><td class='num'>{n} / {len(hs)}</td></tr>"
+    for hs, m, n in sorted(suspects, key=lambda x: (x[0][0].id, x[0][0].verse)))
 
   fams = ''
   for m in modes:
@@ -289,26 +366,38 @@ def render(H, fam):
     if m == '6':
       fams += ("<p class='note'>Pas de vraie mélodie standard : une fois les répétitions de la récitation réduites, "
                "il ne reste que l'intonation et les cadences typiques. Les familles ci-dessous ne contrôlent donc que ces deux éléments.</p>")
-    for p in (1, 2):
-      fams += (f"<div class='fam'><h4>{half_label(p).capitalize()}</h4><table><thead><tr><th>Versets</th>"
+    for p in (1, 2, 3):
+      if not fam.get((m, p)):
+        continue
+      title = half_label(p).capitalize() if p < 3 else 'Incises centrales des versets longs (formule présente dans au moins 2 versets)'
+      fams += (f"<div class='fam'><h4>{title}</h4><table><thead><tr><th>Versets</th>"
                "<th>Squelette</th><th>Exemple</th></tr></thead><tbody>")
       for s, n in fam[(m, p)]:
-        ex = next(h for h in H if h.kind == 'std' and h.shift == 0 and h.mode == m and h.fpart == p
-                  and h.skel == s and not h.gloria)
+        cand = [h for h in H if h.mode == m and h.part == p and h.skel == s and h.long == (p == 3)]
+        ex = next((h for h in cand if not h.gloria), cand[0])
         fams += f"<tr><td class='num'>{n}</td><td><code>{E(s)}</code></td><td>{melody(ex)}<div class='sub'>{link(ex.id)}</div></td></tr>"
       fams += '</tbody></table></div>'
 
   pill = {'std': '<span class="pill std">standard</span>', 'proper': '<span class="pill pr">propre</span>',
           'near': '<span class="pill nr">écart</span>'}
+
+  def status_pill(h):
+    p = pill[h.kind] if not h.note else f'<span class="pill std">standard, {h.note}</span>'
+    return p if not h.long else f'<span class="seg">{half_label(h.part, True)}</span> {p}'
   proper = ''
   for m in modes:
-    keys = sorted(k for k, hs in byv.items() if hs[0].mode == m and status[k] not in ('std', 'short'))
+    keys = sorted(k for k, hs in byv.items() if hs[0].mode == m and (status[k] not in ('std', 'short') or hs[0].long
+                                                                    or any(h.note == 'début omis' for h in hs)))
     proper += (f"<h3>Mode {m} <span class='count'>{len(keys)}</span></h3><div class='tw'><table class='pl'><thead><tr>"
                "<th>Pièce</th><th>Verset</th><th>1<sup>re</sup> moitié</th><th>2<sup>de</sup> moitié</th></tr></thead><tbody>")
     for k in keys:
       hs = byv[k]
-      cells = (f"<td colspan=2>verset court : {pill[hs[0].kind]}</td>" if hs[0].part == 0
-               else ''.join(f'<td>{pill[h.kind]}</td>' for h in hs))
+      if hs[0].part == 0:
+        cells = f"<td colspan=2>verset court : {status_pill(hs[0])}</td>"
+      elif hs[0].long:
+        cells = f"<td colspan=2><div class='segs'>{''.join(f'<div>{status_pill(h)}</div>' for h in hs)}</div></td>"
+      else:
+        cells = ''.join(f'<td>{status_pill(h)}</td>' for h in hs)
       proper += f"<tr><td>{link(k[0])}</td><td>{vlabel(k[1], hs[0].gloria)}</td>{cells}</tr>"
     proper += '</tbody></table></div>'
 
@@ -317,7 +406,8 @@ def render(H, fam):
   for key, val in {'@@SUMMARY@@': rows, '@@NISO@@': str(len(iso)), '@@NREC@@': str(len(rec)),
                    '@@ISO@@': head + '<tbody>' + ''.join(map(nearrow, iso)) + '</tbody>',
                    '@@REC@@': head + '<tbody>' + ''.join(map(nearrow, rec)) + '</tbody>',
-                   '@@FAMS@@': fams, '@@PROPER@@': proper, '@@NV@@': str(len(byv))}.items():
+                   '@@FAMS@@': fams, '@@NSUSP@@': str(len(suspects)), '@@NEXC@@': str(len(exc)),
+                   '@@EXC@@': head + '<tbody>' + exc_rows + '</tbody>', '@@SUSP@@': susp, '@@PROPER@@': proper, '@@NV@@': str(len(byv))}.items():
     tpl = tpl.replace(key, val)
   return tpl
 
@@ -328,9 +418,9 @@ def main():
   p.add_argument('--set', choices=SETS, default='marteo')
   p.add_argument('-o', '--output', default='versets-repons.html')
   a = p.parse_args()
-  H, fam = analyse(a.repo, a.set)
+  H, fam, suspects = analyse(a.repo, a.set)
   with open(a.output, 'w', encoding='utf-8') as fh:
-    fh.write(render(H, fam))
+    fh.write(render(H, fam, suspects))
   print(f'{a.output}: {len({(h.id, h.verse) for h in H})} verses, '
         f'{sum(h.kind == "near" for h in H)} half-verses with a deviation')
 
