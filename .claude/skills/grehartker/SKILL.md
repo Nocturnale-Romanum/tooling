@@ -276,6 +276,17 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `toM1` (repères) ; nouvelles propositions à jambe droite profonde (`candidats.py --trait
   patte`, pages NR de `clM`).
 
+- **Lot pes (14 novembre 2026) :** validés `pe`, `peS`, `peN` (390 p. 87), `peN1` (390 p. 86),
+  `peB`, `peB1`, `taB`, `peNsu2`, `peN1su2`, `pesu2`, `pesu3`, `pesu1sut1`, `pesut2`,
+  `peNsu1sut1`, `peN1sut2`, `peN1sut3`, `peN1su1sut1`, `peN1su1suu1`, `peSsut2`, `peSsu2`
+  (391 p. 253), `peB2` (= `ta` + `taB` ; 391 p. 197, *Heu mihi*), `peN1suu1su2`, `pesu2sut1`.
+  **Exemplaires à fournir par marteo** (ou méthode) : `pesu1suu1` (les propositions étaient des
+  `pesu2`), `peNB`, `peN1su1suw1`, `peN1sut1suw1`, `peN1sut1sux1`. Sans exemplaire :
+  `peN1su1sut2`, `pesu1sut3`, `peNsu3sut1`, `peSsut3`, `peSppt2`, `pesu1sux1`, `pesu1suw1`.
+  Restent les formes en deux neumes : `peG`, `scM1`, `scG`, `scGN1`, `scM2`, `scG1`.
+- **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
+  préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
+
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
 2. Lot clivis : revue de `cl` et `clN`, puis variantes cohérentes avec `cl` (`--sur cl`),
