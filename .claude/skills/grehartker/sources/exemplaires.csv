@@ -289,3 +289,11 @@ peSsu2,variante A,csg-0390,029,4566,3904,90,81,"4566,3904,90,74",0531N2R1 Suscip
 pesu1suu1,choisi,csg-0390,022,4353,1796,91,81,"4353,1796,83,73","A2N1R3 Civitas Jerusalem (lem,, lem,)"
 pesu1suu1,variante A,csg-0391,058,4586,3855,100,78,"4586,3855,92,71","MRTPN2R3 Filiae Jerusalem venite (lem,, lem,)"
 pesu1suu1,variante B,csg-0390,178,3223,4566,85,79,"3223,4566,85,69","Q6F5N1R3 Ecce vidimus eum non habentem (e, e)"
+peN1su1suw1,choisi,csg-0391,156,4286,5675,84,81,"4286,5675,80,67","1122N1R3 Virgo gloriosa semper Evangelium (quiis, quiis)"
+peN1su1suw1,variante A,csg-0391,157,1463,2845,98,77,"1463,2845,85,72","1122N1R3 Virgo gloriosa semper Evangelium (quiis, quiis)"
+peN1sut1suw1,choisi,csg-0391,025,2567,4792,92,72,"2567,4792,85,66","Q6F6N3R2 Jesum tradidit (dé, dé)"
+peN1sut1sux1,choisi,csg-0390,119,2760,2455,104,86,"2760,2455,100,78",0202N2R3 Cum inducerent... Simeon (ul)
+peN1sut1sux1,variante A,csg-0390,087,1553,4524,105,100,"1553,4524,105,82","E1F3R2 Statuit Dominus supra (cán, cán)"
+peN1suu1su2,choisi,csg-0390,103,1110,677,127,121,"1110,677,101,77",H1N2A2 Spes nostra (Spes)
+peN1suu1su2,variante A,csg-0390,180,4665,4962,102,119,"4665,4962,100,76","Q6F5N3R2 Una hora non potuistis (mi, mi)"
+pesu2sut1,choisi,csg-0391,055,3195,1727,155,94,"3195,1727,85,70","P3N2R3 Veniens a Libano (le, le)"
