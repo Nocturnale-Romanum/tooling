@@ -3,14 +3,12 @@ from ..gabc import split_header, header_field
 
 NAME = 'asterisk'
 DESCRIPTION = ("antiphons, responsories and invitatories (not psalms, hymns, orations) have a <sp>*</sp>; next to a bar, it is "
-               "written right under it: <sp>*</sp>(,), not (,) <sp>*</sp> nor <sp>*</sp> (,); in invitatories it follows "
-               "the bar instead: (;) <sp>*</sp> Ve(...)")
+               "written right under it: <sp>*</sp>(,), not (,) <sp>*</sp> nor <sp>*</sp> (,) (no placement rule for invitatories)")
 
 CATEGORIES = [
   ('missing', 'no <sp>*</sp> in the piece'),
   ('after-bar', '<sp>*</sp> written after a bar instead of under it'),
   ('space', 'space between <sp>*</sp> and the bar under which it is written'),
-  ('invitatory', 'invitatory: <sp>*</sp> written under or before a bar instead of after it'),
 ]
 
 PARTS = ('an', 're', 'in')   # not psalms, hymns, orations
@@ -36,10 +34,8 @@ def check(text):
     nxt = re.match(r'(\s*)\(([^)]*)\)', body[s + len(STAR):])
     under = nxt and nxt.group(1) == '' and is_bar(nxt.group(2))
     if invitatory:
-      if nxt and is_bar(nxt.group(2)) and not (prev and is_bar(prev.group(1))):
-        yield (off + s, f'invitatory: <sp>*</sp> written {"under" if under else "before"} the bar ({nxt.group(2)}) '
-               f'instead of after it: ({nxt.group(2)}) <sp>*</sp>', 'invitatory')
-    elif prev and is_bar(prev.group(1)) and not under:
+      continue   # no placement rule for invitatories
+    if prev and is_bar(prev.group(1)) and not under:
       yield off + s, f'<sp>*</sp> written after the bar ({prev.group(1)}) instead of under it', 'after-bar'
     elif nxt and nxt.group(1) and is_bar(nxt.group(2)):
       yield off + s, f'space between <sp>*</sp> and the bar ({nxt.group(2)}): write <sp>*</sp>({nxt.group(2)})', 'space'
