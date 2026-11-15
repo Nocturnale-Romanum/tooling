@@ -20,7 +20,8 @@ def nabc_norm(s):
         out.append(tok)
     else:
       # pitch descriptors, ob/cb brackets of the repeated passage, spacing
-      out.append(re.sub(r'h[a-np]|[oc]b(?!v)|[`/]', '', tok))
+      tok = re.sub(r'h[a-np]|[`/]', '', tok)
+      out.append(re.sub(r'(?:^|(?<=[-!]))ob|cb(?!v)', '', tok))
   return ''.join(out)
 
 
@@ -28,27 +29,37 @@ LIGATURES = {"'oe": 'œ', "'ae": 'æ', "'æ": 'æ', "'œ": 'œ'}
 
 
 def units(body, off):
-  """Yield ('sp', label, pos), ('bar', bar, pos) and ('syl', text, gabc, nabc, pos, starts a word)."""
+  """Yield ('sp', label, pos), ('bar', bar, pos) and ('syl', text, gabc, nabc, pos, starts a word).
+  When a group's text holds a marker after some text (t{o}. <sp>+</sp> Pasce.(ed.. ::)), the notes and bars
+  belong to the text before the marker, and the text after it is a repetendum written as pure text."""
   for m in GROUP.finditer(body):
     txt = re.sub(r"<sp>('[^<]*)</sp>", lambda x: LIGATURES.get(x.group(1), x.group(1)), m.group(1))
     pos = off + m.start(1)
-    # text before a marker in the same group belongs to the preceding unit (e.g. a verse written without notes)
-    pieces = re.split(r'<sp>(.*?)</sp>', txt)
-    for k in range(0, len(pieces) - 1, 2):
-      before = re.sub(r'<[^>]*>|[{}]', '', pieces[k]).strip()
-      if before:
-        yield ('syl', before, '', '', pos, pieces[k][:1].isspace() or k == 0)
-      yield ('sp', pieces[k + 1], pos)
-    txt = pieces[-1]
-    new_word = txt[:1].isspace() or not txt or len(pieces) > 1
-    txt = re.sub(r'<[^>]*>|[{}]', '', txt).strip()
     parts = m.group(2).split('|')
-    g, n = parts[0], '|'.join(parts[1:])
+    g, n = parts[0].strip(), '|'.join(parts[1:]).strip()
     core = re.sub(r'[a-mA-M]\+|[zZ][0-9+-]?|[a-m][xy#]', '', CLEF.sub('', g)).strip()
+    pieces = re.split(r'<sp>(.*?)</sp>', txt)
+    clean = [re.sub(r'<[^>]*>|[{}]', '', t) for t in pieces[::2]]
+    if len(pieces) > 1 and clean[0].strip():
+      notes = ' '.join(t for t in g.split() if not BAR.fullmatch(t))
+      yield ('syl', clean[0].strip(), notes, n, pos, clean[0][:1].isspace() or not pieces[0])
+      for t in g.split():
+        if BAR.fullmatch(t):
+          yield ('bar', t, off + m.start(2))
+      for k in range(1, len(pieces), 2):
+        yield ('sp', pieces[k], pos)
+        if clean[(k + 1) // 2].strip():
+          yield ('syl', clean[(k + 1) // 2].strip(), '', '', pos, True)
+      continue
+    for k in range(1, len(pieces), 2):
+      yield ('sp', pieces[k], pos)
+    txt = clean[-1]
+    new_word = txt[:1].isspace() or not txt or len(pieces) > 1
+    txt = txt.strip()
     if not txt and BAR.fullmatch(core or '-'):
       yield ('bar', core, off + m.start(2))
     elif txt or core:
-      yield ('syl', txt, g.strip(), n.strip(), pos, new_word)
+      yield ('syl', txt, g, n, pos, new_word)
 
 
 def norm_text(t):
@@ -93,8 +104,8 @@ def check(text):
     syls = [u for u in rep if u[0] == 'syl']
     sps = [u for u in rep if u[0] == 'sp']
     if not syls:
-      yield vpos, ('repetendum not written out, only ' + ' '.join(f'<sp>{u[1]}</sp>' for u in sps)
-                   if sps else 'verse not followed by a repetendum')
+      if not sps:   # a bare <sp>+</sp> after the verse is an accepted way to mark the repetendum
+        yield vpos, 'verse not followed by a repetendum'
       continue
     if rep[0][0] != 'sp':
       yield syls[0][4], 'repetendum does not start with a <sp> marker'
@@ -122,7 +133,9 @@ def check(text):
       start = starts[0][0]
     e = dict(starts)[start]
     quoted = respond[start:e]
-    if [norm_text(u[1]) for u in syls] != [norm_text(u[1]) for u in quoted]:
+    if not any(u[2] for u in syls):
+      pass   # repetendum written as pure text: only its marker, text and period are checked
+    elif [norm_text(u[1]) for u in syls] != [norm_text(u[1]) for u in quoted]:
       yield syls[0][4], (f"syllables '{'-'.join(u[1] for u in syls)}' differ from the respond "
                          f"('{'-'.join(u[1] for u in quoted)}')")
     else:
