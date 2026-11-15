@@ -14,8 +14,8 @@ PUNCT = re.compile(r'[^\w]', re.U)
 def nabc_norm(s):
   """NABC without lse<n> significant letters, pitch descriptors (h + pitch), ob/cb brackets and spacing."""
   out = []
-  for tok in re.split(r'(l[st][a-z]+\d)', s):
-    if re.fullmatch(r'l[st][a-z]+\d', tok):
+  for tok in re.split(r'((?<![cq])l[st][a-z]{1,3}\d)', s):
+    if re.fullmatch(r'l[st][a-z]{1,3}\d', tok):
       if not re.fullmatch(r'lse\d', tok):
         out.append(tok)
     else:
@@ -26,6 +26,11 @@ def nabc_norm(s):
 
 
 LIGATURES = {"'oe": 'œ', "'ae": 'æ', "'æ": 'æ', "'œ": 'œ'}
+
+
+def gabc_norm(g):
+  """GABC without line breaks and custos."""
+  return re.sub(r'[zZ][0-9+-]?|[a-m]\+', '', g).strip()
 
 
 def units(body, off):
@@ -140,7 +145,7 @@ def check(text):
                          f"('{'-'.join(u[1] for u in quoted)}')")
     else:
       for u, r in zip(syls, quoted):
-        if u[2] != r[2]:
+        if gabc_norm(u[2]) != gabc_norm(r[2]):
           yield u[4], f"GABC of '{u[1]}' ({u[2]}) differs from the respond ({r[2]})"
         if nabc_norm(u[3]) != nabc_norm(r[3]):
           yield u[4], f"NABC of '{u[1]}' ({u[3]}) differs from the respond ({r[3]})"
