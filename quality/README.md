@@ -14,7 +14,7 @@ with `NAME`, `DESCRIPTION` and `check(text)` yielding `(offset, message)` or `(o
 |---|---|
 | `ob-cb` | every NABC `ob` is closed by a `cb` before the next `ob` or the end of the piece |
 | `repetenda` | in responsories, the repetendum after each verse starts with the `<sp>` marking where it starts in the respond (`R/` for the beginning), quotes the respond syllable by syllable (text, GABC, NABC ignoring `lse<n>`, pitch descriptors, `ob`/`cb` and spacing) and ends with a period; a bare `<sp>+</sp>` after the verse is accepted, and a repetendum written as pure text (`Sanct{o}. <sp>+</sp> Pasce.(ed.. ::)`) is only checked for its marker, text and period |
-| `asterisk` | antiphons, responsories, invitatories and psalms have a `<sp>*</sp>`; next to a bar it is written right under it: `<sp>*</sp>(,)`, not `(,) <sp>*</sp>` nor `<sp>*</sp> (,)` |
+| `asterisk` | antiphons, responsories and invitatories (not psalms, hymns, orations) have a `<sp>*</sp>`; next to a bar it is written right under it: `<sp>*</sp>(,)`, not `(,) <sp>*</sp>` nor `<sp>*</sp> (,)` |
 | `euouae` | antiphons (`office-part:an`) have exactly one `<eu>…</eu>`, holding `E U O U A E.` or `Et sic finiátur.`, whose melody (transposed to c4) is the one of the differentia of the `mode:` header; the table is `DIFFERENTIAE` in `checks/euouae.py` |
 
 ## Reports

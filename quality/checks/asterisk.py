@@ -2,7 +2,7 @@ import re
 from ..gabc import split_header, header_field
 
 NAME = 'asterisk'
-DESCRIPTION = ("antiphons, responsories, invitatories and psalms have a <sp>*</sp>; next to a bar, it is "
+DESCRIPTION = ("antiphons, responsories and invitatories (not psalms, hymns, orations) have a <sp>*</sp>; next to a bar, it is "
                "written right under it: <sp>*</sp>(,), not (,) <sp>*</sp> nor <sp>*</sp> (,)")
 
 CATEGORIES = [
@@ -11,7 +11,7 @@ CATEGORIES = [
   ('space', 'space between <sp>*</sp> and the bar under which it is written'),
 ]
 
-PARTS = ('an', 're', 'in', 'ps')
+PARTS = ('an', 're', 'in')   # not psalms, hymns, orations
 BAR = re.compile(r"[`,;:]+[0-9'_]*|::|;[0-9]*|:[0-9']*")
 STAR = '<sp>*</sp>'
 
