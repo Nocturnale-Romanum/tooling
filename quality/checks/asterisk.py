@@ -6,7 +6,8 @@ DESCRIPTION = ("antiphons, responsories and invitatories (not psalms, hymns, ora
                "written right under it: <sp>*</sp>(,), not (,) <sp>*</sp> nor <sp>*</sp> (,) (no placement rule for invitatories)")
 
 CATEGORIES = [
-  ('missing', 'no <sp>*</sp> in the piece'),
+  ('missing', 'no asterisk at all in the piece'),
+  ('bare', "'*' written in the text without <sp></sp>"),
   ('after-bar', '<sp>*</sp> written after a bar instead of under it'),
   ('space', 'space between <sp>*</sp> and the bar under which it is written'),
 ]
@@ -26,8 +27,13 @@ def check(text):
     return
   body = re.sub(r'%[^\n]*', lambda m: ' ' * len(m.group()), body)   # comments, offsets kept
   stars = [m.start() for m in re.finditer(re.escape(STAR), body)]
-  if not stars:
-    yield off, 'no <sp>*</sp> in the piece', 'missing'
+  # '*' in the text (outside note groups and <sp></sp>)
+  text_only = re.sub(r'\([^)]*\)|<sp>[^<]*</sp>', lambda m: ' ' * len(m.group()), body)
+  bare = [m.start() for m in re.finditer(r'\*', text_only)]
+  for b in bare:
+    yield off + b, "'*' written without <sp></sp>: write <sp>*</sp>", 'bare'
+  if not stars and not bare:
+    yield off, 'no asterisk in the piece', 'missing'
   invitatory = header_field(header, 'office-part') == 'in'
   for s in stars:
     prev = re.search(r'\(([^)]*)\)(\s*)$', body[:s])
