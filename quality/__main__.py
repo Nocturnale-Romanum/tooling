@@ -1,6 +1,6 @@
 """Run quality checks on Nocturnale Romanum GABC files.
 
-Usage: python3 -m quality [--check NAME ...] [--set SET] [FILE ...]
+Usage: python3 -m quality [--check NAME ...] [--set SET] [--by-category] [FILE ...]
 Without FILE, checks the SET of files of <repo>/gabc (default: marteo, i.e. *_marteo.gabc;
 base: <ID>.gabc without _<submitter>; all: every .gabc), repo defaulting to ../liber-responsorialis/nocturnale-romanum.
 """
@@ -28,6 +28,8 @@ def main():
   p.add_argument('--set', choices=SETS, default='marteo')
   p.add_argument('--check', action='append', choices=[c.NAME for c in CHECKS])
   p.add_argument('--list', action='store_true', help='list available checks')
+  p.add_argument('--by-category', action='store_true',
+                 help='group the issues by check and category (batches to process), with counts')
   a = p.parse_args()
   if a.list:
     for c in CHECKS:
@@ -36,16 +38,28 @@ def main():
   checks = [c for c in CHECKS if not a.check or c.NAME in a.check]
   gabc_dir = os.path.join(a.repo, 'gabc')
   files = a.files or [os.path.join(gabc_dir, n) for n in sorted(os.listdir(gabc_dir)) if SETS[a.set](n)]
-  count = 0
+  issues = []
   for f in files:
     with open(f, encoding='utf-8') as fh:
       text = fh.read()
     for c in checks:
-      for pos, msg in c.check(text):
+      for pos, msg, *cat in c.check(text):
         line, col = line_col(text, pos)
         excerpt = text[max(0, pos - 15):pos + 25].replace('\n', ' ')
-        print(f'{os.path.relpath(f)}:{line}:{col}: [{c.NAME}] {msg}  …{excerpt}…')
-        count += 1
+        issues.append((c, cat[0] if cat else '', f'{os.path.relpath(f)}:{line}:{col}: [{c.NAME}] {msg}  …{excerpt}…'))
+  if a.by_category:
+    for c in checks:
+      cats = [k for k, _ in getattr(c, 'CATEGORIES', [])] + ['']
+      labels = dict(getattr(c, 'CATEGORIES', []))
+      for k in cats:
+        group = [line for cc, cat, line in issues if cc is c and cat == k]
+        if group:
+          print(f"## {c.NAME}{' / ' + k if k else ''}: {labels.get(k, '')} ({len(group)})")
+          print('\n'.join(group) + '\n')
+  else:
+    for _, _, line in issues:
+      print(line)
+  count = len(issues)
   print(f'{count} issue(s) in {len(files)} file(s)', file=sys.stderr)
   return 1 if count else 0
 

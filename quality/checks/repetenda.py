@@ -6,6 +6,18 @@ DESCRIPTION = ("in responsories, the repetendum after each verse starts with the
                "in the respond (R/ for the beginning), quotes the respond (text, GABC, NABC without lse<n> "
                "and pitch descriptors) and ends with a period")
 
+# Categories of the reports, in the order of the batches to process them in.
+CATEGORIES = [
+  ('period', 'final period missing'),
+  ('cb-in-gabc', "'cb' written in the GABC instead of the NABC"),
+  ('nabc-missing', 'NABC missing from the repetendum'),
+  ('syllables', 'syllabification differs from the respond'),
+  ('engraving', 'GABC differs from the respond, same pitches (spacing, episema, liquescence, accidental...)'),
+  ('nabc', 'NABC differs from the respond'),
+  ('melody', 'GABC differs from the respond, different pitches'),
+  ('structure', 'missing or misplaced marker, repetendum missing or not found in the respond'),
+]
+
 GROUP = re.compile(r'([^()]*)\(([^)]*)\)')
 BAR = re.compile(r"[`,;:]+[0-9'_?]*|::|;[0-9]*|:[0-9']*")
 PUNCT = re.compile(r'[^\w]', re.U)
@@ -26,6 +38,12 @@ def nabc_norm(s):
 
 
 LIGATURES = {"'oe": 'œ', "'ae": 'æ', "'æ": 'æ', "'œ": 'œ'}
+
+
+def pitches(g):
+  """Pitch letters of a GABC group, without accidentals, line breaks and custos."""
+  g = re.sub(r'\[[^\]]*\]|<[^>]*>|[a-m][xy#]|[zZ][0-9+-]?|[a-m]\+', '', g)
+  return ''.join(c.lower() for c in g if c.lower() in 'abcdefghijklm')
 
 
 def gabc_norm(g):
@@ -61,7 +79,11 @@ def units(body, off):
     txt = clean[-1]
     new_word = txt[:1].isspace() or not txt or len(pieces) > 1
     txt = txt.strip()
-    if not txt and BAR.fullmatch(core or '-'):
+    junk = re.fullmatch(r'(.*?)([oc]b)', core or '-')
+    if not txt and junk and BAR.fullmatch(junk.group(1)):
+      yield ('bar', junk.group(1), off + m.start(2))
+      yield ('err', f"'{junk.group(2)}' written in the GABC of the bar ({core})", off + m.start(2))
+    elif not txt and BAR.fullmatch(core or '-'):
       yield ('bar', core, off + m.start(2))
     elif txt or core:
       yield ('syl', txt, g, n, pos, new_word)
@@ -80,6 +102,10 @@ def check(text):
   if (header_field(header, 'office-part') or '') != 're' or '(' not in body:
     return
   U = list(units(body, off))
+  for u in U:
+    if u[0] == 'err':
+      yield u[2], u[1], 'cb-in-gabc'
+  U = [u for u in U if u[0] != 'err']
   # respond: everything before the first verse, with the position of each marker
   first_v = next((i for i, u in enumerate(U) if u[0] == 'sp' and u[1] == 'V/'), len(U))
   respond, marks = [], {'R/': 0}
@@ -110,10 +136,10 @@ def check(text):
     sps = [u for u in rep if u[0] == 'sp']
     if not syls:
       if not sps:   # a bare <sp>+</sp> after the verse is an accepted way to mark the repetendum
-        yield vpos, 'verse not followed by a repetendum'
+        yield vpos, 'verse not followed by a repetendum', 'structure'
       continue
     if rep[0][0] != 'sp':
-      yield syls[0][4], 'repetendum does not start with a <sp> marker'
+      yield syls[0][4], 'repetendum does not start with a <sp> marker', 'structure'
       continue
     label, rtext = sps[0][1], joined(syls)
     # syllables of the respond from which the repetendum text is quoted
@@ -127,14 +153,14 @@ def check(text):
       if joined(respond[st:e]) == rtext or (joined(respond[st:e]) + ' ').startswith(rtext + ' '):
         starts.append((st, e))
     if not starts:
-      yield syls[0][4], f"repetendum text '{' '.join(u[1] for u in syls)}' not found in the respond"
+      yield syls[0][4], f"repetendum text '{' '.join(u[1] for u in syls)}' not found in the respond", 'structure'
       continue
     start = marks.get(label)
     if start not in [st for st, _ in starts]:
       right = [l for l, p in marks.items() if p in [st for st, _ in starts]]
       yield sps[0][2], (f"repetendum starts with <sp>{label}</sp>"
                         + (f" but quotes the respond from <sp>{right[0]}</sp>" if right else
-                           " but quotes the respond from a point with no <sp> marker"))
+                           " but quotes the respond from a point with no <sp> marker")), 'structure'
       start = starts[0][0]
     e = dict(starts)[start]
     quoted = respond[start:e]
@@ -142,12 +168,15 @@ def check(text):
       pass   # repetendum written as pure text: only its marker, text and period are checked
     elif [norm_text(u[1]) for u in syls] != [norm_text(u[1]) for u in quoted]:
       yield syls[0][4], (f"syllables '{'-'.join(u[1] for u in syls)}' differ from the respond "
-                         f"('{'-'.join(u[1] for u in quoted)}')")
+                         f"('{'-'.join(u[1] for u in quoted)}')"), 'syllables'
     else:
       for u, r in zip(syls, quoted):
-        if gabc_norm(u[2]) != gabc_norm(r[2]):
-          yield u[4], f"GABC of '{u[1]}' ({u[2]}) differs from the respond ({r[2]})"
+        if re.fullmatch(r'(.*)[oc]b', gabc_norm(u[2])) and gabc_norm(u[2])[:-2] == gabc_norm(r[2]):
+          yield u[4], f"'{u[2][-2:]}' written in the GABC of '{u[1]}' ({u[2]})", 'cb-in-gabc'
+        elif gabc_norm(u[2]) != gabc_norm(r[2]):
+          yield (u[4], f"GABC of '{u[1]}' ({u[2]}) differs from the respond ({r[2]})",
+                 'engraving' if pitches(u[2]) == pitches(r[2]) else 'melody')
         if nabc_norm(u[3]) != nabc_norm(r[3]):
-          yield u[4], f"NABC of '{u[1]}' ({u[3]}) differs from the respond ({r[3]})"
+          yield u[4], f"NABC of '{u[1]}' ({u[3]}) differs from the respond ({r[3]})", 'nabc-missing' if not u[3] else 'nabc'
     if not syls[-1][1].endswith('.'):
-      yield syls[-1][4], f"repetendum text does not end with a period ('{syls[-1][1]}')"
+      yield syls[-1][4], f"repetendum text does not end with a period ('{syls[-1][1]}')", 'period'
