@@ -288,7 +288,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Validés le 17 novembre 2026 après localisation (`localiser.py`) : `pesu1suu1` (390 p. 22),
   `peN1su1suw1` (391 p. 156), `peN1sut1suw1` (391 p. 25), `peN1sut1sux1` (390 p. 74) ; `peNB` =
   390 p. 48 (*Beata viscera*, seul emploi NR venant de Hartker). Sans exemplaire :
-  `peN1su1sut2`, `pesu1sut3`, `peNsu3sut1`, `peSsut3`, `peSppt2`, `pesu1sux1`, `pesu1suw1`.
+  `peN1su1sut2`, `pesu1sut3`, `peNsu3sut1`, `peSsut3`, `peSppt2`, `pesu1sux1` ; `pesu1suw1` (aucun
+  emploi NR venant de Hartker) sera composé à la main dans la police (`pe` + `pu` + `gr`, décision de
+  marteo, 17 novembre 2026).
   Restent les formes en deux neumes : `peG`, `scM1`, `scG`, `scGN1`, `scM2`, `scG1`.
 - **Localiser un neume transcrit dans NR (méthode retenue, 17 novembre 2026) :**
   `S/localiser.py <glyphe>` choisit jusqu'à 4 occurrences sur des pages éloignées (une
