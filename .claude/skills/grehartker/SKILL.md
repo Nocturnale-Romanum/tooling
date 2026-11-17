@@ -285,8 +285,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `peB`, `peB1`, `taB`, `peNsu2`, `peN1su2`, `pesu2`, `pesu3`, `pesu1sut1`, `pesut2`,
   `peNsu1sut1`, `peN1sut2`, `peN1sut3`, `peN1su1sut1`, `peN1su1suu1`, `peSsut2`, `peSsu2`
   (391 p. 253), `peB2` (= `ta` + `taB` ; 391 p. 197, *Heu mihi*), `peN1suu1su2`, `pesu2sut1`.
-  **Exemplaires à fournir par marteo** (ou méthode) : `pesu1suu1` (les propositions étaient des
-  `pesu2`), `peNB`, `peN1su1suw1`, `peN1sut1suw1`, `peN1sut1sux1`. Sans exemplaire :
+  Validés le 17 novembre 2026 après localisation (`localiser.py`) : `pesu1suu1` (390 p. 22),
+  `peN1su1suw1` (391 p. 156), `peN1sut1suw1` (391 p. 25), `peN1sut1sux1` (390 p. 74) ; `peNB` =
+  390 p. 48 (*Beata viscera*, seul emploi NR venant de Hartker). Sans exemplaire :
   `peN1su1sut2`, `pesu1sut3`, `peNsu3sut1`, `peSsut3`, `peSppt2`, `pesu1sux1`, `pesu1suw1`.
   Restent les formes en deux neumes : `peG`, `scM1`, `scG`, `scGN1`, `scM2`, `scG1`.
 - **Localiser un neume transcrit dans NR (méthode retenue, 17 novembre 2026) :**
