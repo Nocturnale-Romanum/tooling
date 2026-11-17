@@ -281,24 +281,47 @@ def gabc_files(nr):
 _occ = {}
 
 
+def ensure_occ_table():
+    """cache/nabc_occurrences.tsv, refaite si elle manque (texlua requis)."""
+    if not os.path.exists(OCC):
+        nr = repo("NR_REPO", "nocturnale-romanum")
+        here = os.path.dirname(os.path.abspath(__file__))
+        os.makedirs(CACHE, exist_ok=True)
+        subprocess.run(["texlua", os.path.join(here, "nabc_occurrences.lua"),
+                        os.path.join(repo("GREGORIO_PATCH", "gregorio-patch"), "gregoriotex-nabc.lua"),
+                        os.path.join(here, "gregall_metrics.lua"), OCC]
+                       + gabc_files(nr), check=True)
+
+
 def occurrences(glyph):
     """Emplois d'un glyphe dans les gabc NR, d'après le vrai parseur de gregoriotex-nabc.lua
-    (nabc_occurrences.lua, alias compris : `vi>pp2` pose `scB`) : [(code, syllabe, fragment NABC)].
-    La table cache/nabc_occurrences.tsv est refaite si elle manque (texlua requis)."""
+    (nabc_occurrences.lua, alias compris : `vi>pp2` pose `scB`) : [(code, syllabe, fragment NABC)],
+    une seule transcription par pièce (piece_rows)."""
     if not _occ:
-        if not os.path.exists(OCC):
-            nr = repo("NR_REPO", "nocturnale-romanum")
-            here = os.path.dirname(os.path.abspath(__file__))
-            os.makedirs(CACHE, exist_ok=True)
-            subprocess.run(["texlua", os.path.join(here, "nabc_occurrences.lua"),
-                            os.path.join(repo("GREGORIO_PATCH", "gregorio-patch"), "gregoriotex-nabc.lua"),
-                            os.path.join(here, "gregall_metrics.lua"), OCC]
-                           + gabc_files(nr), check=True)
+        for code, rows in piece_rows().items():
+            for r in rows:
+                for g in set(r["glyphes"].split()):
+                    _occ.setdefault(g, []).append((code, r["syllabe"], r["nabc"]))
+    return _occ.get(glyph, [])
+
+
+_rows = {}
+
+
+def piece_rows():
+    """Fragments NABC de chaque pièce NR, dans l'ordre, d'une seule transcription par pièce : celle
+    de marteo s'il y en a une, sinon celle de pieces_nr.tsv (proposition retenue), sinon la première."""
+    if not _rows:
+        ensure_occ_table()
+        by = {}
         with open(OCC, encoding="utf-8") as f:
             for r in csv.DictReader(f, delimiter="\t"):
-                for g in set(r["glyphes"].split()):
-                    _occ.setdefault(g, []).append((r["code"], r["syllabe"], r["nabc"]))
-    return _occ.get(glyph, [])
+                by.setdefault(r["code"], {}).setdefault(r.get("auteur", ""), []).append(r)
+        pn = pieces_nr()
+        for code, d in by.items():
+            pref = [a for a in ("marteo", pn.get(code, {}).get("submitter")) if a in d] or list(d)
+            _rows[code] = d[pref[0]]
+    return _rows
 
 
 def provenance(glyph, ms, page):

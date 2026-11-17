@@ -1,6 +1,6 @@
 -- Emplois de chaque glyphe dans les pièces NR (<code>_<auteur>.gabc), avec le vrai parseur de gregoriotex-nabc.lua.
 -- usage : texlua nabc_occurrences.lua <gregoriotex-nabc.lua> <gregall_metrics.lua> <sortie.tsv> <gabc…>
--- Sortie : code, syllabe, fragment NABC, glyphes posés (noms gregall, séparés par des espaces).
+-- Sortie : code, auteur, syllabe, fragment NABC, glyphes posés (noms gregall, séparés par des espaces).
 -- Lu par hartker.occurrences() (sources_nr.py, retenir.py) ; à refaire quand les gabc changent.
 local nabclua, metricsfile, outfile = arg[1], arg[2], arg[3]
 luatexbase = { catcodetables = setmetatable({}, {__index=function() return 0 end}) }
@@ -16,11 +16,12 @@ font = { current = function() return 1 end,
 dofile(nabclua)
 gregoriotex.init_nabc_font("gregall")
 local o = io.open(outfile, "w")
-o:write("code\tsyllabe\tnabc\tglyphes\n")
+o:write("code\tauteur\tsyllabe\tnabc\tglyphes\n")
 local n = 0
 for i = 4, #arg do
   local fh = io.open(arg[i], "rb"); local s = fh:read("*a"); fh:close()
-  local code = arg[i]:match("([^/\\]+)_[^_/\\]+%.gabc$") or arg[i]
+  local code, auteur = arg[i]:match("([^/\\]+)_([^_/\\]+)%.gabc$")
+  code = code or arg[i]; auteur = auteur or ""
   local body = s:match("\n%%%%\r?\n(.*)$") or ""
   if s:match("nabc%-lines:%s*1") then
     for syl, grp in body:gmatch("([^%s%(%)]*)%(([^%)]*)%)") do
@@ -31,7 +32,7 @@ for i = 4, #arg do
           local out = gregoriotex.parse_nabc(seg, "gregall", 1)
           local names = {}
           for c in out:gmatch("char(%d+)") do names[#names + 1] = code2name[tonumber(c)] or ("?" .. c) end
-          o:write(code, "\t", syl, "\t", seg, "\t", table.concat(names, " "), "\n")
+          o:write(code, "\t", auteur, "\t", syl, "\t", seg, "\t", table.concat(names, " "), "\n")
           n = n + 1
         end
         idx = idx + 1

@@ -31,14 +31,14 @@ for p in (Proposal.objects.filter(source__siglum__in=list(MS))
     old = rows.get(p.chant.code)
     if old and old["_rank"] >= rank:
         continue
-    rows[p.chant.code] = dict(code=p.chant.code, manuscript=MS[p.source.siglum], page=page, incipit=p.chant.incipit,
+    rows[p.chant.code] = dict(code=p.chant.code, manuscript=MS[p.source.siglum], page=page, incipit=p.chant.incipit, cantus_id=(p.chant.cantus_id or "").strip(),
                               office_part=p.chant.office_part, feast=p.chant.feast.title,
                               note="" if raw.isdigit() else "page source : " + raw,
                               submitter=p.submitter.username, gabc=os.path.abspath(p.filepath()), _rank=rank)
 rows = [{k: v for k, v in r.items() if k != "_rank"} for r in rows.values()]
 rows.sort(key=lambda r: (r["manuscript"], r["page"], r["code"]))
 with open(OUT, "w", newline="", encoding="utf-8") as f:
-    w = csv.DictWriter(f, fieldnames=["code", "manuscript", "page", "incipit", "office_part", "feast", "note", "submitter", "gabc"],
+    w = csv.DictWriter(f, fieldnames=["code", "manuscript", "page", "incipit", "cantus_id", "office_part", "feast", "note", "submitter", "gabc"],
                        delimiter="\t", lineterminator="\n")
     w.writeheader()
     w.writerows(rows)
