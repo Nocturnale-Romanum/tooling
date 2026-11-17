@@ -226,6 +226,19 @@ def align(a, b, gap=-1, local=True):
     return score, pairs[::-1]
 
 
+def bande(key, line, xc, demi=850):
+    """Fenêtre large : la bande de la ligne de neumes (de la ligne de texte au-dessus à celle du
+    dessous), sur ±demi px autour de la position estimée. L'alignement peut se tromper de quelques
+    neumes : la fenêtre les couvre, et marteo (ou un coup d'œil sur cette seule bande) tranche."""
+    tl = text_lines(key)
+    top = tl[line - 1] + 40 if 0 < line <= len(tl) else (tl[0] - 380 if tl else H.BAND[1])
+    bot = tl[line] + 30 if line < len(tl) else top + 420
+    x0 = int(max(H.BAND[0], xc - demi))
+    x1 = int(min(H.BAND[0] + H.BAND[2], xc + demi))
+    y0 = int(max(H.BAND[1], top))
+    return "%d,%d,%d,%d" % (x0, y0, x1 - x0, int(bot) - y0)
+
+
 def snap(seq, obs, idx, mapped, reach=30, ctx=5):
     """Recalage local : autour de la position alignée du glyphe, la composante qui porte sa
     première forme et dont le voisinage (formes avant et après, sans trou) ressemble le mieux."""
@@ -316,8 +329,7 @@ def locate(seg, code, ms, page, glyph, decs):
         x1, y1 = max(h["x"] + h["w"] for h in hits), max(h["y"] + h["h"] for h in hits)
         ctx = " ".join("%s(%s)" % (s, n) for s, n in syls[max(0, k - 2):k + 3])
         out.append(dict(manuscript=key[0], page=key[1], x=int(x0), y=int(y0), w=int(x1 - x0), h=int(y1 - y0),
-                        fenetre="%d,%d,%d,%d" % (max(0, min(wx0, x0) - 120), max(0, min(wy0, y0) - 80),
-                                                 max(wx1, x1) - min(wx0, x0) + 240, max(wy1, y1) - min(wy0, y0) + 160),
+                        fenetre=bande(key, hits[0]["line"], (x0 + x1) / 2, 1000 if conf >= 0.3 else 3000),
                         score=round(conf, 2), sur=sure, syllabe=syls[k][0], nabc=syls[k][1], contexte=ctx,
                         piece="%s %s (%s)" % (code, H.pieces_nr().get(code, {}).get("incipit", "").split(" V")[0],
                                               re.sub(r"<[^>]*>", "", syls[k][0]))))
@@ -339,18 +351,25 @@ def sheet(nom, found):
     cells = []
     for i, f in enumerate(found):
         x, y, w, h = map(int, f["fenetre"].split(","))
-        im = H.crop(f["manuscript"], f["page"], x, y, w, h, pad=0, zoom=2)
+        im = H.crop(f["manuscript"], f["page"], x, y, w, h, pad=0, zoom=1)
+        if w > 2600:                       # ligne entière : deux demi-bandes l'une sous l'autre
+            from PIL import Image
+            half = w // 2 + 60
+            a_, b_ = im.crop((0, 0, half, h)), im.crop((w - half, 0, w, h))
+            im = Image.new("RGB", (half, 2 * h + 12), "white")
+            im.paste(a_, (0, 0)); im.paste(b_, (0, h + 12))
         from PIL import ImageDraw
         d = ImageDraw.Draw(im)
-        d.rectangle(((f["x"] - x) * 2 - 4, (f["y"] - y) * 2 - 4, (f["x"] - x + f["w"]) * 2 + 4, (f["y"] - y + f["h"]) * 2 + 4),
-                    outline=(0, 170, 0) if f["sur"] else (230, 140, 0), width=3)
-        im.thumbnail((640, 420))
-        lab = "%d. %s p.%s  %s  [%s]  conf %.2f" % (i, f["manuscript"][-3:], f["page"].lstrip("0"), f["piece"][:48],
-                                                    f["nabc"][:24], f["score"])
+        if w <= 2600:
+            d.rectangle((f["x"] - x - 6, f["y"] - y - 6, f["x"] - x + f["w"] + 6, f["y"] - y + f["h"] + 6),
+                        outline=(230, 140, 0), width=4)
+        im.thumbnail((1700, 500))
+        lab = "%d. %s p.%s  %s  [%s]   contexte : %s" % (i, f["manuscript"][-3:], f["page"].lstrip("0"), f["piece"][:45],
+                                                          f["nabc"][:24], f["contexte"][:90])
         cells.append((lab, im))
     if cells:
-        H.grid(cells, 3, nom + " : fenêtres localisées (vert : neume aligné ; orange : position estimée)",
-               cell_w=660).save(os.path.join(H.CACHE, "candidats", nom + ".png"))
+        H.grid(cells, 1, nom + " : bandes localisées (orange : position estimée, à quelques neumes près)",
+               cell_w=1720).save(os.path.join(H.CACHE, "candidats", nom + ".png"))
 
 
 def run(glyph, n, nom, toutes=False):
