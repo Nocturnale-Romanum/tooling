@@ -105,6 +105,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   incipit, syllabe), colonne `piece` de `sources/exemplaires.csv`. `S/retenir.py` la remplit
   d'après les pièces NR de la page qui emploient le glyphe (« ? a | b » si plusieurs sont
   possibles) ; la compléter à la main quand on la connaît mieux.
+- **Index de Hartker (Cantus Database)** : `sources/cantus_hartker.tsv`, tiré des inventaires
+  https://cantusdatabase.org/source/123717/inventory/ (390) et …/123718/inventory/ (391) :
+  pièces de chaque page dans l'ordre (`folio` = page e-codices, `seq` = rang sur la page, versets
+  compris), avec le `cantus_id`, qui rattache les pièces NR (champ `cantus_id` du modèle `Chant`,
+  rempli pour 914 des 1 009 pièces NR venant de Hartker). L'ordre de NR n'est pas celui de Hartker.
 - **Glyphes de gregall venus de Hartker** (`reference/gregall_sources.tsv`, d'après
   GregorioNabcRef : 131 glyphes, avec pièce et mot) : les proposer parmi les variantes, sans les
   privilégier.
