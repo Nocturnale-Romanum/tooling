@@ -289,6 +289,12 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `pesu2`), `peNB`, `peN1su1suw1`, `peN1sut1suw1`, `peN1sut1sux1`. Sans exemplaire :
   `peN1su1sut2`, `pesu1sut3`, `peNsu3sut1`, `peSsut3`, `peSppt2`, `pesu1sux1`, `pesu1suw1`.
   Restent les formes en deux neumes : `peG`, `scM1`, `scG`, `scGN1`, `scM2`, `scG1`.
+- **Localiser un neume transcrit dans NR (méthode retenue, 17 novembre 2026) :**
+  `S/localiser.py <glyphe>` choisit jusqu'à 4 occurrences sur des pages éloignées (une
+  transcription par pièce, hors NABC synthétique), aligne la pièce sur la page sans vision et
+  produit une planche de bandes de ligne graduées en coordonnées de page, avec le glyphe gregall en
+  tête. Claude y repère le neume (seule vision du processus, acceptée par marteo), puis relève la
+  boîte exacte dans la segmentation par ses coordonnées.
 - **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
   préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
 

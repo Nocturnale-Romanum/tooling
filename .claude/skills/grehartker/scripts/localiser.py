@@ -347,11 +347,30 @@ def spread(items, n):
     return pick, [t for t in items if t not in pick]
 
 
-def sheet(nom, found):
+def ruler(im, x0, y0, w, h, step=100):
+    """Graduation en coordonnées de page (x en haut, y à gauche), pour relever une position."""
+    from PIL import ImageDraw
+    d = ImageDraw.Draw(im)
+    for x in range((x0 // step + 1) * step, x0 + w, step):
+        d.line((x - x0, 0, x - x0, 10), fill=(0, 0, 255), width=2)
+        if x % 200 == 0:
+            d.text((x - x0 + 2, 10), str(x), fill=(0, 0, 255), font=H.font(16))
+    for y in range((y0 // step + 1) * step, y0 + h, step):
+        d.line((0, y - y0, 10, y - y0), fill=(200, 0, 0), width=2)
+        d.text((12, y - y0 - 8), str(y), fill=(200, 0, 0), font=H.font(16))
+
+
+def sheet(nom, found, glyph=None):
     cells = []
+    if glyph:
+        try:
+            cells.append(("gregall " + glyph + " (échelle de la page)", H.gregall_image(glyph, 100)))
+        except KeyError:
+            pass
     for i, f in enumerate(found):
         x, y, w, h = map(int, f["fenetre"].split(","))
         im = H.crop(f["manuscript"], f["page"], x, y, w, h, pad=0, zoom=1)
+        ruler(im, x, y, w, h)
         if w > 2600:                       # ligne entière : deux demi-bandes l'une sous l'autre
             from PIL import Image
             half = w // 2 + 60
@@ -405,7 +424,7 @@ def run(glyph, n, nom, toutes=False):
         json.dump(found, fh, indent=0, ensure_ascii=False)
     with open(os.path.join(out, nom + "_secours.json"), "w", encoding="utf-8") as fh:
         json.dump(backup, fh, indent=0)
-    sheet(nom, found)
+    sheet(nom, found, glyph)
     for i, f in enumerate(found):
         print("%d. %s p.%s %s,%s,%s,%s conf %.2f %s  %s  [%s]" % (i, f["manuscript"][-3:], f["page"], f["x"], f["y"], f["w"], f["h"],
               f["score"], "aligné" if f["sur"] else "estimé", f["piece"][:50], f["nabc"]))
