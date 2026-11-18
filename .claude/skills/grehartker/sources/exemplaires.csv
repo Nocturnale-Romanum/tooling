@@ -323,3 +323,21 @@ scG,variante A,csg-0391,201,720,2889,120,59,"768,2889,72,56","H1F2R2 Deus omnium
 scG,variante B,csg-0390,122,1523,1057,130,60,"1580,1057,73,54",0205N1R3 Quis es tu qui venisti (Quis)
 scG,variante C,csg-0391,023,890,5180,116,60,"943,5180,63,53","Q6F6N1R3 Vinea mea (Ví, Vi)"
 scG,variante D,csg-0391,104,1448,1420,137,59,"1504,1420,81,59",MUXNN1R1 Veni electa mea (Ve)
+toM1,choisi,csg-0391,113,2271,603,62,63,"2271,603,62,63",0908N2R3 Nativitas tua Dei Genitrix (nim)
+toM1,variante A,csg-0391,103,2323,5859,66,56,"2323,5859,66,56",CBMVN2R3 Ornatam in monilibus (fú)
+toM1,variante B,csg-0391,159,2511,4273,64,52,"2511,4273,64,52",identifié par marteo
+toM1,variante C,csg-0391,205,1700,4554,72,80,"1700,4554,72,80",identifié par marteo (k_clM3 n° 19)
+toM1,variante D,csg-0391,119,1667,4153,80,60,"1667,4153,80,60",identifié par marteo
+toS2sut1,choisi,csg-0390,035,2767,2787,87,81,"2767,2787,79,68","? A3F5R1 Egredietur Dominus et proeliabitur (jus) | A3F5R2 Praecursor pro nobis (tur,, nem) | A3F5R3 Videbunt Gentes justum (t{uu}m,)"
+toS2sut1,variante A,csg-0390,063,1831,3922,84,78,"1831,3922,82,64","? 1227N2R2 Diligebat autem eum (so) | 1227N2R3 In medio ecclesiae aperuit (os) | 1227N3R2 Iste est Joannes (lus,) | Q5F6N1R3 Diligebat Jesus Joannem (so)"
+toS2sut1,variante B,csg-0390,058,3197,5278,85,75,"3197,5278,83,59",? 1226N1R3 Intuens in caelum (lum) | 1226N2R1 Lapidabant Stephanum (num) | 1226N2R3 Impii super justum (runt) | 1226N3R2 Patefactae sunt (li)
+toS2sut1,variante C,csg-0391,185,3417,2812,77,69,"3417,2812,73,65","? 0118N3R2 Elegit te Dominus (nus) | 0531N1R3 Elegit eam Deus (us,) | CONPN2R3 Iste homo perfecit omnia (us,) | COPON2R1 Inveni David (vid)"
+toS2sut1,variante D,csg-0391,143,3034,5280,90,73,"3034,5280,86,54",1111N2R3 Dixerunt discipuli... Martinum (nim)
+toS2su2,choisi,csg-0390,153,3851,4830,80,104,"3851,4830,75,59",Q3N1R1 Videntes Joseph (cé)
+toS2,choisi,csg-0390,042,2275,1748,77,58,,1224R2 Constantes estote (te:) ; ////cltoS2cl-
+toS2,variante A,csg-0390,136,2718,6370,77,63,,7GN2R2 Dixit Dominus Deus non est (us:) ; clScilsc3vi-toS2hhcl-hh
+toS2,variante B,csg-0391,173,1105,3930,81,49,,PMEXN1R3 Tradiderunt corpora sua (re) ; toS2cl-
+toS,choisi,csg-0390,145,1528,1069,101,61,,Q1F5R1 Tribularer si nescirem (num) ; toS2sut1toShg
+toS,variante A,csg-0391,202,3214,2142,115,68,,"H4F3R1 Domine si conversus (ne,) ; tohjst-hktoShjlsi1"
+toN1,choisi,csg-0391,121,4044,5083,81,52,,0508N2R3 In tempore illo consurget (tris:) ; to-1ql!cl-ppt1ci-
+toN1,variante A,csg-0391,075,2199,1130,76,60,,P7R1 Dum complerentur dies (ter) ; pfto-1/vi-

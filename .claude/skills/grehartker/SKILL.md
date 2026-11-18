@@ -308,6 +308,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
   préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
 
+- **Lot torculus (commencé le 18 novembre 2026) :** proposés `toS2` (390 p. 42), `toS` (390 p. 145),
+  `toN1` (391 p. 121), `toM1`, `toS2sut1`, `toS2su2` (ces trois d'après les repères identifiés par
+  marteo) ; `to` choisi avant les lots, à revoir. Bandes prêtes, non examinées : `loc_toB`,
+  `loc_toN`, `loc_toS3`, `loc_toB2`, `loc_toM3`, `loc_toS1`, `loc_toNB`. Composés et ligatures à faire.
+
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
 2. Lot clivis : revue de `cl` et `clN`, puis variantes cohérentes avec `cl` (`--sur cl`),
