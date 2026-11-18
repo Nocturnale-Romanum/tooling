@@ -337,7 +337,30 @@ toS2su2,choisi,csg-0390,153,3851,4830,80,104,"3851,4830,75,59",Q3N1R1 Videntes J
 toS2,choisi,csg-0390,042,2275,1748,77,58,,1224R2 Constantes estote (te:) ; ////cltoS2cl-
 toS2,variante A,csg-0390,136,2718,6370,77,63,,7GN2R2 Dixit Dominus Deus non est (us:) ; clScilsc3vi-toS2hhcl-hh
 toS2,variante B,csg-0391,173,1105,3930,81,49,,PMEXN1R3 Tradiderunt corpora sua (re) ; toS2cl-
-toS,choisi,csg-0390,145,1528,1069,101,61,,Q1F5R1 Tribularer si nescirem (num) ; toS2sut1toShg
-toS,variante A,csg-0391,202,3214,2142,115,68,,"H4F3R1 Domine si conversus (ne,) ; tohjst-hktoShjlsi1"
+toS,choisi,csg-0390,072,2880,6010,97,62,,"0106N1R1 Hodie in Jordane (nu, cæ) ; retenu par marteo"
+toS,variante A,csg-0390,145,889,3117,102,67,,"? Q1F5R1 Tribularer si nescirem (rem, num) | Q2F7R1 Pater peccavi in caelum (Pa, cæ) ; retenu par marteo"
+toS,variante B,csg-0390,088,1690,2128,99,67,,"E1F4R2 Paratum cor meum (me, mi) ; retenu par marteo"
+toS,variante C,csg-0390,087,3528,4564,105,68,,"E1F4R2 Paratum cor meum (me, mi) ; retenu par marteo"
 toN1,choisi,csg-0391,075,2199,1130,76,60,,P7R1 Dum complerentur dies (ter) ; pfto-1/vi-
 toN1,variante A,csg-0391,121,4044,5083,81,52,,0508N2R3 In tempore illo consurget (tris:) ; to-1ql!cl-ppt1ci-
+toBpp2,choisi,csg-0391,197,3924,2826,152,95,,ODEFN2R2 Heu mihi Domine (dum) ; /////to>pp2
+toS2sux1,choisi,csg-0390,026,3094,4604,86,122,,1213N2R3 Grata facta est a Domino (in) ; //qlhh!clhhppt1toS2hlsux1 ; boîte agrandie (marteo)
+toppu1,choisi,csg-0391,054,3235,3898,159,81,,P3F2R2 Ostendit mihi angelus (a) ; toppu1clhhlsm1
+toppu1,variante A,csg-0391,029,1911,1815,144,73,,"Q6F7N2R1 Recessit pastor (nos) ; toppu1clhilsm2 ; position indiquée par marteo (x 1900–2050), 2 composantes"
+toppu1,variante B,csg-0391,053,3166,1802,145,72,,"P3N1R1 Dignus es Domine (li) ; toppu1lsm2cl- ; position indiquée par marteo (x 3100–3300), 2 composantes"
+toG,choisi,csg-0391,178,4667,5534,107,72,,UMEXN1R1 Iste Sanctus pro lege (ó) ; ////clhjppt1pihjsu1vi-hj
+toG,variante A,csg-0391,081,1930,650,110,77,,0624N1R3 Priusquam te formarem (rem) ; clppt1sthh
+toG,variante B,csg-0391,179,4471,5279,130,75,,UMEXN2R3 Stola jucunditatis induit (pul) ; clppt1cl-lst2 ; boîte agrandie (marteo)
+toS2sut2,choisi,csg-0390,063,2936,4951,90,109,,1227N2R3 In medio ecclesiae aperuit (tel) ; ////vi-toS2hisut2ql-hisu2``vihi
+toS2sut2,variante A,csg-0391,058,4827,6277,76,84,,"MRTPN2R3 Filiae Jerusalem venite (nis,) ; vi-sut2toS2sut2qlhi ; position indiquée par marteo (x 4800–4950), 3 composantes"
+toS2sut2,variante B,csg-0391,202,4221,4254,79,111,,"H1F4R1 Peccavi super numerum (cá) ; vihdtoS2sut2ql-su2 ; position indiquée par marteo (x 4200–4300), 3 composantes"
+toN1suu1,choisi,csg-0390,173,1228,3590,86,78,,Q6F2R3 Insurrexerunt in me (me) ; to-1hksuu1vi-hksuu1su2cl-hk
+toN1suu1,variante A,csg-0391,209,1825,5935,88,87,,"09H1N1R1 Si bona suscepimus (est;) ; ////peSto-1suu1ci-cl- ; position indiquée par marteo (x 1800–1900), 2 composantes"
+toN1suu1,variante B,csg-0391,214,3017,5241,86,90,,"09H3N2R3 Tempus est ut revertar (a) ; vi-bv-sut2/to-1suu1/ci- ; position indiquée par marteo (x 3000–3100), 2 composantes"
+toN1suu1,variante C,csg-0391,220,3144,5226,102,89,,"10H1F3R1 Hic est fratrum amator (sa) ; to-1hhsuu1/vi-hhsuu1su2cl- ; position indiquée par marteo (x 3100–3300), 2 composantes"
+toN1su2,choisi,csg-0391,137,4312,1686,98,92,,"PMEXN3R2a Sancti mei qui in isto (re) ; ////ql!clppt1/to-1hisu2 ; position indiquée par marteo (x 4300–4450), 3 composantes"
+toN1su2,variante A,csg-0391,173,4048,3130,84,98,,"PMEXN1R2 Viri sancti gloriosum sanguinem (e) ; ql!clppt1to-1hmsu2 ; position indiquée par marteo (x 4050–4150), 3 composantes"
+toN1su2,variante B,csg-0391,210,4018,5284,96,104,,"09H1N3R1 Quis mihi tribuat (e) ; to-1su2 ; position indiquée par marteo (x 4000–4150), 3 composantes"
+toSsu2,choisi,csg-0390,045,1865,2104,117,72,,1225N1R1 Hodie nobis caelorum Rex (ló) ; ////toShhsu2vihh
+toSsu2,variante A,csg-0390,156,1402,1452,103,70,,Q3F2R3 Dixit Joseph (mi) ; toShhsu2vihh
+toSsu2,variante B,csg-0391,088,3249,1160,111,73,,0118N2R1 Tu es pastor ovium (A) ; ////toShjsu2peShi

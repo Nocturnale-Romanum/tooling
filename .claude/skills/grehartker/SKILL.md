@@ -310,8 +310,12 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 
 - **Lot torculus (commencé le 18 novembre 2026) :** proposés `toS2` (390 p. 42), `toS` (390 p. 145),
   `toN1` (391 p. 121), `toM1`, `toS2sut1`, `toS2su2` (ces trois d'après les repères identifiés par
-  marteo) ; `to` choisi avant les lots, à revoir. Bandes prêtes, non examinées : `loc_toB`,
-  `loc_toN`, `loc_toS3`, `loc_toB2`, `loc_toM3`, `loc_toS1`, `loc_toNB`. Composés et ligatures à faire.
+  marteo) ; `to` choisi avant les lots, à revoir. Décisions du 18 novembre : `toN1` = 391 p. 75,
+  `toM1` = 391 p. 205, `toS` = 390 p. 72 (4 exemples), composés `toS2sut1`, `toS2su2`, `toBpp2`,
+  `toS2sux1`, `toppu1`, `toG`, `toS2sut2`, `toN1suu1`, `toSsu2`, `toN1su2` d'après les positions
+  indiquées par marteo sur les bandes. **À créer (absent de gregall)** : `toN1sut2` (`to-1sut2`),
+  exemplaire en 391 p. 214 (`reperes.csv`). Restent les formes de base `toB`, `toN`, `toS3`, `toB2`,
+  `toM3`, `toS1`, `toNB` (bandes `loc_*` prêtes) et les ligatures.
 
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
