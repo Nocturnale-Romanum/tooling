@@ -402,7 +402,8 @@ def run(glyph, n, nom, toutes=False):
         p = pn.get(code)
         if p and p["manuscript"] in ("csg-0390", "csg-0391"):
             occ.setdefault(code, p)
-    items = [dict(code=c, ms=p["manuscript"], page=p["page"]) for c, p in occ.items()]
+    items = [dict(code=c, ms=p["manuscript"], page=p["page"]) for c, p in occ.items()
+             if not all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, [])) if glyph in r["glyphes"].split())]
     pick, backup = (items, []) if toutes else spread(items, n)
     for t in pick:
         key = (t["ms"], t["page"])
@@ -430,6 +431,10 @@ def run(glyph, n, nom, toutes=False):
     for i, f in enumerate(found):
         print("%d. %s p.%s %s,%s,%s,%s conf %.2f %s  %s  [%s]" % (i, f["manuscript"][-3:], f["page"], f["x"], f["y"], f["w"], f["h"],
               f["score"], "aligné" if f["sur"] else "estimé", f["piece"][:50], f["nabc"]))
+    synth = [c for c, p in occ.items() if all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, []))
+                                              if glyph in r["glyphes"].split())]
+    if synth:
+        print("NABC synthétique (entre ob et cb), écarté :", " ".join(synth))
     print("%d pièces, %d retenues, %d en secours" % (len(items), len(pick), len(backup)))
     return found
 
