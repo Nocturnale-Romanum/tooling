@@ -383,6 +383,6 @@ toM3,variante B,csg-0391,097,4626,2749,68,79,,"0810N2R2 Non me derelinque (tur) 
 toS1,choisi,csg-0390,156,3310,2830,106,79,"3310,2830,102,60",Q3F3R1 Nuntiaverunt Jacob dicentes (dam) ; toS1lsi9 ; la boîte inclut la lsi (marteo)
 toS1,variante A,csg-0391,087,4026,5894,86,59,"4065,5894,47,55","0801N2R2 Surge Petre (bus) ; position indiquée par marteo, lettres au-dessus et en dessous exclues"
 toNB,choisi,csg-0391,038,1801,5875,119,81,"1860,5875,60,64","P0F6R1 Surgens Jesus (gens), 2e neume de la pièce ; localisé d'après la capture de marteo (corrélation 0,57)"
-toN,choisi,csg-0390,048,3233,1722,95,69,,"? 1225N3R1 Beata viscera Mariae (rá) | 1225N3R2 Verbum caro factum est (tis., tis., tis.) | CBMVN1R2 Congratulamini...parvula (re) ; capture de marteo (390_p_48), corrélation 0,60"
-toN,variante A,csg-0390,087,4390,2793,93,77,,"E1F4R3 Adjutor meus tibi psallam (o,, rí) ; capture de marteo (390_p_87), corrélation 0,47"
+toN,choisi,csg-0390,087,4390,2793,93,77,,"E1F4R3 Adjutor meus tibi psallam (o,, rí) ; capture de marteo (390_p_87), corrélation 0,47"
+toN,variante A,csg-0390,048,3233,1722,95,69,,"? 1225N3R1 Beata viscera Mariae (rá) | 1225N3R2 Verbum caro factum est (tis., tis., tis.) | CBMVN1R2 Congratulamini...parvula (re) ; capture de marteo (390_p_48), corrélation 0,60"
 toN,variante B,csg-0390,180,2544,4597,79,71,,"Q6F5N3R1 Eram quasi agnus innocens (sum), capture de marteo (390_p_180), corrélation 0,61"
