@@ -318,8 +318,10 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `toM3`, `toS1`, `toNB` (bandes `loc_*` prêtes) et les ligatures.
 
 - **Lot quilisma (préparé le 18 novembre 2026) :** bandes `loc_ql…` prêtes pour 25 glyphes non
-  ligaturés (`ql`, `qlN`, `qlB` et composés) ; `qlppt1su2` : aucune occurrence hors NABC synthétique.
-  `toN` : trois exemplaires fournis par marteo (390 p. 48, 87, 180).
+  ligaturés (`ql`, `qlN`, `qlB` et composés) ; `qlppt1su2` : aucune occurrence hors NABC synthétique ; **à composer à la main** à partir de
+  `qlNppt1su2` en remplaçant `qlN` par `ql` (décision de marteo, 18 novembre 2026).
+  `toN` : trois exemplaires fournis par marteo en captures (390 p. 48, 87, 180), localisés par
+  corrélation d'image (`cache/candidats/390_p_*.webp`).
 
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
