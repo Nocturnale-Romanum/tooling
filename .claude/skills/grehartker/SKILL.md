@@ -110,6 +110,8 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   pièces de chaque page dans l'ordre (`folio` = page e-codices, `seq` = rang sur la page, versets
   compris), avec le `cantus_id`, qui rattache les pièces NR (champ `cantus_id` du modèle `Chant`,
   rempli pour 914 des 1 009 pièces NR venant de Hartker). L'ordre de NR n'est pas celui de Hartker.
+  NR donne un seul cantus_id pour un répons et son verset ; dans l'index, le verset est une entrée
+  à part, au cantus_id du répons suivi d'une lettre.
 - **Glyphes de gregall venus de Hartker** (`reference/gregall_sources.tsv`, d'après
   GregorioNabcRef : 131 glyphes, avec pièce et mot) : les proposer parmi les variantes, sans les
   privilégier.
@@ -293,8 +295,8 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   marteo, 17 novembre 2026).
   Validés le 17 novembre 2026 (localiser.py) : `peN1su1sut2` (391 p. 119), `pesu1sut3`, `peSsut3`,
   `pesu1sux1`, `peSppt2` (390 p. 88, boîte corrigée d'après marteo), `scG1`, `scGN1` (boîte agrandie
-  à la virga), `scM1`. **Reste** : `peG` (NR le note, mais pas de forme vi + vi visible : à voir
-  avec marteo), `peNsu3sut1` (non placé), `scG` et `scM2` (bandes `loc_scG`, `loc_scM2` non
+  à la virga), `scM1`. `peG` = 391 p. 91 (*Qui operatus est*, verset) et 391 p. 93 (*Sancte Paule*, verset),
+  désignés par marteo : deux virgas fines et séparées, la 2e plus haute. **Reste** : `peNsu3sut1` (non placé), `scG` et `scM2` (bandes `loc_scG`, `loc_scM2` non
   examinées). Prochain lot ensuite : torculus, puis quilisma.
 - **Localiser un neume transcrit dans NR (méthode retenue, 17 novembre 2026) :**
   `S/localiser.py <glyphe>` choisit jusqu'à 4 occurrences sur des pages éloignées (une

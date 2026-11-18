@@ -275,9 +275,11 @@ def cantus_rank(code, ms, page):
     with open(path, encoding="utf-8") as f:
         rows = [r for r in csv.DictReader(f, delimiter="\t") if r["manuscript"] == ms and r["folio"] == page]
     rows.sort(key=lambda r: int(r["seq"] or 0))
-    for k, r in enumerate(rows):
-        if cid and r["cantus_id"] == cid:
-            return k, len(rows)
+    # NR donne un seul cantus_id pour le répons et son verset ; dans l'index, le verset est une
+    # entrée à part dont le cantus_id est celui du répons suivi d'une lettre (007467a…)
+    found = [k for k, r in enumerate(rows) if cid and re.fullmatch(re.escape(cid) + r"[a-z]?", r["cantus_id"])]
+    if found:
+        return found[0], len(rows)
     return None, len(rows)
 
 
