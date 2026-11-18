@@ -341,6 +341,7 @@ toS,choisi,csg-0390,072,2880,6010,97,62,,"0106N1R1 Hodie in Jordane (nu, cæ) ; 
 toS,variante A,csg-0390,145,889,3117,102,67,,"? Q1F5R1 Tribularer si nescirem (rem, num) | Q2F7R1 Pater peccavi in caelum (Pa, cæ) ; retenu par marteo"
 toS,variante B,csg-0390,088,1690,2128,99,67,,"E1F4R2 Paratum cor meum (me, mi) ; retenu par marteo"
 toS,variante C,csg-0390,087,3528,4564,105,68,,"E1F4R2 Paratum cor meum (me, mi) ; retenu par marteo"
+toS,variante D,csg-0390,145,1528,1069,101,61,,"Q1F5R1 Tribularer si nescirem (num) ; ancien choix, gardé par marteo (même page que la variante A)"
 toN1,choisi,csg-0391,075,2199,1130,76,60,,P7R1 Dum complerentur dies (ter) ; pfto-1/vi-
 toN1,variante A,csg-0391,121,4044,5083,81,52,,0508N2R3 In tempore illo consurget (tris:) ; to-1ql!cl-ppt1ci-
 toBpp2,choisi,csg-0391,197,3924,2826,152,95,,ODEFN2R2 Heu mihi Domine (dum) ; /////to>pp2
@@ -364,3 +365,22 @@ toN1su2,variante B,csg-0391,210,4018,5284,96,104,,"09H1N3R1 Quis mihi tribuat (e
 toSsu2,choisi,csg-0390,045,1865,2104,117,72,,1225N1R1 Hodie nobis caelorum Rex (ló) ; ////toShhsu2vihh
 toSsu2,variante A,csg-0390,156,1402,1452,103,70,,Q3F2R3 Dixit Joseph (mi) ; toShhsu2vihh
 toSsu2,variante B,csg-0391,088,3249,1160,111,73,,0118N2R1 Tu es pastor ovium (A) ; ////toShjsu2peShi
+toB,choisi,csg-0390,122,3602,1043,92,60,,0205N1R3 Quis es tu qui venisti (vúl) ; /to>hh
+toB,variante A,csg-0390,045,2570,4190,105,68,,N1F1N3R2 O Regem caeli (lán) ; //to>lsc2 ; neume suivant à droite (marteo)
+toB,variante B,csg-0391,084,2882,4545,54,47,,"PMEXN3R2b Haec est vera fraternitas (re) ; to> ; position indiquée par marteo (x 2850–2950), 1 composantes"
+toB,variante C,csg-0391,196,5153,5619,96,59,,"ODEFN1R3 Domine quando veneris (vul) ; /////to> ; position indiquée par marteo (x 5150–5250), 1 composantes"
+toS3,choisi,csg-0391,220,1531,5223,87,45,,"10H1F3R1 Hic est fratrum amator (rat) ; //toS3hn ; position indiquée par marteo (x 1500–1600), 1 composantes"
+toS3,variante A,csg-0391,054,3492,3911,94,72,,P3F2R2 Ostendit mihi angelus (quæ) ; toS3
+toS3,variante B,csg-0391,174,1946,711,75,45,,"PMEXN2R2 Verbera carnificum (ra) ; toS3 ; position indiquée par marteo (x 1900–2000), 1 composantes"
+toS3,variante C,csg-0391,092,2537,2496,66,55,,"0125N3A2 Ne magnitudo revelationum (la) ; toS3lsal3 ; position indiquée par marteo (x 2500–2600), 1 composantes"
+toB2,choisi,csg-0391,155,1621,1861,92,67,,1122N1A3 Cilicio Caecilia (mem) ; to>2
+toB2,variante A,csg-0390,033,1343,1398,98,70,,A4N3R1 Juravi dicit Dnus ut ultra (col) ; ////to>2
+toB2,variante B,csg-0390,174,1512,784,110,73,,"Q6F3R1 Contumelias et terrores passus (Resp.) (én) ; to>2 ; position indiquée par marteo (x 1500–1600), 1 composantes"
+toB2,variante C,csg-0391,179,2665,6261,105,76,,UMEXN3R1 Corona aurea super caput (e) ; to>2 ; neume suivant à droite (marteo)
+toM3,choisi,csg-0391,156,4170,1192,64,82,,1122N1R3 Virgo gloriosa semper Evangelium (nis) ; toM3/ql!clppt1ci-hj
+toM3,variante A,csg-0391,168,5226,4269,80,79,,APEXN3R2 Isti sunt viri sancti (a) ; toM3/qlhd!cl-hdppt1/vi-su1sut1
+toM3,variante B,csg-0391,097,4626,2749,68,79,,"0810N2R2 Non me derelinque (tur) ; toM3//ql!clppt1/vi-su1suu1 ; position indiquée par marteo (x 4600–4700), 1 composantes"
+toS1,choisi,csg-0390,156,3310,2830,106,79,"3310,2830,102,60",Q3F3R1 Nuntiaverunt Jacob dicentes (dam) ; toS1lsi9 ; la boîte inclut la lsi (marteo)
+toS1,variante A,csg-0391,087,4026,5894,86,59,"4065,5894,47,55","0801N2R2 Surge Petre (bus) ; position indiquée par marteo, lettres au-dessus et en dessous exclues"
+toNB,choisi,csg-0391,038,1801,5875,119,81,"1860,5875,60,64","P0F6R1 Surgens Jesus (gens), 2e neume de la pièce ; localisé d'après la capture de marteo (corrélation 0,57)"
+toN,choisi,csg-0390,058,4561,4626,105,67,,1226N1R3 Intuens in caelum (et) ; to-ci-hg
