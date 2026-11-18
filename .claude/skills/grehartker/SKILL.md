@@ -296,8 +296,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Validés le 17 novembre 2026 (localiser.py) : `peN1su1sut2` (391 p. 119), `pesu1sut3`, `peSsut3`,
   `pesu1sux1`, `peSppt2` (390 p. 88, boîte corrigée d'après marteo), `scG1`, `scGN1` (boîte agrandie
   à la virga), `scM1`. `peG` = 391 p. 91 (*Qui operatus est*, verset) et 391 p. 93 (*Sancte Paule*, verset),
-  désignés par marteo : deux virgas fines et séparées, la 2e plus haute. **Reste** : `peNsu3sut1` (seule occurrence NR entre `ob` et `cb` : NABC synthétique, pas d'exemplaire ; composé à la main : `peN` + `pu` + `pu` + `pu` + `ta`, confirmé par marteo le 18 novembre 2026), `scM2` proposé (391 p. 157, *Beata Caecilia* ; 391 p. 98) ; `scG` non trouvé avec certitude
-  (bandes `loc_scG` : 390 p. 84, 391 p. 202). Prochain lot ensuite : torculus, puis quilisma.
+  désignés par marteo : deux virgas fines et séparées, la 2e plus haute. **Reste** : `peNsu3sut1` (seule occurrence NR entre `ob` et `cb` : NABC synthétique, pas d'exemplaire ; composé à la main : `peN` + `pu` + `pu` + `pu` + `ta`, confirmé par marteo le 18 novembre 2026), `scM2` proposé (391 p. 157, *Beata Caecilia* ; 391 p. 98) ; `scG` (= `peppt1` dans NR) : 390 p. 179 (*Judas
+  mercator*, *Ju*), variantes dont l'exemplaire de marteo (391 p. 201) ; même syllabe = tractulus
+  collé au pes (écart ≤ 28 px), sinon c'est un tractulus suivi d'un pes sur la syllabe suivante. Prochain lot ensuite : torculus, puis quilisma.
 - **Localiser un neume transcrit dans NR (méthode retenue, 17 novembre 2026) :**
   `S/localiser.py <glyphe>` choisit jusqu'à 4 occurrences sur des pages éloignées (une
   transcription par pièce, hors NABC synthétique), aligne la pièce sur la page sans vision et

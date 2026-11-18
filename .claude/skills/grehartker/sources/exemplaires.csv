@@ -318,4 +318,8 @@ peG,choisi,csg-0391,091,4293,4454,157,102,"4293,4510,61,46","0125N1R1 Qui operat
 peG,variante A,csg-0391,093,1299,5191,179,129,"1299,5261,67,59","Sancte Paule, verset (Tu es vas electionis… in universo mundo), désigné par marteo"
 scM2,choisi,csg-0391,157,837,3552,157,82,"915,3552,79,56",1122N3R1 Beata Caecilia dixit Tiburtio (á)
 scM2,variante A,csg-0391,098,4420,4195,252,70,"4592,4207,80,52","0810N3R2 O Hippolyte si credis (pó) ; virga pâle, boîte relevée à la main"
-scG,choisi,csg-0391,201,720,2889,120,59,"768,2889,72,56","H1F3R3? Dominus qui eripuit me (Dó), désigné par marteo"
+scG,choisi,csg-0390,179,838,5246,118,61,"888,5246,68,53",Q6F5N2R2 Judas mercator pessimus (Ju)
+scG,variante A,csg-0391,201,720,2889,120,59,"768,2889,72,56","H1F2R2 Deus omnium exauditor est, verset Dominus qui eripuit (Dó), désigné par marteo"
+scG,variante B,csg-0390,122,1523,1057,130,60,"1580,1057,73,54",0205N1R3 Quis es tu qui venisti (Quis)
+scG,variante C,csg-0391,023,890,5180,116,60,"943,5180,63,53","Q6F6N1R3 Vinea mea (Ví, Vi)"
+scG,variante D,csg-0391,104,1448,1420,137,59,"1504,1420,81,59",MUXNN1R1 Veni electa mea (Ve)
