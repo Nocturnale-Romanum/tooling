@@ -317,6 +317,10 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   exemplaire en 391 p. 214 (`reperes.csv`). Restent les formes de base `toB`, `toN`, `toS3`, `toB2`,
   `toM3`, `toS1`, `toNB` (bandes `loc_*` prêtes) et les ligatures.
 
+- **Lot quilisma (préparé le 18 novembre 2026) :** bandes `loc_ql…` prêtes pour 25 glyphes non
+  ligaturés (`ql`, `qlN`, `qlB` et composés) ; `qlppt1su2` : aucune occurrence hors NABC synthétique.
+  `toN` : trois exemplaires fournis par marteo (390 p. 48, 87, 180).
+
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
 2. Lot clivis : revue de `cl` et `clN`, puis variantes cohérentes avec `cl` (`--sur cl`),
