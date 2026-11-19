@@ -85,6 +85,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   telle quelle : fusion du contour de base avec l'épisème ou la liquescence
   (`S/composer.py --copie`), ou détourage complet. Son exemplaire est choisi pour sa cohérence
   avec le glyphe de base retenu (même fût, même angle : `S/planche.py … --sur <base>`).
+- Encre étrangère dans une boîte (point d'un autre neume…) : ne pas changer la boîte, mais lister
+  la composante dans la colonne `exclure` de `sources/exemplaires.csv` (« x,y,w,h;… », coordonnées
+  de la segmentation) ; surimpressions et restitutions l'ignorent (ex. `qlN`, 390 p.42).
 - Oriscus sans glyphe propre dans gregall : `or_salicus` (∩, salicus), `or_couche` (~, certains
   salicus : `sa1`, `saN1`, `saB2`, `saM1`, `saNB1`, `saM4`), `or_pi` (pressus minor :
   `pi = or_pi + pu`, pendant court de la virga strata du pressus maior : `pr = vs + pu`).

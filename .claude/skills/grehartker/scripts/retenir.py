@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # python -I n'aj
 import hartker as H  # noqa: E402
 
 CSV = os.path.join(H.SKILL, "sources", "exemplaires.csv")
-FIELDS = ["glyph", "role", "manuscript", "page", "x", "y", "w", "h", "base", "piece"]
+FIELDS = ["glyph", "role", "manuscript", "page", "x", "y", "w", "h", "base", "piece", "exclure"]
 ROLES = ["choisi", "variante A", "variante B", "variante C", "variante D"]
 
 

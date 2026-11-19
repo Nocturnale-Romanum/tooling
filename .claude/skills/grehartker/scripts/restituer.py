@@ -56,7 +56,7 @@ def components(seg, r):
     for c in seg[(r["manuscript"], r["page"])]:
         ix = max(0, min(x + w, c["x"] + c["w"]) - max(x, c["x"]))
         iy = max(0, min(y + h, c["y"] + c["h"]) - max(y, c["y"]))
-        if ix * iy >= 0.6 * c["w"] * c["h"]:
+        if ix * iy >= 0.6 * c["w"] * c["h"] and not H.exclue(r, c):
             out.append(c)
     return out
 

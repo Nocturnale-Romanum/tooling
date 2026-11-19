@@ -158,6 +158,16 @@ def comp_in(seg, ms, page, x, y, w, h):
     return best[1] if best else None
 
 
+def exclue(r, c):
+    """Composante c listée dans la colonne `exclure` de l'exemplaire r (« x,y,w,h;… » : encre
+    d'un autre neume qui tombe dans la boîte, ignorée par les surimpressions et restitutions)."""
+    for b in filter(None, (r.get("exclure") or "").split(";")):
+        x, y, w, h = map(int, b.split(","))
+        if abs(c["x"] - x) <= 3 and abs(c["y"] - y) <= 3 and abs(c["w"] - w) <= 3 and abs(c["h"] - h) <= 3:
+            return True
+    return False
+
+
 # ---------------------------------------------------------------- comparaison de formes
 N = 32
 

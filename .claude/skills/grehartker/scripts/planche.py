@@ -111,7 +111,8 @@ def whole(seg, r):
     x, y, w, h = (int(r[k]) for k in "xywh")
     key = (r["manuscript"], r["page"])
     comps = [c for c in seg[key] if max(0, min(x + w, c["x"] + c["w"]) - max(x, c["x"]))
-             * max(0, min(y + h, c["y"] + c["h"]) - max(y, c["y"])) >= 0.6 * c["w"] * c["h"]]
+             * max(0, min(y + h, c["y"] + c["h"]) - max(y, c["y"])) >= 0.6 * c["w"] * c["h"]
+             and not H.exclue(r, c)]
     base = H.comp_in(seg, key[0], key[1], *base_box(r))
     comps = comps or [base]
     x0, y0 = min(c["x"] for c in comps), min(c["y"] for c in comps)
