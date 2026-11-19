@@ -325,6 +325,17 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `qlNppt1su2` en remplaçant `qlN` par `ql` (décision de marteo, 18 novembre 2026).
   `toN` : trois exemplaires fournis par marteo en captures (390 p. 48, 87, 180), localisés par
   corrélation d'image (`cache/candidats/390_p_*.webp`).
+  **Désigné par marteo le 19 novembre 2026** : les 25 glyphes (choix et variantes dans
+  `exemplaires.csv`, boîtes relevées dans la segmentation d'après ses indications sur les bandes ;
+  `qlN` : point d'un autre neume dans la boîte, listé dans `exclure`). **À créer (absent de
+  gregall)** : `qlNppt1su1sut1` (391 p. 161, `reperes.csv`). Ligatures `ql!vssut2`, `ql!vssut2ppt1`
+  (= `qlEvsppt1sut2`) : 390 p. 48 (`reperes.csv`). Pour le lot qi, notés dans `reperes.csv` : `qiN`
+  (391 p. 190), `qisut3` (391 p. 86), `qippt1sut3` (391 p. 157, 159), tous deux absents de gregall.
+  Page mal écrite à éviter : 391 p. 43.
+
+- **Lot qi (préparé le 19 novembre 2026) :** bandes `loc_qi…` pour 15 glyphes ; `qiNppt1su1sut2`
+  (seule occurrence NR synthétique) : exemplaires de marteo, transcrits `ql-ppt1su1sut2` dans NR
+  (391 p. 75 choisi, 391 p. 134).
 
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
