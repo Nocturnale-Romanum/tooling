@@ -386,3 +386,42 @@ toNB,choisi,csg-0391,038,1801,5875,119,81,"1860,5875,60,64","P0F6R1 Surgens Jesu
 toN,choisi,csg-0390,087,4390,2793,93,77,,"E1F4R3 Adjutor meus tibi psallam (o,, rí) ; capture de marteo (390_p_87), corrélation 0,47"
 toN,variante A,csg-0390,048,3233,1722,95,69,,"? 1225N3R1 Beata viscera Mariae (rá) | 1225N3R2 Verbum caro factum est (tis., tis., tis.) | CBMVN1R2 Congratulamini...parvula (re) ; capture de marteo (390_p_48), corrélation 0,60"
 toN,variante B,csg-0390,180,2544,4597,79,71,,"Q6F5N3R1 Eram quasi agnus innocens (sum), capture de marteo (390_p_180), corrélation 0,61"
+ql,choisi,csg-0390,058,3881,1099,118,51,,1226N3R1 Stephanus servus (ho) ; cl-hi`qlhilsl3 ; désigné par marteo
+ql,variante A,csg-0390,172,1399,2739,92,34,,Q6F3R2 Deus Israel (em) ; vi-qlhi ; désigné par marteo
+ql,variante B,csg-0391,091,3883,5847,78,40,,0125N1R2 Bonum certamen certavi (fi) ; ``vihdqlhhorhj ; désigné par marteo
+qlN,choisi,csg-0390,042,4677,2177,130,69,,1224R2 Constantes estote (e) ; ql-hippt2/pehj ; désigné par marteo
+qlN,variante A,csg-0390,113,3839,5213,119,56,,"0121N2R3 Jam corpus ejus corpori (est,) ; toShdql-/vi-hiprhi ; désigné par marteo"
+qlN,variante B,csg-0391,143,4317,3625,167,61,,1111N2R2 Beatus Martinus obitum (jam) ; ``ql-hjppt2`vi-hj ; désigné par marteo
+qlB,choisi,csg-0390,045,1058,2084,134,87,,1225N1R1 Hodie nobis caelorum Rex (ér) ; cl-hh`ql>hh ; désigné par marteo
+qlB,variante A,csg-0391,097,1731,1023,116,108,,0810N2R1 Quo progrederis sine filio (num) ; ///viql>hilsi6 ; désigné par marteo
+qlppt1,choisi,csg-0390,048,4023,2094,139,55,,CBMVN1R2 Congratulamini...parvula (gi) ; qlppt1 ; désigné par marteo
+qlppt1,variante A,csg-0391,074,4233,4183,136,27,,P7I Alleluia spiritus Domini replevit (ter) ; ////qlppt1 ; désigné par marteo
+qlNsu2,choisi,csg-0390,166,5071,2012,155,96,,Q5N2R3 In proximo est (qui) ; cl-hi`ql-hjsu2 ; désigné par marteo
+qlNsu2,variante A,csg-0391,102,3161,1472,129,84,,0325I Ave Maria (mi) ; `ql-hlppt2su2 ; désigné par marteo
+qlNppt1su2,choisi,csg-0390,154,1698,4847,174,83,,Q3N2R3 Memento mei (e) ; ql-hkppt1su2 ; désigné par marteo
+qlNppt1su2,variante A,csg-0391,069,3519,4948,176,75,,P5F5N2R3 Ascendens in altum (cap) ; ql-ppt1su2 ; désigné par marteo
+qlNppt1,choisi,csg-0390,104,3435,2163,169,60,,H1N3R1 Benedicamus Patrem et Filium (Sanc) ; ql-ppt1/pe>1lsal3 ; désigné par marteo
+qlNppt1,variante A,csg-0390,166,1535,2453,167,56,,Q5N2R3 In proximo est (fó) ; ql-ppt1orhl ; désigné par marteo
+qlNppt1,variante B,csg-0391,179,3637,731,182,91,,CONPN1R2 Justus germinabit sicut lilium (tér) ; cl-ql-ppt1/pe~hj ; désigné par marteo
+qlNsut2,choisi,csg-0390,072,3569,5958,141,91,,0106N1R1 Hodie in Jordane (Hic) ; ql-hippt1sut2qi-hjorhm ; désigné par marteo
+qlNsut2,variante A,csg-0390,156,5037,2767,149,90,,Q3F3R1 Nuntiaverunt Jacob dicentes (quam) ; ql-hhppt2sut2qi-hisu2 ; désigné par marteo
+qlNppt1su1sut2,choisi,csg-0390,048,2900,4842,227,123,,1011N1R2 Sine tactu pudoris (tus) ; ql-ppt1su1sut2 ; désigné par marteo
+qlNsu1sux1,choisi,csg-0390,139,4332,3135,144,111,,6GN1R3 Quadraginta dies et noctes (sunt) ; //////pe-1sut2ql-hgsu1sux1 ; désigné par marteo
+qlNsu1sut1,choisi,csg-0391,113,2539,3647,133,94,,CBMVN3R1 Felix namque es (tí) ; pehj/vi-hlsut3ql-hjsu1sut1 ; désigné par marteo
+qlNsu1sut1,variante A,csg-0391,156,4859,5599,132,93,,1122N2R1 Cilicio Caecilia (vo) ; ql-hkppt2sut2ql-hksu1sut1 ; désigné par marteo
+qlNsu1sut1,variante B,csg-0391,173,3209,2471,141,88,,PMEXN1R2 Viri sancti gloriosum sanguinem (pro) ; vibvhhsut2ql-hjsu1sut1 ; désigné par marteo
+qlNppt1su3,choisi,csg-0391,082,3308,2726,189,120,,0624N2R3 Inuebant patri ejus (phe) ; ql-ppt1su3 ; désigné par marteo
+qlNppt1su3,variante A,csg-0391,206,4662,5258,189,128,,08H1F2R3 Quae sunt in corde (rí) ; ql-ppt1su3 ; désigné par marteo
+qlNppt1su3,variante B,csg-0391,216,1285,3796,181,116,,09H4N2R1 Nos alium (á) ; ql-ppt1su3 ; désigné par marteo
+qlNppt1su3,variante C,csg-0391,217,4023,5503,209,120,,09H5N1R1 Domine Rex omnipotens (trum) ; ql-ppt1su3 ; désigné par marteo
+qlBppt1,choisi,csg-0391,055,3419,1341,177,87,,P3N2R3 Veniens a Libano (lú) ; ql>ppt1 ; désigné par marteo
+qlBppt1,variante A,csg-0390,032,3327,3112,162,90,,A4N2R2 Ecce jam veniet plenitudo (Vír) ; ////ql>ppt1lsi3 ; désigné par marteo
+qlBppt1,variante B,csg-0390,123,4542,6291,182,93,,0205N3R1 Beata Agatha (car) ; ql>hhppt1 ; désigné par marteo
+qlsut2,choisi,csg-0391,088,3590,1142,136,73,,0118N2R1 Tu es pastor ovium (to) ; ``qlhhppt2sut2ql-hjsu2 ; désigné par marteo
+qlsut2,variante A,csg-0391,098,2859,5177,198,105,,0810N3R2 O Hippolyte si credis (pro) ; ///qlhippt2sut2ql-hjsu2 ; désigné par marteo
+qlsut2,variante B,csg-0391,155,3074,4941,119,69,,1122N1R1 Cantantibus organis (con) ; `qlhippt2sut2ql-hisu1sux1 ; désigné par marteo
+qlsut2,variante C,csg-0391,168,4593,3885,126,73,,APEXN3R2 Isti sunt viri sancti (non) ; qlhhppt2sut2ql-hjsu1sux1 ; désigné par marteo
+qlNppt1su1sux1,choisi,csg-0391,184,3519,4879,206,130,,COPON3R1 Amavit eum Dominus (or) ; ql-ppt1su1sux1 ; désigné par marteo
+qlNppt1su1sux1,variante A,csg-0390,156,1371,3155,208,123,,Q3F3R1 Nuntiaverunt Jacob dicentes (Cum) ; ql-hjppt1su1sux1 ; désigné par marteo
+qlsu2,choisi,csg-0391,156,4811,1135,115,70,,1122N1R3 Virgo gloriosa semper Evangelium (ti) ; ``qlhippt2su2ql-hisu2 ; désigné par marteo
+qlsu2,variante A,csg-0391,197,3933,3499,126,85,,ODEFN3R1 Peccantem me quotidie (mor) ; ///viqlhisu2 ; désigné par marteo
