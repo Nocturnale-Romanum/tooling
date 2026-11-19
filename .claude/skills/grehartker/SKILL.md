@@ -308,6 +308,17 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   produit une planche de bandes de ligne graduées en coordonnées de page, avec le glyphe gregall en
   tête. Claude y repère le neume (seule vision du processus, acceptée par marteo), puis relève la
   boîte exacte dans la segmentation par ses coordonnées.
+- **Début des pièces (19 novembre 2026) :** répons précédés d'un R rouge, antiennes d'un A rouge,
+  versets d'un U barré noir (indications de marteo). `S/marques.py` repère les marques rouges
+  (couleur : R − G > 68 et G − B > 40) ; certaines pages n'ont aucune rubrication (390 p. 57 :
+  grandes initiales noires en marge), d'où aussi les initiales noires très hautes. Le nombre de
+  marques ne correspond à l'index Cantus que sur 60 pages sur 417 : les marques servent de
+  départs candidats, pas de découpage sûr. `localiser.py` aligne la pièce entière à partir de
+  chaque départ (marque rouge, initiale noire, début de ligne ; segment prolongé sur la page
+  suivante jusqu'à sa première marque, la pièce pouvant être à cheval), pénalise l'écart au rang
+  Cantus, et revient à l'alignement sur la page entière si la confiance est < 0,2.
+  `S/evaluer_localisation.py` mesure le résultat sur les exemplaires validés : 72 % neume exact,
+  88 % dans la bande (ancienne méthode : 73 %, 91 % ; jeu biaisé en sa faveur).
 - **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
   préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
 

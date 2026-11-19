@@ -13,9 +13,10 @@ Méthode :
 4. localisation sans regarder la page : les composantes d'encre de la page (et de la suivante),
    rangées par lignes de neumes puis de gauche à droite, sont classées grossièrement (point,
    tractulus, virga, neume) ; la suite des glyphes NR de la pièce, décomposés en formes de base
-   (reference/decompositions.tsv), est classée de même ; un alignement local (Smith-Waterman)
-   place la pièce sur la page, et donc le neume cherché. Le rang Cantus sert d'a priori quand
-   plusieurs placements se valent ;
+   (reference/decompositions.tsv), est classée de même ; la pièce entière est alignée à partir
+   de chaque départ possible (marques rouges R/A de S/marques.py, initiales noires, débuts de
+   ligne), avec le rang Cantus comme a priori (place_by_marks) ; à défaut, alignement local
+   (Smith-Waterman) sur toute la page et la suivante (place_whole) ;
 5. sortie : cache/candidats/<nom>.json (boîte de la fenêtre et, si l'alignement est sûr, du neume)
    et cache/candidats/<nom>.png, planche des fenêtres pour marteo, avec pièce, syllabe, contexte
    NABC et score de confiance. Les boîtes de la liste se passent à retenir.py.
@@ -187,26 +188,42 @@ def sim(x, y):
     return 1 if coarse(x) == coarse(y) else -1
 
 
-def align(a, b, gap=-1, local=True):
-    """Alignement de la pièce (a) sur la page (b) : local (Smith-Waterman) par défaut, sinon
-    « fitting » (toute la pièce). Renvoie (score, couples (i, j))."""
+def align(a, b, gap=-1, local=True, mode=None):
+    """Alignement de la pièce (a) sur la page (b). Modes : « local » (Smith-Waterman, par
+    défaut), « fitting » (toute la pièce, n'importe où dans b), « ancre » (toute la pièce, à partir
+    du début de b : segment qui commence à la marque de la pièce). Renvoie (score, couples (i, j)).
+    Chaque ligne se calcule d'un coup : S[i, j] = max(D[j], S[i, j-1] + gap) est un maximum
+    cumulé de D[k] + gap (j - k)."""
+    mode = mode or ("local" if local else "fitting")
     n, m = len(a), len(b)
+    bl = np.array(b, dtype=object)
+    bc = np.array([coarse(x) for x in b], dtype=object)
     S = np.zeros((n + 1, m + 1), np.int32)
     T = np.zeros((n + 1, m + 1), np.int8)       # 1 diag, 2 haut, 3 gauche
-    if not local:
+    if mode != "local":
         S[1:, 0] = gap * np.arange(1, n + 1)
         T[1:, 0] = 2
+    if mode == "ancre":
+        S[0, 1:] = gap * np.arange(1, m + 1)
+        T[0, 1:] = 3
+    ramp = gap * np.arange(m + 1)
     for i in range(1, n + 1):
         ai = a[i - 1]
-        for j in range(1, m + 1):
-            d = S[i - 1, j - 1] + sim(ai, b[j - 1])
-            u = S[i - 1, j] + gap
-            l = S[i, j - 1] + gap
-            best, t = max((d, 1), (u, 2), (l, 3))
-            if local and best <= 0:
-                best, t = 0, 0
-            S[i, j], T[i, j] = best, t
-    if local:
+        fine = ai not in ("p", "t", "v", "n")
+        sm = np.where(bl == ai, 3 if fine else 1, np.where(bc == coarse(ai), 1, -1)).astype(np.int32)
+        diag = S[i - 1, :-1] + sm
+        up = S[i - 1, 1:] + gap
+        D = np.maximum(diag, up)
+        if mode == "local":
+            D = np.maximum(D, 0)
+        full = np.concatenate(([S[i, 0]], D))
+        row = np.maximum.accumulate(full - ramp) + ramp
+        S[i, 1:] = row[1:]
+        t = np.where(row[1:] == diag, 1, np.where(row[1:] == up, 2, 3))
+        if mode == "local":
+            t = np.where(row[1:] == 0, 0, t)
+        T[i, 1:] = t
+    if mode == "local":
         i, j = np.unravel_index(np.argmax(S), S.shape)
     else:
         i, j = n, int(np.argmax(S[n]))
@@ -217,7 +234,7 @@ def align(a, b, gap=-1, local=True):
         if t == 1:
             pairs.append((i - 1, j - 1))
             i, j = i - 1, j - 1
-        elif t == 2 or (j == 0 and not local):
+        elif t == 2 or (j == 0 and mode != "local"):
             i -= 1
         elif t == 3:
             j -= 1
@@ -283,23 +300,97 @@ def cantus_rank(code, ms, page):
     return None, len(rows)
 
 
-def locate(seg, code, ms, page, glyph, decs):
+def next_key(seg, ms, page):
+    nxt = (ms, "%03d" % (int(page) + 1)) if page.isdigit() else None
+    return nxt if nxt in seg else None
+
+
+def place_whole(seg, ms, page, a, T):
+    """Pièce alignée (localement) sur toute la page et la suivante."""
+    keys = [(ms, page)] + [k for k in [next_key(seg, ms, page)] if k]
+    obs = [c for k in keys for c in page_sequence(seg, k, T)]
+    if not obs:
+        return None
+    score, pairs = align(a, [c["cls"] for c in obs])
+    return obs, pairs, score, "page entière"
+
+
+def mark_pos(m, tl):
+    """(ligne, x) du début de la pièce d'après sa marque : ligne de texte de la marque (pour une
+    initiale ornée, qui couvre plusieurs lignes : la première ligne de texte sous son sommet)."""
+    if m["kind"] == "initiale":
+        li = next((i for i, t in enumerate(tl) if t > m["y"]), len(tl) - 1)
+    else:
+        cy = m["y"] + m["h"] / 2
+        li = int(np.argmin([abs(t - cy) for t in tl])) if tl else 0
+    return li, m["x"] - 30
+
+
+BONUS = 0.1        # départ = marque du rang Cantus, quand la page a autant de marques que de pièces
+MIN_CONF = 0.2     # en dessous : alignement sur la page entière
+
+
+def place_by_marks(seg, code, ms, page, a, T):
+    """Pièce alignée à partir de son début : segment qui va du point de départ au bas de la page,
+    puis sur la page suivante jusqu'à sa première marque (pièce à cheval sur deux pages ; l'index
+    donne la page de début). Alignement ancré (toute la pièce, dès le début du segment).
+    Départs essayés : marques rouges, grandes initiales noires, débuts de ligne ; score pénalisé
+    selon l'écart entre la place du départ dans la page et le rang Cantus de la pièce (versets
+    exceptés) ; si la page a autant de marques rouges que l'index a de pièces marquées, la
+    marque de même rang reçoit un bonus (l'égalité peut être fortuite : pas de confiance
+    aveugle). Confiance trop basse : None (le cas revient à l'alignement sur la page entière)."""
+    import marques as M
+    key = (ms, page)
+    obs = page_sequence(seg, key, T)
+    if not obs:
+        return None
+    tl = text_lines(key)
+    marks = M.marques(ms, page)
+    entries = [r for r in M.cantus_page(ms, page) if r["genre"] not in M.SANS_MARQUE]
+    cid = H.pieces_nr().get(code, {}).get("cantus_id", "")
+    rank = next((k for k, r in enumerate(entries) if cid and re.fullmatch(re.escape(cid) + r"[a-z]?", r["cantus_id"])), None)
+    tail = []
+    nk = next_key(seg, ms, page)
+    if nk:
+        nm = [mark_pos(m, text_lines(nk)) for m in M.marques(*nk)]
+        stop = min(nm) if nm else (10 ** 6, 0)
+        tail = [c for c in page_sequence(seg, nk, T) if (c["line"], c["x"]) < stop]
+    exact = marks and rank is not None and len(marks) == len(entries)
+    starts = [(mark_pos(m, tl), "marque rouge %d/%d" % (k + 1, len(marks)), BONUS if exact and k == rank else 0)
+              for k, m in enumerate(marks)]
+    starts += [(mark_pos(dict(m, kind="marque"), tl), "initiale noire", 0) for m in M.initiales_noires(ms, page)]
+    starts += [((li, -10 ** 6), "début de ligne", 0) for li in sorted({c["line"] for c in obs})]
+    prior = 0.3 if rank is not None else 0
+    full = float(sum(3 if x not in ("p", "t", "v", "n") else 1 for x in a))
+    expect = (rank + 0.5) / max(1, len(entries)) if rank is not None else 0
+    best, seen = None, set()
+    for pos, how, bonus in sorted(starts, key=lambda t: -t[2]):
+        i0 = next((k for k, c in enumerate(obs) if (c["line"], c["x"]) >= pos), None)
+        if i0 is None or i0 in seen:
+            continue
+        seen.add(i0)
+        b = (obs[i0:] + tail)[:3 * len(a) + 60]
+        score, pairs = align(a, [c["cls"] for c in b], mode="ancre")
+        adj = score / full - prior * abs(i0 / len(obs) - expect) + bonus
+        if best is None or adj > best[0]:
+            best = (adj, b, pairs, score, how)
+    if best is None or best[3] / full < MIN_CONF:
+        return None
+    return best[1], best[2], best[3], best[4]
+
+
+def locate(seg, code, ms, page, glyph, decs, methode="marques"):
     """Place la pièce sur la page (et la suivante) ; renvoie une liste d'emplacements du glyphe."""
     T = templates(seg)
     seq, syls = piece_sequence(code, glyph, decs)
     if not seq:
         return []
-    keys = [(ms, page)]
-    if page.isdigit():
-        nxt = (ms, "%03d" % (int(page) + 1))
-        if nxt in seg:
-            keys.append(nxt)
-    obs = [c for k in keys for c in page_sequence(seg, k, T)]
-    if not obs:
-        return []
     a = [s[0] for s in seq]
-    b = [c["cls"] for c in obs]
-    score, pairs = align(a, b)
+    placed = place_by_marks(seg, code, ms, page, a, T) if methode == "marques" else None
+    placed = placed or place_whole(seg, ms, page, a, T)
+    if placed is None:
+        return []
+    obs, pairs, score, how = placed
     conf = score / float(sum(3 if x not in ("p", "t", "v", "n") else 1 for x in a))
     mapped = dict(pairs)
     out = []
@@ -332,7 +423,7 @@ def locate(seg, code, ms, page, glyph, decs):
         ctx = " ".join("%s(%s)" % (s, n) for s, n in syls[max(0, k - 2):k + 3])
         out.append(dict(manuscript=key[0], page=key[1], x=int(x0), y=int(y0), w=int(x1 - x0), h=int(y1 - y0),
                         fenetre=bande(key, hits[0]["line"], (x0 + x1) / 2, 1000 if conf >= 0.3 else 3000),
-                        score=round(conf, 2), sur=sure, syllabe=syls[k][0], nabc=syls[k][1], contexte=ctx,
+                        score=round(conf, 2), sur=sure, methode=how, syllabe=syls[k][0], nabc=syls[k][1], contexte=ctx,
                         piece="%s %s (%s)" % (code, H.pieces_nr().get(code, {}).get("incipit", "").split(" V")[0],
                                               re.sub(r"<[^>]*>", "", syls[k][0]))))
     return out
