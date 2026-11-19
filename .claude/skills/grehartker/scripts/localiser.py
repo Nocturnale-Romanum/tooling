@@ -1,7 +1,7 @@
 """Retrouve dans Hartker un neume déjà transcrit dans NR, avec le moins de vision possible.
 
 Usage (Python ordinaire) :
-    python -I S/localiser.py <glyphe> [--n 4] [--nom NOM] [--toutes]
+    python -I S/localiser.py <glyphe> [--n 4] [--nom NOM] [--toutes] [--autre]
     python -I S/localiser.py --test          validation sur des cas connus (clS1, clM, scB)
 
 Méthode :
@@ -430,13 +430,13 @@ def locate(seg, code, ms, page, glyph, decs, methode="marques"):
 
 
 # ---------------------------------------------------------------- sélection et planche
-def spread(items, n):
+def spread(items, n, offset=0.5):
     """n éléments sur des pages éloignées."""
     items = sorted(items, key=lambda t: (t["ms"], int(t["page"]) if t["page"].isdigit() else 0))
     if len(items) <= n:
         return items, []
     step = len(items) / n
-    pick = [items[int(i * step + step / 2)] for i in range(n)]
+    pick = [items[int(i * step + step * offset)] for i in range(n)]
     return pick, [t for t in items if t not in pick]
 
 
@@ -484,7 +484,7 @@ def sheet(nom, found, glyph=None):
                cell_w=1720).save(os.path.join(H.CACHE, "candidats", nom + ".png"))
 
 
-def run(glyph, n, nom, toutes=False):
+def run(glyph, n, nom, toutes=False, autre=False):
     seg = H.load_seg()
     decs = decompositions()
     pn = H.pieces_nr()
@@ -495,7 +495,13 @@ def run(glyph, n, nom, toutes=False):
             occ.setdefault(code, p)
     items = [dict(code=c, ms=p["manuscript"], page=p["page"]) for c, p in occ.items()
              if not all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, [])) if glyph in r["glyphes"].split())]
-    pick, backup = (items, []) if toutes else spread(items, n)
+    if autre:
+        # autre série : pages pas encore montrées dans cache/candidats/<nom>.json
+        prev = os.path.join(H.CACHE, "candidats", nom + ".json")
+        shown = {(f["manuscript"], f["page"]) for f in json.load(open(prev, encoding="utf-8"))} if os.path.exists(prev) else set()
+        items = [t for t in items if (t["ms"], t["page"]) not in shown]
+        nom += "_b"
+    pick, backup = (items, []) if toutes else spread(items, n, 0.25 if autre else 0.5)
     for t in pick:
         key = (t["ms"], t["page"])
         if key not in seg:
@@ -561,12 +567,13 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--nom")
     ap.add_argument("--toutes", action="store_true")
+    ap.add_argument("--autre", action="store_true", help="autre série : pages pas encore montrées (sortie <nom>_b)")
     ap.add_argument("--test", action="store_true")
     args = ap.parse_args()
     if args.test:
         test()
     else:
-        run(args.glyphe, args.n, args.nom or "loc_" + args.glyphe, args.toutes)
+        run(args.glyphe, args.n, args.nom or "loc_" + args.glyphe, args.toutes, args.autre)
 
 
 if __name__ == "__main__":
