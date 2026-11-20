@@ -79,7 +79,7 @@ def seed(seg, base):
         return dict(n=H.norm(c["mask"]), h=c["h"], w=c["w"])
     # sans colonne base : toutes les composantes de la boîte (neume en plusieurs traits)
     import planche
-    m = planche.whole(seg, r)["mask"]
+    m = planche.whole(seg, r, pale=True)["mask"]      # traits pâles compris (hampe de vs, de qi…)
     return dict(n=H.norm(m), h=m.shape[0], w=m.shape[1])
 
 
