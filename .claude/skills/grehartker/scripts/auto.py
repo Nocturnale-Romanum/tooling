@@ -15,9 +15,10 @@ Pour chaque bande de cache/candidats/loc_<glyphe>.json :
 2. chaque composante de la bande (hors lignes de texte) reçoit un score : ressemblance au
    gabarit (hartker.score, écart de taille peu pénalisé : gregall n'est pas à l'échelle de
    Hartker), moins une pénalité selon la distance à la position estimée par l'alignement ;
-3. la meilleure est le neume de base ; gregall y est posé (plus grand morceau sur elle) et les
-   composantes de la page qui tombent dans son contour (marge 20 px) complètent la boîte (points,
-   tractulus, épisème) ;
+3. pour un glyphe en plusieurs morceaux, gregall est posé sur chacune des meilleures composantes
+   (mis à son échelle) et l'on cherche les autres morceaux à leur place attendue (points,
+   tractulus, virga) ; la proportion trouvée s'ajoute au score ; la boîte réunit les morceaux
+   trouvés. --large : toute la page de chaque bande, sans a priori de position ;
 4. sortie : cache/candidats/auto_<glyphe>.json (boîtes, score, colonne base) ; avec --inscrire,
    les --n meilleures (pages différentes) sont inscrites comme choix et variantes provisoires
    (retenir.py) et la planche cache/planches/auto_<glyphe>.png est faite (planche.py, --sur BASE
@@ -63,19 +64,49 @@ def seed(seg, base):
     import csv
     with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
         r = next(r for r in csv.DictReader(fh) if r["glyph"] == base and r["role"] == "choisi")
-    box = [int(v) for v in r["base"].split(",")] if r["base"] else [int(r[k]) for k in "xywh"]
-    c = H.comp_in(seg, r["manuscript"], r["page"], *box)
-    return dict(n=H.norm(c["mask"]), h=c["h"], w=c["w"])
+    if r["base"]:
+        c = H.comp_in(seg, r["manuscript"], r["page"], *[int(v) for v in r["base"].split(",")])
+        return dict(n=H.norm(c["mask"]), h=c["h"], w=c["w"])
+    # sans colonne base : toutes les composantes de la boîte (neume en plusieurs traits)
+    import planche
+    m = planche.whole(seg, r)["mask"]
+    return dict(n=H.norm(m), h=m.shape[0], w=m.shape[1])
 
 
-def pick(seg, f, pieces, tpl=None, graine="gregall"):
+def others(seg, key, c, pieces, tl):
+    """Les autres morceaux de gregall, posés d'après la composante c (plus grand morceau), mis à
+    l'échelle de c : pour chacun, la composante de la page la plus proche de la place attendue
+    (à moins de 30 px × échelle, taille compatible). Renvoie (composantes trouvées, fraction)."""
+    bx, by, bw, bh, _ = pieces[0]
+    k = (c["w"] / bw + c["h"] / bh) / 2
+    cx0, cy0 = c["x"] + c["w"] / 2, c["y"] + c["h"] / 2
+    found = []
+    for px, py, pw, ph, _ in pieces[1:]:
+        ex = cx0 + (px + pw / 2 - (bx + bw / 2)) * k
+        ey = cy0 + (py + ph / 2 - (by + bh / 2)) * k
+        best = None
+        for d in seg[key]:
+            if d is c or d in found or any(abs(d["y"] + d["h"] / 2 - y) < 35 for y in tl):
+                continue
+            dist = ((d["x"] + d["w"] / 2 - ex) ** 2 + (d["y"] + d["h"] / 2 - ey) ** 2) ** 0.5
+            size = max(d["w"] * d["h"], 1) / max(pw * ph * k * k, 1)
+            if dist < 30 * k and 0.3 < size < 3.5 and (best is None or dist < best[0]):
+                best = (dist, d)
+        if best:
+            found.append(best[1])
+    return found, len(found) / max(1, len(pieces) - 1)
+
+
+def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
     key = (f["manuscript"], f["page"])
     fx, fy, fw, fh = map(int, f["fenetre"].split(","))
+    if large:                                    # page entière, sans a priori de position
+        fx, fy, fw, fh = H.BAND
     tl = L.text_lines(key)
     ex, ey = f["x"] + f["w"] / 2, f["y"] + f["h"] / 2
     bx, by, bw, bh, bm = pieces[0]
     t = tpl or dict(n=H.norm(bm), h=bh, w=bw)
-    best = None
+    cands = []
     for c in seg[key]:
         cx, cy = c["x"] + c["w"] / 2, c["y"] + c["h"] / 2
         if not (fx <= cx <= fx + fw and fy <= cy <= fy + fh) or c["h"] < 15:
@@ -83,32 +114,24 @@ def pick(seg, f, pieces, tpl=None, graine="gregall"):
         if any(abs(cy - y) < 35 for y in tl):         # lettre de la ligne de texte
             continue
         s = score(c, t)
-        d = ((cx - ex) ** 2 + (2 * (cy - ey)) ** 2) ** 0.5
-        adj = s - DIST * d / 300
-        if best is None or adj > best[0]:
-            best = (adj, s, c)
-    if best is None:
+        d = 0 if large else ((cx - ex) ** 2 + (2 * (cy - ey)) ** 2) ** 0.5
+        cands.append((s - DIST * d / 300, s, c))
+    if not cands:
         return None
-    adj, s, c = best
-    # gregall posé sur la composante : plus grand morceau sur elle (centres alignés)
-    ox, oy = c["x"] + c["w"] / 2 - (bx + bw / 2), c["y"] + c["h"] / 2 - (by + bh / 2)
-    gx0 = min(p[0] for p in pieces) + ox - 20
-    gy0 = min(p[1] for p in pieces) + oy - 20
-    gx1 = max(p[0] + p[2] for p in pieces) + ox + 20
-    gy1 = max(p[1] + p[3] for p in pieces) + oy + 20
-    comps = [c]
-    if len(pieces) > 1:
-        for d in seg[key]:
-            if d is c:
-                continue
-            dx, dy = d["x"] + d["w"] / 2, d["y"] + d["h"] / 2
-            if gx0 <= dx <= gx1 and gy0 <= dy <= gy1 and d["h"] < 0.9 * c["h"] and not any(abs(dy - y) < 35 for y in tl):
-                comps.append(d)
+    cands.sort(key=lambda t: -t[0])
+    best = None
+    for adj, s, c in cands[:(150 if large else 40) if len(pieces) > 1 else 1]:
+        extra, frac = others(seg, key, c, pieces, tl) if len(pieces) > 1 else ([], 1)
+        tot = adj + (1.0 if large else 0.5) * frac
+        if best is None or tot > best[0]:
+            best = (tot, adj, s, c, extra, frac)
+    tot, adj, s, c, extra, frac = best
+    comps = [c] + extra
     x0, y0 = min(d["x"] for d in comps), min(d["y"] for d in comps)
     x1, y1 = max(d["x"] + d["w"] for d in comps), max(d["y"] + d["h"] for d in comps)
     return dict(manuscript=key[0], page=key[1], x=x0, y=y0, w=x1 - x0, h=y1 - y0,
-                base="%d,%d,%d,%d" % (c["x"], c["y"], c["w"], c["h"]), score=round(float(s), 2),
-                adj=round(float(adj), 2), piece="%s ; %s ; repéré automatiquement (graine %s), à valider" % (f["piece"], f["nabc"], graine))
+                base="%d,%d,%d,%d" % (c["x"], c["y"], c["w"], c["h"]), score=round(float(s), 2), morceaux=round(frac, 2),
+                adj=round(float(tot), 2), piece="%s ; %s ; repéré automatiquement (graine %s), à valider" % (f["piece"], f["nabc"], graine))
 
 
 def main():
@@ -118,6 +141,7 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--inscrire", action="store_true")
     ap.add_argument("--graine")
+    ap.add_argument("--large", action="store_true", help="chercher sur toute la page de chaque bande, sans a priori de position")
     args = ap.parse_args()
     seg = H.load_seg()
     jobs = []
@@ -133,12 +157,12 @@ def main():
         with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
             kept = [dict(r) for r in csv.DictReader(fh) if r["glyph"] == g and "à valider" not in r["piece"]]
         done = {(r["manuscript"], r["page"]) for r in kept}
-        out = kept + [p for p in (pick(seg, f, pieces, tpl, args.graine or "gregall") for f in found)
+        out = kept + [p for p in (pick(seg, f, pieces, tpl, args.graine or "gregall", args.large) for f in found)
                       if p and (p["manuscript"], p["page"]) not in done]
         for r in kept:
             r["adj"] = 99
         for i, p in enumerate(out):
-            print("%s %d. %s p.%s %s,%s,%s,%s score %s  %s" % (g, i, p["manuscript"][-3:], p["page"], p["x"], p["y"], p["w"], p["h"], p.get("score", "validé"), p["piece"][:50]))
+            print("%s %d. %s p.%s %s,%s,%s,%s score %s morceaux %s  %s" % (g, i, p["manuscript"][-3:], p["page"], p["x"], p["y"], p["w"], p["h"], p.get("score", "validé"), p.get("morceaux", "-"), p["piece"][:50]))
         with open(os.path.join(H.CACHE, "candidats", "auto_%s.json" % g), "w", encoding="utf-8") as fh:
             json.dump(out, fh, ensure_ascii=False, indent=0)
         if args.inscrire and out:
