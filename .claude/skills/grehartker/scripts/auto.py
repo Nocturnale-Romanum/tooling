@@ -2,7 +2,12 @@
 les planches de choix (marteo valide ou corrige).
 
 Usage (Python ordinaire) :
-    python -I S/auto.py <glyphe> […] [--sur BASE] [--n 4] [--inscrire]
+    python -I S/auto.py <glyphe> […] [--sur BASE] [--graine BASE] [--n 4] [--inscrire]
+
+--graine BASE : le gabarit du plus grand morceau est l'exemplaire choisi de BASE (forme et
+taille de Hartker) au lieu de gregall ; gregall ne sert plus qu'à placer les autres morceaux.
+Les bandes lues sont loc_<glyphe>.json et, si elle existe, loc_<glyphe>_b.json (--autre).
+Les exemplaires déjà validés du glyphe (sans « à valider ») restent en tête, le choix inchangé.
 
 Pour chaque bande de cache/candidats/loc_<glyphe>.json :
 1. gregall rendu à l'échelle de la page (10 unités par pixel), découpé en morceaux d'encre ; son
@@ -53,13 +58,23 @@ def score(c, t):
     return iou - 0.35 * abs(np.log(c["h"] / t["h"])) - 0.35 * abs(np.log(c["w"] / t["w"]))
 
 
-def pick(seg, f, pieces):
+def seed(seg, base):
+    """Gabarit tiré de l'exemplaire choisi de base."""
+    import csv
+    with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
+        r = next(r for r in csv.DictReader(fh) if r["glyph"] == base and r["role"] == "choisi")
+    box = [int(v) for v in r["base"].split(",")] if r["base"] else [int(r[k]) for k in "xywh"]
+    c = H.comp_in(seg, r["manuscript"], r["page"], *box)
+    return dict(n=H.norm(c["mask"]), h=c["h"], w=c["w"])
+
+
+def pick(seg, f, pieces, tpl=None, graine="gregall"):
     key = (f["manuscript"], f["page"])
     fx, fy, fw, fh = map(int, f["fenetre"].split(","))
     tl = L.text_lines(key)
     ex, ey = f["x"] + f["w"] / 2, f["y"] + f["h"] / 2
     bx, by, bw, bh, bm = pieces[0]
-    t = dict(n=H.norm(bm), h=bh, w=bw)
+    t = tpl or dict(n=H.norm(bm), h=bh, w=bw)
     best = None
     for c in seg[key]:
         cx, cy = c["x"] + c["w"] / 2, c["y"] + c["h"] / 2
@@ -93,7 +108,7 @@ def pick(seg, f, pieces):
     x1, y1 = max(d["x"] + d["w"] for d in comps), max(d["y"] + d["h"] for d in comps)
     return dict(manuscript=key[0], page=key[1], x=x0, y=y0, w=x1 - x0, h=y1 - y0,
                 base="%d,%d,%d,%d" % (c["x"], c["y"], c["w"], c["h"]), score=round(float(s), 2),
-                adj=round(float(adj), 2), piece="%s ; %s ; repéré automatiquement (graine gregall), à valider" % (f["piece"], f["nabc"]))
+                adj=round(float(adj), 2), piece="%s ; %s ; repéré automatiquement (graine %s), à valider" % (f["piece"], f["nabc"], graine))
 
 
 def main():
@@ -102,24 +117,33 @@ def main():
     ap.add_argument("--sur")
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--inscrire", action="store_true")
+    ap.add_argument("--graine")
     args = ap.parse_args()
     seg = H.load_seg()
     jobs = []
     for g in args.glyphes:
-        path = os.path.join(H.CACHE, "candidats", "loc_%s.json" % g)
-        if not os.path.exists(path):
+        paths = [os.path.join(H.CACHE, "candidats", "loc_%s%s.json" % (g, sfx)) for sfx in ("", "_b")]
+        found = [f for p in paths if os.path.exists(p) for f in json.load(open(p, encoding="utf-8"))]
+        if not found:
             print(g, ": pas de bandes (localiser.py)")
             continue
-        found = json.load(open(path, encoding="utf-8"))
         pieces = gregall_pieces(g)
-        out = [p for p in (pick(seg, f, pieces) for f in found) if p]
+        tpl = seed(seg, args.graine) if args.graine else None
+        import csv
+        with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
+            kept = [dict(r) for r in csv.DictReader(fh) if r["glyph"] == g and "à valider" not in r["piece"]]
+        done = {(r["manuscript"], r["page"]) for r in kept}
+        out = kept + [p for p in (pick(seg, f, pieces, tpl, args.graine or "gregall") for f in found)
+                      if p and (p["manuscript"], p["page"]) not in done]
+        for r in kept:
+            r["adj"] = 99
         for i, p in enumerate(out):
-            print("%s %d. %s p.%s %d,%d,%d,%d score %.2f  %s" % (g, i, p["manuscript"][-3:], p["page"], p["x"], p["y"], p["w"], p["h"], p["score"], p["piece"][:50]))
+            print("%s %d. %s p.%s %s,%s,%s,%s score %s  %s" % (g, i, p["manuscript"][-3:], p["page"], p["x"], p["y"], p["w"], p["h"], p.get("score", "validé"), p["piece"][:50]))
         with open(os.path.join(H.CACHE, "candidats", "auto_%s.json" % g), "w", encoding="utf-8") as fh:
             json.dump(out, fh, ensure_ascii=False, indent=0)
         if args.inscrire and out:
             order, pages = [], set()
-            for i in sorted(range(len(out)), key=lambda i: -out[i]["adj"]):
+            for i in sorted(range(len(out)), key=lambda i: -float(out[i]["adj"])):
                 k = (out[i]["manuscript"], out[i]["page"])
                 if k not in pages and len(order) < args.n:
                     order.append(i)

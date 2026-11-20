@@ -325,6 +325,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   0,4 par 300 px), complète la boîte avec les composantes qui tombent dans le contour de gregall,
   inscrit choix et variantes provisoires (« à valider ») et fait la planche `auto_<glyphe>`.
   Mesuré sur les lots ql et qi : 52 cas justes sur 84 contre 46 pour l'alignement seul.
+  Dès qu'un exemplaire de la base est validé, refaire une passe avec `--graine BASE` (forme et
+  taille de Hartker ; `po` : scores 0,4–0,5 au lieu de 0,2 avec gregall) ; les exemplaires validés
+  restent en tête.
 - **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
   préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
 
