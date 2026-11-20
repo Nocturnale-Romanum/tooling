@@ -483,10 +483,9 @@ poN1,variante B,csg-0391,174,4939,3200,132,64,"4939,3200,132,64","PMEXN3R1 Propt
 poN1,variante C,csg-0391,042,2997,3527,53,57,"2997,3527,53,57","P0F3R2 De ore prudentis (al) ; po-1hd/vi>hh ; repéré automatiquement (graine po), à valider",
 poB,choisi,csg-0390,155,4113,3574,116,88,,"Q3N3R2 Dixit Ruben (san) ; po> ; repéré automatiquement (graine po), validé par marteo, boîte élargie à gauche (début du neume)",
 poB,variante A,csg-0390,172,3657,5853,111,93,"3657,5853,111,93","Q6N3R2 Dixerunt impii apud se (tán) ; po>pp2 ; repéré automatiquement (graine poB), validé par marteo",
-poT,choisi,csg-0391,137,993,3865,63,46,"993,3865,63,46","1101N1A1 Novit Dominus (e) ; po~ ; repéré automatiquement (graine po), à valider",
-poT,variante A,csg-0391,173,1804,3907,80,59,"1804,3907,80,59","PMEXN1R3 Tradiderunt corpora sua (per) ; //po~ ; repéré automatiquement (graine po), à valider",
-poT,variante B,csg-0391,023,2793,3001,72,36,"2793,3001,72,36","Q6F6N1R1 Omnes amici mei dereliquerunt (dit) ; vi-hmpp2lstm2``po~hn ; repéré automatiquement (graine po), à valider",
-poT,variante C,csg-0391,081,4063,713,56,48,"4063,713,56,48","0624N1R3 Priusquam te formarem (ven) ; ta/vi-po~lsi3 ; repéré automatiquement (graine po), à valider",
+poT,choisi,csg-0391,081,3286,685,79,53,,0624N1R3 Priusquam te formarem (án) ; talse2/vipo~ ; désigné par marteo,"3243,685,71,55;3296,639,26,29"
+poT,variante A,csg-0391,023,2825,3054,63,57,,Q6F6N1R1 Omnes amici mei dereliquerunt (dit) ; vi-hmpp2lstm2``po~hn ; désigné par marteo,
+poT,variante B,csg-0391,173,1804,3907,80,59,,PMEXN1R3 Tradiderunt corpora sua (per) ; //po~ ; désigné par marteo,
 posu2,choisi,csg-0390,050,2916,2439,112,84,"2916,2439,112,72","0101N3R2 Nesciens mater (gem) ; posu2lsc2 ; repéré automatiquement (graine po), validé par marteo",
 posu2,variante A,csg-0390,137,2407,738,116,74,"2407,738,116,64","7GN2R2 Dixit Dominus Deus non est (mi) ; posu2lsc2 ; repéré automatiquement (graine po), validé par marteo",
 posu2,variante B,csg-0390,028,1870,2023,73,55,"1870,2023,66,55","0531N2R1 Suscipe verbum (hó) ; posu2lsc2 ; repéré automatiquement (graine po), validé par marteo",
