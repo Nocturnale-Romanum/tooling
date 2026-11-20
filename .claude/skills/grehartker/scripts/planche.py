@@ -12,6 +12,8 @@ composantes : les deux virgas de `bvN`), calé au pied du trait de son neume de 
 plus bas à gauche) sur celui du neume de base de chaque exemplaire (colonne `base`). Sert à
 vérifier la cohérence d'une variante (viN, viB…) ou d'un composé (bvNsut2 sur bvN) avec le
 glyphe retenu : même fût, même angle, même écart.
+--pale : ajoute l'encre pâle de la boîte reliée aux composantes (hampe trop fine pour la
+segmentation, ex. `qi`), sauf la colonne `exclure`.
 
 Sous chaque exemplaire : sa page et sa pièce (colonne `piece`).
 """
@@ -44,11 +46,12 @@ def main():
     ap.add_argument("nom")
     ap.add_argument("glyphes", nargs="+")
     ap.add_argument("--sur")
+    ap.add_argument("--pale", action="store_true", help="ajoute à la superposition l'encre pâle de la boîte (hampe fine)")
     args = ap.parse_args()
     seg = H.load_seg()
     ref = None
     if args.sur:
-        ref = whole(seg, rows_of(args.sur)[0])
+        ref = whole(seg, rows_of(args.sur)[0], args.pale)
     sheets = []
     for g in args.glyphes:
         rows = rows_of(g)
@@ -106,7 +109,7 @@ def base_box(r):
     return [int(v) for v in r["base"].split(",")] if r.get("base") else [int(r[k]) for k in "xywh"]
 
 
-def whole(seg, r):
+def whole(seg, r, pale=False):
     """Exemplaire entier (composantes surtout dans sa boîte), avec le pied de son neume de base."""
     x, y, w, h = (int(r[k]) for k in "xywh")
     key = (r["manuscript"], r["page"])
@@ -115,11 +118,37 @@ def whole(seg, r):
              and not H.exclue(r, c)]
     base = H.comp_in(seg, key[0], key[1], *base_box(r))
     comps = comps or [base]
-    x0, y0 = min(c["x"] for c in comps), min(c["y"] for c in comps)
-    x1, y1 = max(c["x"] + c["w"] for c in comps), max(c["y"] + c["h"] for c in comps)
+    x0, y0 = min([c["x"] for c in comps] + ([x] if pale else [])), min([c["y"] for c in comps] + ([y] if pale else []))
+    x1 = max([c["x"] + c["w"] for c in comps] + ([x + w] if pale else []))
+    y1 = max([c["y"] + c["h"] for c in comps] + ([y + h] if pale else []))
     mask = np.zeros((y1 - y0, x1 - x0), bool)
     for c in comps:
         mask[c["y"] - y0:c["y"] - y0 + c["h"], c["x"] - x0:c["x"] - x0 + c["w"]] |= c["mask"]
+    if pale:
+        # encre pâle de la boîte (trait fin, hampe) reliée aux composantes : seuil bas sous le fond
+        from scipy import ndimage as ndi
+        g = np.asarray(Image.open(H.download_band(*key)).convert("L")).astype(float)
+        sub = g[y0 - H.BAND[1]:y1 - H.BAND[1], x0 - H.BAND[0]:x1 - H.BAND[0]]
+        bg = np.percentile(g[max(0, y - 60 - H.BAND[1]):y + h + 60 - H.BAND[1], max(0, x - 60 - H.BAND[0]):x + w + 60 - H.BAND[0]], 85)
+        faint = (bg - sub) > 25
+        inbox = np.zeros_like(faint)
+        inbox[y - y0:y - y0 + h, x - x0:x - x0 + w] = True
+        faint &= inbox
+        for c in seg[key]:
+            if H.exclue(r, c):
+                cy, cx = c["y"] - y0, c["x"] - x0
+                ys, xs = np.nonzero(c["mask"])
+                ok = (ys + cy >= 0) & (ys + cy < faint.shape[0]) & (xs + cx >= 0) & (xs + cx < faint.shape[1])
+                faint[ys[ok] + cy, xs[ok] + cx] = False
+        # traits pâles proches (≤ 6 px) des composantes, de proche en proche
+        for _ in range(4):
+            lab, _ = ndi.label(faint)
+            near = ndi.binary_dilation(mask, np.ones((13, 13), bool))
+            keep = np.unique(lab[near & faint])
+            add = np.isin(lab, keep[keep > 0]) & ~mask
+            if not add.any():
+                break
+            mask |= add
     fx, fy = foot(base["mask"])
     return dict(mask=mask, foot=(fx + base["x"] - x0, fy + base["y"] - y0))
 
