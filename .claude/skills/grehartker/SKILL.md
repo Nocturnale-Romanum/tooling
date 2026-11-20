@@ -319,7 +319,12 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Cantus, et revient à l'alignement sur la page entière si la confiance est < 0,2.
   `S/evaluer_localisation.py` mesure le résultat sur les exemplaires validés : 72 % neume exact,
   88 % dans la bande (ancienne méthode : 73 %, 91 % ; jeu biaisé en sa faveur).
-- **Lot pressus (en pause, 20 novembre 2026) :** `pi` = 391 p. 42 (*De ore prudentis*, « lú »)
+- **Lots vs et pressus (choix faits le 21 novembre 2026) :** `vs` 390 p. 117, `vsN` 391 p. 133,
+  `vsB` 390 p. 48 (capture), `or_pi` = oriscus du `pi` choisi, `pi` 391 p. 42, `pr` 390 p. 22,
+  `prN` 391 p. 205, `prB` 390 p. 180 (capture), `prM` 390 p. 48 ; `piB`, `pisu1`, `pisux1`,
+  `piM1sut1` validés. Graines : `prN` ← `vsN`, `prB`/`prM` ← `vs` (stB, gr soudés : échec, graine
+  tirée d'un exemplaire du glyphe), composés de `pi` ← `or_pi` ; surimpression calée par le haut.
+- **Lot pressus (historique, 20 novembre 2026) :** `pi` = 391 p. 42 (*De ore prudentis*, « lú »)
   validé ; `pr` = 390 p. 156 (*Dixit Joseph*, « um ») + 390 p. 117, à revoir : `pr` = `vs` + `pu`, et
   `vs` est la forme longue de l'oriscus `or_pi`, qui n'existe pas seul et doit reprendre celui du
   `pi` choisi (marteo). Ordre : lot `vs` (cohérent avec `pi`), puis reprise du pressus.
