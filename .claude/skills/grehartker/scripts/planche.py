@@ -57,6 +57,7 @@ def main():
     ap.add_argument("--sur")
     ap.add_argument("--calage", default="pied", choices=["pied", "haut", "haut-gauche"],
                     help="point de calage de --sur : pied (défaut), haut (point le plus haut), haut-gauche")
+    ap.add_argument("--calage-aussi", default="haut-gauche", choices=["pied", "haut", "haut-gauche"])
     ap.add_argument("--aussi", help="second glyphe superposé, en bleu, calé en haut à gauche (cl dans po)")
     ap.add_argument("--pale", action="store_true", help="ajoute à la superposition l'encre pâle de la boîte (hampe fine)")
     args = ap.parse_args()
@@ -84,7 +85,7 @@ def main():
             if ref2 is not None and (r["manuscript"], r["page"]) in seg:
                 c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
                 if c:
-                    im = overlay_at(im, c, ref2, x, y, pad, zoom, calage="haut-gauche", color=(0, 60, 220, 45))
+                    im = overlay_at(im, c, ref2, x, y, pad, zoom, calage=args.calage_aussi, color=(0, 60, 220, 45))
             crops.append((r, im))
         try:
             gi = H.gregall_image(g)
