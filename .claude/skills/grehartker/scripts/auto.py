@@ -163,6 +163,7 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--inscrire", action="store_true")
     ap.add_argument("--graine")
+    ap.add_argument("--calage", default="pied", help="calage de la surimpression --sur (planche.py)")
     ap.add_argument("--serie", help="ne lire que la série de bandes loc_<glyphe>_<serie> (b, c…)")
     ap.add_argument("--large", action="store_true", help="chercher sur toute la page de chaque bande, sans a priori de position")
     args = ap.parse_args()
@@ -208,7 +209,7 @@ def main():
             subprocess.run([sys.executable, "-I", os.path.join(here, "retenir.py"), g, "auto_" + g] + [str(i) for i in order], check=True)
             cmd = [sys.executable, "-I", os.path.join(here, "planche.py"), "auto_" + g, g]
             if args.sur and args.sur != g:
-                cmd += ["--sur", args.sur]
+                cmd += ["--sur", args.sur, "--calage", args.calage]
             jobs.append(cmd)
     del seg                            # planche.py recharge la segmentation : ne pas la garder deux fois
     import gc
