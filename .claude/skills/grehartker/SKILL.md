@@ -347,6 +347,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - **Lot qi (préparé le 19 novembre 2026) :** bandes `loc_qi…` pour 15 glyphes ; `qiNppt1su1sut2`
   (seule occurrence NR synthétique) : exemplaires de marteo, transcrits `ql-ppt1su1sut2` dans NR
   (391 p. 75 choisi, 391 p. 134).
+  `qi` = 391 p. 222 (*Aspice Domine*, « au »), `qiN` = 391 p. 97 (*Puer meus*, « cit ») : hampe
+  parallèle à celle de `qi`. La hampe du qi est trop pâle pour la segmentation : superposer avec
+  `planche.py … --sur qi --pale`, et juger la cohérence sur l'angle de la hampe.
 
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
