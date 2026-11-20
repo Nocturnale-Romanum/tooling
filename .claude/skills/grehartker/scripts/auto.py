@@ -6,7 +6,8 @@ Usage (Python ordinaire) :
 
 --graine BASE : le gabarit du plus grand morceau est l'exemplaire choisi de BASE (forme et
 taille de Hartker) au lieu de gregall ; gregall ne sert plus qu'à placer les autres morceaux.
-Les bandes lues sont loc_<glyphe>.json et, si elle existe, loc_<glyphe>_b.json (--autre).
+Les bandes lues sont loc_<glyphe>.json et les séries suivantes loc_<glyphe>_b, _c… (--autre) ;
+--serie c : seulement la série c (nouvelles propositions sans reprendre les pages écartées).
 Les exemplaires déjà validés du glyphe (sans « à valider ») restent en tête, le choix inchangé.
 
 Pour chaque bande de cache/candidats/loc_<glyphe>.json :
@@ -29,6 +30,7 @@ Pour chaque bande de cache/candidats/loc_<glyphe>.json :
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -143,12 +145,17 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--inscrire", action="store_true")
     ap.add_argument("--graine")
+    ap.add_argument("--serie", help="ne lire que la série de bandes loc_<glyphe>_<serie> (b, c…)")
     ap.add_argument("--large", action="store_true", help="chercher sur toute la page de chaque bande, sans a priori de position")
     args = ap.parse_args()
     seg = H.load_seg()
     jobs = []
     for g in args.glyphes:
-        paths = [os.path.join(H.CACHE, "candidats", "loc_%s%s.json" % (g, sfx)) for sfx in ("", "_b")]
+        import glob
+        paths = sorted(p for p in glob.glob(os.path.join(H.CACHE, "candidats", "loc_%s*.json" % g))
+                       if re.fullmatch(r"loc_%s(_[b-h])?\.json" % re.escape(g), os.path.basename(p)))
+        if args.serie:
+            paths = [p for p in paths if p.endswith("_%s.json" % args.serie)]
         found = [f for p in paths if os.path.exists(p) for f in json.load(open(p, encoding="utf-8"))]
         if not found:
             print(g, ": pas de bandes (localiser.py)")

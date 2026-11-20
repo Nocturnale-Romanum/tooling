@@ -526,10 +526,15 @@ def run(glyph, n, nom, toutes=False, autre=False):
              if not all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, [])) if glyph in r["glyphes"].split())]
     if autre:
         # autre série : pages pas encore montrées dans cache/candidats/<nom>.json
-        prev = os.path.join(H.CACHE, "candidats", nom + ".json")
-        shown = {(f["manuscript"], f["page"]) for f in json.load(open(prev, encoding="utf-8"))} if os.path.exists(prev) else set()
+        import glob
+        shown, n_prev = set(), 0
+        for prev in glob.glob(os.path.join(H.CACHE, "candidats", nom + "*.json")):
+            if not re.fullmatch(re.escape(nom) + r"(_[b-h])?\.json", os.path.basename(prev)):
+                continue                       # pas les bandes d'un autre glyphe (loc_prB…)
+            n_prev += 1
+            shown |= {(f["manuscript"], f["page"]) for f in json.load(open(prev, encoding="utf-8"))}
         items = [t for t in items if (t["ms"], t["page"]) not in shown]
-        nom += "_b"
+        nom += "_" + "bcdefgh"[n_prev - 1] if n_prev else ""
     pick, backup = (items, []) if toutes else spread(items, n, 0.25 if autre else 0.5)
     for t in pick:
         key = (t["ms"], t["page"])
@@ -596,7 +601,7 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--nom")
     ap.add_argument("--toutes", action="store_true")
-    ap.add_argument("--autre", action="store_true", help="autre série : pages pas encore montrées (sortie <nom>_b)")
+    ap.add_argument("--autre", action="store_true", help="autre série : pages pas encore montrées dans les séries précédentes (sortie <nom>_b, _c…)")
     ap.add_argument("--test", action="store_true")
     args = ap.parse_args()
     if args.test:
