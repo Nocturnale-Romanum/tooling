@@ -18,7 +18,9 @@ Pour chaque bande de cache/candidats/loc_<glyphe>.json :
 3. pour un glyphe en plusieurs morceaux, gregall est posé sur chacune des meilleures composantes
    (mis à son échelle) et l'on cherche les autres morceaux à leur place attendue (points,
    tractulus, virga) ; la proportion trouvée s'ajoute au score ; la boîte réunit les morceaux
-   trouvés. --large : toute la page de chaque bande, sans a priori de position ;
+   trouvés. --large : toute la page de chaque bande, sans a priori de position (dernier recours :
+   peut trouver une forme semblable ailleurs sur la page, comme pour poGN ; vérifier d'abord
+   si la boîte de la bande n'est pas déjà la bonne) ;
 4. sortie : cache/candidats/auto_<glyphe>.json (boîtes, score, colonne base) ; avec --inscrire,
    les --n meilleures (pages différentes) sont inscrites comme choix et variantes provisoires
    (retenir.py) et la planche cache/planches/auto_<glyphe>.png est faite (planche.py, --sur BASE
