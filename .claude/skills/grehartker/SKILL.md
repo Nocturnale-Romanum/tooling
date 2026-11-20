@@ -319,6 +319,12 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Cantus, et revient à l'alignement sur la page entière si la confiance est < 0,2.
   `S/evaluer_localisation.py` mesure le résultat sur les exemplaires validés : 72 % neume exact,
   88 % dans la bande (ancienne méthode : 73 %, 91 % ; jeu biaisé en sa faveur).
+- **Repérage automatique (20 novembre 2026, demandé par marteo) :** `S/auto.py <glyphe>… --inscrire
+  [--sur BASE]` choisit le neume dans chaque bande `loc_<glyphe>` avec gregall comme graine
+  (ressemblance au plus grand morceau de gregall, pénalité de distance à la position estimée,
+  0,4 par 300 px), complète la boîte avec les composantes qui tombent dans le contour de gregall,
+  inscrit choix et variantes provisoires (« à valider ») et fait la planche `auto_<glyphe>`.
+  Mesuré sur les lots ql et qi : 52 cas justes sur 84 contre 46 pour l'alignement seul.
 - **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
   préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
 
