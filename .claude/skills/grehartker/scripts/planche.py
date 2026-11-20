@@ -12,6 +12,8 @@ composantes : les deux virgas de `bvN`), calé au pied du trait de son neume de 
 plus bas à gauche) sur celui du neume de base de chaque exemplaire (colonne `base`). Sert à
 vérifier la cohérence d'une variante (viN, viB…) ou d'un composé (bvNsut2 sur bvN) avec le
 glyphe retenu : même fût, même angle, même écart.
+--aussi G : second glyphe superposé en bleu, calé coin haut-gauche contre coin haut-gauche
+(la clivis au début d'un porrectus : `planche.py … po --aussi cl`).
 --pale : ajoute l'encre pâle de la boîte reliée aux composantes (hampe trop fine pour la
 segmentation, ex. `qi`), sauf la colonne `exclure`.
 
@@ -46,12 +48,15 @@ def main():
     ap.add_argument("nom")
     ap.add_argument("glyphes", nargs="+")
     ap.add_argument("--sur")
+    ap.add_argument("--aussi", help="second glyphe superposé, en bleu, calé en haut à gauche (cl dans po)")
     ap.add_argument("--pale", action="store_true", help="ajoute à la superposition l'encre pâle de la boîte (hampe fine)")
     args = ap.parse_args()
     seg = H.load_seg()
-    ref = None
+    ref = ref2 = None
     if args.sur:
         ref = whole(seg, rows_of(args.sur)[0], args.pale)
+    if args.aussi:
+        ref2 = whole(seg, rows_of(args.aussi)[0], args.pale)
     sheets = []
     for g in args.glyphes:
         rows = rows_of(g)
@@ -67,6 +72,10 @@ def main():
                 c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
                 if c:
                     im = overlay_at(im, c, ref, x, y, pad, zoom)
+            if ref2 is not None and (r["manuscript"], r["page"]) in seg:
+                c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
+                if c:
+                    im = overlay_at(im, c, ref2, x, y, pad, zoom, calage="haut-gauche", color=(0, 60, 220, 45))
             crops.append((r, im))
         try:
             gi = H.gregall_image(g)
@@ -153,16 +162,19 @@ def whole(seg, r, pale=False):
     return dict(mask=mask, foot=(fx + base["x"] - x0, fy + base["y"] - y0))
 
 
-def overlay_at(im, comp, ref, bx, by, pad, zoom):
+def overlay_at(im, comp, ref, bx, by, pad, zoom, calage="pied", color=(220, 0, 0, 45)):
     """Superposition dans une découpe dont le coin est (bx - pad, by - pad) en coordonnées de page."""
-    fx, fy = foot(comp["mask"])
-    fx, fy = fx + comp["x"] - bx, fy + comp["y"] - by
-    rx, ry = ref["foot"]
+    if calage == "haut-gauche":                  # coins haut-gauche des boîtes d'encre
+        fx, fy, rx, ry = comp["x"] - bx, comp["y"] - by, 0, 0
+    else:
+        fx, fy = foot(comp["mask"])
+        fx, fy = fx + comp["x"] - bx, fy + comp["y"] - by
+        rx, ry = ref["foot"]
     ys, xs = np.nonzero(ref["mask"])
     lay = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
     for xx, yy in zip(xs - rx + fx + pad, ys - ry + fy + pad):
-        d.rectangle((xx * zoom, yy * zoom, xx * zoom + zoom - 1, yy * zoom + zoom - 1), fill=(220, 0, 0, 45))
+        d.rectangle((xx * zoom, yy * zoom, xx * zoom + zoom - 1, yy * zoom + zoom - 1), fill=color)
     return Image.alpha_composite(im.convert("RGBA"), lay).convert("RGB")
 
 
