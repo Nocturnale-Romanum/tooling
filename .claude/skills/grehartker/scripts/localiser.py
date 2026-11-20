@@ -164,7 +164,22 @@ def text_lines(key):
         _LINES[key] = sorted(cents)
         with open(path, "w", encoding="utf-8") as f:
             json.dump({"%s:%s" % k: v for k, v in _LINES.items()}, f)
-    return _LINES[key]
+    return fill_lines(_LINES[key])
+
+
+def fill_lines(tl):
+    """Lignes de texte manquées par le profil (fréquent : 182 pages sur 241, souvent une ligne
+    peu encrée) : un écart d'environ k interlignes (médiane) reçoit k - 1 lignes régulières."""
+    if len(tl) < 4:
+        return tl
+    m = float(np.median(np.diff(tl)))
+    out = [tl[0]]
+    for a, b in zip(tl, tl[1:]):
+        k = int(round((b - a) / m))
+        if k >= 2 and abs((b - a) / k - m) < 0.2 * m:
+            out += [a + (b - a) * i / k for i in range(1, k)]
+        out.append(b)
+    return out
 
 
 def page_sequence(seg, key, T):
@@ -373,10 +388,12 @@ def place_by_marks(seg, code, ms, page, a, T):
         score, pairs = align(a, [c["cls"] for c in b], mode="ancre")
         adj = score / full - prior * abs(i0 / len(obs) - expect) + bonus
         if best is None or adj > best[0]:
-            best = (adj, b, pairs, score, how)
-    if best is None or best[3] / full < MIN_CONF:
+            best = (adj, b, pairs, score, how, i0 / len(obs))
+    if best is None:
         return None
-    return best[1], best[2], best[3], best[4]
+    _, b, pairs, score, how, frac = best
+    return dict(placed=(b, pairs, score, how), sure=score / full >= MIN_CONF, frac=frac,
+                expect=expect if rank is not None else None, n=len(obs))
 
 
 def locate(seg, code, ms, page, glyph, decs, methode="marques"):
@@ -386,8 +403,20 @@ def locate(seg, code, ms, page, glyph, decs, methode="marques"):
     if not seq:
         return []
     a = [s[0] for s in seq]
-    placed = place_by_marks(seg, code, ms, page, a, T) if methode == "marques" else None
-    placed = placed or place_whole(seg, ms, page, a, T)
+    pm = place_by_marks(seg, code, ms, page, a, T) if methode == "marques" else None
+    placed = pm["placed"] if pm and pm["sure"] else None
+    if placed is None:
+        placed = place_whole(seg, ms, page, a, T)
+        # repli peu sûr lui aussi : s'il tombe loin du rang Cantus attendu (> 30 % de la page),
+        # garder le départ ancré, qui tient compte de ce rang
+        if pm and pm["expect"] is not None and placed is not None:
+            first = placed[1][0][1] if placed[1] else 0
+            key0 = placed[0][first]["key"] if placed[0] else None
+            pos = (sum(1 for c in placed[0][:first] if c["key"] == key0) / pm["n"]) if key0 == (ms, page) else 1.0
+            if abs(pos - pm["expect"]) > 0.3:
+                b, pairs, score, how = pm["placed"]
+                placed = (b, pairs, score, how + " (confiance basse, rang Cantus)")
+        placed = placed or (pm["placed"] if pm else None)
     if placed is None:
         return []
     obs, pairs, score, how = placed
