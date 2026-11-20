@@ -527,4 +527,8 @@ pr,variante B,csg-0391,025,2897,2425,82,67,"2897,2425,72,67","Q6F6N3R1 Tradideru
 vs,choisi,csg-0390,117,2039,3102,97,101,,CBMVN3A1 Gaude Maria (go:) ; vs ; désigné par marteo,
 vs,variante A,csg-0391,068,1570,4938,82,70,,"P5F5N1R1 Post passionem suam (ctá) ; vs ; désigné par marteo ; trait montant pâle, lettre c en haut à droite hors boîte","1652,4901,35,35"
 vs,variante B,csg-0391,119,1482,1734,80,71,,"0929N1A3 Ascendit fumus (mus) ; vs ; désigné par marteo ; exemplaire laid, faute de mieux",
-vsN,choisi,csg-0391,222,3567,3546,89,67,"3567,3546,89,67","H1N1R1 Vidi Dominum sedentem (rant) ; ``peSvs-pe~hh ; repéré automatiquement (graine vs), à valider",
+vsN,choisi,csg-0391,222,3567,3546,89,67,"3567,3546,89,67","H1N1R1 Vidi Dominum sedentem (rant) ; ``peSvs-pe~hh ; repéré automatiquement (graine vs), juste mais laid (marteo), à remplacer",
+vsB,choisi,csg-0390,048,3397,4191,111,121,,1011N1R2 Sine tactu pudoris (texte « que sine tactu ») ; vs> ; capture de marteo,
+vsB,variante A,csg-0390,143,3910,3811,118,106,"3910,3811,118,106","Q1N1R1 Ecce nunc tempus (nunc) ; vs> ; repéré automatiquement (graine vsB), à valider",
+vsB,variante B,csg-0390,018,5069,1019,109,106,"5069,1019,109,106","A1N3R3 Ecce dies veniunt (ger) ; vs> ; repéré automatiquement (graine vsB), à valider",
+vsB,variante C,csg-0391,068,3633,5268,115,102,"3633,5268,115,102","P5F5N1R2 Omnis pulchritudo Domini (tér) ; vs> ; repéré automatiquement (graine vsB), à valider",
