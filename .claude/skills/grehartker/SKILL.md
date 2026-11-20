@@ -350,6 +350,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `qi` = 391 p. 222 (*Aspice Domine*, « au »), `qiN` = 391 p. 97 (*Puer meus*, « cit ») : hampe
   parallèle à celle de `qi`. La hampe du qi est trop pâle pour la segmentation : superposer avec
   `planche.py … --sur qi --pale`, et juger la cohérence sur l'angle de la hampe.
+  **Lot qi désigné le 20 novembre 2026** (16 glyphes, `exemplaires.csv`). `qippt2sut2` et
+  `qiNppt1suu1su1sut2` : mêmes exemplaires que gregall (H297B, H392L). **À créer (absents de
+  gregall)** : `qisut3`, `qippt1sut3`, `qippt1su2sut1`, `qisu2sut1` (`reperes.csv`).
 
 **Prochaines étapes :**
 1. Lot virga : décisions de marteo sur les nouvelles propositions, `viNB`, puis import.
