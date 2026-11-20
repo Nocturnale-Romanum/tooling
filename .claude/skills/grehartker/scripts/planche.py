@@ -12,6 +12,7 @@ composantes : les deux virgas de `bvN`), calé au pied du trait de son neume de 
 plus bas à gauche) sur celui du neume de base de chaque exemplaire (colonne `base`). Sert à
 vérifier la cohérence d'une variante (viN, viB…) ou d'un composé (bvNsut2 sur bvN) avec le
 glyphe retenu : même fût, même angle, même écart.
+--calage haut : --sur calé par les points les plus hauts (oriscus de `vs` sur celui de `pi`).
 --aussi G : second glyphe superposé en bleu, calé coin haut-gauche contre coin haut-gauche
 (la clivis au début d'un porrectus : `planche.py … po --aussi cl`).
 --pale : ajoute l'encre pâle de la boîte reliée aux composantes (hampe trop fine pour la
@@ -37,6 +38,12 @@ def rows_of(glyph):
         return sorted([r for r in csv.DictReader(f) if r["glyph"] == glyph], key=lambda r: order.index(r["role"]))
 
 
+def top(mask):
+    ys, xs = np.nonzero(mask)
+    i = np.argmin(ys * 1000 + xs)
+    return xs[i], ys[i]
+
+
 def foot(mask):
     ys, xs = np.nonzero(mask)
     i = np.argmax(ys - xs)
@@ -48,6 +55,8 @@ def main():
     ap.add_argument("nom")
     ap.add_argument("glyphes", nargs="+")
     ap.add_argument("--sur")
+    ap.add_argument("--calage", default="pied", choices=["pied", "haut", "haut-gauche"],
+                    help="point de calage de --sur : pied (défaut), haut (point le plus haut), haut-gauche")
     ap.add_argument("--aussi", help="second glyphe superposé, en bleu, calé en haut à gauche (cl dans po)")
     ap.add_argument("--pale", action="store_true", help="ajoute à la superposition l'encre pâle de la boîte (hampe fine)")
     args = ap.parse_args()
@@ -71,7 +80,7 @@ def main():
             if ref is not None and (r["manuscript"], r["page"]) in seg:
                 c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
                 if c:
-                    im = overlay_at(im, c, ref, x, y, pad, zoom)
+                    im = overlay_at(im, c, ref, x, y, pad, zoom, calage=args.calage)
             if ref2 is not None and (r["manuscript"], r["page"]) in seg:
                 c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
                 if c:
@@ -166,6 +175,10 @@ def overlay_at(im, comp, ref, bx, by, pad, zoom, calage="pied", color=(220, 0, 0
     """Superposition dans une découpe dont le coin est (bx - pad, by - pad) en coordonnées de page."""
     if calage == "haut-gauche":                  # coins haut-gauche des boîtes d'encre
         fx, fy, rx, ry = comp["x"] - bx, comp["y"] - by, 0, 0
+    elif calage == "haut":                       # points les plus hauts (oriscus de vs sur celui de pi)
+        fx, fy = top(comp["mask"])
+        fx, fy = fx + comp["x"] - bx, fy + comp["y"] - by
+        rx, ry = top(ref["mask"])
     else:
         fx, fy = foot(comp["mask"])
         fx, fy = fx + comp["x"] - bx, fy + comp["y"] - by
