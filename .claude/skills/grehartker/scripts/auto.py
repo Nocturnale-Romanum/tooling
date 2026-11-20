@@ -47,7 +47,8 @@ DIST = float(os.environ.get("AUTO_DIST", 0.4))   # pénalité de distance (par 3
 
 BONUS_MORCEAUX = 0.15   # autres morceaux de gregall trouvés à leur place (un point près d'un trait
                         # quelconque ne doit pas l'emporter sur la forme : pr de la série c)
-MIN_FORME = 0.25        # ressemblance minimale pour inscrire une proposition
+MIN_FORME = 0.25        # ressemblance minimale pour inscrire une proposition (avec --graine : gabarit
+                        # tiré de Hartker ; avec gregall, les ressemblances sont plus basses)
 
 
 def gregall_pieces(g):
@@ -194,12 +195,15 @@ def main():
         if args.inscrire and out:
             order, pages = [], set()
             for i in sorted(range(len(out)), key=lambda i: -float(out[i]["adj"])):
-                if out[i].get("score") is not None and out[i]["score"] < MIN_FORME:
+                if args.graine and out[i].get("score") is not None and out[i]["score"] < MIN_FORME:
                     continue
                 k = (out[i]["manuscript"], out[i]["page"])
                 if k not in pages and len(order) < args.n:
                     order.append(i)
                     pages.add(k)
+            if not order:
+                print(g, ": aucune proposition assez ressemblante")
+                continue
             here = os.path.dirname(os.path.abspath(__file__))
             subprocess.run([sys.executable, "-I", os.path.join(here, "retenir.py"), g, "auto_" + g] + [str(i) for i in order], check=True)
             cmd = [sys.executable, "-I", os.path.join(here, "planche.py"), "auto_" + g, g]

@@ -319,6 +319,10 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Cantus, et revient à l'alignement sur la page entière si la confiance est < 0,2.
   `S/evaluer_localisation.py` mesure le résultat sur les exemplaires validés : 72 % neume exact,
   88 % dans la bande (ancienne méthode : 73 %, 91 % ; jeu biaisé en sa faveur).
+- **Lot pressus (en pause, 20 novembre 2026) :** `pi` = 391 p. 42 (*De ore prudentis*, « lú »)
+  validé ; `pr` = 390 p. 156 (*Dixit Joseph*, « um ») + 390 p. 117, à revoir : `pr` = `vs` + `pu`, et
+  `vs` est la forme longue de l'oriscus `or_pi`, qui n'existe pas seul et doit reprendre celui du
+  `pi` choisi (marteo). Ordre : lot `vs` (cohérent avec `pi`), puis reprise du pressus.
 - **Repérage automatique (20 novembre 2026, demandé par marteo) :** `S/auto.py <glyphe>… --inscrire
   [--sur BASE]` choisit le neume dans chaque bande `loc_<glyphe>` avec gregall comme graine
   (ressemblance au plus grand morceau de gregall, pénalité de distance à la position estimée,
