@@ -45,6 +45,11 @@ import localiser as L  # noqa: E402
 DIST = float(os.environ.get("AUTO_DIST", 0.4))   # pénalité de distance (par 300 px)
 
 
+BONUS_MORCEAUX = 0.15   # autres morceaux de gregall trouvés à leur place (un point près d'un trait
+                        # quelconque ne doit pas l'emporter sur la forme : pr de la série c)
+MIN_FORME = 0.25        # ressemblance minimale pour inscrire une proposition
+
+
 def gregall_pieces(g):
     """Morceaux d'encre de gregall à l'échelle de la page : [(x, y, w, h, masque)], plus grand d'abord."""
     im = np.asarray(H.gregall_image(g, 100).convert("L")) < 128
@@ -75,6 +80,15 @@ def seed(seg, base):
     import planche
     m = planche.whole(seg, r)["mask"]
     return dict(n=H.norm(m), h=m.shape[0], w=m.shape[1])
+
+
+def rejected(glyph, key):
+    """Coins (x, y) des propositions écartées par marteo pour ce glyphe sur cette page
+    (reperes.csv : « proposé à tort pour <glyphe> »)."""
+    import csv
+    with open(os.path.join(H.SKILL, "sources", "reperes.csv"), encoding="utf-8") as fh:
+        return [(int(r["x"]), int(r["y"])) for r in csv.DictReader(fh)
+                if (r["manuscript"], r["page"]) == key and glyph and ("à tort pour %s " % glyph) in r["note"] + " "]
 
 
 def others(seg, key, c, pieces, tl):
@@ -109,6 +123,7 @@ def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
     tl = L.text_lines(key)
     ex, ey = f["x"] + f["w"] / 2, f["y"] + f["h"] / 2
     bx, by, bw, bh, bm = pieces[0]
+    refus = rejected(f.get("glyphe_cible"), key)
     t = tpl or dict(n=H.norm(bm), h=bh, w=bw)
     cands = []
     for c in seg[key]:
@@ -117,6 +132,8 @@ def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
             continue
         if any(abs(cy - y) < 35 for y in tl):         # lettre de la ligne de texte
             continue
+        if any(abs(c["x"] - x) <= 5 and abs(c["y"] - y) <= 5 for x, y in refus):
+            continue                                  # déjà écarté par marteo (reperes.csv)
         s = score(c, t)
         d = 0 if large else ((cx - ex) ** 2 + (2 * (cy - ey)) ** 2) ** 0.5
         cands.append((s - DIST * d / 300, s, c))
@@ -126,7 +143,7 @@ def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
     best = None
     for adj, s, c in cands[:(150 if large else 40) if len(pieces) > 1 else 1]:
         extra, frac = others(seg, key, c, pieces, tl) if len(pieces) > 1 else ([], 1)
-        tot = adj + (1.0 if large else 0.5) * frac
+        tot = adj + (1.0 if large else BONUS_MORCEAUX) * frac
         if best is None or tot > best[0]:
             best = (tot, adj, s, c, extra, frac)
     tot, adj, s, c, extra, frac = best
@@ -166,7 +183,7 @@ def main():
         with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
             kept = [dict(r) for r in csv.DictReader(fh) if r["glyph"] == g and "à valider" not in r["piece"]]
         done = {(r["manuscript"], r["page"]) for r in kept}
-        out = kept + [p for p in (pick(seg, f, pieces, tpl, args.graine or "gregall", args.large) for f in found)
+        out = kept + [p for p in (pick(seg, dict(f, glyphe_cible=g), pieces, tpl, args.graine or "gregall", args.large) for f in found)
                       if p and (p["manuscript"], p["page"]) not in done]
         for r in kept:
             r["adj"] = 99
@@ -177,6 +194,8 @@ def main():
         if args.inscrire and out:
             order, pages = [], set()
             for i in sorted(range(len(out)), key=lambda i: -float(out[i]["adj"])):
+                if out[i].get("score") is not None and out[i]["score"] < MIN_FORME:
+                    continue
                 k = (out[i]["manuscript"], out[i]["page"])
                 if k not in pages and len(order) < args.n:
                     order.append(i)
