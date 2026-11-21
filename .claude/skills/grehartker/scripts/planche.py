@@ -62,7 +62,8 @@ def main():
     ap.add_argument("--aussi", help="second glyphe superposé, en bleu, calé en haut à gauche (cl dans po)")
     ap.add_argument("--pale", action="store_true", help="ajoute à la superposition l'encre pâle de la boîte (hampe fine)")
     args = ap.parse_args()
-    seg = H.load_seg()
+    keys = {(r["manuscript"], r["page"]) for g in args.glyphes + [args.sur, args.aussi] if g for r in rows_of(g)}
+    seg = H.load_seg(keys)          # seulement les pages utiles : la machine manque de mémoire
     ref = ref2 = None
     if args.sur:
         ref = whole(seg, rows_of(args.sur)[0], args.pale)

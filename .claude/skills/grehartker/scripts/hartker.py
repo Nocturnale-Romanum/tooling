@@ -124,12 +124,15 @@ def segment(path):
     return comps
 
 
-def load_seg():
-    """Composantes de chaque page segmentée ; les masques sont stockés en bits empaquetés."""
+def load_seg(keys=None):
+    """Composantes de chaque page segmentée ; les masques sont stockés en bits empaquetés.
+    keys : ne garder que ces pages ((ms, page)) — beaucoup moins de mémoire (planches)."""
     if not os.path.exists(SEG):
         return {}
     with open(SEG, "rb") as f:
         seg = pickle.load(f)
+    if keys is not None:
+        seg = {k: v for k, v in seg.items() if k in set(keys)}
     for comps in seg.values():
         for c in comps:
             if "bits" in c:
