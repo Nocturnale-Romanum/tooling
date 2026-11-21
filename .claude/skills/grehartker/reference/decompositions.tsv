@@ -336,7 +336,7 @@ sa	sa	saMN1	vi + or_salicus + viN	d'après gregall	3
 sa	sa	saM6	viN + or_salicus + vi	d'après gregall	2
 sa	sa	saNsu1sut1	pu + or_salicus + viN + pu + ta	d'après gregall	1
 sa	sa	sa1EclNB	pu + or_couche + clNB	d'après gregall	1
-sa	sa	saM5ppt1	ta + pu + or_salicus + vi	d'après gregall	1
+sa	sa	saM5ppt1	ta + ta + or_salicus + vi	corrigé par marteo (21 novembre 2026)	1
 sa	sa	saEclS1	pu + or_salicus + clS1	d'après gregall	1
 sf	sf	sf	pu + pu + cl	d'après gregall	93
 sf	sf	sfN	ta + ta + clN	d'après gregall	83
@@ -414,3 +414,4 @@ vs	vs	vsN	vsN	base	13
 vs	vs	vslsc3	vs + lsc@3	régulier	96
 vs	vs	vslst2	vs + lst@2	régulier	1
 sa	sa	saM7	vi + or_couche + viN	nouveau (marteo, 21 novembre 2026), absent de gregall	0
+sa	sa	saM5	ta + or_salicus + vi	marteo (21 novembre 2026), absent de NR	0
