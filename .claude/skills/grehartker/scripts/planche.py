@@ -55,8 +55,9 @@ def main():
     ap.add_argument("nom")
     ap.add_argument("glyphes", nargs="+")
     ap.add_argument("--sur")
-    ap.add_argument("--calage", default="pied", choices=["pied", "haut", "haut-gauche"],
-                    help="point de calage de --sur : pied (défaut), haut (point le plus haut), haut-gauche")
+    ap.add_argument("--calage", default="pied", choices=["pied", "haut", "haut-gauche", "forme"],
+                    help="point de calage de --sur : pied (défaut), haut (point le plus haut), haut-gauche, "
+                         "forme (centre sur centre de la composante de l'exemplaire qui ressemble le plus à --sur)")
     ap.add_argument("--calage-aussi", default="haut-gauche", choices=["pied", "haut", "haut-gauche"])
     ap.add_argument("--aussi", help="second glyphe superposé, en bleu, calé en haut à gauche (cl dans po)")
     ap.add_argument("--pale", action="store_true", help="ajoute à la superposition l'encre pâle de la boîte (hampe fine)")
@@ -79,7 +80,13 @@ def main():
             x, y, w, h = (int(r[k]) for k in "xywh")
             im = H.crop(r["manuscript"], r["page"], x, y, w, h, pad=pad, zoom=zoom)
             if ref is not None and (r["manuscript"], r["page"]) in seg:
-                c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
+                if args.calage == "forme":           # la composante la plus ressemblante de la boîte
+                    t = dict(n=H.norm(ref["mask"]), h=ref["mask"].shape[0], w=ref["mask"].shape[1])
+                    inside = [d for d in seg[(r["manuscript"], r["page"])]
+                              if x <= d["x"] + d["w"] / 2 <= x + w and y <= d["y"] + d["h"] / 2 <= y + h and not H.exclue(r, d)]
+                    c = max(inside, key=lambda d: H.score(d, [t])) if inside else None
+                else:
+                    c = H.comp_in(seg, r["manuscript"], r["page"], *base_box(r))
                 if c:
                     im = overlay_at(im, c, ref, x, y, pad, zoom, calage=args.calage)
             if ref2 is not None and (r["manuscript"], r["page"]) in seg:
@@ -176,6 +183,9 @@ def overlay_at(im, comp, ref, bx, by, pad, zoom, calage="pied", color=(220, 0, 0
     """Superposition dans une découpe dont le coin est (bx - pad, by - pad) en coordonnées de page."""
     if calage == "haut-gauche":                  # coins haut-gauche des boîtes d'encre
         fx, fy, rx, ry = comp["x"] - bx, comp["y"] - by, 0, 0
+    elif calage == "forme":                      # centres alignés
+        fx, fy = comp["x"] + comp["w"] / 2 - bx, comp["y"] + comp["h"] / 2 - by
+        rx, ry = ref["mask"].shape[1] / 2, ref["mask"].shape[0] / 2
     elif calage == "haut":                       # points les plus hauts (oriscus de vs sur celui de pi)
         fx, fy = top(comp["mask"])
         fx, fy = fx + comp["x"] - bx, fy + comp["y"] - by
@@ -187,7 +197,7 @@ def overlay_at(im, comp, ref, bx, by, pad, zoom, calage="pied", color=(220, 0, 0
     ys, xs = np.nonzero(ref["mask"])
     lay = Image.new("RGBA", im.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
-    for xx, yy in zip(xs - rx + fx + pad, ys - ry + fy + pad):
+    for xx, yy in zip((xs - rx + fx + pad).astype(int), (ys - ry + fy + pad).astype(int)):
         d.rectangle((xx * zoom, yy * zoom, xx * zoom + zoom - 1, yy * zoom + zoom - 1), fill=color)
     return Image.alpha_composite(im.convert("RGBA"), lay).convert("RGB")
 

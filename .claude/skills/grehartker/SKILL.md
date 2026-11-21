@@ -319,6 +319,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Cantus, et revient à l'alignement sur la page entière si la confiance est < 0,2.
   `S/evaluer_localisation.py` mesure le résultat sur les exemplaires validés : 72 % neume exact,
   88 % dans la bande (ancienne méthode : 73 %, 91 % ; jeu biaisé en sa faveur).
+- **Lot salicus (21 novembre 2026) :** `sa` 390 p. 29, `sa1` 390 p. 32 (boîte agrandie à la virga) ;
+  `or_salicus` = boucle du `sa` choisi (390 p. 29, 1589,1350), `or_couche` = oriscus couché du `sa1`
+  choisi (390 p. 32, 1678,4227). Composés : surimpression de `or_salicus` ou `or_couche` selon la
+  décomposition, calée sur la composante la plus ressemblante (`planche.py --calage forme`).
+  `saM2` (vi + pq) et `saG` (ta + pq) relèvent du lot pes quassus.
 - **Lots vs et pressus (choix faits le 21 novembre 2026) :** `vs` 390 p. 117, `vsN` 391 p. 133,
   `vsB` 390 p. 48 (capture), `or_pi` = oriscus du `pi` choisi, `pi` 391 p. 42, `pr` 390 p. 22,
   `prN` 391 p. 205, `prB` 390 p. 180 (capture), `prM` 390 p. 48 ; `piB`, `pisu1`, `pisux1`,

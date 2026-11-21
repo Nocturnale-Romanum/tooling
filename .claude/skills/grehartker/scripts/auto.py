@@ -211,11 +211,14 @@ def main():
             if args.sur and args.sur != g:
                 cmd += ["--sur", args.sur, "--calage", args.calage]
             jobs.append(cmd)
-    del seg                            # planche.py recharge la segmentation : ne pas la garder deux fois
-    import gc
-    gc.collect()
-    for cmd in jobs:
-        subprocess.run(cmd, check=True)
+    if jobs:
+        # planche.py recharge la segmentation : remplacer ce processus (qui la garde en mémoire) par
+        # un petit lanceur, sinon la machine manque de mémoire (planches tuées)
+        path = os.path.join(H.CACHE, "candidats", "auto_planches.json")
+        with open(path, "w", encoding="utf-8") as fh:
+            json.dump(jobs, fh)
+        os.execv(sys.executable, [sys.executable, "-I", "-c",
+                                  "import json, subprocess, sys; [subprocess.run(c) for c in json.load(open(sys.argv[1]))]", path])
 
 
 if __name__ == "__main__":
