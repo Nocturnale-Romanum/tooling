@@ -583,6 +583,7 @@ saN,variante A,csg-0390,029,1437,3084,111,101,"1484,3084,64,65","A3N3R2 Ecce rad
 saN,variante B,csg-0390,115,1560,4090,114,108,"1608,4090,66,70","0202I Ecce venit ad templum (nit) ; sa-tohi ; repéré automatiquement (graine saN), à valider",
 saN,variante C,csg-0391,075,1716,3836,99,80,"1758,3836,57,52","P7F2R2 Spiritus Sanctus procedens (ne) ; //////sa-/pf-hl ; repéré automatiquement (graine saN), à valider",
 saMN1,choisi,csg-0391,103,4184,2045,205,155,"4308,2045,81,54","CBMVN2R2 Quae est ista quae processit (Je, « Jerusalem ») ; saM-1 ; capture de marteo","4371,2172,40,16"
-saM7,choisi,csg-0391,038,2290,5124,95,131,"2337,5199,48,25","P0F2R1 Maria Magdalene et altera Maria (le, « alleluia ») ; transcrit saM-1hjlss1 dans NR ; capture de marteo (vi en bas à gauche, or_couche, viN au-dessus), à vérifier",
+saM7,choisi,csg-0391,038,2290,5124,170,131,"2337,5199,48,25","P0F2R1 Maria Magdalene et altera Maria (le, « alleluia ») ; transcrit saM-1hjlss1 dans NR ; capture de marteo (vi en bas à gauche, or_couche, viN au-dessus), boîte étendue à la viN (haut/droite) à la demande de marteo","2419,5235,17,13;2441,5215,19,18"
 saM6,choisi,csg-0390,153,2195,2004,174,132,"2195,2083,53,53","Vado ad patrem (pièce absente de NR) ; H153V, « dicam » ; source de gregall, repérée par ressemblance sur toute la page (tous les morceaux à leur place), validé par marteo",
 saM6,variante A,csg-0391,103,3945,2429,115,86,"3945,2449,71,66","CBMVN2R2 Quae est ista quae processit (gí) ; saM4 ; repéré automatiquement (graine gregall), identifié par marteo comme saM6 (viN + or_salicus + vi)",
+saM8,choisi,csg-0391,119,3508,5105,76,54,,"0508N1R2 Stetit Angelus super aram (dit) ; transcrit saM6 dans NR ; ta + or_couche + vi, glyphe nouveau nommé saM8 par marteo",
