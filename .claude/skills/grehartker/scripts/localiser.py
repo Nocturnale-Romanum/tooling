@@ -513,8 +513,21 @@ def sheet(nom, found, glyph=None):
                cell_w=1720).save(os.path.join(H.CACHE, "candidats", nom + ".png"))
 
 
+def needed_pages(pick):
+    """Pages à décompresser : celles des pièces retenues (et la suivante), et celles des gabarits
+    (exemplaires choisis des formes de base) — toute la segmentation ne tient plus en mémoire."""
+    keys = set()
+    for t in pick:
+        keys.add((t["ms"], t["page"]))
+        if t["page"].isdigit():
+            keys.add((t["ms"], "%03d" % (int(t["page"]) + 1)))
+    formes = {f for v in decompositions().values() for f in v}
+    with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as f:
+        keys |= {(r["manuscript"], r["page"]) for r in csv.DictReader(f) if r["glyph"] in formes and r["role"] == "choisi"}
+    return keys
+
+
 def run(glyph, n, nom, toutes=False, autre=False):
-    seg = H.load_seg()
     decs = decompositions()
     pn = H.pieces_nr()
     occ = {}
@@ -536,6 +549,7 @@ def run(glyph, n, nom, toutes=False, autre=False):
         items = [t for t in items if (t["ms"], t["page"]) not in shown]
         nom += "_" + "bcdefgh"[n_prev - 1] if n_prev else ""
     pick, backup = (items, []) if toutes else spread(items, n, 0.25 if autre else 0.5)
+    seg = H.load_seg(needed_pages(pick))
     for t in pick:
         key = (t["ms"], t["page"])
         if key not in seg:
@@ -543,7 +557,7 @@ def run(glyph, n, nom, toutes=False, autre=False):
     if any((t["ms"], t["page"]) not in seg for t in pick):
         import subprocess
         subprocess.run([sys.executable, "-I", os.path.join(os.path.dirname(os.path.abspath(__file__)), "pages.py"), "segmenter"])
-        seg = H.load_seg()
+        seg = H.load_seg(needed_pages(pick))
     found = []
     for t in pick:
         for f in locate(seg, t["code"], t["ms"], t["page"], glyph, decs):

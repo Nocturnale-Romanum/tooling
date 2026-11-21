@@ -124,9 +124,30 @@ def segment(path):
     return comps
 
 
+SEGDIR = os.path.join(CACHE, "seg")      # un fichier par page (<ms>_<page>.pkl) : on ne lit que l'utile
+
+
+def _unpack(comps):
+    for c in comps:
+        if "bits" in c:
+            c["mask"] = np.unpackbits(c.pop("bits"), count=c["h"] * c["w"]).reshape(c["h"], c["w"]).astype(bool)
+    return comps
+
+
 def load_seg(keys=None):
     """Composantes de chaque page segmentée ; les masques sont stockés en bits empaquetés.
-    keys : ne garder que ces pages ((ms, page)) — beaucoup moins de mémoire (planches)."""
+    keys : ne lire que ces pages ((ms, page)) — la segmentation entière ne tient plus en mémoire
+    à côté des autres sessions. Lecture dans cache/seg/ (un fichier par page) s'il existe."""
+    if os.path.isdir(SEGDIR):
+        if keys is None:
+            keys = [tuple(f[:-4].split("_", 1)) for f in os.listdir(SEGDIR) if f.endswith(".pkl")]
+        seg = {}
+        for ms, page in keys:
+            path = os.path.join(SEGDIR, "%s_%s.pkl" % (ms, page))
+            if os.path.exists(path):
+                with open(path, "rb") as f:
+                    seg[(ms, page)] = _unpack(pickle.load(f))
+        return seg
     if not os.path.exists(SEG):
         return {}
     with open(SEG, "rb") as f:
@@ -134,19 +155,19 @@ def load_seg(keys=None):
     if keys is not None:
         seg = {k: v for k, v in seg.items() if k in set(keys)}
     for comps in seg.values():
-        for c in comps:
-            if "bits" in c:
-                c["mask"] = np.unpackbits(c.pop("bits"), count=c["h"] * c["w"]).reshape(c["h"], c["w"]).astype(bool)
+        _unpack(comps)
     return seg
 
 
 def save_seg(seg):
-    os.makedirs(CACHE, exist_ok=True)
-    packed = {k: [dict({n: v for n, v in c.items() if n != "mask"}, bits=np.packbits(c["mask"].ravel()))
-                  for c in comps] for k, comps in seg.items()}
-    with open(SEG + ".part", "wb") as f:
-        pickle.dump(packed, f)
-    os.replace(SEG + ".part", SEG)
+    """Écrit les pages données dans cache/seg/ (un fichier par page) ; seg.pkl n'est plus tenu à jour."""
+    os.makedirs(SEGDIR, exist_ok=True)
+    for (ms, page), comps in seg.items():
+        packed = [dict({n: v for n, v in c.items() if n != "mask"}, bits=np.packbits(c["mask"].ravel())) for c in comps]
+        path = os.path.join(SEGDIR, "%s_%s.pkl" % (ms, page))
+        with open(path + ".part", "wb") as f:
+            pickle.dump(packed, f)
+        os.replace(path + ".part", path)
 
 
 def comp_in(seg, ms, page, x, y, w, h):

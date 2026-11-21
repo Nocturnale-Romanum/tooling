@@ -167,7 +167,16 @@ def main():
     ap.add_argument("--serie", help="ne lire que la série de bandes loc_<glyphe>_<serie> (b, c…)")
     ap.add_argument("--large", action="store_true", help="chercher sur toute la page de chaque bande, sans a priori de position")
     args = ap.parse_args()
-    seg = H.load_seg()
+    import csv
+    import glob
+    keys = set()
+    for g in args.glyphes:
+        for path in glob.glob(os.path.join(H.CACHE, "candidats", "loc_%s*.json" % g)):
+            if re.fullmatch(r"loc_%s(_[b-h])?\.json" % re.escape(g), os.path.basename(path)):
+                keys |= {(f["manuscript"], f["page"]) for f in json.load(open(path, encoding="utf-8"))}
+    with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
+        keys |= {(r["manuscript"], r["page"]) for r in csv.DictReader(fh) if r["glyph"] in set(args.glyphes) | {args.graine}}
+    seg = H.load_seg(keys)              # seulement les pages utiles (mémoire)
     jobs = []
     for g in args.glyphes:
         import glob
