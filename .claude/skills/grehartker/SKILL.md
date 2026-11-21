@@ -319,6 +319,15 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Cantus, et revient à l'alignement sur la page entière si la confiance est < 0,2.
   `S/evaluer_localisation.py` mesure le résultat sur les exemplaires validés : 72 % neume exact,
   88 % dans la bande (ancienne méthode : 73 %, 91 % ; jeu biaisé en sa faveur).
+- **Audit de gregall (22 novembre 2026) :** gregall a 608 glyphes, dont 415 employés dans NR et
+  décomposés (`decompositions.tsv`). Formes de base de NR encore sans exemplaire : neumes `pf`,
+  `pfS`, `pfN`, `pfB`, `pt`, `trS` (aucune occurrence NR hors composés), élément `taNN` ; les
+  lettres significatives (lot à part) ; les ligatures (en dernier). Glyphes de gregall hors NR dont
+  la forme de tête n'a ni forme de base ni exemplaire (à composer à la main ou à chercher dans
+  Hartker) : `bvB`, `clB1`, `clN1`, `peNB1`, `pfM`, `sfM`, `piM1`, `poG`, `poN`, `pqSB`, `qlNB`,
+  `saM3`, `saMN4`, `sc1`, `stS`, `toB1`, `toM`, `trG1`, `trG2`, `trNT`, `trS1`, `vsNB`, et deux
+  familles absentes de NR : `tg` (`tg1`, `tgM`, `tgS1`, `tgS4`) et `tv`. Éléments su/pp : u → taN,
+  x → stB ; v, w, y d'après les décompositions existantes.
 - **Lot salicus (21 novembre 2026) :** `sa` 390 p. 29, `sa1` 390 p. 32 (boîte agrandie à la virga) ;
   `or_salicus` = boucle du `sa` choisi (390 p. 29, 1589,1350), `or_couche` = oriscus couché du `sa1`
   choisi (390 p. 32, 1678,4227). Composés : surimpression de `or_salicus` ou `or_couche` selon la
