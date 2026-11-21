@@ -163,6 +163,7 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--inscrire", action="store_true")
     ap.add_argument("--graine")
+    ap.add_argument("--seuil", type=float, default=MIN_FORME, help="ressemblance minimale avec --graine")
     ap.add_argument("--calage", default="pied", help="calage de la surimpression --sur (planche.py)")
     ap.add_argument("--serie", help="ne lire que la série de bandes loc_<glyphe>_<serie> (b, c…)")
     ap.add_argument("--large", action="store_true", help="chercher sur toute la page de chaque bande, sans a priori de position")
@@ -205,7 +206,7 @@ def main():
         if args.inscrire and out:
             order, pages = [], set()
             for i in sorted(range(len(out)), key=lambda i: -float(out[i]["adj"])):
-                if args.graine and out[i].get("score") is not None and out[i]["score"] < MIN_FORME:
+                if args.graine and out[i].get("score") is not None and out[i]["score"] < args.seuil:
                     continue
                 k = (out[i]["manuscript"], out[i]["page"])
                 if k not in pages and len(order) < args.n:
