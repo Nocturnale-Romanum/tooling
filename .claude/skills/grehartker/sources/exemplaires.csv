@@ -594,3 +594,8 @@ pqB,variante A,csg-0391,030,3097,1791,93,88,"3097,1791,93,88","Q6F7N3R2 Aestimat
 pqB,variante B,csg-0391,091,4203,3766,86,90,"4203,3766,86,90","0125N1R1 Qui operatus est Petro (gen) ; ////clpq> ; repéré automatiquement (graine pq), validé par marteo",
 pqB,variante C,csg-0390,089,945,623,85,71,"945,623,85,71","E1F6R2 Misericordia tua Domine (cór) ; pq> ; repéré automatiquement (graine pq), validé par marteo",
 pqSN,choisi,csg-0391,217,2810,6221,122,78,"2810,6221,106,78","09H4N3R1 Conforta me Rex (os) ; pqS-bv-ppt2vi-sut3tr-3 ; capture de marteo, source de gregall (H411C)",
+st,choisi,csg-0391,203,1013,1925,26,34,"1013,1925,26,34","MUXXN1R2 Diffusa est gratia (tu) ; tolsi7sthh ; repéré automatiquement (graine gregall), validé par marteo",
+st,variante A,csg-0391,102,2626,4855,32,40,"2626,4855,32,40","1007N1R2 Vidi speciosam sicut (quá) ; ////toppt1sthh ; repéré automatiquement (graine gregall), validé par marteo",
+st,variante B,csg-0390,028,3942,3541,22,25,"3942,3541,22,25","A1F2R1 Suscipe verbum (e) ; //tosthh ; repéré automatiquement (graine gregall), validé par marteo",
+st,variante C,csg-0390,123,2759,3905,29,37,"2759,3905,29,37","0205N2R1 Ego autem adjuvata (mi) ; tosthh ; repéré automatiquement (graine gregall), validé par marteo",
+stN,choisi,csg-0390,046,2567,2144,49,45,,"unique stN de Hartker (marteo) : à droite d'un torculus collé, clivis plus loin à droite ; capture de marteo",
