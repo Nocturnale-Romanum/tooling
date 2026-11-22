@@ -140,6 +140,7 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 
 **Vocabulaire de marteo**
 - Le *céphalicus* est la forme en crosse qui s'enroule vers l'intérieur (`cl>`, `clB` : 390 p. 61,
+- `tr` = torculus resupinus ; `tg` = trigon ; `pf` = porrectus flexus ; `pt` = pes stratus (pe + vs) (marteo, 22 novembre 2026).
   Valde honorandus, *commendavit*). Le « P » (hampe et petite boucle fermée en haut) est `viB`,
   pas un céphalicus.
 - Le « Ꝛ » à pied tourné à droite suivi d'un tractulus dessous, devant une virga épisémée à deux
