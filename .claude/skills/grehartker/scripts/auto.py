@@ -156,6 +156,41 @@ def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
                 adj=round(float(tot), 2), piece="%s ; %s ; repéré automatiquement (graine %s), à valider" % (f["piece"], f["nabc"], graine))
 
 
+def partout(g, pieces, tpl, graine, n=40):
+    """Recherche sur toutes les pages segmentées (glyphe absent de NR) : les n meilleures formes,
+    au plus 2 par page, morceaux de gregall compris. Lecture page par page (mémoire)."""
+    bx, by, bw, bh, bm = pieces[0]
+    t = tpl or dict(n=H.norm(bm), h=bh, w=bw)
+    keys = sorted(tuple(f[:-4].split("_", 1)) for f in os.listdir(H.SEGDIR) if f.endswith(".pkl"))
+    best = []
+    for key in keys:
+        seg = H.load_seg([key])
+        if key not in seg:
+            continue
+        tl = L.text_lines(key)
+        cands = []
+        for c in seg[key]:
+            if c["h"] < 15 or not (0.4 < c["h"] / t["h"] < 2.5 and 0.4 < c["w"] / t["w"] < 2.5):
+                continue
+            if any(abs(c["y"] + c["h"] / 2 - y) < 35 for y in tl):
+                continue
+            s = score(c, t)
+            if s < 0.2:
+                continue
+            extra, frac = others(seg, key, c, pieces, tl) if len(pieces) > 1 else ([], 1)
+            cands.append((s + 0.15 * frac, s, frac, c, extra))
+        for tot, s, frac, c, extra in sorted(cands, key=lambda x: -x[0])[:2]:
+            comps = [c] + extra
+            x0, y0 = min(d["x"] for d in comps), min(d["y"] for d in comps)
+            x1, y1 = max(d["x"] + d["w"] for d in comps), max(d["y"] + d["h"] for d in comps)
+            best.append(dict(manuscript=key[0], page=key[1], x=x0, y=y0, w=x1 - x0, h=y1 - y0,
+                             base="%d,%d,%d,%d" % (c["x"], c["y"], c["w"], c["h"]), score=round(float(s), 2),
+                             morceaux=round(frac, 2), adj=round(float(tot), 2),
+                             piece="recherche sur tout Hartker (glyphe absent de NR, graine %s), à valider" % graine))
+        best = sorted(best, key=lambda p: -p["adj"])[:n]
+    return best
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("glyphes", nargs="+")
@@ -163,6 +198,7 @@ def main():
     ap.add_argument("--n", type=int, default=4)
     ap.add_argument("--inscrire", action="store_true")
     ap.add_argument("--graine")
+    ap.add_argument("--partout", action="store_true", help="chercher sur toutes les pages (glyphe absent de NR)")
     ap.add_argument("--seuil", type=float, default=MIN_FORME, help="ressemblance minimale avec --graine")
     ap.add_argument("--calage", default="pied", help="calage de la surimpression --sur (planche.py)")
     ap.add_argument("--serie", help="ne lire que la série de bandes loc_<glyphe>_<serie> (b, c…)")
@@ -186,7 +222,9 @@ def main():
         if args.serie:
             paths = [p for p in paths if p.endswith("_%s.json" % args.serie)]
         found = [f for p in paths if os.path.exists(p) for f in json.load(open(p, encoding="utf-8"))]
-        if not found:
+        if args.partout:
+            found = []
+        elif not found:
             print(g, ": pas de bandes (localiser.py)")
             continue
         pieces = gregall_pieces(g)
@@ -195,8 +233,13 @@ def main():
         with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:
             kept = [dict(r) for r in csv.DictReader(fh) if r["glyph"] == g and "à valider" not in r["piece"]]
         done = {(r["manuscript"], r["page"]) for r in kept}
-        out = kept + [p for p in (pick(seg, dict(f, glyphe_cible=g), pieces, tpl, args.graine or "gregall", args.large) for f in found)
-                      if p and (p["manuscript"], p["page"]) not in done]
+        if args.partout:
+            if tpl is None and args.graine:
+                tpl = seed(H.load_seg([(r["manuscript"], r["page"]) for r in kept] or None), args.graine)
+            new = partout(g, pieces, tpl, args.graine or "gregall")
+        else:
+            new = [p for p in (pick(seg, dict(f, glyphe_cible=g), pieces, tpl, args.graine or "gregall", args.large) for f in found) if p]
+        out = kept + [p for p in new if (p["manuscript"], p["page"]) not in done]
         for r in kept:
             r["adj"] = 99
         for i, p in enumerate(out):
