@@ -35,11 +35,12 @@ import planche as P  # noqa: E402
 SCALE = 10.0      # unités de police par pixel e-codices
 UP = 4            # suréchantillonnage avant vectorisation
 VDIR = os.path.join(H.CACHE, "vectorisation")    # planches de vectorisation (à part des planches de choix)
-SMOOTH = float(os.environ.get("VEC_FLOU", 1.0))      # flou gaussien (pixels de page) avant tracé
+SMOOTH = float(os.environ.get("VEC_FLOU", 2.0))      # flou gaussien (pixels de page) avant tracé
 ALPHA = float(os.environ.get("VEC_ALPHA", 0.9))      # potrace : < 1 garde les angles
 OPTTOL = float(os.environ.get("VEC_OPT", 1.0))       # potrace : fusion des courbes (lissage vectoriel)
-SIMP = float(os.environ.get("VEC_SIMP", 6))          # FontForge : erreur admise par simplify (unités)
-HARRIS = os.environ.get("VEC_HARRIS", "0") == "1"    # ancienne méthode (mélange de flous autour des angles)
+SIMP = float(os.environ.get("VEC_SIMP", 8))          # FontForge : erreur admise par simplify (unités)
+HARRIS = os.environ.get("VEC_HARRIS", "0") == "1"
+AMINCIR = float(os.environ.get("VEC_AMINCIR", 1.0))   # amincissement du trait (pixels de page) : marteo trace le cœur du trait    # ancienne méthode (mélange de flous autour des angles)
 SPECK = 40        # taches isolées (pixels de page) ignorées : aspérités du papier
 HOLE = 30         # petits trous (pixels de page) bouchés : encre claire au milieu d'un trait
 CORNER_T = 0.45   # seuil relatif de la réponse de Harris pour un vrai angle
@@ -71,6 +72,8 @@ def trace(mask):
     import potrace
     m = np.pad(mask.astype(float), 3)
     big = np.kron(m, np.ones((UP, UP)))
+    if AMINCIR > 0:                  # le cœur du trait : bords repris à AMINCIR px vers l'intérieur
+        big = (ndi.distance_transform_edt(big > 0.5) > AMINCIR * UP).astype(float)
     smooth = ndi.gaussian_filter(big, SMOOTH * UP)
     if HARRIS:
         sharp = ndi.gaussian_filter(big, 0.6 * UP)
