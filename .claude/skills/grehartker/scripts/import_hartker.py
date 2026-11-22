@@ -10,7 +10,9 @@ Usage (avec le Python de FontForge) :
 (6132 x 8176), telle que dans sources/calibration.csv.
 
 Le script :
-- télécharge la découpe par IIIF (marge de 40 px autour de la boîte) dans cache/decoupes/ (non versionné) ;
+- télécharge la découpe par IIIF (marge de 40 px autour de la boîte) dans cache/decoupes/ (non versionné),
+  en un seul JPEG de première génération (à défaut, la page en cache), l'agrandit 4 fois (Lanczos)
+  et l'enregistre en PNG, sans recompression ;
 - l'importe dans le calque Back du glyphe, en remplaçant une éventuelle image précédente ;
 - la met à l'échelle commune (SCALE unités de police par pixel, cf. S/calibrate.py) ;
 - la cale sur le gabarit gregall (calque `gregall`) : centre horizontal de la boîte sur le
@@ -40,37 +42,44 @@ import fontforge
 from commun import fore_bbox, parse, source_variante
 
 SCALE = 10.0   # unités de police par pixel e-codices (S/calibrate.py)
+UP = 4         # image de fond agrandie UP fois (Lanczos) : bords en dégradé pour détourer à la main
+IMG_SCALE = SCALE / UP   # unités de police par pixel de l'image agrandie
 MARGIN = 40
 WIP = 0xFFFF80
 IIIF = "https://media.e-codices.ch/iip/csg/{ms}/{ms}_{page}.jp2/{x},{y},{w},{h}/full/0/default.jpg"
 
 
 def fetch(cache, ms, page, x, y, w, h):
-    path = os.path.join(cache, "%s_%s_%d_%d_%d_%d.jpg" % (ms, page, x, y, w, h))
-    if not os.path.exists(path):
-        # d'abord la page en cache (cache/pages, coordonnées de la bande décalées de BAND) :
-        # pas de réseau, e-codices pouvant être indisponible
-        try:
-            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-            import hartker as H
-            band = H.band_path(ms, page)
-            if os.path.exists(band):
-                from PIL import Image
-                bx, by = H.BAND[0], H.BAND[1]
-                Image.open(band).crop((x - bx, y - by, x - bx + w, y - by + h)).save(path, quality=95)
-                return path
-        except ImportError:
-            pass
+    """Découpe agrandie UP fois (Lanczos) et enregistrée en PNG (sans perte) : d'abord la région
+    demandée à e-codices (JPEG de première génération, seul format servi), à défaut la bande de
+    page en cache ; jamais de recompression JPEG intermédiaire."""
+    from PIL import Image
+    path = os.path.join(cache, "%s_%s_%d_%d_%d_%d_x%d.png" % (ms, page, x, y, w, h, UP))
+    if os.path.exists(path):
+        return path
+    raw = os.path.join(cache, "%s_%s_%d_%d_%d_%d.jpg" % (ms, page, x, y, w, h))
+    im = None
+    if not os.path.exists(raw):
         url = IIIF.format(ms=ms, page=page, x=x, y=y, w=w, h=h)
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "grehartker-import"})
-            with urllib.request.urlopen(req) as r:
+            with urllib.request.urlopen(req, timeout=60) as r:
                 data = r.read()
-            with open(path, "wb") as f:
+            with open(raw, "wb") as f:
                 f.write(data)
-        except urllib.error.URLError:
-            # le Python de FontForge pour Windows n'a pas de support HTTPS : on passe par curl
-            subprocess.run(["curl", "-sfL", "-A", "grehartker-import", "-o", path, url], check=True)
+        except Exception:
+            try:
+                subprocess.run(["curl", "-sfL", "-m", "60", "-A", "grehartker-import", "-o", raw, url], check=True)
+            except Exception:
+                pass
+    if os.path.exists(raw) and os.path.getsize(raw) > 0:
+        im = Image.open(raw)
+    else:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import hartker as H
+        bx, by = H.BAND[0], H.BAND[1]
+        im = Image.open(H.band_path(ms, page)).crop((x - bx, y - by, x - bx + w, y - by + h))
+    im.convert("RGB").resize((w * UP, h * UP), Image.LANCZOS).save(path)
     return path
 
 
@@ -127,10 +136,10 @@ def main(sfd, name, ms, page, x, y, w, h, align="bas", basebox=None):
                               block, flags=re.S | re.M))
     # l'image qui vient d'être importée est celle que FontForge a mise à son échelle par
     # défaut (em / hauteur de l'image) ; les précédentes sont déjà à SCALE
-    fresh = [m for m in images if abs(float(m.group(1)) - SCALE) > 1e-6]
+    fresh = [m for m in images if abs(float(m.group(1)) - IMG_SCALE) > 1e-6]
     last = fresh[0] if fresh else images[-1]
     new_img = re.sub(r"^Image2: (\S+) (\d+) \S+ \S+ \S+ \S+",
-                     lambda m: "Image2: %s %s %g %g %g %g" % (m.group(1), m.group(2), left, top, SCALE, SCALE),
+                     lambda m: "Image2: %s %s %g %g %g %g" % (m.group(1), m.group(2), left, top, IMG_SCALE, IMG_SCALE),
                      last.group(0), count=1, flags=re.M)
     for m in reversed(images):
         block = block[:m.start()] + block[m.end():]
