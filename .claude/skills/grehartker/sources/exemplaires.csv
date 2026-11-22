@@ -696,5 +696,5 @@ pfN,choisi,csg-0391,070,3742,3827,120,83,"3742,3827,120,83","P7F4R2 Ite in orbem
 pfN,variante A,csg-0391,198,3382,4532,133,82,"3382,4532,133,82","ODEFN3R3b Libera me Domine de morte (li) ; pf- ; repéré automatiquement (graine gregall), validé par marteo",
 pfN,variante B,csg-0391,111,2567,3299,114,67,"2567,3299,114,67","0908N1R1 Hodie nata est beata (Ma) ; ////scpf- ; repéré automatiquement (graine gregall), validé par marteo",
 pfN,variante C,csg-0390,048,3245,5885,154,93,"3307,5885,92,70",1225N3R2 Verbum caro factum est (tis.) ; cilsc3to-pf- ; capture de marteo ; seconde clivis plus longue (grave) : pfMN à envisager,
-pfB,choisi,csg-0390,084,4582,1351,120,73,"4582,1364,70,60","E2N2R2 Diligam te Domine virtus (tum) ; //pf>hipp2lsc2lst3 ; capture de marteo (pfB n° 1) ; points (pp2) et lettres c, t exclus","4607,1303,34,36;4664,1310,73,34;4549,1434,20,16"
-pfB,variante A,csg-0391,082,2404,3793,134,88,,"0624N3R1 Praecursor Domini venit (án) ; //pf>hhlsc2 ; capture de marteo (pfB n° 2), lettre c exclue","2440,3751,34,37"
+pfB,choisi,csg-0390,084,4582,1351,120,73,"4582,1364,70,60","E2N2R2 Diligam te Domine virtus (tum) ; //pf>hipp2lsc2lst3 ; capture de marteo (pfB n° 1) ; points (pp2) et lettres c, t exclus ; validé par marteo","4607,1303,34,36;4664,1310,73,34;4549,1434,20,16"
+pfB,variante A,csg-0391,082,2404,3793,134,88,,"0624N3R1 Praecursor Domini venit (án) ; //pf>hhlsc2 ; capture de marteo (pfB n° 2), lettre c exclue ; validé par marteo","2440,3751,34,37"
