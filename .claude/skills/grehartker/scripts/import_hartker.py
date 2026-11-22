@@ -3,6 +3,7 @@
 Usage (avec le Python de FontForge) :
     ffpython S/import_hartker.py src/grehartker.sfd <glyphe> <ms> <page> <x> <y> <w> <h> [bas|haut|centre]
     ffpython S/import_hartker.py src/grehartker.sfd <glyphe composé> <ms> <page> <x> <y> <w> <h> base <bx>,<by>,<bw>,<bh>
+    ffpython S/import_hartker.py src/grehartker.sfd --choisis <glyphe> …   exemplaires choisis (calage bas ; haut pour cl)
 
 <ms> : csg-0390 ou csg-0391 ; <page> : numéro e-codices sur 3 chiffres (031, 100…).
 <x> <y> <w> <h> : boîte du neume en pixels de l'image e-codices en pleine résolution
@@ -47,6 +48,19 @@ IIIF = "https://media.e-codices.ch/iip/csg/{ms}/{ms}_{page}.jp2/{x},{y},{w},{h}/
 def fetch(cache, ms, page, x, y, w, h):
     path = os.path.join(cache, "%s_%s_%d_%d_%d_%d.jpg" % (ms, page, x, y, w, h))
     if not os.path.exists(path):
+        # d'abord la page en cache (cache/pages, coordonnées de la bande décalées de BAND) :
+        # pas de réseau, e-codices pouvant être indisponible
+        try:
+            sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+            import hartker as H
+            band = H.band_path(ms, page)
+            if os.path.exists(band):
+                from PIL import Image
+                bx, by = H.BAND[0], H.BAND[1]
+                Image.open(band).crop((x - bx, y - by, x - bx + w, y - by + h)).save(path, quality=95)
+                return path
+        except ImportError:
+            pass
         url = IIIF.format(ms=ms, page=page, x=x, y=y, w=w, h=h)
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "grehartker-import"})
@@ -128,5 +142,23 @@ def main(sfd, name, ms, page, x, y, w, h, align="bas", basebox=None):
     print("%s : %s importé (échelle %g, calage %s)" % (name, src, SCALE, align))
 
 
+def choisis(sfd, glyphs):
+    """Importe en fond l'exemplaire choisi (sources/exemplaires.csv) de chaque glyphe."""
+    import csv
+    here = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(os.path.dirname(here), "sources", "exemplaires.csv"), encoding="utf-8") as fh:
+        rows = {r["glyph"]: r for r in csv.DictReader(fh) if r["role"] == "choisi"}
+    for g in glyphs:
+        r = rows.get(g)
+        if r is None:
+            print(g, ": pas d'exemplaire choisi")
+            continue
+        align = "haut" if g == "cl" or (g.startswith("cl") and parse(g)[1] == g) else "bas"
+        main(sfd, g, r["manuscript"], r["page"], r["x"], r["y"], r["w"], r["h"], align)
+
+
 if __name__ == "__main__":
-    main(*sys.argv[1:12])
+    if len(sys.argv) > 2 and sys.argv[2] == "--choisis":
+        choisis(sys.argv[1], sys.argv[3:])
+    else:
+        main(*sys.argv[1:12])
