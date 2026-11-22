@@ -35,7 +35,11 @@ import planche as P  # noqa: E402
 SCALE = 10.0      # unités de police par pixel e-codices
 UP = 4            # suréchantillonnage avant vectorisation
 VDIR = os.path.join(H.CACHE, "vectorisation")    # planches de vectorisation (à part des planches de choix)
-SMOOTH = 2.6      # flou gaussien (pixels de page) : efface le grain de l'encre et les vaguelettes
+SMOOTH = float(os.environ.get("VEC_FLOU", 1.0))      # flou gaussien (pixels de page) avant tracé
+ALPHA = float(os.environ.get("VEC_ALPHA", 0.9))      # potrace : < 1 garde les angles
+OPTTOL = float(os.environ.get("VEC_OPT", 1.0))       # potrace : fusion des courbes (lissage vectoriel)
+SIMP = float(os.environ.get("VEC_SIMP", 6))          # FontForge : erreur admise par simplify (unités)
+HARRIS = os.environ.get("VEC_HARRIS", "0") == "1"    # ancienne méthode (mélange de flous autour des angles)
 SPECK = 40        # taches isolées (pixels de page) ignorées : aspérités du papier
 HOLE = 30         # petits trous (pixels de page) bouchés : encre claire au milieu d'un trait
 CORNER_T = 0.45   # seuil relatif de la réponse de Harris pour un vrai angle
@@ -68,14 +72,18 @@ def trace(mask):
     m = np.pad(mask.astype(float), 3)
     big = np.kron(m, np.ones((UP, UP)))
     smooth = ndi.gaussian_filter(big, SMOOTH * UP)
-    sharp = ndi.gaussian_filter(big, 0.6 * UP)
-    near = corners(sharp)
-    # lissage fort partout, sauf autour des vrais angles du trait où l'on colle au tracé
-    w = ndi.gaussian_filter(near.astype(float), 1.5 * UP)
-    w = np.clip(w / max(w.max(), 1e-6) * 2, 0, 1)
-    final = (w * sharp + (1 - w) * smooth) > 0.5
+    if HARRIS:
+        sharp = ndi.gaussian_filter(big, 0.6 * UP)
+        w = ndi.gaussian_filter(corners(sharp).astype(float), 1.5 * UP)
+        w = np.clip(w / max(w.max(), 1e-6) * 2, 0, 1)
+        final = (w * sharp + (1 - w) * smooth) > 0.5
+    else:
+        # flou léger (garde les angles, y compris rentrants) ; le lissage des courbes se fait
+        # ensuite sur le tracé vectoriel (potrace opttolerance, FontForge simplify), qui
+        # conserve les points d'angle
+        final = smooth > 0.5
     bm = potrace.Bitmap(~final)      # potracer prend les pixels à 0 pour l'encre
-    return bm.trace(turdsize=SPECK * UP * UP, alphamax=1.0, opticurve=True, opttolerance=0.5), final.shape
+    return bm.trace(turdsize=SPECK * UP * UP, alphamax=ALPHA, opticurve=True, opttolerance=OPTTOL), final.shape
 
 
 def corners(img):
@@ -114,7 +122,7 @@ def to_glyph(g, path, shape):
     g.foreground = layer
     g.correctDirection()
     g.addExtrema()
-    g.simplify(4, ("mergelines", "smoothcurves"))
+    g.simplify(SIMP, ("mergelines", "smoothcurves", "removesingletonpoints"))
     g.round()
     g.color = 0xFFFF80
 
