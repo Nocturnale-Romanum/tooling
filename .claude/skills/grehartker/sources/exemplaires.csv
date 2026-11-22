@@ -636,7 +636,6 @@ trN3,choisi,csg-0391,180,5233,2895,108,58,"5233,2895,108,58","UMEXN3R2a Hic est 
 trN3,variante A,csg-0390,031,2284,4203,40,58,"2284,4203,40,58","A4N1R1 Canite tuba (Si) ; ///////tr-3vihj ; repéré automatiquement (graine gregall), validé par marteo",
 trN3,variante B,csg-0391,061,1693,1153,33,33,"1693,1153,33,33","APTPN3A Lux perpetua lucebit Sanctis tuis (ne,) ; //vi-tr-3hklss2cl-hl`vi-hl`prhm ; repéré automatiquement (graine gregall), validé par marteo",
 trN3,variante C,csg-0390,144,3467,6241,112,81,"3467,6241,112,81","Q1F5R1 Tribularer si nescirem (cór) ; //tr-3vi>hk ; repéré automatiquement (graine gregall), validé par marteo",
-trSN,choisi,csg-0391,143,4329,3990,151,82,"4329,3990,151,82","1111N2R2 Beatus Martinus obitum (in) ; trS-hj````nihlsut2qlhl!clhl ; repéré automatiquement (graine gregall), validé par marteo",
 trN1,choisi,csg-0390,074,3480,2096,146,102,"3480,2096,146,102","0106N2R1 Illuminare illuminare Jerusalem (te) ; tr-1hjpihmlsc3vi-hm ; repéré automatiquement (graine gregall), validé par marteo",
 trN1,variante A,csg-0390,022,2985,4586,129,80,"2985,4586,129,80","A2N1R3 Civitas Jerusalem (ret) ; tr-1hj ; repéré automatiquement (graine gregall), validé par marteo",
 trN1,variante B,csg-0390,068,3214,1057,125,85,"3214,1057,125,85","1228N1R1 Centum quadraginta (ri) ; tr-1 ; repéré automatiquement (graine trN1), validé par marteo",
@@ -669,7 +668,6 @@ pt,variante B,csg-0391,065,1599,5609,102,79,"1599,5609,102,79","recherche sur to
 pt,variante C,csg-0391,198,4326,2771,133,81,"4326,2771,133,81","recherche sur tout Hartker (glyphe absent de NR, graine pt), à valider",
 pt,variante D,csg-0391,064,3691,2811,117,76,"3691,2811,117,76","recherche sur tout Hartker (glyphe absent de NR, graine pt), à valider",
 trS,choisi,csg-0391,157,3716,1085,161,66,"3716,1085,126,66","1122N2R2 Caeciliam intra cubiculum (ha) ; trShjsut2qlhj!clhj ; repéré automatiquement (graine gregall), validé par marteo ; trS seul absent de Hartker : tiré du trSsut2 choisi, sans les deux tractulus (marteo)","3836,1109,39,14;3844,1128,33,13"
-trSNsut2,choisi,csg-0391,143,4329,3990,151,82,"4329,3990,151,82","1111N2R2 Beatus Martinus obitum (in) ; trS-hj````nihlsut2qlhl!clhl ; repéré automatiquement (graine gregall), validé par marteo ; trSN avec ses deux tractulus : glyphe trSNsut2, absent de gregall, à créer (marteo)",
 trM,choisi,csg-0390,065,4869,6360,124,115,"4869,6414,49,61","1228N2R1 Effuderunt sanguinem sanctorum (dernier neume de la page) ; capture de marteo, validé",
 trM,variante A,csg-0390,016,2551,4902,143,99,"2603,4902,91,75","0324N3R1 Missus est Gabriel (tís) ; trM ; repéré automatiquement (graine po), validé par marteo, élargi à gauche jusqu'à la viN",
 trNT1,choisi,csg-0390,042,2484,4563,139,85,"2484,4599,71,49","1224R3 Sanctificamini filii (áu) ; //tr-~1lsl2 ; capture de marteo, préféré, validé",
@@ -681,5 +679,9 @@ tgSN,variante C,csg-0391,215,4621,3090,84,63,"4621,3130,24,23","09H4N1R1 Adonai 
 tgSN,variante D,csg-0390,062,4937,5278,88,48,"4975,5302,50,24","1227N1R2 Hic est discipulus (um, « satgS- ») ; 4 neumes à droite du tgSNsuu1 (marteo), validé par marteo",
 tgSNsuu1,choisi,csg-0390,062,4514,5263,86,75,"4550,5288,43,23","1227N1R2 Hic est discipulus (um) ; transcrit ta-tgSsuu1 dans NR, en fait tgSNsuu1 (marteo) ; capture de marteo ; glyphe absent de gregall, à créer",
 tgSNsuu1,variante A,csg-0390,088,2384,1012,97,79,"2427,1062,54,29","E1F5R3 Gaudebunt labia mea (Dó) ; transcrit tgShmsuu1 dans NR, en fait tgSNsuu1 (marteo) ; capture de marteo",
-trSN,variante A,csg-0390,016,2460,680,130,104,"2460,704,106,80","A1N1R1 Aspiciens a longe (première ligne) ; capture de marteo, deux tractulus exclus","2576,749,29,17;2557,775,33,15"
+trSN,choisi,csg-0390,026,4212,4223,141,103,"4212,4262,108,64","verset de Rogavi (390 p. 26) ; capture de marteo, deux tractulus exclus ; choisi par marteo","4326,4265,31,15;4328,4287,37,16"
+trSN,variante A,csg-0391,143,4329,3990,151,82,"4329,3990,151,82","1111N2R2 Beatus Martinus obitum (in) ; trS-hj````nihlsut2qlhl!clhl ; repéré automatiquement (graine gregall), validé par marteo",
+trSN,variante B,csg-0390,016,2460,680,130,104,"2460,704,106,80","A1N1R1 Aspiciens a longe (première ligne) ; capture de marteo, deux tractulus exclus","2576,749,29,17;2557,775,33,15"
+trSNsut2,choisi,csg-0391,143,4329,3990,151,82,"4329,3990,151,82","1111N2R2 Beatus Martinus obitum (in) ; trS-hj````nihlsut2qlhl!clhl ; repéré automatiquement (graine gregall), validé par marteo ; trSN avec ses deux tractulus : glyphe trSNsut2, absent de gregall, à créer (marteo)",
 trSNsut2,variante A,csg-0390,016,2460,680,145,110,"2460,704,106,80","A1N1R1 Aspiciens a longe (première ligne) ; capture de marteo, trSN avec ses deux tractulus",
+trSNsut2,variante B,csg-0390,026,4212,4223,153,103,"4212,4262,108,64","verset de Rogavi (390 p. 26) ; capture de marteo, trSN avec ses deux tractulus",
