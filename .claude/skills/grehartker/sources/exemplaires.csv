@@ -681,3 +681,5 @@ tgSN,variante C,csg-0391,215,4621,3090,84,63,"4621,3130,24,23","09H4N1R1 Adonai 
 tgSN,variante D,csg-0390,062,4937,5278,88,48,"4975,5302,50,24","1227N1R2 Hic est discipulus (um, « satgS- ») ; 4 neumes à droite du tgSNsuu1 (marteo), validé par marteo",
 tgSNsuu1,choisi,csg-0390,062,4514,5263,86,75,"4550,5288,43,23","1227N1R2 Hic est discipulus (um) ; transcrit ta-tgSsuu1 dans NR, en fait tgSNsuu1 (marteo) ; capture de marteo ; glyphe absent de gregall, à créer",
 tgSNsuu1,variante A,csg-0390,088,2384,1012,97,79,"2427,1062,54,29","E1F5R3 Gaudebunt labia mea (Dó) ; transcrit tgShmsuu1 dans NR, en fait tgSNsuu1 (marteo) ; capture de marteo",
+trSN,variante A,csg-0390,016,2460,680,130,104,"2460,704,106,80","A1N1R1 Aspiciens a longe (première ligne) ; capture de marteo, deux tractulus exclus","2576,749,29,17;2557,775,33,15"
+trSNsut2,variante A,csg-0390,016,2460,680,145,110,"2460,704,106,80","A1N1R1 Aspiciens a longe (première ligne) ; capture de marteo, trSN avec ses deux tractulus",
