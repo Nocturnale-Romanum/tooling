@@ -34,7 +34,9 @@ import planche as P  # noqa: E402
 SCALE = 10.0      # unités de police par pixel e-codices
 UP = 4            # suréchantillonnage avant vectorisation
 VDIR = os.path.join(H.CACHE, "vectorisation")    # planches de vectorisation (à part des planches de choix)
-SMOOTH = 1.2      # flou gaussien (pixels suréchantillonnés)
+SMOOTH = 2.6      # flou gaussien (pixels de page) : efface le grain de l'encre et les vaguelettes
+SPECK = 40        # taches isolées (pixels de page) ignorées : aspérités du papier
+HOLE = 30         # petits trous (pixels de page) bouchés : encre claire au milieu d'un trait
 
 
 def chosen(glyph):
@@ -43,17 +45,27 @@ def chosen(glyph):
 
 
 def mask_of(r):
+    """Masque du neume : composantes de la boîte et encre pâle reliée (planche.whole), nettoyé :
+    ouverture morphologique (aspérités du bord), taches isolées retirées, petits trous bouchés."""
     seg = H.load_seg([(r["manuscript"], r["page"])])
-    return P.whole(seg, r, pale=True)["mask"]
+    m = P.whole(seg, r, pale=True)["mask"]
+    m = ndi.binary_opening(m, np.ones((2, 2), bool)) | (m & ~ndi.binary_dilation(ndi.binary_opening(m, np.ones((2, 2), bool)), iterations=2))
+    lab, n = ndi.label(m)
+    sizes = ndi.sum(m, lab, range(1, n + 1))
+    m = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s >= SPECK])
+    holes = ndi.binary_fill_holes(m) & ~m
+    hl, hn = ndi.label(holes)
+    hs = ndi.sum(holes, hl, range(1, hn + 1))
+    return m | np.isin(hl, [i + 1 for i, s in enumerate(hs) if s < HOLE])
 
 
 def trace(mask):
     import potrace
     m = np.pad(mask.astype(float), 3)
     big = np.kron(m, np.ones((UP, UP)))
-    big = ndi.gaussian_filter(big, SMOOTH * UP / 2) > 0.5
-    bm = potrace.Bitmap(big)
-    return bm.trace(turdsize=4 * UP * UP, alphamax=1.0, opticurve=True, opttolerance=0.2), big.shape
+    big = ndi.gaussian_filter(big, SMOOTH * UP) > 0.5
+    bm = potrace.Bitmap(~big)        # potracer prend les pixels à 0 pour l'encre
+    return bm.trace(turdsize=SPECK * UP * UP, alphamax=1.2, opticurve=True, opttolerance=0.8), big.shape
 
 
 def to_glyph(g, path, shape):
@@ -75,7 +87,7 @@ def to_glyph(g, path, shape):
     g.foreground = layer
     g.correctDirection()
     g.addExtrema()
-    g.simplify(1.5, ("mergelines",))
+    g.simplify(4, ("mergelines", "smoothcurves"))
     g.round()
     g.color = 0xFFFF80
 
@@ -124,7 +136,10 @@ def sheet(sfd, glyphs, nom):
         # rendu : 1 unité = 1/10 pixel de page ; zoom 2 → em/10*2 pixels par em
         tmp = os.path.join(VDIR, "_rendu_%s.png" % g)
         font[g].export(tmp, int(em / SCALE * 2))
-        vec = Image.open(tmp).convert("RGB")
+        vec = Image.open(tmp).convert("L")
+        if np.asarray(vec).mean() < 128:          # FontForge rend en blanc sur noir
+            vec = Image.fromarray(255 - np.asarray(vec))
+        vec = vec.convert("RGB")
         try:
             gre = H.gregall_image(g, int(100 * 2))
         except KeyError:
