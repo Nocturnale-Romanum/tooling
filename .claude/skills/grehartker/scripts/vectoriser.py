@@ -6,8 +6,9 @@ Usage (avec le Python de FontForge, sans -I) :
 Pour chaque glyphe (ligne « choisi » de sources/exemplaires.csv) :
 1. masque de l'exemplaire : composantes d'encre de la boîte (hors colonne `exclure`), plus
    l'encre pâle qui leur est reliée (hampes fines), comme les surimpressions de planche.py ;
-2. le masque est agrandi 4 fois, lissé (flou gaussien puis seuil à mi-hauteur) pour ne pas
-   reproduire le grain de l'encre, puis vectorisé par potrace (courbes de Bézier) ;
+2. le masque est agrandi 4 fois et lissé (flou gaussien puis seuil à mi-hauteur) pour ne pas
+   reproduire le grain de l'encre ; autour des vrais angles du trait (détecteur de Harris), le
+   lissage est faible pour garder l'angle vif ; puis vectorisation par potrace (Bézier) ;
 3. le contour remplace le premier plan du glyphe, à l'échelle commune : 10 unités de police par
    pixel e-codices, sans aucune mise à l'échelle propre au glyphe (y vers le haut) ; FontForge
    corrige le sens des contours, ajoute les extrémums, simplifie légèrement et arrondit ;
@@ -37,6 +38,9 @@ VDIR = os.path.join(H.CACHE, "vectorisation")    # planches de vectorisation (à
 SMOOTH = 2.6      # flou gaussien (pixels de page) : efface le grain de l'encre et les vaguelettes
 SPECK = 40        # taches isolées (pixels de page) ignorées : aspérités du papier
 HOLE = 30         # petits trous (pixels de page) bouchés : encre claire au milieu d'un trait
+CORNER_T = 0.45   # seuil relatif de la réponse de Harris pour un vrai angle
+CORNER_N = 6      # au plus ce nombre d'angles par glyphe (les plus nets)
+CORNER_R = 4      # rayon (pixels de page) de la zone où l'on colle au tracé autour d'un angle
 
 
 def chosen(glyph):
@@ -63,9 +67,32 @@ def trace(mask):
     import potrace
     m = np.pad(mask.astype(float), 3)
     big = np.kron(m, np.ones((UP, UP)))
-    big = ndi.gaussian_filter(big, SMOOTH * UP) > 0.5
-    bm = potrace.Bitmap(~big)        # potracer prend les pixels à 0 pour l'encre
-    return bm.trace(turdsize=SPECK * UP * UP, alphamax=1.2, opticurve=True, opttolerance=0.8), big.shape
+    smooth = ndi.gaussian_filter(big, SMOOTH * UP)
+    sharp = ndi.gaussian_filter(big, 0.6 * UP)
+    near = corners(sharp)
+    # lissage fort partout, sauf autour des vrais angles du trait où l'on colle au tracé
+    w = ndi.gaussian_filter(near.astype(float), 1.5 * UP)
+    w = np.clip(w / max(w.max(), 1e-6) * 2, 0, 1)
+    final = (w * sharp + (1 - w) * smooth) > 0.5
+    bm = potrace.Bitmap(~final)      # potracer prend les pixels à 0 pour l'encre
+    return bm.trace(turdsize=SPECK * UP * UP, alphamax=1.0, opticurve=True, opttolerance=0.5), final.shape
+
+
+def corners(img):
+    """Vrais angles du trait (détecteur de Harris sur le masque peu lissé) : disques de
+    CORNER_R pixels de page autour des maxima de la réponse, au-dessus d'un seuil relatif."""
+    gy, gx = np.gradient(img)
+    s = 1.5 * UP
+    Ixx, Iyy, Ixy = (ndi.gaussian_filter(a, s) for a in (gx * gx, gy * gy, gx * gy))
+    R = Ixx * Iyy - Ixy * Ixy - 0.05 * (Ixx + Iyy) ** 2
+    if R.max() <= 0:
+        return np.zeros_like(img, bool)
+    peaks = (R == ndi.maximum_filter(R, size=int(4 * UP))) & (R > CORNER_T * R.max())
+    ys, xs = np.nonzero(peaks)
+    keep = np.argsort(-R[ys, xs])[:CORNER_N]
+    peaks = np.zeros_like(peaks)
+    peaks[ys[keep], xs[keep]] = True
+    return ndi.binary_dilation(peaks, iterations=int(CORNER_R * UP))
 
 
 def to_glyph(g, path, shape):
