@@ -13,7 +13,7 @@ Pour chaque glyphe (ligne « choisi » de sources/exemplaires.csv) :
    corrige le sens des contours, ajoute les extrémums, simplifie légèrement et arrondit ;
 4. caler.py cale ensuite le contour sur gregall (bas sur bas, `cl` haut sur haut, centrage
    relatif à la chasse, élargissement de chasse ≤ 20 %) : on garde de gregall tout sauf le tracé.
---planche NOM : cache/planches/NOM.png, une ligne par glyphe : exemplaire de Hartker, glyphe
+--planche NOM : cache/vectorisation/NOM.png, une ligne par glyphe : exemplaire de Hartker, glyphe
 vectorisé rendu, gregall, à la même échelle.
 """
 import argparse
@@ -33,6 +33,7 @@ import planche as P  # noqa: E402
 
 SCALE = 10.0      # unités de police par pixel e-codices
 UP = 4            # suréchantillonnage avant vectorisation
+VDIR = os.path.join(H.CACHE, "vectorisation")    # planches de vectorisation (à part des planches de choix)
 SMOOTH = 1.2      # flou gaussien (pixels suréchantillonnés)
 
 
@@ -79,22 +80,9 @@ def to_glyph(g, path, shape):
     g.color = 0xFFFF80
 
 
-def render(sfd, glyph, px):
-    """Rendu du glyphe vectorisé à l'échelle de la page × zoom (comme gregall_image)."""
-    import fontforge
-    f = fontforge.open(sfd)
-    g = f[glyph]
-    xmin, ymin, xmax, ymax = g.boundingBox()
-    f.close()
-    tmp = os.path.join(H.CACHE, "planches", "_v_%s.png" % glyph)
-    ff = fontforge.open(sfd)
-    ff[glyph].export(tmp, int(px))
-    ff.close()
-    return Image.open(tmp).convert("RGB")
-
-
 def main():
     import fontforge
+    os.makedirs(VDIR, exist_ok=True)
     ap = argparse.ArgumentParser()
     ap.add_argument("sfd")
     ap.add_argument("glyphes", nargs="+")
@@ -134,7 +122,7 @@ def sheet(sfd, glyphs, nom):
         x, y, w, h = (int(r[k]) for k in "xywh")
         crop = H.crop(r["manuscript"], r["page"], x, y, w, h, pad=10, zoom=2)
         # rendu : 1 unité = 1/10 pixel de page ; zoom 2 → em/10*2 pixels par em
-        tmp = os.path.join(H.CACHE, "planches", "_v_%s.png" % g)
+        tmp = os.path.join(VDIR, "_rendu_%s.png" % g)
         font[g].export(tmp, int(em / SCALE * 2))
         vec = Image.open(tmp).convert("RGB")
         try:
@@ -157,8 +145,13 @@ def sheet(sfd, glyphs, nom):
             out.paste(im, (xx, yy + lab))
             xx += im.width + 20
         yy += max(im.height for im in ims) + lab + 10
-    path = os.path.join(H.CACHE, "planches", nom + ".png")
+    path = os.path.join(VDIR, nom + ".png")
     out.save(path)
+    for g in glyphs:
+        try:
+            os.remove(os.path.join(VDIR, "_rendu_%s.png" % g))
+        except OSError:
+            pass
     print(path)
 
 
