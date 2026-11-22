@@ -664,9 +664,9 @@ tgS,variante C,csg-0391,184,3943,3223,37,41,"3960,3248,20,16","CONPN3R1 Iste est
 tgS3,choisi,csg-0391,113,4753,3302,92,80,"4753,3341,20,21","1011N1R1 Felix es sacra (ma:) ; ta-vitoS2hitoS2hjsut1/tgS3/sa!cl ; repéré automatiquement (graine tg), élargi à droite et en haut (marteo), validé",
 pt,choisi,csg-0390,104,2841,1104,101,82,"2841,1104,101,82","recherche sur tout Hartker (graine pt), validé par marteo",
 pt,variante A,csg-0390,048,3742,5871,125,95,"3742,5871,125,95","1225N3R2 Verbum caro factum est (tis.) ; `````sa-pp1lse4`pe-lss3``ptlsi7lsx6 ; repéré automatiquement (graine gregall), validé par marteo (juste mais peu joli)",
-pt,variante B,csg-0391,065,1599,5609,102,79,"1599,5609,102,79","recherche sur tout Hartker (glyphe absent de NR, graine pt), à valider",
-pt,variante C,csg-0391,198,4326,2771,133,81,"4326,2771,133,81","recherche sur tout Hartker (glyphe absent de NR, graine pt), à valider",
-pt,variante D,csg-0391,064,3691,2811,117,76,"3691,2811,117,76","recherche sur tout Hartker (glyphe absent de NR, graine pt), à valider",
+pt,variante B,csg-0391,065,1599,5609,102,79,"1599,5609,102,79","recherche sur tout Hartker (glyphe absent de NR, graine pt), validé par marteo",
+pt,variante C,csg-0391,198,4326,2771,133,81,"4326,2771,133,81","recherche sur tout Hartker (glyphe absent de NR, graine pt), validé par marteo",
+pt,variante D,csg-0391,064,3691,2811,117,76,"3691,2811,117,76","recherche sur tout Hartker (glyphe absent de NR, graine pt), validé par marteo",
 trS,choisi,csg-0391,157,3716,1085,161,66,"3716,1085,126,66","1122N2R2 Caeciliam intra cubiculum (ha) ; trShjsut2qlhj!clhj ; repéré automatiquement (graine gregall), validé par marteo ; trS seul absent de Hartker : tiré du trSsut2 choisi, sans les deux tractulus (marteo)","3836,1109,39,14;3844,1128,33,13"
 trM,choisi,csg-0390,065,4869,6360,124,115,"4869,6414,49,61","1228N2R1 Effuderunt sanguinem sanctorum (dernier neume de la page) ; capture de marteo, validé",
 trM,variante A,csg-0390,016,2551,4902,143,99,"2603,4902,91,75","0324N3R1 Missus est Gabriel (tís) ; trM ; repéré automatiquement (graine po), validé par marteo, élargi à gauche jusqu'à la viN",
