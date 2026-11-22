@@ -329,6 +329,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `saM3`, `saMN4`, `sc1`, `stS`, `toB1`, `toM`, `trG1`, `trG2`, `trNT`, `trS1`, `vsNB`, et deux
   familles absentes de NR : `tg` (`tg1`, `tgM`, `tgS1`, `tgS4`) et `tv`. Éléments su/pp : u → taN,
   x → stB ; v, w, y d'après les décompositions existantes.
+  Règle (marteo, 22 novembre 2026) : un glyphe absent de NR n'est probablement pas dans Hartker ; il
+  est composé à la main à partir des formes de base, sauf si sa source gregall est dans Hartker
+  (`gregall_sources.tsv`, source « H… ») — alors on va chercher cet exemplaire.
 - **Lot salicus (21 novembre 2026) :** `sa` 390 p. 29, `sa1` 390 p. 32 (boîte agrandie à la virga) ;
   `or_salicus` = boucle du `sa` choisi (390 p. 29, 1589,1350), `or_couche` = oriscus couché du `sa1`
   choisi (390 p. 32, 1678,4227). Composés : surimpression de `or_salicus` ou `or_couche` selon la
