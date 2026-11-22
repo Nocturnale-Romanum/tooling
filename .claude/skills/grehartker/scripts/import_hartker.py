@@ -163,7 +163,10 @@ def choisis(sfd, glyphs):
             print(g, ": pas d'exemplaire choisi")
             continue
         align = "haut" if g == "cl" or (g.startswith("cl") and parse(g)[1] == g) else "bas"
-        main(sfd, g, r["manuscript"], r["page"], r["x"], r["y"], r["w"], r["h"], align)
+        # un processus par glyphe : rouvrir la même police dans un seul processus FontForge
+        # a fait perdre des glyphes (22 novembre 2026)
+        subprocess.run([sys.executable, os.path.abspath(__file__), sfd, g, r["manuscript"], r["page"],
+                        r["x"], r["y"], r["w"], r["h"], align], check=True)
 
 
 if __name__ == "__main__":
