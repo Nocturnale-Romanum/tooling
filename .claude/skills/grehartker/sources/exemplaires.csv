@@ -782,7 +782,4 @@ pfEpi,variante A,csg-0391,202,3205,3892,86,69,"3205,3892,86,69","H1F4R3 Audi Dom
 toEclB,choisi,csg-0391,213,4069,4200,154,72,"4069,4200,154,72","09H3N1R1 Peto Domine (hu) ; to!cl> ; repéré automatiquement (graine gregall), à valider",
 qlEclB1,choisi,csg-0391,217,3105,5180,129,101,"3105,5180,129,101","09H5N1R1 Domine Rex omnipotens (men) ; clql!cl>1 ; repéré automatiquement (graine gregall), à valider",
 qiEclB,choisi,csg-0391,070,3020,5536,74,56,"3020,5536,74,56","P5F5N3R2 Ponit nubem (suum) ; cl-///qi!cl> ; repéré automatiquement (graine gregall), à valider",
-viNB,choisi,csg-0390,094,3546,4587,68,71,"3546,4587,68,71","EXF3A5 Magnus dominus (Mag) ; vi-> ; repéré automatiquement (graine viB), à valider",
-viNB,variante A,csg-0390,075,1925,2781,55,58,"1925,2781,55,58","0106N1R2 In columbae specie (In) ; vi->lsal6 ; repéré automatiquement (graine viB), à valider",
-viNB,variante B,csg-0391,176,4944,4228,62,72,"4944,4228,62,72","PMEXN2A3 Sancti qui sperant (pen) ; vi-> ; repéré automatiquement (graine viB), à valider",
-viNB,variante C,csg-0390,065,3166,4336,57,52,"3166,4336,57,52","UMEXN3A2 Habitabit in tabernaculo tuo (sanc) ; vi->hg ; repéré automatiquement (graine viB), à valider",
+viNB,choisi,csg-0390,042,2728,1041,85,91,,"1224R1 Sanctificamini hodie (ma, « majestatem ») ; vi-> ; capture d'écran de marteo (exemple 1)",
