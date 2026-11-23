@@ -355,6 +355,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   Dès qu'un exemplaire de la base est validé, refaire une passe avec `--graine BASE` (forme et
   taille de Hartker ; `po` : scores 0,4–0,5 au lieu de 0,2 avec gregall) ; les exemplaires validés
   restent en tête.
+- **Captures d'écran plein écran (navigateur e-codices) :** recadrer autour du centre (≈ 350×250 px
+  autour du neume) avant de corréler (`capture2.py`) ; un grand recadrage peut se caler ailleurs
+  (391 p. 157 : faux à 0,50, juste à 0,80 recadré). Vérifier que plusieurs recadrages concordent.
 - **Économie :** marteo demande de limiter l'examen d'images par Claude (coût en jetons) :
   préparer les planches et les lui laisser juger, plutôt que de les lire soi-même.
 
