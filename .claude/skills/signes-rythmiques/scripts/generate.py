@@ -1,5 +1,5 @@
 """Generation of one <ID>_marteo.gabc from <ID>_dcrochu.gabc, in memory. The current directory is the repository root."""
-import glob, os, re, sys
+import glob, os, re, sys, tempfile
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from nrparse import *
 from build import rows_for
@@ -7,8 +7,10 @@ from rules import predict_piece, digits_piece
 from writer import rewrite, expand_shorthands, fix_liquescent_strophae, shorthands_left
 from raise_nabc import raise_body
 from model import load_model
+from office import office
 
 _M = None
+_TMP = tempfile.mkdtemp(prefix='signes-office-')
 
 
 def model():
@@ -38,7 +40,11 @@ def strip_signs(s):
 def generate(i):
     """Everything about the generated piece: text of the file, rows, signs, raised syllables, checks."""
     T, L = model()
-    path = f'gabc/{i}_dcrochu.gabc'
+    src = f'gabc/{i}_dcrochu.gabc'
+    # ex officio corrections first: the rest of the chain reads the corrected copy
+    fixed, changes = office(open(src, encoding='utf-8', errors='replace', newline='').read())
+    path = os.path.join(_TMP, f'{i}_dcrochu.gabc')
+    open(path, 'w', encoding='utf-8', newline='').write(fixed)
     stat = dict(aligned_notes=0, unaligned_notes=0, unaligned_snip=0, no_nabc_notes=0, ex=[])
     rows = rows_for(i, path, L, stat)
     P = predict_piece(rows, T)
@@ -55,7 +61,7 @@ def generate(i):
     if b'\r\n' in open(path, 'rb').read():
         txt = txt.replace('\n', '\r\n')
     d0 = open(path, encoding='utf-8', errors='replace').read().rpartition('%%')[2].replace('\r\n', '\n')
-    return dict(id=i, path=path, text=txt, first=first, rows=rows, P=P, Dg=Dg, stat=stat, raised=raised,
+    return dict(id=i, path=path, src=src, office=changes, text=txt, first=first, rows=rows, P=P, Dg=Dg, stat=stat, raised=raised,
                 signed=signed, body=body,
                 same=strip_signs(fix_liquescent_strophae(expand_shorthands(d0))) == strip_signs(signed.replace('\r\n', '\n')),
                 left=shorthands_left(body))

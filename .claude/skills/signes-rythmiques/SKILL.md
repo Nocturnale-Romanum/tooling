@@ -102,6 +102,7 @@ Une reprise (`+`, `‡`) recopie exactement le corps du répons. Tout écart dan
 - **`lsc` :** indique une note rapide.
 - **`pp` :** en NABC, il s'écrit après le glyphe de base, mais ses notes GABC viennent avant celles du glyphe.
 - **Liquescence NABC `>` (`or>`, `vi>`, `pe>1`…) :** elle correspond soit aux notes du glyphe de base dont la dernière porte une liquescence augmentative (GABC `>`), soit à une note de plus, diminuée (GABC `~`). Exemple : `cum(hggof~|cllsc3`or>)`, où `or>` couvre `go` et `f~`. L'alignement (`lenprob` dans `build.py`) admet toujours les deux nombres de notes.
+- **Glyphes liés par `!` :** la dernière note du premier glyphe peut être la première du suivant, comptée une seule fois en GABC. Ainsi `sa!cl-` couvre 4 notes (`jjokg`), et non 5. L'alignement admet que le glyphe placé avant `!` couvre une note de moins (`glued` dans `nrparse.py`, `lenprob` dans `build.py`).
 - **Ce qu'il faut regarder :** la barre suivante, la nature syllabique ou mélismatique de la note, et le neume suivant (pour le quilisma).
 
 ### Élévation du NABC sous les épisèmes
@@ -115,6 +116,13 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 ### Écriture
 - **Raccourcis :** toujours développer les strophas et virgas multiples (`fss` → `fsfs`, `fsss` → `fsfsfs`, `fvv` → `fvfv`), dans la partie GABC seulement. `fss_` est ambigu : Gregorio 6.1 l'épisème comme `fs_fs`, alors que seul `fsfs_` est correct. Le NABC a ses propres `ss` (`lss2`), qu'il ne faut pas toucher.
 - **Inclinatum suivi d'une stropha liquescente :** quand dcrochu écrit deux notes losangées consécutives dont la deuxième est une stropha liquescente (`H!Gs<`, `H!Gs>`, `HGs<`, `HGs>`), supprimer la stropha et le `!`, et mettre une liquescence ordinaire : `HG>`. Le corpus `_marteo` écrit toujours ces paires sans `!`.
+- **Corrections d'office de `fusion-repons` (consigne de marteo, 19/11/2026) :** le générateur les applique au texte de dcrochu avant de poser les signes (`office.py`) et les liste à l'écran :
+  - **R2 :** les coupes imposées, quel que soit le fichier : *quó/ni/am*, *po/te…* (en début de mot : *omní/pot/ens* reste), *í/de/o*, *dis/per…*, *sic/ut*, *di/gnis…*, *a/gnus…*, *sanc/tus…*, *trans-* ;
+  - **R13, premier cas :** `//` → `/` après un punctum seul, même précédé d'un bémol (`ixh//` → `ixh/`) ;
+  - **R5 ter :** teneur d'un verset sur `i` ou `j` : `ta` → `tahh`, `vi` → `vihh` sur ses notes sans hauteur, et le crochet voisin prend la même hauteur (`obvi` → `obhhvihh`, R17) ;
+  - **R14 :** strophas développées (ci-dessous, dans `writer.py`).
+
+  Le second cas de R13 et R11 (alléluia standard) ne sont pas appliqués. Le contrôle « seuls les signes diffèrent de dcrochu » porte sur le texte ainsi corrigé.
 - **En-tête :** premier bloc d'en-tête de dcrochu, avec `submitter:marteo;` et `nabc-lines:1;`. Les fins de ligne CRLF sont conservées.
 - **Échantillons :** les compiler avec la police NABC `gregall` (`\gresetnabcfont{gregall}{12}`), et non `gresgmodern`, même si `common_headers.tex` l'indique.
 - **Codes de pièce :** tout code cité (`P3F4R1`, `0202N1R2`) est un lien vers `https://nocturnale.marteo.fr/chant/<code>`.
@@ -148,6 +156,7 @@ Les épisèmes entrent souvent en collision avec le NABC de dcrochu. Quand une n
 | `build.py` | Alignement des notes sur le NABC (programmation dynamique) et traits de contexte de chaque note |
 | `rules.py` | Règles, prédiction par pièce, chiffres, scores |
 | `writer.py` | Écriture des signes dans le GABC et développement des raccourcis |
+| `office.py` | Corrections d'office de `fusion-repons` (R2, R13, R5 ter), appliquées par `generate.py` avant les signes |
 | `raise_nabc.py` | Élévation du NABC, utilisable seule : `python raise_nabc.py <fichier> [--write]` |
 | `model.py`, `model.json` | Table des neumes et longueurs des glyphes |
 | `split.json` | Tirage du 08/11/2026, graine 20261108 : 709 pièces pour l'apprentissage, 304 pour la vérification |

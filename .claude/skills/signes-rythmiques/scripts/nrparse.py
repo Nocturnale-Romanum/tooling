@@ -113,11 +113,12 @@ RE_TOK = re.compile(
 
 
 class Atom:
-    __slots__ = ('role', 'name', 'count', 'ls', 'cx', 'bracket', 'raw')
+    __slots__ = ('role', 'name', 'count', 'ls', 'cx', 'bracket', 'raw', 'glued')
 
     def __init__(self, role, name, count, cx, bracket, raw=''):
         self.role, self.name, self.count, self.cx, self.bracket, self.raw = role, name, count, cx, bracket, raw
         self.ls = []
+        self.glued = False   # followed by `!`: its last note may be the first note of the next glyph
 
 
 def glyph_name(g):
@@ -159,6 +160,8 @@ def parse_nabc(s, state, residue=None):
             continue
         if m.group('bang'):
             bang = True
+            if cx and cx['gl']:
+                cx['gl'][-1].glued = True
             continue
         if m.group('gl'):
             if not bang:

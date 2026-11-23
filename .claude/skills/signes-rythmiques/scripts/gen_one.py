@@ -96,6 +96,9 @@ def main():
     print('episemes', vals.count('E'), 'points', vals.count('D'), 'chiffres', sorted(set(G['Dg'].values())), len(G['Dg']))
     for e in st['ex']:
         print('  NON ALIGNE', e)
+    print('corrections d office (fusion-repons) :', len(G['office']))
+    for c in G['office']:
+        print('   ', c)
     print('--- fins d incise (barre, signe, R = reprise, incise, <a revoir>)')
     print('\n'.join(incise_ends(G)))
     os.makedirs(samples, exist_ok=True)

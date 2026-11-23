@@ -33,6 +33,15 @@ def two_up(ns, n):
 def lenprob(a, L):
     if a.role != 'base':
         return {1: 1.0}
+    d = _lenprob(a, L)
+    if a.glued:
+        # sa!cl-: the last note of the salicus is the first note of the clivis, counted once in GABC
+        for k in [k for k in d if k > 1]:
+            d.setdefault(k - 1, .02)
+    return d
+
+
+def _lenprob(a, L):
     if a.name[:2] in ('ql', 'qi'):
         # the quilisma glyph may cover only the wavy note when another neume carries the following note
         d = {int(k): v for k, v in L.get(a.name, {'2': 1.0}).items()}
