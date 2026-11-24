@@ -287,7 +287,7 @@ ql	ql	qlNsu3	qlN + pu + pu + pu	régulier	6
 ql	ql	qlNppt1su1suu1	ta + qlN + pu + taN	régulier	3
 ql	ql	qlNsu1suu2	qlN + pu + taN + taN	régulier	2
 ql	ql	qlNsu1sut2	qlN + pu + ta + ta	régulier	2
-ql	ql	qlNppt2su1suv1su2	ta + ta + qlN + pu + taNN? + pu + pu	régulier	2
+ql	ql	qlNppt2su1suv1su2	ta + ta + qlN + pu + suv1? + pu + pu	régulier	2
 ql	ql	qlNsut1sux1	qlN + ta + stB	régulier	1
 ql	ql	qlNsu1suu1	qlN + pu + taN	régulier	1
 ql	ql	qlEclppt1	ta + ql!cl	ligature	824
@@ -430,7 +430,7 @@ tr	tr	trG1	pe + peS	marteo (24 novembre 2026)	0
 sa	sa	saM3	viN + or_couche + viN	marteo (24 novembre 2026)	0
 pes	sc	sc1	pu + pu + pu + vi	marteo (24 novembre 2026)	0
 tr	tr	trG2	toS2 + vi	marteo (24 novembre 2026)	0
-tg	tg	tgS4	pu + taNN + taN	marteo (24 novembre 2026)	0
+tg	tg	tgS4	pu + suv1 + taN	marteo (24 novembre 2026)	0
 tg	tg	tgM	pu + pu + gr	marteo (24 novembre 2026)	0
 tg	tg	tg1	pu + pu + pu + pu	marteo (24 novembre 2026) ; dernier point dans l'alignement des points 2 et 3	0
 tg	tg	tgS1	pu + ta + ta	marteo (24 novembre 2026)	0
@@ -466,14 +466,14 @@ vi	vi	visut2su2	vi + ta + ta + pu + pu	grammaire du nom, hors Hartker (24 novemb
 vi	vi	visut3suw1	vi + ta + ta + ta + gr	grammaire du nom, hors Hartker (24 novembre 2026)	0
 vi	vi	visut3suy1	vi + ta + ta + ta + grN	grammaire du nom, hors Hartker (24 novembre 2026)	0
 vi	vi	visut4	vi + ta + ta + ta + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
-su	su	suv1	taNN	grammaire du nom, hors Hartker (24 novembre 2026)	0
-pes	pe	pesu2suv1	pe + pu + pu + taNN	grammaire du nom, hors Hartker (24 novembre 2026)	0
+su	su	suv1	suv1	base : forme taNN (tractulus à double épisème), marteo (24 novembre 2026)	0
+pes	pe	pesu2suv1	pe + pu + pu + suv1	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pes	pe	peSsu1sux1	peS + pu + stB	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	su1suw1	pu + gr	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	su1sut1sux1	pu + ta + stB	grammaire du nom, hors Hartker (24 novembre 2026)	0
-su	su	su1suv1	pu + taNN	grammaire du nom, hors Hartker (24 novembre 2026)	0
+su	su	su1suv1	pu + suv1	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	su2suw1	pu + pu + gr	grammaire du nom, hors Hartker (24 novembre 2026)	0
-su	su	su2suv1	pu + pu + taNN	grammaire du nom, hors Hartker (24 novembre 2026)	0
+su	su	su2suv1	pu + pu + suv1	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	su3sut1	pu + pu + pu + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pp	pp	pp4	pu + pu + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	su5	pu + pu + pu + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
@@ -494,10 +494,10 @@ su	su	sut3suw1	ta + ta + ta + gr	grammaire du nom, hors Hartker (24 novembre 202
 su	su	sut3suy1	ta + ta + ta + grN	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pp	pp	ppu4	taN + taN + taN + taN	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pp	pp	ppu5	taN + taN + taN + taN + taN	grammaire du nom, hors Hartker (24 novembre 2026)	0
-su	su	suv1su2	taNN + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
+su	su	suv1su2	suv1 + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 vi	vi	visu1sut1sux1	vi + pu + ta + stB	grammaire du nom, hors Hartker (24 novembre 2026)	0
-vi	vi	visu1suv1	vi + pu + taNN	grammaire du nom, hors Hartker (24 novembre 2026)	0
-vi	vi	visuv1su2	vi + taNN + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
+vi	vi	visu1suv1	vi + pu + suv1	grammaire du nom, hors Hartker (24 novembre 2026)	0
+vi	vi	visuv1su2	vi + suv1 + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pes	pe	peNsu2suy1	peN + pu + pu + grN	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pes	pe	peSsut1su2	peS + ta + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pes	pe	peN1suw2	peN1 + gr + gr	grammaire du nom, hors Hartker (24 novembre 2026)	0
@@ -512,11 +512,11 @@ pq	pq	pqNsu2	pqN + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 to	to	toN1su1	toN1 + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 to	to	toN1suu1su2	toN1 + taN + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 vi	vi	viNsut1suu1	viN + ta + taN	grammaire du nom, hors Hartker (24 novembre 2026)	0
-ql	ql	qlNsu1suv1su2	qlN + pu + taNN + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
-su	su	su1suv1su2	pu + taNN + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
+ql	ql	qlNsu1suv1su2	qlN + pu + suv1 + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
+su	su	su1suv1su2	pu + suv1 + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
 pes	pe	peNsu4	peN + pu + pu + pu + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
-pes	pe	pesuv1su1sut1	pe + taNN + pu + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
-su	su	suv1su1sut1	taNN + pu + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
+pes	pe	pesuv1su1sut1	pe + suv1 + pu + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
+su	su	suv1su1sut1	suv1 + pu + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
 sa	sa	saNsu2sut1	saN + pu + pu + ta	grammaire du nom, hors Hartker (24 novembre 2026)	0
 vi	vi	viNsu2sux1	viN + pu + pu + stB	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	su2sux1	pu + pu + stB	grammaire du nom, hors Hartker (24 novembre 2026)	0

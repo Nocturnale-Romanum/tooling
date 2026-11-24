@@ -100,6 +100,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   régénérer aussi tous les composés qui contiennent un oriscus** (décompositions contenant `or_`),
   sinon ils gardent l'ancien oriscus. Relancer les composeurs sur ces glyphes nommés seulement :
   une passe sur tout recompose aussi les composés recalés à la main par marteo.
+- `taNN` (tractulus à double épisème, `v` du NABC) : pas de glyphe `taNN` dans gregall, mais `suv1`
+  ne contient que lui : c'est `suv1` qui porte la forme (à tracer, exemplaire 391 p. 112, capture
+  de marteo) et que les décompositions référencent à la place de `taNN` (24 novembre 2026).
 - Glyphes nouveaux, absents de gregall (police de détourage, U+E68C–U+E698, après le bloc gregall
   de la version de marteo avec `ob`/`cb`) : composés automatiquement à partir des formes de base,
   sauf `qiEclEpi` et `qiEpoN1`, formes d'un bloc (ligaturées) à tracer (marteo, 24 novembre 2026).

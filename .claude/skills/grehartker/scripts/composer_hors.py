@@ -36,7 +36,7 @@ sys.path.insert(0, HERE)
 import hartker as H  # noqa: E402
 import oriscus as O  # noqa: E402
 
-PTS = {"pu", "ta", "taN", "taNN", "gr", "grN", "stB"}
+PTS = {"pu", "ta", "taN", "taNN", "suv1", "gr", "grN", "stB"}   # suv1 : forme taNN
 COMPOSE_HARTKER = 0x80C0FF
 COULEUR = 0x80FFFF
 MIN_N = 3
