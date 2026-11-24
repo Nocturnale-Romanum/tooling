@@ -19,6 +19,7 @@ est vide et dont toutes les formes sont disponibles (tracées ou composées).
    trois points du `tg` composé ; `tg1` : le 4e point dans l'alignement des points 2 et 3.
    Plusieurs formes principales (`tv`, `bvB`, `poG`…) : faute de mesures, chaque forme est
    centrée sur le contour correspondant du gabarit gregall (contours rangés de gauche à droite).
+Les oriscus sont ré-extraits de `pi`, `sa`, `sa1` à chaque composition (S/oriscus.py).
 3. Le groupe est calé à gauche sur le gabarit gregall ; couleur cyan (composé hors Hartker,
    à vérifier).
 """
@@ -33,6 +34,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import hartker as H  # noqa: E402
+import oriscus as O  # noqa: E402
 
 PTS = {"pu", "ta", "taN", "taNN", "gr", "grN", "stB"}
 COMPOSE_HARTKER = 0x80C0FF
@@ -58,7 +60,7 @@ def boxes(f):
 
     def b(n):
         if n not in cache:
-            cache[n] = f[n].boundingBox()
+            cache[n] = O.boite(f, n)
         return cache[n]
     return b
 
@@ -202,7 +204,7 @@ def main():
     sfd, noms = args[0], args[1:]
     dec, cho = lire()
     f = fontforge.open(sfd)
-    dispo = lambda p: p in f and (len(f[p].foreground) > 0 or bool(f[p].references))
+    dispo = lambda p: O.disponible(f, p)
     if not noms:
         noms = [n for n, r in dec.items() if n in f and n not in cho and not len(f[n].foreground)
                 and not f[n].references and r["statut"] not in ("base", "ligature")
@@ -225,7 +227,7 @@ def main():
             continue
         if not essai:
             g = f[n]
-            g.references = tuple((p, (1, 0, 0, 1, round(dx), round(dy))) for p, dx, dy in refs)
+            O.poser(f, g, refs)                  # oriscus ré-extraits de pi / sa / sa1, en contours
             g.color = COULEUR
             note = "Composé hors Hartker (composer_hors.py, écarts typiques), à vérifier"
             g.comment = "\n".join([l for l in (g.comment or "").split("\n") if l and "composer_hors" not in l] + [note])

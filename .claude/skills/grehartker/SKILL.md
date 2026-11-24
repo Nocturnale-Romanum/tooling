@@ -93,6 +93,13 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   `pi = or_pi + pu`, pendant court de la virga strata du pressus maior : `pr = vs + pu`).
   Ils sont extraits des glyphes tracés `pi`, `sa` et `sa1` respectivement et ne reçoivent pas de
   glyphe de police (marteo, 24 novembre 2026).
+  **Extraction : `S/oriscus.py`** (contour de `pi`, `sa`, `sa1` qui n'est ni le `pu` ni le `vi`
+  tracés). Les composeurs (`S/composer_auto.py`, `S/composer_hors.py`) ré-extraient les oriscus à
+  chaque composition et les recopient **en contours** (pas en références) dans les composés.
+  **Règle : après toute retouche de `pi`, `sa` ou `sa1`, et à chaque régénération des composés,
+  régénérer aussi tous les composés qui contiennent un oriscus** (décompositions contenant `or_`),
+  sinon ils gardent l'ancien oriscus. Relancer les composeurs sur ces glyphes nommés seulement :
+  une passe sur tout recompose aussi les composés recalés à la main par marteo.
 - Glyphes nouveaux, absents de gregall (police de détourage, U+E68C–U+E698, après le bloc gregall
   de la version de marteo avec `ob`/`cb`) : composés automatiquement à partir des formes de base,
   sauf `qiEclEpi` et `qiEpoN1`, formes d'un bloc (ligaturées) à tracer (marteo, 24 novembre 2026).
