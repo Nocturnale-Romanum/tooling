@@ -1,4 +1,4 @@
-"""(Expérimental) Trace une ligature (`xxExx`) en fusionnant les glyphes qu'elle lie, placés
+"""(Abandonné le 24 novembre 2026, résultats inexploitables ; gardé pour mémoire.) (Expérimental) Trace une ligature (`xxExx`) en fusionnant les glyphes qu'elle lie, placés
 d'après son exemplaire choisi.
 
 Usage (avec le Python de FontForge, sans -I) :

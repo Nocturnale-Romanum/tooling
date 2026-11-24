@@ -96,6 +96,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - Glyphes nouveaux, absents de gregall (police de détourage, U+E68C–U+E698, après le bloc gregall
   de la version de marteo avec `ob`/`cb`) : composés automatiquement à partir des formes de base,
   sauf `qiEclEpi` et `qiEpoN1`, formes d'un bloc (ligaturées) à tracer (marteo, 24 novembre 2026).
+- Tracé automatique des ligatures (`S/ligaturer.py` : glyphes liés calés sur l'exemplaire puis
+  réunis) essayé le 24 novembre 2026 et abandonné, trop loin d'être exploitable (comme la
+  vectorisation potrace) : marteo trace les ligatures à la main.
 - **Ligatures traitées en dernier** (décision de marteo, 13 novembre 2026) : une fois choisis les
   glyphes qui les composent, pour juger leur cohérence par superposition en transparence.
 - Ligatures (`!`) : seuls les morceaux qui se touchent sont liés (`clEpi = cl!or_pi + pu`) ; la
