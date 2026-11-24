@@ -210,7 +210,7 @@ def place(sfd, fonds):
         block = text[start:end]
         images = list(re.finditer(r"^Image2: \S+ \d+ \S+ \S+ (\S+) \S+\n.*?^EndImage2\n", block, flags=re.S | re.M))
         fresh = [m for m in images if abs(float(m.group(1)) - IMG_SCALE) > 1e-6]
-        last = fresh[-1] if fresh else images[-1]
+        last = fresh[0] if fresh else images[0]          # FontForge met la nouvelle image en tête
         new_img = re.sub(r"^Image2: (\S+) (\d+) \S+ \S+ \S+ \S+",
                          lambda m: "Image2: %s %s %g %g %g %g" % (m.group(1), m.group(2), left, top, IMG_SCALE, IMG_SCALE),
                          last.group(0), count=1, flags=re.M)
