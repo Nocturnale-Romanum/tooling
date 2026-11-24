@@ -106,8 +106,10 @@ def piece_sequence(code, glyph, decs):
     et la liste des syllabes."""
     rows = H.piece_rows().get(code, [])
     seq, syls, synth = [], [], False
+    lettre = bool(SKIP.search(glyph))           # lettre significative : la cible est le neume porteur
     for k, r in enumerate(rows):
         syls.append((r["syllabe"], r["nabc"]))
+        hote = None                              # indices dans seq des formes du dernier neume
         for g in r["glyphes"].split():
             if g == "ob":
                 synth = True
@@ -115,11 +117,18 @@ def piece_sequence(code, glyph, decs):
             if g == "cb":
                 synth = False
                 continue
-            if synth or SKIP.search(g):
+            if synth:
                 continue
+            if SKIP.search(g):
+                if lettre and g == glyph and hote:
+                    for i in hote:
+                        seq[i] = seq[i][:3] + (True,)
+                continue
+            hote = []
             for form in decs.get(g, [g]):
                 cl = form_class(form)
                 if cl:
+                    hote.append(len(seq))
                     seq.append((form if form in _T else cl, g, k, g == glyph))
     return seq, syls
 
