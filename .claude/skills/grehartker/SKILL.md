@@ -91,6 +91,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - Oriscus sans glyphe propre dans gregall : `or_salicus` (∩, salicus), `or_couche` (~, certains
   salicus : `sa1`, `saN1`, `saB2`, `saM1`, `saNB1`, `saM4`), `or_pi` (pressus minor :
   `pi = or_pi + pu`, pendant court de la virga strata du pressus maior : `pr = vs + pu`).
+  Ils sont extraits des glyphes tracés `pi`, `sa` et `sa1` respectivement et ne reçoivent pas de
+  glyphe de police (marteo, 24 novembre 2026).
+- Glyphes nouveaux, absents de gregall (police de détourage, U+E68C–U+E698, après le bloc gregall
+  de la version de marteo avec `ob`/`cb`) : composés automatiquement à partir des formes de base,
+  sauf `qiEclEpi` et `qiEpoN1`, formes d'un bloc (ligaturées) à tracer (marteo, 24 novembre 2026).
 - **Ligatures traitées en dernier** (décision de marteo, 13 novembre 2026) : une fois choisis les
   glyphes qui les composent, pour juger leur cohérence par superposition en transparence.
 - Ligatures (`!`) : seuls les morceaux qui se touchent sont liés (`clEpi = cl!or_pi + pu`) ; la
