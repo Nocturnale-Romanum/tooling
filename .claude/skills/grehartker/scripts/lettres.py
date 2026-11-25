@@ -44,6 +44,53 @@ def zone(pos, x0, y0, x1, y1):
     return xs[0], ys[0], xs[1], ys[1], (ex, ey)
 
 
+def autour(seg, key, box, lettre, pos, pieces=None):
+    """Composantes de la lettre `lettre` (position NABC `pos`) autour de la boîte du neume
+    (x0, y0, x1, y1), ou None. Sert aussi à auto.py pour prolonger le cadre des glyphes porteurs."""
+    pieces = pieces or A.gregall_pieces(lettre)
+    x0, y0, x1, y1 = box
+    zx0, zy0, zx1, zy1, (ex, ey) = zone(pos, x0, y0, x1, y1)
+    tl = L.text_lines(key)
+    bx, by, bw, bh, bm = pieces[0]
+    t = dict(n=H.norm(bm), h=bh, w=bw)
+    best = None
+    for c in seg[key]:
+        cx, cy = c["x"] + c["w"] / 2, c["y"] + c["h"] / 2
+        if not (zx0 <= cx <= zx1 and zy0 <= cy <= zy1) or c["h"] < 10 or any(abs(cy - y) < 35 for y in tl):
+            continue
+        inter = max(0, min(x1, c["x"] + c["w"]) - max(x0, c["x"])) * max(0, min(y1, c["y"] + c["h"]) - max(y0, c["y"]))
+        if inter > 0.5 * c["w"] * c["h"]:
+            continue
+        adj = A.score(c, t) - DIST * ((cx - ex) ** 2 + (cy - ey) ** 2) ** 0.5 / 100
+        if best is None or adj > best[0]:
+            best = (adj, c)
+    if best is None:
+        return None
+    extra, _ = A.others(seg, key, best[1], pieces, tl) if len(pieces) > 1 else ([], 1)
+    return [best[1]] + extra
+
+
+def prolonger(seg, key, glyphe, box):
+    """Boîte (x0, y0, x1, y1) d'un glyphe porteur de lettres (`cllsc3`, `tolsc4lst3`…) prolongée
+    jusqu'à chaque lettre, cherchée à sa position NABC ; à défaut, de 40 px dans sa direction."""
+    x0, y0, x1, y1 = box
+    for lettre, pos in re.findall(r"(ls[a-z]+?)(\d)", glyphe):
+        try:
+            comps = autour(seg, key, box, lettre, int(pos))
+        except KeyError:                                   # lettre absente de gregall
+            comps = None
+        if comps:
+            x0, y0 = min([x0] + [c["x"] for c in comps]), min([y0] + [c["y"] for c in comps])
+            x1, y1 = max([x1] + [c["x"] + c["w"] for c in comps]), max([y1] + [c["y"] + c["h"] for c in comps])
+        else:
+            p = int(pos)
+            x0 -= 40 if p in (1, 4, 7) else 0
+            x1 += 40 if p in (3, 6, 9) else 0
+            y0 -= 40 if p in (1, 2, 3) else 0
+            y1 += 40 if p in (7, 8, 9) else 0
+    return x0, y0, x1, y1
+
+
 def chercher(seg, f, lettre, pieces):
     key = (f["manuscript"], f["page"])
     m = re.search(re.escape(lettre) + r"(\d)", f["nabc"])

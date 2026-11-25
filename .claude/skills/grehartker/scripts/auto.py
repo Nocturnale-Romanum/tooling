@@ -151,6 +151,10 @@ def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
     comps = [c] + extra
     x0, y0 = min(d["x"] for d in comps), min(d["y"] for d in comps)
     x1, y1 = max(d["x"] + d["w"] for d in comps), max(d["y"] + d["h"] for d in comps)
+    if re.search(r"ls[a-z]+\d", f.get("glyphe_cible") or ""):
+        # glyphe porteur de lettres : cadre prolongé jusqu'aux lettres, selon leur position NABC
+        import lettres
+        x0, y0, x1, y1 = lettres.prolonger(seg, key, f["glyphe_cible"], (x0, y0, x1, y1))
     return dict(manuscript=key[0], page=key[1], x=x0, y=y0, w=x1 - x0, h=y1 - y0,
                 base="%d,%d,%d,%d" % (c["x"], c["y"], c["w"], c["h"]), score=round(float(s), 2), morceaux=round(frac, 2),
                 adj=round(float(tot), 2), piece="%s ; %s ; repéré automatiquement (graine %s), à valider" % (f["piece"], f["nabc"], graine))

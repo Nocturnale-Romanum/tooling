@@ -95,6 +95,11 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   (marteo, 25 novembre 2026). L'oriscus se retouche là ; `pi` (= `orpi` + `pu`), `sa`
   (= `pu` + `orsa` + `vi`), `sa1` (= `pu` + `ortilde` + `vi`) et tous les composés à oriscus les
   référencent et suivent d'eux-mêmes. Les décompositions emploient ces noms.
+- **Glyphes porteurs de lettre** (`cllsc3`, `tolsc4lst3`…) : le cadre doit contenir la lettre.
+  `auto.py` le prolonge dans la direction de chaque lettre selon sa position NABC (pavé numérique :
+  1 en haut à gauche, 2 en haut, 3 en haut à droite, 4 à gauche, 6 à droite, 7 8 9 en bas, cf.
+  GregorioNabcRef) jusqu'à la composante qui ressemble à la lettre gregall
+  (`lettres.prolonger`), à défaut de 40 px (demande de marteo, 25 novembre 2026).
 - `taNN` (tractulus à double épisème, `v` du NABC) : pas de glyphe `taNN` dans gregall, mais `suv1`
   ne contient que lui : c'est `suv1` qui porte la forme (à tracer, exemplaire 391 p. 112, capture
   de marteo) et que les décompositions référencent à la place de `taNN` (24 novembre 2026).
