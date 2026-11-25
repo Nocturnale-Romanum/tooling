@@ -91,15 +91,10 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
 - Oriscus sans glyphe propre dans gregall : `or_salicus` (∩, salicus), `or_couche` (~, certains
   salicus : `sa1`, `saN1`, `saB2`, `saM1`, `saNB1`, `saM4`), `or_pi` (pressus minor :
   `pi = or_pi + pu`, pendant court de la virga strata du pressus maior : `pr = vs + pu`).
-  Ils sont extraits des glyphes tracés `pi`, `sa` et `sa1` respectivement et ne reçoivent pas de
-  glyphe de police (marteo, 24 novembre 2026).
-  **Extraction : `S/oriscus.py`** (contour de `pi`, `sa`, `sa1` qui n'est ni le `pu` ni le `vi`
-  tracés). Les composeurs (`S/composer_auto.py`, `S/composer_hors.py`) ré-extraient les oriscus à
-  chaque composition et les recopient **en contours** (pas en références) dans les composés.
-  **Règle : après toute retouche de `pi`, `sa` ou `sa1`, et à chaque régénération des composés,
-  régénérer aussi tous les composés qui contiennent un oriscus** (décompositions contenant `or_`),
-  sinon ils gardent l'ancien oriscus. Relancer les composeurs sur ces glyphes nommés seulement :
-  une passe sur tout recompose aussi les composés recalés à la main par marteo.
+  Ils ont des **glyphes techniques non codés** (pas de point de code) : `orpi`, `orsa`, `ortilde`
+  (marteo, 25 novembre 2026). L'oriscus se retouche là ; `pi` (= `orpi` + `pu`), `sa`
+  (= `pu` + `orsa` + `vi`), `sa1` (= `pu` + `ortilde` + `vi`) et tous les composés à oriscus les
+  référencent et suivent d'eux-mêmes. Les décompositions emploient ces noms.
 - `taNN` (tractulus à double épisème, `v` du NABC) : pas de glyphe `taNN` dans gregall, mais `suv1`
   ne contient que lui : c'est `suv1` qui porte la forme (à tracer, exemplaire 391 p. 112, capture
   de marteo) et que les décompositions référencent à la place de `taNN` (24 novembre 2026).

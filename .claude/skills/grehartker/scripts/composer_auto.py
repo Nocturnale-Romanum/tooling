@@ -6,10 +6,9 @@ Usage (avec le Python de FontForge, sans -I) :
 
 Sans glyphe : tous les glyphes de reference/decompositions.tsv qui ne sont ni des formes de base
 ni des ligatures et ont un exemplaire choisi. Les glyphes dont le premier plan contient déjà un
-tracé ne sont jamais touchés (sauf les composés bleus, dont le premier plan ne porte que des oriscus).
-Les oriscus (`or_pi`, `or_salicus`, `or_couche`) sont ré-extraits de `pi`, `sa`, `sa1` à chaque
-composition et recopiés en contours (S/oriscus.py). Ne relancer que sur des glyphes nommés : une
-passe sur tout recompose les composés bleus et efface les recalages de marteo.
+tracé ou des références non posées par ce script (couleur autre que bleu) ne sont jamais touchés.
+Ne relancer que sur des glyphes nommés : une passe sur tout recompose les composés bleus et efface
+les recalages de marteo.
 
 Pour chaque glyphe :
 1. masque de l'exemplaire choisi (planche.whole, encre pâle comprise, colonne `exclure`
@@ -40,7 +39,6 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import hartker as H  # noqa: E402
 import planche as P  # noqa: E402
-import oriscus as O  # noqa: E402
 from import_hartker import fetch, MARGIN, IMG_SCALE  # noqa: E402
 
 SCALE = 10.0
@@ -88,7 +86,7 @@ def bbox(g):
 
 
 def disponible(f, n, faits):
-    return O.disponible(f, n) or n in faits
+    return n in f and (len(f[n].foreground) > 0 or bool(f[n].references) or n in faits)
 
 
 def fusionner(comps, n):
@@ -112,7 +110,7 @@ def composer(f, g, parts, comps):
     comps = fusionner(comps, len(parts))
     if len(comps) != len(parts):
         return None, "%d composantes pour %d formes" % (len(comps), len(parts))
-    boxes = {p: O.boite(f, p) for p in set(parts)}
+    boxes = {p: bbox(f[p]) for p in set(parts)}
     area = lambda b: (b[2] - b[0]) * (b[3] - b[1])
     imain = max(range(len(parts)), key=lambda i: area(boxes[parts[i]]))
     cmain = max(range(len(comps)), key=lambda i: comps[i][4])
@@ -163,7 +161,7 @@ def main():
         if n not in f or n not in cho:
             continue
         g, r = f[n], cho[n]
-        if len(g.foreground) > 0 and g.color != COMPOSE:     # un composé bleu (oriscus en contours) se régénère
+        if (len(g.foreground) > 0 or g.references) and g.color != COMPOSE:   # tracé, ou composé à la main (pi, sa…)
             bilan["déjà tracé"].append(n)
             continue
         parts = [p.strip() for p in dec[n]["decomposition"].split("+")] if n in dec else []
@@ -175,7 +173,7 @@ def main():
             refs, X0, Y0 = res
             left, top = X0 + SCALE * (x - MARGIN), Y0 - SCALE * (y - MARGIN)
             if not essai:
-                O.poser(f, g, refs)             # oriscus ré-extraits de pi / sa / sa1, en contours
+                g.references = tuple((p, (1, 0, 0, 1, round(dx), round(dy))) for p, dx, dy in refs)
                 g.color = COMPOSE
             faits.add(n)
             bilan["composé"].append(n)

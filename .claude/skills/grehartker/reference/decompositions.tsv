@@ -121,13 +121,13 @@ clivis	cl	clSsuu1su2	clS + taN + pu + pu	régulier	1
 clivis	ci	ciG	clS + ta	d'après gregall	113
 clivis	ci	ciG1	clS + pu + pu	d'après gregall	4
 clivis	cl	clN1su2	clSN + pu + pu	d'après gregall	1
-clivis	cl	clEpi	cl!or_pi + pu	ligature	334
-clivis	cl	clEpilsc2	cl!or_pi + pu + lsc@2	ligature	90
+clivis	cl	clEpi	cl!orpi + pu	ligature	334
+clivis	cl	clEpilsc2	cl!orpi + pu + lsc@2	ligature	90
 clivis	cl	clEpo	cl!po	ligature	24
 clivis	cl	clEpoN1	cl!poN1	ligature	5
-clivis	cl	clEpisu1	cl!or_pi + pu + pu	ligature	4
+clivis	cl	clEpisu1	cl!orpi + pu + pu	ligature	4
 clivis	cl	clEclS	cl!clS	ligature	3
-clivis	cl	clEpilsc1lst3	cl!or_pi + pu + lsc@1 + lst@3	ligature	3
+clivis	cl	clEpilsc1lst3	cl!orpi + pu + lsc@1 + lst@3	ligature	3
 clivis	cl	clEpr	cl!vs + pu	ligature	1
 ds	ds	dsN	st + stN	d'après gregall	156
 ds	ds	ds	st + st	d'après gregall	53
@@ -172,14 +172,14 @@ pf	pf	pfB	pfB	base	2
 pf	pf	pflst2	pf + lst@2	régulier	27
 pf	pf	pflsc2	cl + cl + lsc_semi@2	d'après gregall	140
 pf	pf	pf1lsc2	pf + lsc@2	d'après gregall	64
-pf	pf	pfEpi	pf!or_pi + pu	ligature	2
-pi	pi	pi	or_pi + pu	d'après gregall	248
-pi	pi	pilst2	or_pi + pu + lst@2	d'après gregall	45
-pi	pi	pisu1	or_pi + pu + pu	d'après gregall	23
-pi	pi	piB	or_pi + stB	d'après gregall	17
-pi	pi	pilsc2	or_pi + pu + lsc@2	d'après gregall	10
-pi	pi	piM1sut1	or_pi + ta + ta	d'après gregall	1
-pi	pi	pisux1	or_pi + pu + stB	d'après gregall	1
+pf	pf	pfEpi	pf!orpi + pu	ligature	2
+pi	pi	pi	orpi + pu	d'après gregall	248
+pi	pi	pilst2	orpi + pu + lst@2	d'après gregall	45
+pi	pi	pisu1	orpi + pu + pu	d'après gregall	23
+pi	pi	piB	orpi + stB	d'après gregall	17
+pi	pi	pilsc2	orpi + pu + lsc@2	d'après gregall	10
+pi	pi	piM1sut1	orpi + ta + ta	d'après gregall	1
+pi	pi	pisux1	orpi + pu + stB	d'après gregall	1
 po	po	po	po	base	693
 po	po	poN1	poN1	base	102
 po	po	poB	poB	base	95
@@ -310,34 +310,34 @@ ql	ql	qlEclS1	ql!clS1	ligature	3
 ql	ql	qlEvs	ql!vs	ligature	2
 ql	ql	qlEclBppt1	ta + ql!clB	ligature	2
 ql	ql	qlEclB1	ql!clB1	ligature	1
-ql	ql	qlEclEpippt1	ta + ql!cl!or_pi + pu	ligature	1
+ql	ql	qlEclEpippt1	ta + ql!cl!orpi + pu	ligature	1
 ql	ql	qlEclM	ql!clM	ligature	1
-ql	ql	qlEclEpi	ql!cl!or_pi + pu	ligature	1
+ql	ql	qlEclEpi	ql!cl!orpi + pu	ligature	1
 ql	ql	qlEclNB	ql!clNB	ligature	1
 ql	ql	qlEpoTppt1	ta + ql!poT	ligature	1
 ql	ql	qlEclEclB	ql!cl!clB	ligature	1
 ql	ql	qlEclNBppt1	ta + ql!clNB	ligature	1
-sa	sa	sa	pu + or_salicus + vi	d'après gregall	680
-sa	sa	saB	pu + or_salicus + viB	d'après gregall	50
-sa	sa	sa1	pu + or_couche + vi	d'après gregall	29
-sa	sa	saN	pu + or_salicus + viN	d'après gregall	28
-sa	sa	saM	vi + or_salicus + vi	d'après gregall	18
-sa	sa	sapp1	pu + pu + or_salicus + vi	d'après gregall	12
-sa	sa	saB2	ta + or_couche + viB	d'après gregall	7
-sa	sa	saEclN	pu + or_salicus + clN	d'après gregall	7
-sa	sa	saN1	pu + or_couche + viN	d'après gregall	5
-sa	sa	saM4	viN + or_couche + vi	d'après gregall	5
+sa	sa	sa	pu + orsa + vi	d'après gregall	680
+sa	sa	saB	pu + orsa + viB	d'après gregall	50
+sa	sa	sa1	pu + ortilde + vi	d'après gregall	29
+sa	sa	saN	pu + orsa + viN	d'après gregall	28
+sa	sa	saM	vi + orsa + vi	d'après gregall	18
+sa	sa	sapp1	pu + pu + orsa + vi	d'après gregall	12
+sa	sa	saB2	ta + ortilde + viB	d'après gregall	7
+sa	sa	saEclN	pu + orsa + clN	d'après gregall	7
+sa	sa	saN1	pu + ortilde + viN	d'après gregall	5
+sa	sa	saM4	viN + ortilde + vi	d'après gregall	5
 sa	sa	saM2	vi + pq	d'après gregall	4
-sa	sa	saM1	vi + or_couche + vi	d'après gregall	4
-sa	sa	saEcl	pu + or_salicus + cl	d'après gregall	4
+sa	sa	saM1	vi + ortilde + vi	d'après gregall	4
+sa	sa	saEcl	pu + orsa + cl	d'après gregall	4
 sa	sa	saG	ta + pq	d'après gregall	3
-sa	sa	saNB1	viN + or_couche + viB	d'après gregall	3
-sa	sa	saMN1	vi + or_salicus + viN	d'après gregall	3
-sa	sa	saM6	viN + or_salicus + vi	d'après gregall	2
-sa	sa	saNsu1sut1	pu + or_salicus + viN + pu + ta	d'après gregall	1
-sa	sa	sa1EclNB	pu + or_couche + clNB	d'après gregall	1
-sa	sa	saM5ppt1	ta + ta + or_salicus + vi	corrigé par marteo (21 novembre 2026)	1
-sa	sa	saEclS1	pu + or_salicus + clS1	d'après gregall	1
+sa	sa	saNB1	viN + ortilde + viB	d'après gregall	3
+sa	sa	saMN1	vi + orsa + viN	d'après gregall	3
+sa	sa	saM6	viN + orsa + vi	d'après gregall	2
+sa	sa	saNsu1sut1	pu + orsa + viN + pu + ta	d'après gregall	1
+sa	sa	sa1EclNB	pu + ortilde + clNB	d'après gregall	1
+sa	sa	saM5ppt1	ta + ta + orsa + vi	corrigé par marteo (21 novembre 2026)	1
+sa	sa	saEclS1	pu + orsa + clS1	d'après gregall	1
 sf	sf	sf	pu + pu + cl	d'après gregall	93
 sf	sf	sfN	ta + ta + clN	d'après gregall	83
 sf	sf	sfS	ta + ta + cl	d'après gregall	15
@@ -382,10 +382,10 @@ to	to	toS2sux1	toS2 + stB	régulier	1
 to	to	tolsc4lst3	to + lsc@4 + lst@3	régulier	1
 to	to	toG	ta + cl	d'après gregall	5
 to	to	toEcl	to!cl	ligature	25
-to	to	toEpi	to!or_pi + pu	ligature	9
+to	to	toEpi	to!orpi + pu	ligature	9
 to	to	toSEcl	toS!cl	ligature	5
 to	to	toEclN	to!clN	ligature	4
-to	to	toEpisu1	to!or_pi + pu + pu	ligature	3
+to	to	toEpisu1	to!orpi + pu + pu	ligature	3
 to	to	toSEclNlsi8	toS!clN + lsi@8	ligature	1
 to	to	toEclB	to!clB	ligature	1
 to	to	toSEclN	toS!clN	ligature	1
@@ -413,9 +413,9 @@ vs	vs	vsB	vsB	base	93
 vs	vs	vsN	vsN	base	13
 vs	vs	vslsc3	vs + lsc@3	régulier	96
 vs	vs	vslst2	vs + lst@2	régulier	1
-sa	sa	saM7	vi + or_couche + viN	nouveau (marteo, 21 novembre 2026), absent de gregall	0
-sa	sa	saM5	ta + or_salicus + vi	marteo (21 novembre 2026), absent de NR	0
-sa	sa	saM8	ta + or_couche + vi	nouveau (marteo, 21 novembre 2026), absent de gregall	0
+sa	sa	saM7	vi + ortilde + viN	nouveau (marteo, 21 novembre 2026), absent de gregall	0
+sa	sa	saM5	ta + orsa + vi	marteo (21 novembre 2026), absent de NR	0
+sa	sa	saM8	ta + ortilde + vi	nouveau (marteo, 21 novembre 2026), absent de gregall	0
 tg	tg	tgSNsuu1	tgSN + taN	nouveau (marteo, 22 novembre 2026), absent de gregall	0
 to	to	toN1sut2	toN1 + ta + ta	nouveau (marteo), absent de gregall	1
 ql	ql	qlNppt1su1sut1	ta + qlN + pu + ta	nouveau (marteo), absent de gregall	1
@@ -427,7 +427,7 @@ po	po	posu1suu1	po + pu + taN	nouveau (marteo), absent de gregall	1
 virga	bv	bvB	viN + viB	marteo (24 novembre 2026)	0
 po	po	poG	clN + vi	marteo (24 novembre 2026)	0
 tr	tr	trG1	pe + peS	marteo (24 novembre 2026)	0
-sa	sa	saM3	viN + or_couche + viN	marteo (24 novembre 2026)	0
+sa	sa	saM3	viN + ortilde + viN	marteo (24 novembre 2026)	0
 pes	sc	sc1	pu + pu + pu + vi	marteo (24 novembre 2026)	0
 tr	tr	trG2	toS2 + vi	marteo (24 novembre 2026)	0
 tg	tg	tgS4	pu + suv1 + taN	marteo (24 novembre 2026)	0
@@ -437,8 +437,8 @@ tg	tg	tgS1	pu + ta + ta	marteo (24 novembre 2026)	0
 virga	tv	tv	vi + vi + vi	marteo (24 novembre 2026)	0
 to	to	toM	viN + cl	marteo (24 novembre 2026)	0
 sf	sf	sfM	viN + to	marteo (24 novembre 2026)	0
-sa	sa	saMN4	viN + or_salicus + viN	marteo (24 novembre 2026)	0
-pi	pi	piM1	or_pi + ta	marteo (24 novembre 2026)	0
+sa	sa	saMN4	viN + orsa + viN	marteo (24 novembre 2026)	0
+pi	pi	piM1	orpi + ta	marteo (24 novembre 2026)	0
 pf	pf	pfM	à construire à la main par ligature de glyphes existants	constructible, marteo (24 novembre 2026)	0
 pq	pq	pqSB	à construire à la main d'après l'exemplaire 391 p. 231 (source gregall H424M)	constructible, marteo (24 novembre 2026)	0
 po	po	poN	à construire à la main	constructible, marteo (24 novembre 2026)	0
