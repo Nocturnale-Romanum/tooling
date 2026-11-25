@@ -110,6 +110,7 @@ def piece_sequence(code, glyph, decs):
     for k, r in enumerate(rows):
         syls.append((r["syllabe"], r["nabc"]))
         hote = None                              # indices dans seq des formes du dernier neume
+        dyn = H.dynamiques(r).get(glyph, set())  # glyphe composé dynamiquement : ses morceaux posés
         for g in r["glyphes"].split():
             if g == "ob":
                 synth = True
@@ -129,7 +130,7 @@ def piece_sequence(code, glyph, decs):
                 cl = form_class(form)
                 if cl:
                     hote.append(len(seq))
-                    seq.append((form if form in _T else cl, g, k, g == glyph))
+                    seq.append((form if form in _T else cl, g, k, g == glyph or g in dyn))
     return seq, syls
 
 
@@ -545,7 +546,7 @@ def run(glyph, n, nom, toutes=False, autre=False):
         if p and p["manuscript"] in ("csg-0390", "csg-0391"):
             occ.setdefault(code, p)
     items = [dict(code=c, ms=p["manuscript"], page=p["page"]) for c, p in occ.items()
-             if not all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, [])) if glyph in r["glyphes"].split())]
+             if not all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, [])) if glyph in r["glyphes"].split() or glyph in H.dynamiques(r))]
     if autre:
         # autre série : pages pas encore montrées dans cache/candidats/<nom>.json
         import glob
@@ -586,7 +587,7 @@ def run(glyph, n, nom, toutes=False, autre=False):
         print("%d. %s p.%s %s,%s,%s,%s conf %.2f %s  %s  [%s]" % (i, f["manuscript"][-3:], f["page"], f["x"], f["y"], f["w"], f["h"],
               f["score"], "aligné" if f["sur"] else "estimé", f["piece"][:50], f["nabc"]))
     synth = [c for c, p in occ.items() if all(synthetic(c, k) for k, r in enumerate(H.piece_rows().get(c, []))
-                                              if glyph in r["glyphes"].split())]
+                                              if glyph in r["glyphes"].split() or glyph in H.dynamiques(r))]
     if synth:
         print("NABC synthétique (entre ob et cb), écarté :", " ".join(synth))
     print("%d pièces, %d retenues, %d en secours" % (len(items), len(pick), len(backup)))

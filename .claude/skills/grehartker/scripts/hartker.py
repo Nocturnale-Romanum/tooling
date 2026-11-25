@@ -334,9 +334,27 @@ def occurrences(glyph):
     if not _occ:
         for code, rows in piece_rows().items():
             for r in rows:
-                for g in set(r["glyphes"].split()):
+                for g in set(r["glyphes"].split()) | set(dynamiques(r)):
                     _occ.setdefault(g, []).append((code, r["syllabe"], r["nabc"]))
     return _occ.get(glyph, [])
+
+
+def _nom(s):
+    """Nom NABC du parseur (`cl-`, `ql!cl>`) → nom de glyphe (`clN`, `qlEclB`)."""
+    return s.replace(">", "B").replace("-", "N").replace("!", "E").replace("~", "T")
+
+
+def dynamiques(r):
+    """Glyphes d'un fragment que gregoriotex-nabc compose dynamiquement : {glyphe complet demandé :
+    noms des glyphes posés à sa place (glyphe de la police, pp et su ajoutés)} ; les lettres
+    ajoutées n'ont pas de glyphe posé ici (add_ls)."""
+    out = {}
+    for e in (r.get("resolution") or "").split():
+        full, rest = e.split("=", 1)
+        g, pp, su, ls = (rest.split("+", 3) + ["", "", ""])[:4]
+        if g != full and g != "ERR":
+            out[_nom(full)] = {_nom(x) for x in (g, pp, su) if x}
+    return out
 
 
 _rows = {}

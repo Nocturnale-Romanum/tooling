@@ -51,6 +51,50 @@ MIN_FORME = 0.25        # ressemblance minimale pour inscrire une proposition (a
                         # tiré de Hartker ; avec gregall, les ressemblances sont plus basses)
 
 
+_DYN = {}
+
+
+def dynamique(g):
+    """(glyphe de la police, pp ajoutés, su ajoutés) d'un glyphe que gregoriotex-nabc compose
+    dynamiquement (reference/composes_dynamiques_nr.tsv), sinon None."""
+    if not _DYN:
+        import csv
+        with open(os.path.join(H.SKILL, "reference", "composes_dynamiques_nr.tsv"), encoding="utf-8") as fh:
+            for r in csv.DictReader(fh, delimiter="\t"):
+                _DYN[r["glyphe_complet"]] = (r["glyphe_police"], r["pp_ajoutes"], r["su_ajoutes"])
+    return _DYN.get(g)
+
+
+def points_autour(seg, key, box, pp, su, tl):
+    """Boîte prolongée jusqu'aux prepunctis (à gauche) et subpunctis (à droite, en descendant)
+    ajoutés dynamiquement : les plus proches petites composantes, de proche en proche."""
+    x0, y0, x1, y1 = box
+    n_pp = sum(int(d) for d in re.findall(r"\d", pp))
+    n_su = sum(int(d) for d in re.findall(r"\d", su))
+    petits = [c for c in seg[key] if max(c["w"], c["h"]) <= 70 and c["w"] * c["h"] >= 60
+              and not any(abs(c["y"] + c["h"] / 2 - y) < 35 for y in tl)]
+    bord = x0
+    for _ in range(n_pp):
+        cand = [c for c in petits if c["x"] + c["w"] <= bord + 10 and c["x"] >= bord - 160
+                and y0 - 60 <= c["y"] + c["h"] / 2 <= y1 + 60]
+        if not cand:
+            break
+        c = min(cand, key=lambda c: bord - (c["x"] + c["w"]))
+        petits.remove(c)
+        bord = c["x"]
+        x0, y0, y1 = min(x0, c["x"]), min(y0, c["y"]), max(y1, c["y"] + c["h"])
+    px, py = x1, (y0 + y1) / 2
+    for _ in range(n_su):
+        cand = [c for c in petits if px - 60 <= c["x"] + c["w"] / 2 <= px + 160 and py - 40 <= c["y"] + c["h"] / 2 <= py + 200]
+        if not cand:
+            break
+        c = min(cand, key=lambda c: abs(c["x"] + c["w"] / 2 - px) + abs(c["y"] + c["h"] / 2 - py))
+        petits.remove(c)
+        px, py = c["x"] + c["w"] / 2, c["y"] + c["h"] / 2
+        x1, y1 = max(x1, c["x"] + c["w"]), max(y1, c["y"] + c["h"])
+    return x0, y0, x1, y1
+
+
 def gregall_pieces(g):
     """Morceaux d'encre de gregall à l'échelle de la page : [(x, y, w, h, masque)], plus grand d'abord."""
     im = np.asarray(H.gregall_image(g, 100).convert("L")) < 128
@@ -155,6 +199,10 @@ def pick(seg, f, pieces, tpl=None, graine="gregall", large=False):
         # glyphe porteur de lettres : cadre prolongé jusqu'aux lettres, selon leur position NABC
         import lettres
         x0, y0, x1, y1 = lettres.prolonger(seg, key, f["glyphe_cible"], (x0, y0, x1, y1))
+    dyn = dynamique(f.get("glyphe_cible") or "")
+    if dyn and (dyn[1] or dyn[2]):
+        # glyphe composé dynamiquement : cadre prolongé jusqu'aux pp / su ajoutés
+        x0, y0, x1, y1 = points_autour(seg, key, (x0, y0, x1, y1), dyn[1], dyn[2], tl)
     return dict(manuscript=key[0], page=key[1], x=x0, y=y0, w=x1 - x0, h=y1 - y0,
                 base="%d,%d,%d,%d" % (c["x"], c["y"], c["w"], c["h"]), score=round(float(s), 2), morceaux=round(frac, 2),
                 adj=round(float(tot), 2), piece="%s ; %s ; repéré automatiquement (graine %s), à valider" % (f["piece"], f["nabc"], graine))
@@ -231,7 +279,10 @@ def main():
         elif not found:
             print(g, ": pas de bandes (localiser.py)")
             continue
-        pieces = gregall_pieces(g)
+        try:
+            pieces = gregall_pieces(g)
+        except KeyError:                     # absent de gregall (composé dynamiquement) : glyphe porteur
+            pieces = gregall_pieces(dynamique(g)[0])
         tpl = seed(seg, args.graine) if args.graine else None
         import csv
         with open(os.path.join(H.SKILL, "sources", "exemplaires.csv"), encoding="utf-8") as fh:

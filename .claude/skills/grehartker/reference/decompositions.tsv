@@ -538,3 +538,22 @@ vi	vi	vippt2suu5	ta + ta + vi + taN + taN + taN + taN + taN	grammaire du nom, ho
 vi	vi	visuu5	vi + taN + taN + taN + taN + taN	grammaire du nom, hors Hartker (24 novembre 2026)	0
 su	su	suu5	taN + taN + taN + taN + taN	grammaire du nom, hors Hartker (24 novembre 2026)	0
 ql	ql	qlNppt1sut2su1	ta + qlN + ta + ta + pu	grammaire du nom, hors Hartker (24 novembre 2026)	0
+ql	ql	qlppt2	ta + ta + ql	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlNppt2sut2	ta + ta + qlN + ta + ta	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlNppt2	ta + ta + qlN	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlEclNppt2	ta + ta + qlEclN	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+po	po	popp2	pu + pu + po	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+clivis	cl	cllss2lsc3	cl + lss@2 + lsc@3	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlNppt2su2	ta + ta + qlN + pu + pu	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlEclppt2	ta + ta + qlEcl	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+clivis	ci	ciNppt2	ta + ta + viN + pu + pu	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+virga	bv	bvNsu2	viN + viN + pu + pu	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlEpoBppt1	ta + qlEpoB	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+clivis	cl	cllsl2lsc3	cl + lsl@2 + lsc@3	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+ql	ql	qlppt2sut2	ta + ta + ql + ta + ta	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+pes	pe	pesu2lsc2	pe + pu + pu + lsc@2	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+to	to	topp2	pu + pu + to	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+qi	qi	qiEpoppt1	ta + qiEpo	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+clivis	ci	cipp2	pu + pu + vi + pu + pu	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+qi	qi	qiNppt1su2	ta + qiN + pu + pu	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
+vi	vi	visu1suu1lsc2	vi + pu + taN + lsc@2	nouveau : composé dynamiquement par gregoriotex-nabc, fréquent dans NR (marteo, 25 novembre 2026)	
