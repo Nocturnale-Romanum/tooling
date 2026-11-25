@@ -44,6 +44,7 @@ from import_hartker import fetch, MARGIN, IMG_SCALE  # noqa: E402
 SCALE = 10.0
 MIN_PX = 30
 COMPOSE = 0x80C0FF          # composé automatiquement, à vérifier
+FOND_SEUL = 0xFF80C0        # fond posé, composition automatique impossible : à composer
 TOL_PART = 4.0              # une forme secondaire ne doit pas être bien plus grande que sa composante
 
 
@@ -188,6 +189,8 @@ def main():
             left = (gx0 + gx1) / 2 - (MARGIN + w / 2) * SCALE
             top = gy0 + (MARGIN + h) * SCALE
             bilan["fond seul"].append("%s (%s)" % (n, why))
+            if not essai and not g.references:
+                g.color = FOND_SEUL
         if not essai and not sans_fonds:
             img = fetch(cache, r["manuscript"], r["page"], x - MARGIN, y - MARGIN, w + 2 * MARGIN, h + 2 * MARGIN)
             g.importOutlines(img)
