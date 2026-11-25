@@ -139,8 +139,11 @@ def composer(f, g, parts, comps):
     hi = max(dx + boxes[p][2] for p, dx, dy in refs)
     s = (gx0 + gx1) / 2 - (lo + hi) / 2
     refs = [(p, dx + s, dy) for p, dx, dy in refs]
-    from composer_hors import caler_vertical         # verticalement, comme gregall pose ses éléments
-    v = caler_vertical(f, g, refs, lambda q: boxes[q])
+    # verticalement : bas du premier élément (le plus à gauche) sur le bas du premier contour du
+    # gabarit gregall ; le fond suit (marteo, 25 novembre 2026)
+    first = min(refs, key=lambda e: boxes[e[0]][0] + e[1])
+    gc = [c.boundingBox() for c in g.layers["gregall"]]
+    v = (min(gc, key=lambda b: b[0])[1] - (boxes[first[0]][1] + first[2])) if gc else 0
     refs = [(p, dx, dy + v) for p, dx, dy in refs]
     return (refs, X0 + s, Y0 + v), None
 
