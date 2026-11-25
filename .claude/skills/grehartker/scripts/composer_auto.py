@@ -139,7 +139,10 @@ def composer(f, g, parts, comps):
     hi = max(dx + boxes[p][2] for p, dx, dy in refs)
     s = (gx0 + gx1) / 2 - (lo + hi) / 2
     refs = [(p, dx + s, dy) for p, dx, dy in refs]
-    return (refs, X0 + s, Y0), None
+    from composer_hors import caler_vertical         # verticalement, comme gregall pose ses éléments
+    v = caler_vertical(f, g, refs, lambda q: boxes[q])
+    refs = [(p, dx, dy + v) for p, dx, dy in refs]
+    return (refs, X0 + s, Y0 + v), None
 
 
 def main():

@@ -19,7 +19,8 @@ est vide et dont toutes les formes sont disponibles (tracées ou composées).
    trois points du `tg` composé ; `tg1` : le 4e point dans l'alignement des points 2 et 3.
    Plusieurs formes principales (`tv`, `bvB`, `poG`…) : faute de mesures, chaque forme est
    centrée sur le contour correspondant du gabarit gregall (contours rangés de gauche à droite).
-3. Le groupe est calé à gauche sur le gabarit gregall ; couleur cyan (composé hors Hartker,
+3. Le groupe est calé à gauche sur le gabarit gregall et, verticalement, comme gregall pose ses
+   éléments (caler_vertical) ; couleur cyan (composé hors Hartker,
    à vérifier).
 """
 import collections
@@ -193,7 +194,26 @@ def placer(f, n, parts, m, box, tg_pts):
         sy = gy1 - hi
     if len(mains) > 1:
         sx = 0.0
-    return [(p, dx + sx, dy + sy) for p, dx, dy in refs], None
+    refs = [(p, dx + sx, dy + sy) for p, dx, dy in refs]
+    s = caler_vertical(f, f[n], refs, box)
+    return [(p, dx, dy + s) for p, dx, dy in refs], None
+
+
+def caler_vertical(f, g, refs, box):
+    """Décalage vertical qui pose le composé comme gregall pose le sien : éléments et contours du
+    gabarit rangés de gauche à droite, médiane des écarts entre centres ; si leurs nombres
+    diffèrent, centre de la boîte sur centre du gabarit. gregall surélève la forme principale de ses
+    composés (médiane +151 unités) : la garder à sa hauteur propre mettait les composés trop bas
+    (marteo, 25 novembre 2026)."""
+    els = sorted(refs, key=lambda e: box(e[0])[0] + e[1])
+    ours = [(box(p)[1] + box(p)[3]) / 2 + dy for p, dx, dy in els]
+    gc = sorted(g.layers["gregall"], key=lambda c: c.boundingBox()[0])
+    if gc and len(gc) == len(ours):
+        return float(np.median(np.array([(c.boundingBox()[1] + c.boundingBox()[3]) / 2 for c in gc]) - np.array(ours)))
+    gb = g.layers["gregall"].boundingBox()
+    lo = min(box(p)[1] + dy for p, dx, dy in refs)
+    hi = max(box(p)[3] + dy for p, dx, dy in refs)
+    return ((gb[1] + gb[3]) - (lo + hi)) / 2
 
 
 def main():
