@@ -229,7 +229,7 @@ def main():
         noms = [n for n, r in dec.items() if n in f and n not in cho and not len(f[n].foreground)
                 and not f[n].references and r["statut"] not in ("base", "ligature")
                 and "+" in r["decomposition"] and n not in SAUF
-                and not re.search(r"[a-z0-9]E[a-z]", n)]     # ligature : se trace d'un bloc
+                and "!" not in r["decomposition"]]          # vraie ligature (morceaux liés) : se trace d'un bloc
     m = mesurer(f, dec)
     box = boxes(f)
     tg = f["tg"]
