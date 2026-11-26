@@ -929,9 +929,10 @@ prlsc2,variante D,csg-0390,112,5266,703,65,99,"5266,743,65,59","0121N1R3 Amo Chr
 vippu1su2lsc3,choisi,csg-0391,035,2359,3433,183,89,,"P1N1R2 Angelus Domini locutus est (le, « alleluia ») ; //////cippu1lsc3 ; virga pâle non segmentée ; capture d'écran de marteo, validé par marteo",
 vippu1su2lsc3,variante A,csg-0391,119,2139,6073,225,142,"2139,6165,74,50","0508N3R1 In conspectu Gentium (lí) ; cippu1lsc3 ; repéré automatiquement (graine vi), à valider",
 vippu1su2lsc3,variante B,csg-0391,035,1981,3432,110,105,"1981,3472,70,65","P1N1R2 Angelus Domini locutus est mulieribus (le) ; //////cippu1lsc3 ; repéré automatiquement (graine vi), à valider",
-clNlst2,choisi,csg-0391,103,1955,4706,122,149,"1955,4791,86,64","CBMVN3R2 Beatam me dicent (tens) ; cl-lst2cl> ; repéré automatiquement (graine clN), à valider",
-clNlst2,variante A,csg-0391,179,4604,5218,74,119,"4606,5264,72,73","UMEXN2R3 Stola jucunditatis induit (pul) ; clppt1cl-lst2 ; repéré automatiquement (graine clN), à valider",
-clNlst2,variante B,csg-0391,219,1876,5821,80,127,"1876,5878,57,70","10H1F2R2 Ornaverunt (em) ; cl-hilst2cl-hh/vihh ; repéré automatiquement (graine clN), à valider",
+clNlst2,choisi,csg-0391,103,1955,4746,122,109,"1955,4791,86,64","CBMVN3R2 Beatam me dicent, V. Et misericordia (tens, « potens est ») ; cl-lst2cl> ; clivis suivante exclue ; capture d'écran de marteo, validé par marteo","2048,4793,69,49"
+clNlst2,variante A,csg-0391,103,1955,4706,122,149,"1955,4791,86,64","CBMVN3R2 Beatam me dicent (tens) ; cl-lst2cl> ; repéré automatiquement (graine clN), à valider",
+clNlst2,variante B,csg-0391,179,4604,5218,74,119,"4606,5264,72,73","UMEXN2R3 Stola jucunditatis induit (pul) ; clppt1cl-lst2 ; repéré automatiquement (graine clN), à valider",
+clNlst2,variante C,csg-0391,219,1876,5821,80,127,"1876,5878,57,70","10H1F2R2 Ornaverunt (em) ; cl-hilst2cl-hh/vihh ; repéré automatiquement (graine clN), à valider",
 vippt1su2lsc3,choisi,csg-0391,088,4658,1107,134,102,"4658,1147,94,62","0801N2R2 Surge Petre (Pe) ; cihhppt1lsc3tr-1hhvihh ; repéré automatiquement (graine vi), à valider",
 vslst2,choisi,csg-0391,093,2418,4823,68,127,"2418,4863,68,87","0125N3R1 Sancte Paule Apostole (grá) ; ///vihdqlhhclhivihisut1su2vslst2 ; repéré automatiquement (graine vs), à valider",
 talst2,choisi,csg-0391,107,4601,1318,82,62,"4601,1363,45,17","0829N1R1 Misit Herodes rex (qui) ; talst2 ; repéré automatiquement (graine ta), à valider",
