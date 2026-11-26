@@ -44,6 +44,7 @@ from import_hartker import fetch, MARGIN, IMG_SCALE  # noqa: E402
 SCALE = 10.0
 MIN_PX = 30
 COMPOSE = 0x80C0FF          # composé automatiquement, à vérifier
+CYAN = 0x80FFFF             # composé d'après gregall : recomposable d'après l'exemplaire
 FOND_SEUL = 0xFF80C0        # fond posé, composition automatique impossible : à composer
 TOL_PART = 4.0              # une forme secondaire ne doit pas être bien plus grande que sa composante
 
@@ -170,7 +171,7 @@ def main():
         if n not in f or n not in cho:
             continue
         g, r = f[n], cho[n]
-        if (len(g.foreground) > 0 or g.references) and g.color != COMPOSE:   # tracé, ou composé à la main (pi, sa…)
+        if (len(g.foreground) > 0 or g.references) and g.color not in (COMPOSE, CYAN):   # tracé, ou composé à la main (pi, sa…)
             bilan["déjà tracé"].append(n)
             continue
         # « lsc@3 » : la lettre lsc (en position 3) ; sa place vient de l'exemplaire
