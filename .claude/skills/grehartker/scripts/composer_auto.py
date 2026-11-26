@@ -218,27 +218,32 @@ def main():
 
 def place(sfd, fonds):
     """Échelle et position des images importées, fixées dans le .sfd (non exposées par l'API) ;
-    seule la dernière image importée est gardée dans chaque glyphe."""
-    with open(sfd, encoding="latin-1") as fh:
-        text = fh.read()
-    for name, left, top in fonds:
-        start = text.index("StartChar: %s\n" % name)
-        end = text.index("EndChar\n", start)
-        block = text[start:end]
-        images = list(re.finditer(r"^Image2: \S+ \d+ \S+ \S+ (\S+) \S+\n.*?^EndImage2\n", block, flags=re.S | re.M))
-        fresh = [m for m in images if abs(float(m.group(1)) - IMG_SCALE) > 1e-6]
+    seule la dernière image importée est gardée dans chaque glyphe. Une seule passe sur le texte
+    (le fichier de travail dépasse 150 Mo : des copies successives épuisaient la mémoire)."""
+    pos = {name: (left, top) for name, left, top in fonds}
+    img = re.compile(r"^Image2: \S+ \d+ \S+ \S+ (\S+) \S+\n.*?^EndImage2\n", re.S | re.M)
+
+    def fix(m):
+        if m.group(1) not in pos:
+            return m.group(0)
+        left, top = pos[m.group(1)]
+        block = m.group(0)
+        images = list(img.finditer(block))
+        if not images:
+            return block
+        fresh = [i for i in images if abs(float(i.group(1)) - IMG_SCALE) > 1e-6]
         last = fresh[0] if fresh else images[0]          # FontForge met la nouvelle image en tête
         new_img = re.sub(r"^Image2: (\S+) (\d+) \S+ \S+ \S+ \S+",
-                         lambda m: "Image2: %s %s %g %g %g %g" % (m.group(1), m.group(2), left, top, IMG_SCALE, IMG_SCALE),
+                         lambda k: "Image2: %s %s %g %g %g %g" % (k.group(1), k.group(2), left, top, IMG_SCALE, IMG_SCALE),
                          last.group(0), count=1, flags=re.M)
-        for m in reversed(images):
-            block = block[:m.start()] + block[m.end():]
-        pos = images[0].start()
-        block = block[:pos] + new_img + block[pos:]
-        text = text[:start] + block + text[end:]
+        start = images[0].start()
+        rest = img.sub("", block[start:])
+        return block[:start] + new_img + rest
+    with open(sfd, encoding="latin-1") as fh:
+        text = fh.read()
+    text = re.sub(r"^StartChar: (\S+)\n.*?^EndChar\n", fix, text, flags=re.S | re.M)
     with open(sfd, "w", encoding="latin-1", newline="\n") as fh:
         fh.write(text)
-
 
 if __name__ == "__main__":
     main()
