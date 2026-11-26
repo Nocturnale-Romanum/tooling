@@ -175,6 +175,8 @@ def main():
             continue
         # « lsc@3 » : la lettre lsc (en position 3) ; sa place vient de l'exemplaire
         parts = [p.strip().split("@")[0] for p in dec[n]["decomposition"].split("+")] if n in dec else []
+        from composer_hors import a_plat
+        parts = a_plat(f, dec, parts)                    # formes composées dépliées (tgSN → pu pu taN)
         res, why = None, "formes manquantes : " + " ".join(p for p in parts if not disponible(f, p, faits))
         if parts and all(disponible(f, p, faits) for p in parts):
             res, why = composer(f, g, parts, composantes(r))

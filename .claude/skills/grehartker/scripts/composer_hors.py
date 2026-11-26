@@ -2,7 +2,7 @@
 base, avec les écarts typiques mesurés dans les composés placés d'après Hartker.
 
 Usage (avec le Python de FontForge, sans -I) :
-    ffpython S/composer_hors.py <police.sfd> [<glyphe> …] [--essai]
+    ffpython S/composer_hors.py <police.sfd> [<glyphe> …] [--essai] [--gabarit]
 
 Sans glyphe : ceux de reference/decompositions.tsv sans exemplaire choisi, dont le premier plan
 est vide et dont toutes les formes sont disponibles (tracées ou composées).
@@ -19,6 +19,8 @@ est vide et dont toutes les formes sont disponibles (tracées ou composées).
    trois points du `tg` composé ; `tg1` : le 4e point dans l'alignement des points 2 et 3.
    Plusieurs formes principales (`tv`, `bvB`, `poG`…) : faute de mesures, chaque forme est
    centrée sur le contour correspondant du gabarit gregall (contours rangés de gauche à droite).
+--gabarit (glyphes dont l'exemplaire résiste à la vision, marteo, 26 novembre 2026) : chaque forme
+   est d'abord centrée sur son contour du gabarit gregall ; à défaut, règles ci-dessus.
 3. Le groupe est calé à gauche sur le gabarit gregall et, verticalement, comme gregall pose ses
    éléments (caler_vertical) ; couleur cyan (composé hors Hartker,
    à vérifier).
@@ -227,9 +229,47 @@ def caler_vertical(f, g, refs, box):
     return ((gb[1] + gb[3]) - (lo + hi)) / 2
 
 
+def a_plat(f, dec, parts):
+    """Formes composées dépliées en leurs éléments (`tgSN` → `pu`, `pu`, `taN`) : une forme sans tracé
+    propre et qui a une décomposition est remplacée par celle-ci, récursivement."""
+    out = []
+    for p in parts:
+        r = dec.get(p)
+        if p in f and not len(f[p].foreground) and r and "+" in r["decomposition"] and r["statut"] != "base":
+            out += a_plat(f, dec, parts_of(r))
+        else:
+            out.append(p)
+    return out
+
+
+def placer_gabarit(f, n, parts, box):
+    """Chaque forme centrée sur le contour du gabarit gregall qui lui correspond (contours extérieurs
+    rangés de gauche à droite ; ceux qui se chevauchent horizontalement sont réunis si besoin)."""
+    bs = [c.boundingBox() for c in f[n].layers["gregall"]]
+    outer = [b for b in bs if not any(o != b and o[0] <= b[0] and o[1] <= b[1] and o[2] >= b[2] and o[3] >= b[3] for o in bs)]
+    gr = sorted([list(b) for b in outer])
+    if len(gr) > len(parts):
+        m = []
+        for b in gr:
+            if m and b[0] <= m[-1][2]:
+                a = m[-1]
+                m[-1] = [min(a[0], b[0]), min(a[1], b[1]), max(a[2], b[2]), max(a[3], b[3])]
+            else:
+                m.append(b)
+        gr = m
+    if len(gr) != len(parts):
+        return None, "%d contours gregall pour %d formes" % (len(gr), len(parts))
+    refs = []
+    for p, b in zip(parts, gr):
+        q = box(p)
+        refs.append((p, (b[0] + b[2]) / 2 - (q[0] + q[2]) / 2, (b[1] + b[3]) / 2 - (q[1] + q[3]) / 2))
+    return refs, None
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     essai = "--essai" in sys.argv
+    gabarit = "--gabarit" in sys.argv          # cas où la vision échoue : formes posées sur gregall
     sfd, noms = args[0], args[1:]
     dec, cho = lire()
     f = fontforge.open(sfd)
@@ -246,12 +286,14 @@ def main():
     tg_pts = [cen(e) for e in el] if el else None
     faits, echecs = [], []
     for n in noms:
-        parts = parts_of(dec[n])
+        parts = a_plat(f, dec, parts_of(dec[n]))
         miss = [p for p in dict.fromkeys(parts) if not dispo(p)]
         if miss:
             echecs.append("%s (formes manquantes : %s)" % (n, " ".join(miss)))
             continue
-        refs, why = placer(f, n, parts, m, box, tg_pts)
+        refs, why = placer_gabarit(f, n, parts, box) if gabarit else (None, None)
+        if not refs:
+            refs, why = placer(f, n, parts, m, box, tg_pts)
         if not refs:
             echecs.append("%s (%s)" % (n, why))
             continue
