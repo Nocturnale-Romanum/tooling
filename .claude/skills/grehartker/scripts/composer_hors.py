@@ -43,6 +43,15 @@ MIN_N = 3
 SAUF = {"tgSsuu1", "clN1su2"}   # construit à la main ; décomposition douteuse (marteo, 24 novembre 2026)
 
 
+def ligature(n):
+    """Un glyphe à E (`qlEcl`…) est une vraie ligature, tracée d'un trait, sauf exception listée
+    dans reference/ligatures_composees.tsv (formes simples séparées : `saEcl` = pu + orsa + cl)."""
+    if not re.search(r"[a-z0-9]E[a-z]", n):
+        return False
+    with open(os.path.join(H.SKILL, "reference", "ligatures_composees.tsv"), encoding="utf-8") as fh:
+        return n not in {l.split("\t")[0] for l in fh if l.strip() and not l.startswith("#")}
+
+
 def lire():
     dec = {r["glyphe"]: r for r in csv.DictReader(open(os.path.join(H.SKILL, "reference", "decompositions.tsv"),
                                                      encoding="utf-8"), delimiter="\t")}
@@ -229,7 +238,7 @@ def main():
         noms = [n for n, r in dec.items() if n in f and n not in cho and not len(f[n].foreground)
                 and not f[n].references and r["statut"] not in ("base", "ligature")
                 and "+" in r["decomposition"] and n not in SAUF
-                and "!" not in r["decomposition"]]          # vraie ligature (morceaux liés) : se trace d'un bloc
+                and not ligature(n)]
     m = mesurer(f, dec)
     box = boxes(f)
     tg = f["tg"]

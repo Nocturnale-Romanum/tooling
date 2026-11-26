@@ -1,0 +1,6 @@
+glyphe	motif
+# Glyphes dont le nom contient E (ligature) mais composés de formes simples séparées (marteo, 26 novembre 2026)
+saEcl	pu + orsa + cl
+saEclN	pu + orsa + clN
+saEclS1	pu + orsa + clS1
+sa1EclNB	pu + ortilde + clNB

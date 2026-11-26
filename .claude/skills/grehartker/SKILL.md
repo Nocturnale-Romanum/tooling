@@ -95,6 +95,9 @@ Ci-dessous, `S` désigne `scripts/`, `K` la racine du skill, `F` le fichier
   (marteo, 25 novembre 2026). L'oriscus se retouche là ; `pi` (= `orpi` + `pu`), `sa`
   (= `pu` + `orsa` + `vi`), `sa1` (= `pu` + `ortilde` + `vi`) et tous les composés à oriscus les
   référencent et suivent d'eux-mêmes. Les décompositions emploient ces noms.
+- **Ligatures** : tout glyphe dont le nom contient `E` est une vraie ligature, tracée d'un trait, sauf
+  les exceptions de `reference/ligatures_composees.tsv` (formes simples séparées, composables :
+  `saEcl` = `pu` + `orsa` + `cl`…). Les composeurs s'y tiennent (marteo, 26 novembre 2026).
 - **Glyphes porteurs de lettre** (`cllsc3`, `tolsc4lst3`…) : le cadre doit contenir la lettre.
   `auto.py` le prolonge dans la direction de chaque lettre selon sa position NABC (pavé numérique :
   1 en haut à gauche, 2 en haut, 3 en haut à droite, 4 à gauche, 6 à droite, 7 8 9 en bas, cf.

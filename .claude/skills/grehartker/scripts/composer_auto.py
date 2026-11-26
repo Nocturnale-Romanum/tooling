@@ -157,7 +157,9 @@ def main():
     dec, cho = lire()
     f = fontforge.open(sfd)
     if not noms:
-        noms = [n for n, r in dec.items() if r["statut"] not in ("base", "ligature", "statut") and n in cho]
+        from composer_hors import ligature
+        noms = [n for n, r in dec.items() if r["statut"] not in ("base", "ligature", "statut") and n in cho
+                and not ligature(n)]
     # ordre : les composés qui servent de forme à d'autres d'abord
     noms = sorted(noms, key=lambda n: sum(n in [p.strip() for p in dec[m]["decomposition"].split("+")]
                                           for m in noms if m in dec), reverse=True)
