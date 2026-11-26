@@ -242,8 +242,7 @@ def place(sfd, fonds):
     with open(sfd, encoding="latin-1") as fh:
         text = fh.read()
     text = re.sub(r"^StartChar: (\S+)\n.*?^EndChar\n", fix, text, flags=re.S | re.M)
-    with open(sfd, "w", encoding="latin-1", newline="\n") as fh:
-        fh.write(text)
+    H.ecrire_sfd(sfd, text)
 
 if __name__ == "__main__":
     main()

@@ -20,6 +20,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+import hartker as H  # noqa: E402
 
 IMG = re.compile(r"^Image2: (\S+) (\d+) (\S+) (\S+) (\S+) (\S+)\n.*?^EndImage2\n", re.S | re.M)
 SRC = re.compile(r"Hartker (csg-\d+) p\. (\d+), boite (\d+),(\d+),(\d+),(\d+)")
@@ -30,6 +31,8 @@ FIELDS = ["glyphe", "manuscript", "page", "x", "y", "w", "h", "gauche", "haut", 
 def exporter(travail, officiel, manifeste):
     with open(travail, encoding="latin-1") as fh:
         text = fh.read()
+    if "StartChar:" not in text:
+        sys.exit("fichier de travail vide ou illisible, rien n'est écrit : %s" % travail)
     rows, sans_source, out, last = [], [], [], 0
     for m in CHAR.finditer(text):
         block = m.group(0)
@@ -50,8 +53,7 @@ def exporter(travail, officiel, manifeste):
     if sans_source:
         sys.exit("images sans source reconnue (commentaire « Hartker … boite … ») : " + " ".join(sans_source))
     out.append(text[last:])
-    with open(officiel, "w", encoding="latin-1", newline="\n") as fh:
-        fh.write("".join(out))
+    H.ecrire_sfd(officiel, "".join(out))
     with open(manifeste, "w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=FIELDS, delimiter="\t", lineterminator="\n")
         w.writeheader()
@@ -86,8 +88,7 @@ def restaurer(officiel, manifeste, travail):
                                                                    r["echelle"], r["echelle"])
                        + i.group(0).split("\n", 1)[1], m.group(0))
     text = CHAR.sub(fix, text)
-    with open(travail, "w", encoding="latin-1", newline="\n") as fh:
-        fh.write(text)
+    H.ecrire_sfd(travail, text)
     print("%d fonds restaurés dans %s" % (len(rows), travail))
 
 

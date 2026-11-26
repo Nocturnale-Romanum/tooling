@@ -392,3 +392,14 @@ def provenance(glyph, ms, page):
     if len(items) == 1:
         return items[0]
     return ("? " + " | ".join(items)) if items else ""
+
+
+def ecrire_sfd(path, text):
+    """Écrit un .sfd de façon atomique (fichier temporaire puis remplacement) : une erreur en cours
+    d'écriture (mémoire) ne peut plus vider le fichier (26 novembre 2026). Refuse un texte vide."""
+    if not text or "StartChar:" not in text:
+        raise ValueError("refus d'écrire un .sfd vide ou sans glyphe : %s" % path)
+    tmp = path + ".tmp-ecriture"
+    with open(tmp, "w", encoding="latin-1", newline="\n") as fh:
+        fh.write(text)
+    os.replace(tmp, path)

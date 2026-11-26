@@ -41,6 +41,9 @@ import fontforge
 
 from commun import fore_bbox, parse, source_variante
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import hartker as H  # noqa: E402
+
 SCALE = 10.0   # unités de police par pixel e-codices (S/calibrate.py)
 UP = 4         # image de fond agrandie UP fois (Lanczos) : bords en dégradé pour détourer à la main
 IMG_SCALE = SCALE / UP   # unités de police par pixel de l'image agrandie
@@ -146,8 +149,7 @@ def main(sfd, name, ms, page, x, y, w, h, align="bas", basebox=None):
     pos = images[0].start()
     block = block[:pos] + new_img + block[pos:]
     text = text[:start] + block + text[end:]
-    with open(sfd, "w", encoding="latin-1", newline="\n") as fh:
-        fh.write(text)
+    H.ecrire_sfd(sfd, text)
     print("%s : %s importé (échelle %g, calage %s)" % (name, src, SCALE, align))
 
 
