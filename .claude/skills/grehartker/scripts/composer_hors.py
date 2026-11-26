@@ -26,6 +26,7 @@ est vide et dont toutes les formes sont disponibles (tracées ou composées).
 import collections
 import csv
 import os
+import re
 import sys
 
 import fontforge
@@ -51,7 +52,8 @@ def lire():
 
 
 def parts_of(r):
-    return [p.strip() for p in r["decomposition"].split("+")]
+    """Formes de la décomposition ; « lsc@3 » : la lettre lsc (position 3, ignorée ici)."""
+    return [p.strip().split("@")[0] for p in r["decomposition"].split("+")]
 
 
 def boxes(f):
@@ -226,7 +228,8 @@ def main():
     if not noms:
         noms = [n for n, r in dec.items() if n in f and n not in cho and not len(f[n].foreground)
                 and not f[n].references and r["statut"] not in ("base", "ligature")
-                and "+" in r["decomposition"] and n not in SAUF]
+                and "+" in r["decomposition"] and n not in SAUF
+                and not re.search(r"[a-z0-9]E[a-z]", n)]     # ligature : se trace d'un bloc
     m = mesurer(f, dec)
     box = boxes(f)
     tg = f["tg"]
